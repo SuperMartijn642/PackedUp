@@ -1,6 +1,6 @@
 package com.supermartijn642.packedup;
 
-import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
@@ -14,8 +14,8 @@ public class BackpackContainerScreen extends ContainerScreen<BackpackContainer> 
     private final ResourceLocation texture;
 
     public BackpackContainerScreen(BackpackContainer container, PlayerInventory inventory, ITextComponent name){
-        super(container,inventory,name);
-        this.texture = new ResourceLocation("packedup","textures/inventory/rows" + container.rows + ".png");
+        super(container, inventory, name);
+        this.texture = new ResourceLocation("packedup", "textures/inventory/rows" + container.rows + ".png");
         this.xSize = 176;
         this.ySize = 112 + 18 * container.rows;
     }
@@ -29,7 +29,7 @@ public class BackpackContainerScreen extends ContainerScreen<BackpackContainer> 
 
     @Override
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY){
-        RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+        GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.minecraft.getTextureManager().bindTexture(this.texture);
         int i = (this.width - this.xSize) / 2;
         int j = (this.height - this.ySize) / 2;
