@@ -65,7 +65,7 @@ public class BackpackStorageManager {
         int highest = 0;
         for(File file : files){
             String name = file.getName();
-            if(!name.startsWith("inventory") || name.endsWith(".nbt"))
+            if(!name.startsWith("inventory") || !name.endsWith(".nbt"))
                 continue;
             int index;
             try{
