@@ -1,0 +1,28 @@
+{
+  "type": "packedup:backpackrecipe",
+  "pattern": [
+    "ILI",
+    "ICI",
+    "GGG"
+  ],
+  "key": {
+    "I": {
+      "type": "forge:ore_dict",
+      "ore": "gemDiamond"
+    },
+    "C": {
+      "item": "packedup:goldbackpack"
+    },
+    "L": {
+      "type": "forge:ore_dict",
+      "ore": "ingotGold"
+    },
+    "G": {
+      "type": "forge:ore_dict",
+      "ore": "blockGlass"
+    }
+  },
+  "result": {
+    "item": "packedup:diamondbackpack"
+  }
+}

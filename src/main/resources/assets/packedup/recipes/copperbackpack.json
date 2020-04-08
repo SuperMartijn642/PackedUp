@@ -1,0 +1,23 @@
+{
+  "type": "packedup:backpackrecipe",
+  "pattern": [
+    "ILI",
+    "ICI",
+    "III"
+  ],
+  "key": {
+    "I": {
+      "type": "forge:ore_dict",
+      "ore": "ingotCopper"
+    },
+    "C": {
+      "item": "packedup:basicbackpack"
+    },
+    "L": {
+      "item": "minecraft:leather"
+    }
+  },
+  "result": {
+    "item": "packedup:copperbackpack"
+  }
+}

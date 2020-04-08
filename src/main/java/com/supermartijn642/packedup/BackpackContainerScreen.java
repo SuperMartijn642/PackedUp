@@ -1,0 +1,48 @@
+package com.supermartijn642.packedup;
+
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentTranslation;
+
+/**
+ * Created 2/7/2020 by SuperMartijn642
+ */
+public class BackpackContainerScreen extends GuiContainer {
+
+    private final ResourceLocation texture;
+    private final String title;
+    private final ITextComponent playerInventory;
+
+    public BackpackContainerScreen(BackpackContainer container, EntityPlayer player){
+        super(container);
+        this.texture = new ResourceLocation("packedup", "textures/inventory/rows" + container.rows + ".png");
+        this.xSize = 176;
+        this.ySize = 112 + 18 * container.rows;
+
+        this.title = player.inventory.getCurrentItem().getDisplayName();
+        this.playerInventory = player.inventory.getDisplayName();
+    }
+
+    @Override
+    public void drawScreen(int mouseX, int mouseY, float partialTicks){
+        this.drawDefaultBackground();
+        super.drawScreen(mouseX, mouseY, partialTicks);
+        this.renderHoveredToolTip(mouseX, mouseY);
+    }
+
+    @Override
+    protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY){
+        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+        this.mc.getTextureManager().bindTexture(this.texture);
+        this.drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, this.xSize, this.ySize);
+    }
+
+    @Override
+    protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY){
+        this.fontRenderer.drawString(this.title, 8, 6, 4210752);
+        this.fontRenderer.drawString(this.playerInventory.getFormattedText(), 8, this.ySize - 96 + 2, 4210752);
+    }
+}
