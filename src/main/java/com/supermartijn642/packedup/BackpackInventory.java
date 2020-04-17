@@ -84,6 +84,7 @@ public class BackpackInventory implements IItemHandlerModifiable {
     public void save(File file){
         NBTTagCompound compound = new NBTTagCompound();
         compound.setInteger("slots", this.slots);
+        compound.setInteger("stacks",this.stacks.size());
         for(int slot = 0; slot < this.slots; slot++)
             compound.setTag("stack" + slot, this.stacks.get(slot).writeToNBT(new NBTTagCompound()));
         try{
@@ -101,7 +102,8 @@ public class BackpackInventory implements IItemHandlerModifiable {
         }
         this.slots = compound.getInteger("slots");
         this.stacks.clear();
-        for(int slot = 0; slot < this.slots; slot++)
+        int size = compound.hasKey("stacks") ? compound.getInteger("stacks") : this.slots; // Do this for compatibility with older versions
+        for(int slot = 0; slot < size; slot++)
             this.stacks.add(new ItemStack(compound.getCompoundTag("stack" + slot)));
     }
 

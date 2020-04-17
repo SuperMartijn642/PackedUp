@@ -16,11 +16,14 @@ public class BackpackContainerScreen extends GuiContainer {
     private final String title;
     private final ITextComponent playerInventory;
 
+    private int rows;
+
     public BackpackContainerScreen(BackpackContainer container, EntityPlayer player){
         super(container);
         this.texture = new ResourceLocation("packedup", "textures/inventory/rows" + container.rows + ".png");
-        this.xSize = 176;
-        this.ySize = 112 + 18 * container.rows;
+        this.xSize = 176 + Math.max(0, (container.rows - 9) * 18);
+        this.ySize = 112 + 18 * Math.min(8, container.rows);
+        this.rows = container.rows;
 
         this.title = player.inventory.getCurrentItem().getDisplayName();
         this.playerInventory = player.inventory.getDisplayName();
@@ -42,6 +45,8 @@ public class BackpackContainerScreen extends GuiContainer {
 
     @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY){
+        if(this.rows >= 9)
+            return;
         this.fontRenderer.drawString(this.title, 8, 6, 4210752);
         this.fontRenderer.drawString(this.playerInventory.getFormattedText(), 8, this.ySize - 96 + 2, 4210752);
     }

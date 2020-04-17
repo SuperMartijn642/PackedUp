@@ -21,7 +21,7 @@ public class PUConfig {
 
         instance.addCustomCategoryComment(Configuration.CATEGORY_GENERAL, "");
         for(BackpackType type : BackpackType.values()){
-            rows.put(type, instance.getInt("rows" + type.name().substring(0, 1).toUpperCase() + type.name().substring(1).toLowerCase(), Configuration.CATEGORY_GENERAL, type.getDefaultRows(), 1, 8, "How many rows does the " + type.name().toLowerCase() + " backpack have?"));
+            rows.put(type, instance.getInt("rows" + type.name().substring(0, 1).toUpperCase() + type.name().substring(1).toLowerCase(), Configuration.CATEGORY_GENERAL, type.getDefaultRows(), 1, 13, "How many rows does the " + type.name().toLowerCase() + " backpack have?"));
         }
 
         if(instance.hasChanged())

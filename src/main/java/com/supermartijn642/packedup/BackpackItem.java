@@ -51,10 +51,4 @@ public class BackpackItem extends Item {
         }
         return super.onItemRightClick(worldIn, playerIn, handIn);
     }
-
-    @Override
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn){
-        if(stack.getTagCompound() != null && stack.getTagCompound().hasKey("packedup:invIndex"))
-            tooltip.add("index: " + stack.getTagCompound().getInteger("packedup:invIndex"));
-    }
 }
