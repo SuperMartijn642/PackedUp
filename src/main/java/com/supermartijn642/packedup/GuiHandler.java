@@ -19,6 +19,6 @@ public class GuiHandler implements IGuiHandler {
     @Nullable
     @Override
     public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z){
-        return new BackpackContainerScreen(new BackpackContainer(player, ID),player);
+        return new BackpackContainerScreen(new BackpackContainer(player, ID), player);
     }
 }

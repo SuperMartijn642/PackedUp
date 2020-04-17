@@ -47,7 +47,7 @@ public class BackpackRecipeFactory implements IRecipeFactory {
                 if(backpack.hasDisplayName())
                     result.setStackDisplayName(backpack.getDisplayName());
                 for(Map.Entry<Enchantment,Integer> enchant : EnchantmentHelper.getEnchantments(backpack).entrySet())
-                    result.addEnchantment(enchant.getKey(),enchant.getValue());
+                    result.addEnchantment(enchant.getKey(), enchant.getValue());
                 return result;
             }
             return this.getRecipeOutput().copy();
