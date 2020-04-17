@@ -45,7 +45,7 @@ public class PackedUp {
     public static final IRecipeSerializer<BackpackRecipe> BACKPACK_RECIPE_SERIALIZER = new BackpackRecipe.Serializer();
 
     public PackedUp(){
-        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, PUConfig.CONFIG_SPEC);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, PUConfig.CONFIG_SPEC);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::init);
         MinecraftForge.EVENT_BUS.register(BackpackStorageManager.class);
     }
