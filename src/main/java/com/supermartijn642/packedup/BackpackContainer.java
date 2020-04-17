@@ -24,21 +24,33 @@ public class BackpackContainer extends Container {
     }
 
     private void addSlots(int rows, IItemHandler inventory, PlayerInventory player, int bagSlot){
+        int startX = 8;
+        int startY = rows < 9 ? 17 : 8;
+
+        int columns = 9 + Math.max(rows - 9, 0);
+        rows = Math.min(rows, 9);
         for(int row = 0; row < rows; row++){
-            for(int column = 0; column < 9; column++){
-                int x = 8 + 18 * column, y = 17 + 18 * row, index = row * 9 + column;
+            for(int column = 0; column < columns; column++){
+                int x = startX + 18 * column, y = startY + 18 * row, index = row * columns + column;
                 this.addSlot(new SlotItemHandler(inventory, index, x, y));
             }
         }
+
+        startX = 8 + (columns - 9) * 9;
+        startY += rows * 18 + (rows == 9 ? 4 : 13);
+
         // player slots
         for(int row = 0; row < 3; row++){
             for(int column = 0; column < 9; column++){
-                int x = 8 + 18 * column, y = 30 + 18 * rows + 18 * row, index = row * 9 + column + 9;
+                int x = startX + 18 * column, y = startY + 18 * row, index = row * 9 + column + 9;
                 this.addSlot(new Slot(player, index, x, y));
             }
         }
+
+        startY += 58;
+
         for(int column = 0; column < 9; column++){
-            int x = 8 + 18 * column, y = 88 + 18 * rows;
+            int x = startX + 18 * column, y = startY;
             if(column == bagSlot)
                 this.addSlot(new Slot(player, column, x, y) {
                     public boolean canTakeStack(PlayerEntity playerIn){

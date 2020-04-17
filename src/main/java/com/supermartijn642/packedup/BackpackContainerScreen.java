@@ -16,8 +16,8 @@ public class BackpackContainerScreen extends ContainerScreen<BackpackContainer> 
     public BackpackContainerScreen(BackpackContainer container, PlayerInventory inventory, ITextComponent name){
         super(container, inventory, name);
         this.texture = new ResourceLocation("packedup", "textures/inventory/rows" + container.rows + ".png");
-        this.xSize = 176;
-        this.ySize = 112 + 18 * container.rows;
+        this.xSize = 176 + Math.max(0, (container.rows - 9) * 18);
+        this.ySize = 112 + 18 * Math.min(8, container.rows);
     }
 
     @Override
@@ -38,6 +38,8 @@ public class BackpackContainerScreen extends ContainerScreen<BackpackContainer> 
 
     @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY){
+        if(container.rows >= 9)
+            return;
         this.font.drawString(this.title.getFormattedText(), 8.0F, 6.0F, 4210752);
         this.font.drawString(this.playerInventory.getDisplayName().getFormattedText(), 8.0F, (float)(this.ySize - 96 + 2), 4210752);
     }

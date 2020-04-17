@@ -1,6 +1,8 @@
 package com.supermartijn642.packedup;
 
 import com.google.gson.JsonObject;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
@@ -12,6 +14,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
 import javax.annotation.Nullable;
+import java.util.Map;
 
 /**
  * Created 2/8/2020 by SuperMartijn642
@@ -28,6 +31,10 @@ public class BackpackRecipe extends ShapedRecipe {
         if(!backpack.isEmpty() && backpack.getItem() instanceof BackpackItem){
             ItemStack result = this.getRecipeOutput().copy();
             result.setTag(backpack.getTag());
+            if(backpack.hasDisplayName())
+                result.setDisplayName(backpack.getDisplayName());
+            for(Map.Entry<Enchantment,Integer> enchant : EnchantmentHelper.getEnchantments(backpack).entrySet())
+                result.addEnchantment(enchant.getKey(), enchant.getValue());
             return result;
         }
         return this.getRecipeOutput().copy();
