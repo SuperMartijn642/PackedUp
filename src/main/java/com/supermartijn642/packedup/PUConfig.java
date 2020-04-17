@@ -34,19 +34,19 @@ public class PUConfig {
 
     private PUConfig(ForgeConfigSpec.Builder builder){
 //        this.basicEnable = builder.worldRestart().comment("Enable the basic backpack?").define("enableBasic", true);
-        this.basicRows = builder.comment("How many rows does the basic backpack have?").defineInRange("rowsBasic", BackpackType.BASIC.getDefaultRows(), 1, 8);
+        this.basicRows = builder.comment("How many rows does the basic backpack have?").defineInRange("rowsBasic", BackpackType.BASIC.getDefaultRows(), 1, 13);
 //        this.ironEnable = builder.worldRestart().comment("Enable the iron backpack?").define("enableIron", true);
-        this.ironRows = builder.comment("How many rows does the iron backpack have?").defineInRange("rowsIron", BackpackType.IRON.getDefaultRows(), 1, 8);
+        this.ironRows = builder.comment("How many rows does the iron backpack have?").defineInRange("rowsIron", BackpackType.IRON.getDefaultRows(), 1, 13);
 //        this.copperEnable = builder.worldRestart().comment("Enable the copper backpack?").define("enableCopper", true);
-        this.copperRows = builder.comment("How many rows does the copper backpack have?").defineInRange("rowsCopper", BackpackType.COPPER.getDefaultRows(), 1, 8);
+        this.copperRows = builder.comment("How many rows does the copper backpack have?").defineInRange("rowsCopper", BackpackType.COPPER.getDefaultRows(), 1, 13);
 //        this.silverEnable = builder.worldRestart().comment("Enable the silver backpack?").define("enableSilver", true);
-        this.silverRows = builder.comment("How many rows does the silver backpack have?").defineInRange("rowsSilver", BackpackType.SILVER.getDefaultRows(), 1, 8);
+        this.silverRows = builder.comment("How many rows does the silver backpack have?").defineInRange("rowsSilver", BackpackType.SILVER.getDefaultRows(), 1, 13);
 //        this.goldEnable = builder.worldRestart().comment("Enable the gold backpack?").define("enableGold", true);
-        this.goldRows = builder.comment("How many rows does the gold backpack have?").defineInRange("rowsGold", BackpackType.GOLD.getDefaultRows(), 1, 8);
+        this.goldRows = builder.comment("How many rows does the gold backpack have?").defineInRange("rowsGold", BackpackType.GOLD.getDefaultRows(), 1, 13);
 //        this.diamondEnable = builder.worldRestart().comment("Enable the diamond backpack?").define("enableDiamond", true);
-        this.diamondRows = builder.comment("How many rows does the diamond backpack have?").defineInRange("rowsDiamond", BackpackType.DIAMOND.getDefaultRows(), 1, 8);
+        this.diamondRows = builder.comment("How many rows does the diamond backpack have?").defineInRange("rowsDiamond", BackpackType.DIAMOND.getDefaultRows(), 1, 13);
 //        this.obsidianEnable = builder.worldRestart().comment("Enable the obsidian backpack?").define("enableObsidian", true);
-        this.obsidianRows = builder.comment("How many rows does the obsidian backpack have?").defineInRange("rowsObsidian", BackpackType.OBSIDIAN.getDefaultRows(), 1, 8);
+        this.obsidianRows = builder.comment("How many rows does the obsidian backpack have?").defineInRange("rowsObsidian", BackpackType.OBSIDIAN.getDefaultRows(), 1, 13);
     }
 
 }

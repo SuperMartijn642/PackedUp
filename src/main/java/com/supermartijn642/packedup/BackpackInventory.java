@@ -84,7 +84,8 @@ public class BackpackInventory implements IItemHandlerModifiable {
     public void save(File file){
         CompoundNBT compound = new CompoundNBT();
         compound.putInt("slots", this.slots);
-        for(int slot = 0; slot < this.slots; slot++)
+        compound.putInt("stacks", this.stacks.size());
+        for(int slot = 0; slot < this.stacks.size(); slot++)
             compound.put("stack" + slot, this.stacks.get(slot).write(new CompoundNBT()));
         try{
             CompressedStreamTools.write(compound, file);
@@ -101,7 +102,8 @@ public class BackpackInventory implements IItemHandlerModifiable {
         }
         this.slots = compound.getInt("slots");
         this.stacks.clear();
-        for(int slot = 0; slot < this.slots; slot++)
+        int size = compound.contains("stacks") ? compound.getInt("stacks") : this.slots; // Do this for compatibility with older versions
+        for(int slot = 0; slot < size; slot++)
             this.stacks.add(ItemStack.read(compound.getCompound("stack" + slot)));
     }
 
