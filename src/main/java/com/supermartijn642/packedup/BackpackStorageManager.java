@@ -29,33 +29,33 @@ public class BackpackStorageManager {
         if(event.getWorld().isRemote() || event.getWorld().getDimension().getType() != DimensionType.OVERWORLD)
             return;
         ServerWorld world = (ServerWorld)event.getWorld();
-        directory = new File(world.getSaveHandler().getWorldDirectory(),"packedup/backpacks");
+        directory = new File(world.getSaveHandler().getWorldDirectory(), "packedup/backpacks");
         load();
     }
 
     public static BackpackInventory getInventory(int index){
         BackpackInventory inventory = inventories.get(index);
         if(inventory == null){
-            File file = new File(directory,"inventory" + index + ".nbt");
+            File file = new File(directory, "inventory" + index + ".nbt");
             if(!file.exists())
                 throw new IllegalStateException("Inventory requested for index '" + index + "', yet no file for that index was found!");
             inventory = new BackpackInventory();
             inventory.load(file);
-            inventories.put(index,inventory);
+            inventories.put(index, inventory);
         }
         return inventory;
     }
 
     public static int createInventoryIndex(BackpackType type){
         int index = inventoryIndex++;
-        inventories.put(index,new BackpackInventory(type.getRows() * 9));
+        inventories.put(index, new BackpackInventory(type.getRows() * 9));
         return index;
     }
 
     public static void save(){
         directory.mkdirs();
         for(int i : inventories.keySet())
-            inventories.get(i).save(new File(directory,"inventory" + i + ".nbt"));
+            inventories.get(i).save(new File(directory, "inventory" + i + ".nbt"));
     }
 
     public static void load(){
@@ -69,7 +69,7 @@ public class BackpackStorageManager {
                 continue;
             int index;
             try{
-                index = Integer.parseInt(name.substring("inventory".length(),name.length() - ".nbt".length()));
+                index = Integer.parseInt(name.substring("inventory".length(), name.length() - ".nbt".length()));
             }catch(NumberFormatException e){continue;}
             if(index > highest)
                 highest = index;

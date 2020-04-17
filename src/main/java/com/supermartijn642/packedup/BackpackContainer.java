@@ -28,7 +28,7 @@ public class BackpackContainer extends Container {
         int startY = rows < 9 ? 17 : 8;
 
         int columns = 9 + Math.max(rows - 9, 0);
-        rows = Math.min(rows,9);
+        rows = Math.min(rows, 9);
         for(int row = 0; row < rows; row++){
             for(int column = 0; column < columns; column++){
                 int x = startX + 18 * column, y = startY + 18 * row, index = row * columns + column;

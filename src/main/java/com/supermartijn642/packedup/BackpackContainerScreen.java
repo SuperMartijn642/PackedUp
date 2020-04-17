@@ -16,7 +16,7 @@ public class BackpackContainerScreen extends ContainerScreen<BackpackContainer> 
     public BackpackContainerScreen(BackpackContainer container, PlayerInventory inventory, ITextComponent name){
         super(container, inventory, name);
         this.texture = new ResourceLocation("packedup", "textures/inventory/rows" + container.rows + ".png");
-        this.xSize = 176 + Math.max(0,(container.rows - 9) * 18);
+        this.xSize = 176 + Math.max(0, (container.rows - 9) * 18);
         this.ySize = 112 + 18 * Math.min(8, container.rows);
     }
 

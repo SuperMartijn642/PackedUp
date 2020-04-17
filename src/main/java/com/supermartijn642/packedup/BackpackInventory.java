@@ -109,7 +109,7 @@ public class BackpackInventory implements IItemHandlerModifiable {
 
     @Override
     public void setStackInSlot(int slot, @Nonnull ItemStack stack){
-        this.stacks.set(slot,stack);
+        this.stacks.set(slot, stack);
     }
 
     public void adjustSize(int slots){
