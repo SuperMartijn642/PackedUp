@@ -1,0 +1,9 @@
+{
+  "item.packedup.basicbackpack": "Rucksack",
+  "item.packedup.ironbackpack": "Eisenrucksack",
+  "item.packedup.copperbackpack": "Kupferrucksack",
+  "item.packedup.silverbackpack": "Silberrucksack",
+  "item.packedup.goldbackpack": "Goldrucksack",
+  "item.packedup.diamondbackpack": "Diamantrucksack",
+  "item.packedup.obsidianbackpack": "Obsidianrucksack"
+}
