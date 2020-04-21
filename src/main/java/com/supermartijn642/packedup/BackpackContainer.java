@@ -2,6 +2,7 @@ package com.supermartijn642.packedup;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.container.ClickType;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
@@ -14,16 +15,18 @@ import net.minecraftforge.items.SlotItemHandler;
 public class BackpackContainer extends Container {
 
     public final int rows;
+    public final int bagSlot;
 
     public BackpackContainer(int id, int inventoryIndex, PlayerInventory player, int bagSlot){
         super(PackedUp.container, id);
+        this.bagSlot = bagSlot;
 
         BackpackInventory inventory = player.player.world.isRemote ? new BackpackInventory(inventoryIndex * 9) : BackpackStorageManager.getInventory(inventoryIndex);
         this.rows = inventory.getSlots() / 9;
-        this.addSlots(this.rows, inventory, player, bagSlot);
+        this.addSlots(this.rows, inventory, player);
     }
 
-    private void addSlots(int rows, IItemHandler inventory, PlayerInventory player, int bagSlot){
+    private void addSlots(int rows, IItemHandler inventory, PlayerInventory player){
         int startX = 8;
         int startY = rows < 9 ? 17 : 8;
 
@@ -51,7 +54,7 @@ public class BackpackContainer extends Container {
 
         for(int column = 0; column < 9; column++){
             int x = startX + 18 * column, y = startY;
-            if(column == bagSlot)
+            if(column == this.bagSlot)
                 this.addSlot(new Slot(player, column, x, y) {
                     public boolean canTakeStack(PlayerEntity playerIn){
                         return false;
@@ -90,5 +93,12 @@ public class BackpackContainer extends Container {
         }
 
         return returnStack;
+    }
+
+    @Override
+    public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, PlayerEntity player){
+        if(clickTypeIn == ClickType.SWAP && dragType == this.bagSlot)
+            return ItemStack.EMPTY;
+        return super.slotClick(slotId, dragType, clickTypeIn, player);
     }
 }
