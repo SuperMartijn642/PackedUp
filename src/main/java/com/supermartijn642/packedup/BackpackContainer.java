@@ -1,6 +1,7 @@
 package com.supermartijn642.packedup;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.ClickType;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -13,17 +14,19 @@ import net.minecraftforge.items.SlotItemHandler;
 public class BackpackContainer extends Container {
 
     public final int rows;
+    public final int bagSlot;
 
     public BackpackContainer(EntityPlayer player, int rows){
         this.rows = rows;
+        this.bagSlot = player.inventory.getCurrentItem().getItem() instanceof BackpackItem ? player.inventory.currentItem : -1;
 
         ItemStack backpack = player.getHeldItemMainhand().getItem() instanceof BackpackItem ? player.getHeldItemMainhand() : player.getHeldItemOffhand();
         BackpackInventory inventory = player.world.isRemote ? new BackpackInventory(this.rows * 9) : BackpackStorageManager.getInventory(backpack.getTagCompound().getInteger("packedup:invIndex"));
 
-        this.addSlots(this.rows, inventory, player, player.inventory.getCurrentItem().getItem() instanceof BackpackItem ? player.inventory.currentItem : -1);
+        this.addSlots(this.rows, inventory, player);
     }
 
-    private void addSlots(int rows, IItemHandler inventory, EntityPlayer player, int bagSlot){
+    private void addSlots(int rows, IItemHandler inventory, EntityPlayer player){
         int startX = 8;
         int startY = rows < 9 ? 17 : 8;
 
@@ -51,7 +54,7 @@ public class BackpackContainer extends Container {
 
         for(int column = 0; column < 9; column++){
             int x = startX + 18 * column, y = startY;
-            if(column == bagSlot)
+            if(column == this.bagSlot)
                 this.addSlotToContainer(new Slot(player.inventory, column, x, y) {
                     public boolean canTakeStack(EntityPlayer playerIn){
                         return false;
@@ -90,5 +93,12 @@ public class BackpackContainer extends Container {
         }
 
         return returnStack;
+    }
+
+    @Override
+    public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, EntityPlayer player){
+        if(clickTypeIn == ClickType.SWAP && dragType == this.bagSlot)
+            return ItemStack.EMPTY;
+        return super.slotClick(slotId, dragType, clickTypeIn, player);
     }
 }
