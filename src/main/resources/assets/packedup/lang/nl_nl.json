@@ -5,5 +5,7 @@
   "item.packedup.silverbackpack": "Zilveren Rugzak",
   "item.packedup.goldbackpack": "Gouden Rugzak",
   "item.packedup.diamondbackpack": "Diamanten Rugzak",
-  "item.packedup.obsidianbackpack": "Obsidiaan Rugzak"
+  "item.packedup.obsidianbackpack": "Obsidiaan Rugzak",
+  "gui.packedup.title": "Rugzak Naam",
+  "gui.packedup.name": "Rugzak Naam:"
 }

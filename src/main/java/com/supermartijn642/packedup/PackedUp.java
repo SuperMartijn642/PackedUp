@@ -14,6 +14,8 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.network.NetworkRegistry;
+import net.minecraftforge.fml.network.simple.SimpleChannel;
 import net.minecraftforge.registries.ObjectHolder;
 
 /**
@@ -21,6 +23,8 @@ import net.minecraftforge.registries.ObjectHolder;
  */
 @Mod("packedup")
 public class PackedUp {
+
+    public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(new ResourceLocation("movingelevators", "main"), () -> "1", "1"::equals, "1"::equals);
 
     public static CommonProxy proxy = DistExecutor.runForDist(() -> () -> new ClientProxy(), () -> () -> new CommonProxy());
 
@@ -48,6 +52,8 @@ public class PackedUp {
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, PUConfig.CONFIG_SPEC);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::init);
         MinecraftForge.EVENT_BUS.register(BackpackStorageManager.class);
+
+        CHANNEL.registerMessage(0, PacketRename.class, PacketRename::encode, PacketRename::decode, PacketRename::handle);
     }
 
     public void init(FMLCommonSetupEvent e){
