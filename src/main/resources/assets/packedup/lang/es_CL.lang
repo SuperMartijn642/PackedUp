@@ -5,3 +5,4 @@ item.packedup:silverbackpack.name=Mochila de Plata
 item.packedup:goldbackpack.name=Mochila de Oro
 item.packedup:diamondbackpack.name=Mochila de Diamante
 item.packedup:obsidianbackpack.name=Mochila de Obsidiana
+gui.packedup.name=Nombre de la Mochila:
