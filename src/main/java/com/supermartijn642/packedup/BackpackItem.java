@@ -4,7 +4,6 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
@@ -34,7 +33,7 @@ public class BackpackItem extends Item {
         if(!playerIn.isSneaking()){
             if(!worldIn.isRemote && stack.getItem() instanceof BackpackItem){
                 int bagSlot = handIn == EnumHand.MAIN_HAND ? playerIn.inventory.currentItem : -1;
-                CommonProxy.openBackpackInventory(stack,playerIn,bagSlot);
+                CommonProxy.openBackpackInventory(stack, playerIn, bagSlot);
             }
         }else if(worldIn.isRemote){
             ClientProxy.openScreen(stack.getItem().getItemStackDisplayName(stack), stack.getDisplayName());
