@@ -49,8 +49,7 @@ public class BackpackItem extends Item {
                 int bagSlot = handIn == Hand.MAIN_HAND ? playerIn.inventory.currentItem : -1;
                 NetworkHooks.openGui((ServerPlayerEntity)playerIn, new ContainerProvider(inventoryIndex, stack.getDisplayName(), bagSlot), a -> a.writeInt(this.type.getRows()).writeInt(bagSlot));
             }
-        }
-        else if(worldIn.isRemote){
+        }else if(worldIn.isRemote){
             ClientProxy.openScreen(stack.getItem().getDisplayName(stack).getFormattedText(), stack.getDisplayName().getFormattedText());
         }
         return ActionResult.resultSuccess(stack);
