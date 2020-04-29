@@ -39,7 +39,6 @@ public class CommonProxy {
                 inventory.adjustSize(type.getRows() * 9);
         }
         int inventoryIndex = compound.getInteger("packedup:invIndex");
-        System.out.println("send bag: " + bagSlot);
         player.openGui(PackedUp.instance, type.getRows() | ((bagSlot + 2) << 5) | (inventoryIndex << 11), player.world, (int)player.posX, (int)player.posY, (int)player.posZ);
     }
 

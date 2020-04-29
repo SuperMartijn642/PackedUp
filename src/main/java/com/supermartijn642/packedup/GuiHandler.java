@@ -15,7 +15,6 @@ public class GuiHandler implements IGuiHandler {
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z){
         int bagSlot = ((ID >> 5) & 63) - 2;
         int inventoryIndex = (ID >> 11) & 2097151;
-        System.out.println("read bag: " + bagSlot);
         return new BackpackContainer(inventoryIndex, player, bagSlot);
     }
 

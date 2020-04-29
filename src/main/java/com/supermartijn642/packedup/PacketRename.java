@@ -18,6 +18,7 @@ public class PacketRename implements IMessage, IMessageHandler<PacketRename,IMes
     private String name;
 
     public PacketRename(String name){
+        System.out.println("name: " + name);
         this.name = name;
     }
 
@@ -54,10 +55,10 @@ public class PacketRename implements IMessage, IMessageHandler<PacketRename,IMes
             if(stack.isEmpty() || !(stack.getItem() instanceof BackpackItem))
                 return null;
 
-            if(this.name == null)
+            if(message.name == null)
                 stack.clearCustomName();
             else
-                stack.setStackDisplayName(this.name);
+                stack.setStackDisplayName(message.name);
         }
         return null;
     }

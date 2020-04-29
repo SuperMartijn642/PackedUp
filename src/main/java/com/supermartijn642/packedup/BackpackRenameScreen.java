@@ -20,7 +20,7 @@ public class BackpackRenameScreen extends GuiScreen {
 
     private static final int MAX_NAME_CHARACTER_COUNT = 23;
 
-    private static final ResourceLocation BACKGROUND = new ResourceLocation("packedup", "textures/screen.png");
+    private static final ResourceLocation BACKGROUND = new ResourceLocation(PackedUp.MODID, "textures/screen.png");
     private static final int BACKGROUND_WIDTH = 170, BACKGROUND_HEIGHT = 50;
 
     private GuiTextField nameField;
@@ -54,6 +54,7 @@ public class BackpackRenameScreen extends GuiScreen {
         this.nameField.updateCursorCounter();
         if(!this.lastTickName.trim().equals(this.nameField.getText().trim())){
             this.lastTickName = this.nameField.getText();
+            System.out.println("Sending!!!");
             PackedUp.channel.sendToServer(new PacketRename(this.lastTickName.trim().isEmpty() || this.lastTickName.trim().equals(this.defaultName) ? null : this.lastTickName.trim()));
         }
     }
@@ -79,7 +80,7 @@ public class BackpackRenameScreen extends GuiScreen {
 
         GlStateManager.popMatrix();
 
-        this.fontRenderer.drawString(I18n.format("gui.movingelevators.floorname.label"), this.nameField.x + 2, this.height / 4, Integer.MAX_VALUE);
+        this.fontRenderer.drawString(I18n.format("gui.packedup.name"), this.nameField.x + 2, this.top + 8, 4210752);
         this.nameField.drawTextBox();
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
