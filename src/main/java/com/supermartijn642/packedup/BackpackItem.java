@@ -32,23 +32,28 @@ public class BackpackItem extends Item {
 
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn){
-        if(!worldIn.isRemote){
-            ItemStack stack = playerIn.getHeldItem(handIn);
-            CompoundNBT compound = stack.getOrCreateTag();
-            if(!compound.contains("packedup:invIndex")){
-                compound.putInt("packedup:invIndex", BackpackStorageManager.createInventoryIndex(this.type));
-                stack.setTag(compound);
-            }else{
-                BackpackInventory inventory = BackpackStorageManager.getInventory(compound.getInt("packedup:invIndex"));
-                int rows = inventory.getSlots() / 9;
-                if(rows != this.type.getRows())
-                    inventory.adjustSize(this.type.getRows() * 9);
+        ItemStack stack = playerIn.getHeldItem(handIn);
+        if(!playerIn.isShiftKeyDown()){
+            if(!worldIn.isRemote){
+                CompoundNBT compound = stack.getOrCreateTag();
+                if(!compound.contains("packedup:invIndex")){
+                    compound.putInt("packedup:invIndex", BackpackStorageManager.createInventoryIndex(this.type));
+                    stack.setTag(compound);
+                }else{
+                    BackpackInventory inventory = BackpackStorageManager.getInventory(compound.getInt("packedup:invIndex"));
+                    int rows = inventory.getSlots() / 9;
+                    if(rows != this.type.getRows())
+                        inventory.adjustSize(this.type.getRows() * 9);
+                }
+                int inventoryIndex = compound.getInt("packedup:invIndex");
+                int bagSlot = handIn == Hand.MAIN_HAND ? playerIn.inventory.currentItem : -1;
+                NetworkHooks.openGui((ServerPlayerEntity)playerIn, new ContainerProvider(inventoryIndex, stack.getDisplayName(), bagSlot), a -> a.writeInt(this.type.getRows()).writeInt(bagSlot));
             }
-            int inventoryIndex = compound.getInt("packedup:invIndex");
-            int bagSlot = handIn == Hand.MAIN_HAND ? playerIn.inventory.currentItem : -1;
-            NetworkHooks.openGui((ServerPlayerEntity)playerIn, new ContainerProvider(inventoryIndex, stack.getDisplayName(), bagSlot), a -> a.writeInt(this.type.getRows()).writeInt(bagSlot));
         }
-        return super.onItemRightClick(worldIn, playerIn, handIn);
+        else if(worldIn.isRemote){
+            ClientProxy.openScreen(stack.getItem().getDisplayName(stack).getFormattedText(), stack.getDisplayName().getFormattedText());
+        }
+        return ActionResult.resultSuccess(stack);
     }
 
     private static class ContainerProvider implements INamedContainerProvider {

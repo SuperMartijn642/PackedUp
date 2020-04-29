@@ -5,5 +5,7 @@
   "item.packedup.silverbackpack": "Mochila de Plata",
   "item.packedup.goldbackpack": "Mochila de Oro",
   "item.packedup.diamondbackpack": "Mochila de Diamante",
-  "item.packedup.obsidianbackpack": "Mochila de Obsidiana"
+  "item.packedup.obsidianbackpack": "Mochila de Obsidiana",
+  "gui.packedup.title": "Nombre de la Mochila",
+  "gui.packedup.name": "Nombre de la Mochila:"
 }
