@@ -30,4 +30,8 @@ public class ClientProxy extends CommonProxy {
     public EntityPlayer getClientPlayer(){
         return Minecraft.getMinecraft().player;
     }
+
+    public static void openScreen(String defaultName, String name){
+        Minecraft.getMinecraft().displayGuiScreen(new BackpackRenameScreen(defaultName, name));
+    }
 }

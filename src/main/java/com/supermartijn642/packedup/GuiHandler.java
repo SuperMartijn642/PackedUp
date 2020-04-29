@@ -13,12 +13,17 @@ public class GuiHandler implements IGuiHandler {
     @Nullable
     @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z){
-        return new BackpackContainer(player, ID);
+        int bagSlot = ((ID >> 5) & 63) - 2;
+        int inventoryIndex = (ID >> 11) & 2097151;
+        System.out.println("read bag: " + bagSlot);
+        return new BackpackContainer(inventoryIndex, player, bagSlot);
     }
 
     @Nullable
     @Override
     public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z){
-        return new BackpackContainerScreen(new BackpackContainer(player, ID), player);
+        int rows = ID & 31;
+        int bagSlot = ((ID >> 5) & 63) - 2;
+        return new BackpackContainerScreen(new BackpackContainer(rows, player, bagSlot), player);
     }
 }

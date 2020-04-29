@@ -6,6 +6,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 
@@ -29,22 +30,15 @@ public class BackpackItem extends Item {
 
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn){
-        if(!worldIn.isRemote){
-            ItemStack stack = playerIn.getHeldItem(handIn);
-            NBTTagCompound compound = stack.getTagCompound();
-            if(compound == null)
-                compound = new NBTTagCompound();
-            if(!compound.hasKey("packedup:invIndex")){
-                compound.setInteger("packedup:invIndex", BackpackStorageManager.createInventoryIndex(this.type));
-                stack.setTagCompound(compound);
-            }else{
-                BackpackInventory inventory = BackpackStorageManager.getInventory(compound.getInteger("packedup:invIndex"));
-                int rows = inventory.getSlots() / 9;
-                if(rows != this.type.getRows())
-                    inventory.adjustSize(this.type.getRows() * 9);
+        ItemStack stack = playerIn.getHeldItem(handIn);
+        if(!playerIn.isSneaking()){
+            if(!worldIn.isRemote && stack.getItem() instanceof BackpackItem){
+                int bagSlot = handIn == EnumHand.MAIN_HAND ? playerIn.inventory.currentItem : -1;
+                CommonProxy.openBackpackInventory(stack,playerIn,bagSlot);
             }
-            playerIn.openGui(PackedUp.instance, this.type.getRows(), worldIn, (int)playerIn.posX, (int)playerIn.posY, (int)playerIn.posZ);
+        }else if(worldIn.isRemote){
+            ClientProxy.openScreen(stack.getItem().getItemStackDisplayName(stack), stack.getDisplayName());
         }
-        return super.onItemRightClick(worldIn, playerIn, handIn);
+        return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
     }
 }

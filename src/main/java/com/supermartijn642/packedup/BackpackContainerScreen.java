@@ -3,6 +3,7 @@ package com.supermartijn642.packedup;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 
@@ -24,7 +25,10 @@ public class BackpackContainerScreen extends GuiContainer {
         this.ySize = 112 + 18 * Math.min(8, container.rows);
         this.rows = container.rows;
 
-        this.title = player.inventory.getCurrentItem().getDisplayName();
+        if(container.bagSlot < 0 || !(player.inventory.getStackInSlot(container.bagSlot).getItem() instanceof BackpackItem))
+            this.title = PackedUp.basicbackpack.getItemStackDisplayName(ItemStack.EMPTY);
+        else
+            this.title = player.inventory.player.inventory.getStackInSlot(container.bagSlot).getDisplayName();
         this.playerInventory = player.inventory.getDisplayName();
     }
 
