@@ -46,7 +46,14 @@ public class BackpackContainer extends Container {
         for(int row = 0; row < 3; row++){
             for(int column = 0; column < 9; column++){
                 int x = startX + 18 * column, y = startY + 18 * row, index = row * 9 + column + 9;
-                this.addSlot(new Slot(player, index, x, y));
+                if(index == this.bagSlot)
+                    this.addSlot(new Slot(player, index, x, y) {
+                        public boolean canTakeStack(PlayerEntity playerIn){
+                            return false;
+                        }
+                    });
+                else
+                    this.addSlot(new Slot(player, index, x, y));
             }
         }
 
@@ -99,6 +106,19 @@ public class BackpackContainer extends Container {
     public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, PlayerEntity player){
         if(clickTypeIn == ClickType.SWAP && dragType == this.bagSlot)
             return ItemStack.EMPTY;
+        if(clickTypeIn == ClickType.PICKUP && dragType == 1){
+            Slot slot = this.getSlot(slotId);
+            if(slot.canTakeStack(player)){
+                ItemStack stack = slot.getStack();
+                if(stack.getItem() instanceof BackpackItem){
+                    if(!player.world.isRemote){
+                        int bagSlot = slotId >= (this.rows + 3) * 9 ? slotId - (this.rows + 3) * 9 : slotId >= this.rows * 9 ? slotId - (this.rows - 1) * 9 : -1;
+                        CommonProxy.openBackpackInventory(stack, player, bagSlot);
+                    }
+                    return ItemStack.EMPTY;
+                }
+            }
+        }
         return super.slotClick(slotId, dragType, clickTypeIn, player);
     }
 }
