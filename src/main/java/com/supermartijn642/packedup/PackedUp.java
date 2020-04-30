@@ -24,7 +24,7 @@ import net.minecraftforge.registries.ObjectHolder;
 @Mod("packedup")
 public class PackedUp {
 
-    public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(new ResourceLocation("movingelevators", "main"), () -> "1", "1"::equals, "1"::equals);
+    public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(new ResourceLocation("packedup", "main"), () -> "1", "1"::equals, "1"::equals);
 
     public static CommonProxy proxy = DistExecutor.runForDist(() -> () -> new ClientProxy(), () -> () -> new CommonProxy());
 
