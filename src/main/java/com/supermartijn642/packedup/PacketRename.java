@@ -27,7 +27,7 @@ public class PacketRename {
     }
 
     public static PacketRename decode(PacketBuffer buffer){
-        return new PacketRename(buffer.readBoolean() ? buffer.readString() : null);
+        return new PacketRename(buffer.readBoolean() ? buffer.readString(32767) : null);
     }
 
     public void handle(Supplier<NetworkEvent.Context> contextSupplier){
