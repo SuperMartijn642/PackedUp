@@ -1,5 +1,7 @@
 package com.supermartijn642.packedup;
 
+import java.util.Locale;
+
 /**
  * Created 2/7/2020 by SuperMartijn642
  */
@@ -26,6 +28,6 @@ public enum BackpackType {
     }
 
     public String getRegistryName(){
-        return this.toString().toLowerCase() + "backpack";
+        return this.name().toLowerCase(Locale.ENGLISH) + "backpack";
     }
 }
