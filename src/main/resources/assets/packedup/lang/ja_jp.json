@@ -1,0 +1,11 @@
+{
+  "item.packedup.basicbackpack": "バックパック",
+  "item.packedup.ironbackpack": "鉄のバックパック",
+  "item.packedup.copperbackpack": "銅のバックパック",
+  "item.packedup.silverbackpack": "銀のバックパック",
+  "item.packedup.goldbackpack": "金のバックパック",
+  "item.packedup.diamondbackpack": "ダイヤのバックパック",
+  "item.packedup.obsidianbackpack": "黒曜石のバックパック",
+  "gui.packedup.title": "バックパック名",
+  "gui.packedup.name": "バックパック名:"
+}
