@@ -45,11 +45,13 @@ public class BackpackItem extends Item {
         private int inventoryIndex;
         private ITextComponent displayName;
         private int bagSlot;
+        private BackpackInventory inventory;
 
-        public ContainerProvider(int inventoryIndex, ITextComponent displayName, int bagSlot){
+        public ContainerProvider(ITextComponent displayName, int bagSlot, int inventoryIndex, BackpackInventory inventory){
             this.inventoryIndex = inventoryIndex;
             this.displayName = displayName;
             this.bagSlot = bagSlot;
+            this.inventory = inventory;
         }
 
         @Override
@@ -59,8 +61,8 @@ public class BackpackItem extends Item {
 
         @Nullable
         @Override
-        public Container createMenu(int id, PlayerInventory inventory, PlayerEntity player){
-            return new BackpackContainer(id, this.inventoryIndex, inventory, this.bagSlot);
+        public Container createMenu(int id, PlayerInventory playerInv, PlayerEntity player){
+            return new BackpackContainer(id, playerInv, this.bagSlot, this.inventoryIndex, this.inventory.rows, this.inventory.bagsInThisBag, this.inventory.bagsThisBagIsIn, this.inventory.layer);
         }
     }
 }
