@@ -18,6 +18,9 @@ import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
 import net.minecraftforge.registries.ObjectHolder;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Created 2/7/2020 by SuperMartijn642
  */
@@ -54,6 +57,7 @@ public class PackedUp {
         MinecraftForge.EVENT_BUS.register(BackpackStorageManager.class);
 
         CHANNEL.registerMessage(0, PacketRename.class, PacketRename::encode, PacketRename::decode, PacketRename::handle);
+        CHANNEL.registerMessage(1, PacketMaxLayers.class, PacketMaxLayers::encode, PacketMaxLayers::decode, PacketMaxLayers::handle);
     }
 
     public void init(FMLCommonSetupEvent e){
@@ -70,7 +74,21 @@ public class PackedUp {
 
         @SubscribeEvent
         public static void onContainerRegistry(final RegistryEvent.Register<ContainerType<?>> e){
-            e.getRegistry().register(IForgeContainerType.create((windowId, inv, data) -> new BackpackContainer(windowId, data.readInt(), inv, data.readInt())).setRegistryName("container"));
+            e.getRegistry().register(IForgeContainerType.create((windowId, inv, data) -> {
+                int bagSlot = data.readInt();
+                int inventoryIndex = data.readInt();
+                int rows = data.readInt();
+                int size = data.readInt();
+                Set<Integer> bagsInThisBag = new HashSet<>(size);
+                for(int i = 0; i < size; i++)
+                    bagsInThisBag.add(data.readInt());
+                size = data.readInt();
+                Set<Integer> bagsThisBagIsIn = new HashSet<>(size);
+                for(int i = 0; i < size; i++)
+                    bagsThisBagIsIn.add(data.readInt());
+                int layer = data.readInt();
+                return new BackpackContainer(windowId, inv, bagSlot, inventoryIndex, rows, bagsInThisBag, bagsThisBagIsIn, layer);
+            }).setRegistryName("container"));
         }
 
         @SubscribeEvent

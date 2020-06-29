@@ -22,7 +22,7 @@ public class CommonProxy {
     public static void openBackpackInventory(ItemStack stack, PlayerEntity player, int bagSlot){
         BackpackType type = ((BackpackItem)stack.getItem()).type;
         CompoundNBT compound = stack.getOrCreateTag();
-        if(!compound.contains("packedup:invIndex")){
+        if(!compound.contains("packedup:invIndex") || BackpackStorageManager.getInventory(compound.getInt("packedup:invIndex")) == null){
             compound.putInt("packedup:invIndex", BackpackStorageManager.createInventoryIndex(type));
             stack.setTag(compound);
         }else{
@@ -32,7 +32,17 @@ public class CommonProxy {
                 inventory.adjustSize(type.getRows() * 9);
         }
         int inventoryIndex = compound.getInt("packedup:invIndex");
-        NetworkHooks.openGui((ServerPlayerEntity)player, new BackpackItem.ContainerProvider(inventoryIndex, stack.getDisplayName(), bagSlot), a -> a.writeInt(type.getRows()).writeInt(bagSlot));
+        BackpackInventory inventory = BackpackStorageManager.getInventory(inventoryIndex);
+        NetworkHooks.openGui((ServerPlayerEntity)player, new BackpackItem.ContainerProvider(stack.getDisplayName(), bagSlot, inventoryIndex, inventory), a -> {
+            a.writeInt(bagSlot);
+            a.writeInt(inventoryIndex);
+            a.writeInt(inventory.rows);
+            a.writeInt(inventory.bagsInThisBag.size());
+            inventory.bagsInThisBag.forEach(a::writeInt);
+            a.writeInt(inventory.bagsThisBagIsIn.size());
+            inventory.bagsThisBagIsIn.forEach(a::writeInt);
+            a.writeInt(inventory.layer);
+        });
     }
 
 }

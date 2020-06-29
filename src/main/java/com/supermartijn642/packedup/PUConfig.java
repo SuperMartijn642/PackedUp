@@ -17,6 +17,9 @@ public class PUConfig {
     public static final ForgeConfigSpec CONFIG_SPEC;
     public static final PUConfig INSTANCE;
 
+    public ForgeConfigSpec.BooleanValue allowBagInBag;
+    public ForgeConfigSpec.IntValue maxBagInBagLayer;
+
     public ForgeConfigSpec.BooleanValue basicEnable;
     public ForgeConfigSpec.IntValue basicRows;
     public ForgeConfigSpec.BooleanValue ironEnable;
@@ -33,20 +36,22 @@ public class PUConfig {
     public ForgeConfigSpec.IntValue obsidianRows;
 
     private PUConfig(ForgeConfigSpec.Builder builder){
+        this.allowBagInBag = builder.worldRestart().comment("Can backpacks be put inside other backpacks?").define("allowBagInBag", true);
+        this.maxBagInBagLayer = builder.worldRestart().comment("How many layers deep can you place backpacks inside backpacks? -1 for infinite, 0 is the same as setting 'allowBagInBag' to false.").defineInRange("maxBagInBagLayer", -1, -1, 5);
 //        this.basicEnable = builder.worldRestart().comment("Enable the basic backpack?").define("enableBasic", true);
-        this.basicRows = builder.comment("How many rows does the basic backpack have?").defineInRange("rowsBasic", BackpackType.BASIC.getDefaultRows(), 1, 13);
+        this.basicRows = builder.worldRestart().comment("How many rows does the basic backpack have?").defineInRange("rowsBasic", BackpackType.BASIC.getDefaultRows(), 1, 13);
 //        this.ironEnable = builder.worldRestart().comment("Enable the iron backpack?").define("enableIron", true);
-        this.ironRows = builder.comment("How many rows does the iron backpack have?").defineInRange("rowsIron", BackpackType.IRON.getDefaultRows(), 1, 13);
+        this.ironRows = builder.worldRestart().comment("How many rows does the iron backpack have?").defineInRange("rowsIron", BackpackType.IRON.getDefaultRows(), 1, 13);
 //        this.copperEnable = builder.worldRestart().comment("Enable the copper backpack?").define("enableCopper", true);
-        this.copperRows = builder.comment("How many rows does the copper backpack have?").defineInRange("rowsCopper", BackpackType.COPPER.getDefaultRows(), 1, 13);
+        this.copperRows = builder.worldRestart().comment("How many rows does the copper backpack have?").defineInRange("rowsCopper", BackpackType.COPPER.getDefaultRows(), 1, 13);
 //        this.silverEnable = builder.worldRestart().comment("Enable the silver backpack?").define("enableSilver", true);
-        this.silverRows = builder.comment("How many rows does the silver backpack have?").defineInRange("rowsSilver", BackpackType.SILVER.getDefaultRows(), 1, 13);
+        this.silverRows = builder.worldRestart().comment("How many rows does the silver backpack have?").defineInRange("rowsSilver", BackpackType.SILVER.getDefaultRows(), 1, 13);
 //        this.goldEnable = builder.worldRestart().comment("Enable the gold backpack?").define("enableGold", true);
-        this.goldRows = builder.comment("How many rows does the gold backpack have?").defineInRange("rowsGold", BackpackType.GOLD.getDefaultRows(), 1, 13);
+        this.goldRows = builder.worldRestart().comment("How many rows does the gold backpack have?").defineInRange("rowsGold", BackpackType.GOLD.getDefaultRows(), 1, 13);
 //        this.diamondEnable = builder.worldRestart().comment("Enable the diamond backpack?").define("enableDiamond", true);
-        this.diamondRows = builder.comment("How many rows does the diamond backpack have?").defineInRange("rowsDiamond", BackpackType.DIAMOND.getDefaultRows(), 1, 13);
+        this.diamondRows = builder.worldRestart().comment("How many rows does the diamond backpack have?").defineInRange("rowsDiamond", BackpackType.DIAMOND.getDefaultRows(), 1, 13);
 //        this.obsidianEnable = builder.worldRestart().comment("Enable the obsidian backpack?").define("enableObsidian", true);
-        this.obsidianRows = builder.comment("How many rows does the obsidian backpack have?").defineInRange("rowsObsidian", BackpackType.OBSIDIAN.getDefaultRows(), 1, 13);
+        this.obsidianRows = builder.worldRestart().comment("How many rows does the obsidian backpack have?").defineInRange("rowsObsidian", BackpackType.OBSIDIAN.getDefaultRows(), 1, 13);
     }
 
 }

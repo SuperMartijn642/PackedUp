@@ -9,6 +9,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
+import java.util.Set;
+
 /**
  * Created 2/7/2020 by SuperMartijn642
  */
@@ -17,12 +19,15 @@ public class BackpackContainer extends Container {
     public final int rows;
     public final int bagSlot;
 
-    public BackpackContainer(int id, int inventoryIndex, PlayerInventory player, int bagSlot){
+    public BackpackContainer(int id, PlayerInventory player, int bagSlot, int inventoryIndex, int rows, Set<Integer> bagsInThisBag, Set<Integer> bagsThisBagIsIn, int layer){
         super(PackedUp.container, id);
         this.bagSlot = bagSlot;
+        this.rows = rows;
 
-        BackpackInventory inventory = player.player.world.isRemote ? new BackpackInventory(inventoryIndex * 9) : BackpackStorageManager.getInventory(inventoryIndex);
-        this.rows = inventory.getSlots() / 9;
+        BackpackInventory inventory = player.player.world.isRemote ?
+            new BackpackInventory(true, inventoryIndex, rows, bagsInThisBag, bagsThisBagIsIn, layer) :
+            BackpackStorageManager.getInventory(inventoryIndex);
+
         this.addSlots(this.rows, inventory, player);
     }
 
