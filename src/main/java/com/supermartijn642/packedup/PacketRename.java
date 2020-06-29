@@ -18,7 +18,6 @@ public class PacketRename implements IMessage, IMessageHandler<PacketRename,IMes
     private String name;
 
     public PacketRename(String name){
-        System.out.println("name: " + name);
         this.name = name;
     }
 

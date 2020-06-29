@@ -12,9 +12,9 @@ import net.minecraft.util.text.ITextComponent;
  */
 public class BackpackContainerScreen extends GuiContainer {
 
-    private final ResourceLocation texture;
-    private final String title;
-    private final ITextComponent playerInventory;
+    private ResourceLocation texture;
+    private String title;
+    private ITextComponent playerInventory;
 
     private int rows;
 
@@ -28,7 +28,7 @@ public class BackpackContainerScreen extends GuiContainer {
         if(container.bagSlot < 0 || !(player.inventory.getStackInSlot(container.bagSlot).getItem() instanceof BackpackItem))
             this.title = PackedUp.basicbackpack.getItemStackDisplayName(ItemStack.EMPTY);
         else
-            this.title = player.inventory.player.inventory.getStackInSlot(container.bagSlot).getDisplayName();
+            this.title = player.inventory.getStackInSlot(container.bagSlot).getDisplayName();
         this.playerInventory = player.inventory.getDisplayName();
     }
 

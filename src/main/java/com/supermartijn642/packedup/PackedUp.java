@@ -44,6 +44,8 @@ public class PackedUp {
         PUConfig.init(e.getModConfigurationDirectory());
         channel = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
         channel.registerMessage(PacketRename.class, PacketRename.class, 0, Side.SERVER);
+        channel.registerMessage(PacketMaxLayers.class, PacketMaxLayers.class, 1, Side.CLIENT);
+        channel.registerMessage(PacketBackpackContainer.class, PacketBackpackContainer.class, 2, Side.CLIENT);
     }
 
     @Mod.EventHandler

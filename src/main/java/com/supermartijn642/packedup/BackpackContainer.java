@@ -5,7 +5,6 @@ import net.minecraft.inventory.ClickType;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
 /**
@@ -13,27 +12,37 @@ import net.minecraftforge.items.SlotItemHandler;
  */
 public class BackpackContainer extends Container {
 
-    public final int rows;
-    public final int bagSlot;
+    public int rows;
+    public int bagSlot;
+    public BackpackInventory inventory;
 
-    public BackpackContainer(int inventoryIndex, EntityPlayer player, int bagSlot){
+    public BackpackContainer(EntityPlayer player, int bagSlot, int inventoryIndex){
         this.bagSlot = bagSlot;
+        this.inventory = BackpackStorageManager.getInventory(inventoryIndex);
+        this.rows = this.inventory.rows;
 
-        BackpackInventory inventory = player.world.isRemote ? new BackpackInventory(inventoryIndex * 9) : BackpackStorageManager.getInventory(inventoryIndex);
-        this.rows = inventory.getSlots() / 9;
-        this.addSlots(this.rows, inventory, player);
+        this.addSlots(player);
     }
 
-    private void addSlots(int rows, IItemHandler inventory, EntityPlayer player){
-        int startX = 8;
-        int startY = rows < 9 ? 17 : 8;
+    public BackpackContainer(EntityPlayer player, int bagSlot, int rows, int inventoryIndex){
+        this.bagSlot = bagSlot;
+        this.rows = rows;
 
-        int columns = 9 + Math.max(rows - 9, 0);
-        rows = Math.min(rows, 9);
+        this.inventory = new BackpackInventory(true, inventoryIndex, rows);
+
+        this.addSlots(player);
+    }
+
+    private void addSlots(EntityPlayer player){
+        int startX = 8;
+        int startY = this.rows < 9 ? 17 : 8;
+
+        int columns = 9 + Math.max(this.rows - 9, 0);
+        int rows = Math.min(this.rows, 9);
         for(int row = 0; row < rows; row++){
             for(int column = 0; column < columns; column++){
                 int x = startX + 18 * column, y = startY + 18 * row, index = row * columns + column;
-                this.addSlotToContainer(new SlotItemHandler(inventory, index, x, y));
+                this.addSlotToContainer(new SlotItemHandler(this.inventory, index, x, y));
             }
         }
 

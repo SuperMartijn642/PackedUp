@@ -54,7 +54,6 @@ public class BackpackRenameScreen extends GuiScreen {
         this.nameField.updateCursorCounter();
         if(!this.lastTickName.trim().equals(this.nameField.getText().trim())){
             this.lastTickName = this.nameField.getText();
-            System.out.println("Sending!!!");
             PackedUp.channel.sendToServer(new PacketRename(this.lastTickName.trim().isEmpty() || this.lastTickName.trim().equals(this.defaultName) ? null : this.lastTickName.trim()));
         }
     }

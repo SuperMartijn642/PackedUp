@@ -15,7 +15,7 @@ public class GuiHandler implements IGuiHandler {
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z){
         int bagSlot = ((ID >> 5) & 63) - 2;
         int inventoryIndex = (ID >> 11) & 2097151;
-        return new BackpackContainer(inventoryIndex, player, bagSlot);
+        return new BackpackContainer(player, bagSlot, inventoryIndex);
     }
 
     @Nullable
@@ -23,6 +23,7 @@ public class GuiHandler implements IGuiHandler {
     public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z){
         int rows = ID & 31;
         int bagSlot = ((ID >> 5) & 63) - 2;
-        return new BackpackContainerScreen(new BackpackContainer(rows, player, bagSlot), player);
+        int inventoryIndex = (ID >> 11) & 2097151;
+        return new BackpackContainerScreen(new BackpackContainer(player, bagSlot, rows, inventoryIndex), player);
     }
 }

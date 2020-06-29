@@ -1,6 +1,7 @@
 package com.supermartijn642.packedup;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -26,12 +27,19 @@ public class ClientProxy extends CommonProxy {
         }
     }
 
-    @Override
-    public EntityPlayer getClientPlayer(){
+    public static EntityPlayer getClientPlayer(){
         return Minecraft.getMinecraft().player;
     }
 
     public static void openScreen(String defaultName, String name){
         Minecraft.getMinecraft().displayGuiScreen(new BackpackRenameScreen(defaultName, name));
+    }
+
+    public static void addScheduledTask(Runnable task){
+        Minecraft.getMinecraft().addScheduledTask(task);
+    }
+
+    public static GuiScreen getGui(){
+        return Minecraft.getMinecraft().currentScreen;
     }
 }
