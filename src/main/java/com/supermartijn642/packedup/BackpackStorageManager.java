@@ -36,7 +36,7 @@ public class BackpackStorageManager {
     public static void onWorldLoad(WorldEvent.Load event){
         if(event.getWorld().isRemote() || event.getWorld().getDimension().getType() != DimensionType.OVERWORLD)
             return;
-        maxLayers = PUConfig.INSTANCE.maxBagInBagLayer.get();
+        maxLayers = PUConfig.INSTANCE.allowBagInBag.get() ? PUConfig.INSTANCE.maxBagInBagLayer.get() : 0;
         ServerWorld world = (ServerWorld)event.getWorld();
         directory = new File(world.getSaveHandler().getWorldDirectory(), "packedup/backpacks");
         load();
