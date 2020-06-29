@@ -126,6 +126,16 @@ public class BackpackInventory implements IItemHandlerModifiable {
 
     @Override
     public boolean isItemValid(int slot, @Nonnull ItemStack stack){
+        if(stack.getItem() instanceof BlockItem && ((BlockItem)stack.getItem()).getBlock() instanceof ShulkerBoxBlock && stack.hasTag()){
+            CompoundNBT compound = stack.getTag().getCompound("BlockEntityTag");
+            if(compound.contains("Items", 9)){
+                NonNullList<ItemStack> items = NonNullList.withSize(27, ItemStack.EMPTY);
+                ItemStackHelper.loadAllItems(compound, items);
+                for(ItemStack stack1 : items)
+                    if(stack1.getItem() instanceof BackpackItem)
+                        return false;
+            }
+        }
         return true;
     }
 
