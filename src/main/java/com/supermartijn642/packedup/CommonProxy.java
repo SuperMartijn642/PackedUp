@@ -29,7 +29,7 @@ public class CommonProxy {
             BackpackInventory inventory = BackpackStorageManager.getInventory(compound.getInt("packedup:invIndex"));
             int rows = inventory.getSlots() / 9;
             if(rows != type.getRows())
-                inventory.adjustSize(type.getRows() * 9);
+                inventory.adjustSize(type.getRows());
         }
         int inventoryIndex = compound.getInt("packedup:invIndex");
         BackpackInventory inventory = BackpackStorageManager.getInventory(inventoryIndex);
