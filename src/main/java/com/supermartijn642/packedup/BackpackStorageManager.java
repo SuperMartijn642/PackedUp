@@ -2,8 +2,9 @@ package com.supermartijn642.packedup;
 
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.dimension.DimensionType;
+import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraft.world.storage.FolderName;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -27,18 +28,18 @@ public class BackpackStorageManager {
 
     @SubscribeEvent
     public static void onWorldSave(WorldEvent.Save event){
-        if(event.getWorld().isRemote() || event.getWorld().getDimension().getType() != DimensionType.OVERWORLD)
+        if(event.getWorld().isRemote() || event.getWorld().getWorld().func_234923_W_() != World.field_234918_g_)
             return;
         save();
     }
 
     @SubscribeEvent
     public static void onWorldLoad(WorldEvent.Load event){
-        if(event.getWorld().isRemote() || event.getWorld().getDimension().getType() != DimensionType.OVERWORLD)
+        if(event.getWorld().isRemote() || event.getWorld().getWorld().func_234923_W_() != World.field_234918_g_)
             return;
         maxLayers = PUConfig.INSTANCE.allowBagInBag.get() ? PUConfig.INSTANCE.maxBagInBagLayer.get() : 0;
         ServerWorld world = (ServerWorld)event.getWorld();
-        directory = new File(world.getSaveHandler().getWorldDirectory(), "packedup/backpacks");
+        directory = new File(world.getServer().func_240776_a_(FolderName.field_237253_i_).toFile(), "packedup/backpacks");
         load();
     }
 

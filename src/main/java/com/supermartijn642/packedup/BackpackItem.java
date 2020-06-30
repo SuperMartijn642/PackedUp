@@ -30,13 +30,13 @@ public class BackpackItem extends Item {
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn){
         ItemStack stack = playerIn.getHeldItem(handIn);
-        if(!playerIn.isShiftKeyDown()){
+        if(!playerIn.isSneaking()){
             if(!worldIn.isRemote && stack.getItem() instanceof BackpackItem){
                 int bagSlot = handIn == Hand.MAIN_HAND ? playerIn.inventory.currentItem : -1;
                 CommonProxy.openBackpackInventory(stack, playerIn, bagSlot);
             }
         }else if(worldIn.isRemote){
-            ClientProxy.openScreen(stack.getItem().getDisplayName(stack).getFormattedText(), stack.getDisplayName().getFormattedText());
+            ClientProxy.openScreen(stack.getItem().getDisplayName(stack).getString(), stack.getDisplayName().getString());
         }
         return ActionResult.resultSuccess(stack);
     }
