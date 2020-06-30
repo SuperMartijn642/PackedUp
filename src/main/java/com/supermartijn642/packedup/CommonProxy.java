@@ -33,7 +33,7 @@ public class CommonProxy {
             BackpackInventory inventory = BackpackStorageManager.getInventory(compound.getInteger("packedup:invIndex"));
             int rows = inventory.getSlots() / 9;
             if(rows != type.getRows())
-                inventory.adjustSize(type.getRows() * 9);
+                inventory.adjustSize(type.getRows());
         }
         int inventoryIndex = compound.getInteger("packedup:invIndex");
         player.openGui(PackedUp.instance, type.getRows() | ((bagSlot + 2) << 5) | (inventoryIndex << 11), player.world, (int)player.posX, (int)player.posY, (int)player.posZ);
