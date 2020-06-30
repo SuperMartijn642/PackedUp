@@ -13,7 +13,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '1.0.14-mc1.15'
+version = '1.0.14-mc1.16'
 group = 'com.supermartijn642.packedup' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'packedup'
 
@@ -40,7 +40,7 @@ minecraft {
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
 
             // Recommended logging level for the console
-            property 'forge.logging.console.level', 'debug'
+//            property 'forge.logging.console.level', 'debug'
 
             mods {
                 packedup {
@@ -56,7 +56,7 @@ minecraft {
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
 
             // Recommended logging level for the console
-            property 'forge.logging.console.level', 'debug'
+//            property 'forge.logging.console.level', 'debug'
 
             mods {
                 packedup {
@@ -72,7 +72,7 @@ minecraft {
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
 
             // Recommended logging level for the console
-            property 'forge.logging.console.level', 'debug'
+//            property 'forge.logging.console.level', 'debug'
 
             args '--mod', 'examplemod', '--all', '--output', file('src/generated/resources/')
 
@@ -123,9 +123,9 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 
     // compile against the JEI API but do not include it at runtime
-    compileOnly fg.deobf("mezz.jei:jei-1.15.2:6.0.0.2:api")
+//    compileOnly fg.deobf("mezz.jei:jei-1.15.2:6.0.0.2:api")
     // at runtime, use the full JEI jar
-    runtimeOnly fg.deobf("mezz.jei:jei-1.15.2:6.0.0.2")
+//    runtimeOnly fg.deobf("mezz.jei:jei-1.15.2:6.0.0.2")
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..
