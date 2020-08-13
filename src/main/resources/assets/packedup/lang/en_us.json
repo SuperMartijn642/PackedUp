@@ -7,5 +7,7 @@
   "item.packedup.diamondbackpack": "Diamond Backpack",
   "item.packedup.obsidianbackpack": "Obsidian Backpack",
   "gui.packedup.title": "Backpack Name",
-  "gui.packedup.name": "Backpack Name:"
+  "gui.packedup.name": "Backpack Name:",
+  "keys.category.packedup": "Packed Up",
+  "keys.packedup.openbag": "Open Backpack"
 }
