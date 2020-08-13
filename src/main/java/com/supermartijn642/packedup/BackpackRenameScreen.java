@@ -1,6 +1,7 @@
 package com.supermartijn642.packedup;
 
 import com.mojang.blaze3d.platform.GlStateManager;
+import com.supermartijn642.packedup.packets.PacketRename;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.TextFieldWidget;
