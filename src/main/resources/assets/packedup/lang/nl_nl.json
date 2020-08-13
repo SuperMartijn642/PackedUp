@@ -7,5 +7,7 @@
   "item.packedup.diamondbackpack": "Diamanten Rugzak",
   "item.packedup.obsidianbackpack": "Obsidiaan Rugzak",
   "gui.packedup.title": "Rugzak Naam",
-  "gui.packedup.name": "Rugzak Naam:"
+  "gui.packedup.name": "Rugzak Naam:",
+  "keys.category.packedup": "Packed Up",
+  "keys.packedup.openbag": "Rugzak Openen"
 }
