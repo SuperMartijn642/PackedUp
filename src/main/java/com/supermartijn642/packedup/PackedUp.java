@@ -66,7 +66,8 @@ public class PackedUp {
 
         CHANNEL.registerMessage(0, PacketRename.class, PacketRename::encode, PacketRename::decode, PacketRename::handle);
         CHANNEL.registerMessage(1, PacketMaxLayers.class, PacketMaxLayers::encode, PacketMaxLayers::decode, PacketMaxLayers::handle);
-        CHANNEL.registerMessage(2, PacketOpenBag.class, (msg, buffer) -> {}, buffer -> new PacketOpenBag(), PacketOpenBag::handle);
+        CHANNEL.registerMessage(2, PacketOpenBag.class, (msg, buffer) -> {
+        }, buffer -> new PacketOpenBag(), PacketOpenBag::handle);
     }
 
     public void init(FMLCommonSetupEvent e){
