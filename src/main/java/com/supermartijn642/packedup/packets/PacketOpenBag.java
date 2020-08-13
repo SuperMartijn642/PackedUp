@@ -4,7 +4,7 @@ import com.supermartijn642.packedup.BackpackItem;
 import com.supermartijn642.packedup.CommonProxy;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.fml.network.NetworkEvent;
-import top.theillusivec4.curios.api.CuriosAPI;
+import top.theillusivec4.curios.api.CuriosApi;
 
 import java.util.function.Supplier;
 
@@ -21,7 +21,7 @@ public class PacketOpenBag {
 
         PlayerEntity player = contextSupplier.get().getSender();
         if(player != null){
-            CuriosAPI.getCurioEquipped(item -> item.getItem() instanceof BackpackItem, player).ifPresent(triple ->
+            CuriosApi.getCuriosHelper().findEquippedCurio(item -> item.getItem() instanceof BackpackItem, player).ifPresent(triple ->
                 CommonProxy.openBackpackInventory(triple.getRight(), player, -1)
             );
         }
