@@ -1,11 +1,8 @@
 package com.supermartijn642.packedup.integration;
 
 import baubles.api.BaubleType;
-import baubles.api.IBauble;
 import baubles.api.cap.BaublesCapabilities;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.capabilities.Capability;
 
 /**
