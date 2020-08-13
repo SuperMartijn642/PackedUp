@@ -1,5 +1,6 @@
-package com.supermartijn642.packedup;
+package com.supermartijn642.packedup.packets;
 
+import com.supermartijn642.packedup.BackpackItem;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

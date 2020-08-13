@@ -1,5 +1,9 @@
-package com.supermartijn642.packedup;
+package com.supermartijn642.packedup.packets;
 
+import com.supermartijn642.packedup.BackpackContainer;
+import com.supermartijn642.packedup.BackpackInventory;
+import com.supermartijn642.packedup.BackpackStorageManager;
+import com.supermartijn642.packedup.ClientProxy;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;

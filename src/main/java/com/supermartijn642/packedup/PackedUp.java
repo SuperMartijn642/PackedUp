@@ -1,6 +1,14 @@
 package com.supermartijn642.packedup;
 
+import com.supermartijn642.packedup.integration.BaublesActive;
+import com.supermartijn642.packedup.integration.BaublesInactive;
+import com.supermartijn642.packedup.packets.PacketBackpackContainer;
+import com.supermartijn642.packedup.packets.PacketMaxLayers;
+import com.supermartijn642.packedup.packets.PacketOpenBag;
+import com.supermartijn642.packedup.packets.PacketRename;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -24,6 +32,8 @@ public class PackedUp {
 
     public static SimpleNetworkWrapper channel;
 
+    public static BaublesInactive baubles;
+
     @GameRegistry.ObjectHolder("packedup:basicbackpack")
     public static BackpackItem basicbackpack;
     @GameRegistry.ObjectHolder("packedup:ironbackpack")
@@ -46,12 +56,18 @@ public class PackedUp {
         channel.registerMessage(PacketRename.class, PacketRename.class, 0, Side.SERVER);
         channel.registerMessage(PacketMaxLayers.class, PacketMaxLayers.class, 1, Side.CLIENT);
         channel.registerMessage(PacketBackpackContainer.class, PacketBackpackContainer.class, 2, Side.CLIENT);
+        channel.registerMessage(PacketOpenBag.class, PacketOpenBag.class, 3, Side.SERVER);
+
+        baubles = Loader.isModLoaded("baubles") ? new BaublesActive() : new BaublesInactive();
     }
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent e){
         MinecraftForge.EVENT_BUS.register(BackpackStorageManager.class);
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
+
+        if(FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT)
+            ClientProxy.init();
     }
 
 }

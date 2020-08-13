@@ -1,5 +1,6 @@
-package com.supermartijn642.packedup;
+package com.supermartijn642.packedup.packets;
 
+import com.supermartijn642.packedup.BackpackStorageManager;
 import io.netty.buffer.ByteBuf;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
