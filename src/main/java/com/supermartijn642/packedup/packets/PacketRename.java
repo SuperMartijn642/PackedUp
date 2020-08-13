@@ -1,5 +1,6 @@
-package com.supermartijn642.packedup;
+package com.supermartijn642.packedup.packets;
 
+import com.supermartijn642.packedup.BackpackItem;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;

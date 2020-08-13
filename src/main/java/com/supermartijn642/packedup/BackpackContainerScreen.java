@@ -29,7 +29,6 @@ public class BackpackContainerScreen extends ContainerScreen<BackpackContainer> 
     }
 
 
-
     @Override
     protected void func_230450_a_(MatrixStack matrixStack, float partialTicks, int mouseX, int mouseY){
         RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);

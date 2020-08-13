@@ -1,5 +1,6 @@
 package com.supermartijn642.packedup;
 
+import com.supermartijn642.packedup.packets.PacketMaxLayers;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;

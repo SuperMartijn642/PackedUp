@@ -8,7 +8,6 @@ import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.InputMappings;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.StringTextComponent;
@@ -81,7 +80,7 @@ public class BackpackRenameScreen extends Screen {
 
         RenderSystem.popMatrix();
 
-        this.field_230712_o_.func_238422_b_(matrixStack,new TranslationTextComponent("gui.packedup.name"), this.nameField.field_230690_l_ + 2, this.top + 8, 4210752);
+        this.field_230712_o_.func_238422_b_(matrixStack, new TranslationTextComponent("gui.packedup.name"), this.nameField.field_230690_l_ + 2, this.top + 8, 4210752);
         this.nameField.func_230430_a_(matrixStack, mouseX, mouseY, partialTicks);
         super.func_230430_a_(matrixStack, mouseX, mouseY, partialTicks);
     }

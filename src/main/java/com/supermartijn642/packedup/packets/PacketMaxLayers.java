@@ -1,5 +1,6 @@
-package com.supermartijn642.packedup;
+package com.supermartijn642.packedup.packets;
 
+import com.supermartijn642.packedup.BackpackStorageManager;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.network.NetworkEvent;
 
