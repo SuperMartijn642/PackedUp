@@ -6,3 +6,5 @@ item.packedup:goldbackpack.name=Golden Backpack
 item.packedup:diamondbackpack.name=Diamond Backpack
 item.packedup:obsidianbackpack.name=Obsidian Backpack
 gui.packedup.name=Backpack Name:
+keys.category.packedup=Packed Up
+keys.packedup.openbag=Open Backpack
