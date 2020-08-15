@@ -29,14 +29,14 @@ public class BackpackStorageManager {
 
     @SubscribeEvent
     public static void onWorldSave(WorldEvent.Save event){
-        if(event.getWorld().isRemote() || event.getWorld().getWorld().func_234923_W_() != World.field_234918_g_)
+        if(event.getWorld().isRemote() || !(event.getWorld() instanceof World) || ((World)event.getWorld()).func_234923_W_() != World.field_234918_g_)
             return;
         save();
     }
 
     @SubscribeEvent
     public static void onWorldLoad(WorldEvent.Load event){
-        if(event.getWorld().isRemote() || event.getWorld().getWorld().func_234923_W_() != World.field_234918_g_)
+        if(event.getWorld().isRemote() || !(event.getWorld() instanceof World) || ((World)event.getWorld()).func_234923_W_() != World.field_234918_g_)
             return;
         maxLayers = PUConfig.INSTANCE.allowBagInBag.get() ? PUConfig.INSTANCE.maxBagInBagLayer.get() : 0;
         ServerWorld world = (ServerWorld)event.getWorld();

@@ -37,14 +37,14 @@ public class BackpackRenameScreen extends Screen {
     }
 
     @Override
-    protected void func_231160_c_(){
-        this.left = (this.field_230708_k_ - BACKGROUND_WIDTH) / 2;
-        this.top = (this.field_230709_l_ - BACKGROUND_HEIGHT) / 2;
+    protected void init(){
+        this.left = (this.width - BACKGROUND_WIDTH) / 2;
+        this.top = (this.height - BACKGROUND_HEIGHT) / 2;
 
-        boolean focused = this.nameField != null && this.nameField.func_230999_j_();
+        boolean focused = this.nameField != null && this.nameField.isFocused();
         int width = 150;
         int height = 20;
-        this.field_230705_e_.add(this.nameField = new TextFieldWidget(this.field_230712_o_, (this.field_230708_k_ - width) / 2, this.top + 20, width, height, new StringTextComponent("")));
+        this.children.add(this.nameField = new TextFieldWidget(this.font, (this.width - width) / 2, this.top + 20, width, height, new StringTextComponent("")));
         this.nameField.setText(this.lastTickName);
         this.nameField.setCanLoseFocus(true);
         this.nameField.setFocused2(focused);
@@ -52,7 +52,7 @@ public class BackpackRenameScreen extends Screen {
     }
 
     @Override
-    public void func_231023_e_(){
+    public void tick(){
         this.nameField.tick();
         if(!this.lastTickName.trim().equals(this.nameField.getText().trim())){
             this.lastTickName = this.nameField.getText();
@@ -61,8 +61,8 @@ public class BackpackRenameScreen extends Screen {
     }
 
     @Override
-    public void func_230430_a_(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks){
-        this.func_230446_a_(matrixStack);
+    public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks){
+        this.renderBackground(matrixStack);
 
         RenderSystem.pushMatrix();
         RenderSystem.translated(this.left, this.top, 0);
@@ -81,33 +81,33 @@ public class BackpackRenameScreen extends Screen {
 
         RenderSystem.popMatrix();
 
-        this.field_230712_o_.func_238422_b_(matrixStack, new TranslationTextComponent("gui.packedup.name"), this.nameField.field_230690_l_ + 2, this.top + 8, 4210752);
-        this.nameField.func_230430_a_(matrixStack, mouseX, mouseY, partialTicks);
-        super.func_230430_a_(matrixStack, mouseX, mouseY, partialTicks);
+        this.font.func_243246_a(matrixStack, new TranslationTextComponent("gui.packedup.name"), this.nameField.x + 2, this.top + 8, 4210752);
+        this.nameField.render(matrixStack, mouseX, mouseY, partialTicks);
+        super.render(matrixStack, mouseX, mouseY, partialTicks);
     }
 
     @Override
-    public boolean func_231177_au__(){
+    public boolean isPauseScreen(){
         return false;
     }
 
     @Override
-    public boolean func_231044_a_(double mouseX, double mouseY, int mouseButton){
+    public boolean mouseClicked(double mouseX, double mouseY, int mouseButton){
         if(mouseButton == 1){ // text field
-            if(mouseX >= this.nameField.field_230690_l_ && mouseX < this.nameField.field_230690_l_ + this.nameField.func_230998_h_()
-                && mouseY >= this.nameField.field_230691_m_ && mouseY < this.nameField.field_230691_m_ + this.nameField.getHeight())
+            if(mouseX >= this.nameField.x && mouseX < this.nameField.x + this.nameField.getWidth()
+                && mouseY >= this.nameField.y && mouseY < this.nameField.y + this.nameField.getHeight())
                 this.nameField.setText("");
         }
-        super.func_231044_a_(mouseX, mouseY, mouseButton);
+        super.mouseClicked(mouseX, mouseY, mouseButton);
         return false;
     }
 
     @Override
-    public boolean func_231046_a_(int p_keyPressed_1_, int p_keyPressed_2_, int p_keyPressed_3_){
-        if(super.func_231046_a_(p_keyPressed_1_, p_keyPressed_2_, p_keyPressed_3_))
+    public boolean keyPressed(int p_keyPressed_1_, int p_keyPressed_2_, int p_keyPressed_3_){
+        if(super.keyPressed(p_keyPressed_1_, p_keyPressed_2_, p_keyPressed_3_))
             return true;
         InputMappings.Input mouseKey = InputMappings.getInputByCode(p_keyPressed_1_, p_keyPressed_2_);
-        if(!this.nameField.func_230999_j_() && (p_keyPressed_1_ == 256 || Minecraft.getInstance().gameSettings.keyBindInventory.isActiveAndMatches(mouseKey))){
+        if(!this.nameField.isFocused() && (p_keyPressed_1_ == 256 || Minecraft.getInstance().gameSettings.keyBindInventory.isActiveAndMatches(mouseKey))){
             Minecraft.getInstance().player.closeScreen();
             return true;
         }
