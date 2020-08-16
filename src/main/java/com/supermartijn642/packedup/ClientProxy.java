@@ -57,7 +57,7 @@ public class ClientProxy extends CommonProxy {
 
     @SubscribeEvent
     public static void onKey(InputEvent.KeyInputEvent e){
-        if(OPEN_BAG_KEY.isPressed())
+        if(OPEN_BAG_KEY.isPressed() && Minecraft.getMinecraft().world != null)
             PackedUp.channel.sendToServer(new PacketOpenBag());
     }
 }
