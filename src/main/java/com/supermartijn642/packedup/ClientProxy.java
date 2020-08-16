@@ -37,7 +37,7 @@ public class ClientProxy extends CommonProxy {
     }
 
     public static void onKey(InputEvent.KeyInputEvent e){
-        if(OPEN_BAG_KEY.matchesKey(e.getKey(), e.getScanCode()))
+        if(OPEN_BAG_KEY.matchesKey(e.getKey(), e.getScanCode()) && Minecraft.getInstance().world != null)
             PackedUp.CHANNEL.sendToServer(new PacketOpenBag());
     }
 }
