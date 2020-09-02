@@ -25,9 +25,11 @@ import net.minecraftforge.fml.relauncher.Side;
 public class ClientProxy extends CommonProxy {
 
     private static KeyBinding OPEN_BAG_KEY = new KeyBinding("keys.packedup.openbag", 24/*'o'*/, "keys.category.packedup");
+    private static boolean baubles = false;
 
     public static void init(){
-        if(Loader.isModLoaded("baubles"))
+        baubles = Loader.isModLoaded("baubles");
+        if(baubles)
             ClientRegistry.registerKeyBinding(OPEN_BAG_KEY);
     }
 
@@ -57,7 +59,7 @@ public class ClientProxy extends CommonProxy {
 
     @SubscribeEvent
     public static void onKey(InputEvent.KeyInputEvent e){
-        if(OPEN_BAG_KEY.isPressed() && Minecraft.getMinecraft().world != null)
+        if(baubles && OPEN_BAG_KEY.isPressed() && Minecraft.getMinecraft().world != null && Minecraft.getMinecraft().currentScreen == null)
             PackedUp.channel.sendToServer(new PacketOpenBag());
     }
 }
