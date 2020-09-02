@@ -11,7 +11,7 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 //Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 
 
-version = "1.0.17-mc1.12"
+version = "1.0.18-mc1.12"
 group = "com.supermartijn642.packedup" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "packedup"
 
@@ -23,7 +23,7 @@ compileJava {
 minecraft {
     version = "1.12.2-14.23.5.2847"
     runDir = "run"
-    
+
     // the mappings can be changed at any time, and must be in the following format.
     // snapshot_YYYYMMDD   snapshot are built nightly.
     // stable_#            stables are built at the discretion of the MCP team.
@@ -34,7 +34,8 @@ minecraft {
 }
 
 dependencies {
-    compile files("lib/Baubles-1.12-1.5.2-deobf.jar")
+    provided files("lib/Baubles-1.12-1.5.2-deobf.jar")
+//    runtimeOnly files("lib/Baubles-1.12-1.5.2-deobf.jar")
 }
 
 processResources {
