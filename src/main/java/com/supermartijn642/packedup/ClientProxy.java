@@ -15,13 +15,14 @@ import net.minecraftforge.fml.client.registry.ClientRegistry;
  */
 public class ClientProxy extends CommonProxy {
 
-    private static KeyBinding OPEN_BAG_KEY = new KeyBinding("keys.packedup.openbag", 79/*'o'*/, "keys.category.packedup");
+    private static KeyBinding OPEN_BAG_KEY;
 
     @Override
     public void init(){
         ScreenManager.registerFactory(PackedUp.container, BackpackContainerScreen::new);
 
         if(ModList.get().isLoaded("curios")){
+            OPEN_BAG_KEY = new KeyBinding("keys.packedup.openbag", 79/*'o'*/, "keys.category.packedup");
             ClientRegistry.registerKeyBinding(OPEN_BAG_KEY);
             MinecraftForge.EVENT_BUS.addListener(ClientProxy::onKey);
         }
@@ -37,7 +38,7 @@ public class ClientProxy extends CommonProxy {
     }
 
     public static void onKey(InputEvent.KeyInputEvent e){
-        if(OPEN_BAG_KEY.matchesKey(e.getKey(), e.getScanCode()) && Minecraft.getInstance().world != null)
+        if(OPEN_BAG_KEY != null && OPEN_BAG_KEY.matchesKey(e.getKey(), e.getScanCode()) && Minecraft.getInstance().world != null && Minecraft.getInstance().currentScreen == null)
             PackedUp.CHANNEL.sendToServer(new PacketOpenBag());
     }
 }
