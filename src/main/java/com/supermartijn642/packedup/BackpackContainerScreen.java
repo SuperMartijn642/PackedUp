@@ -42,7 +42,7 @@ public class BackpackContainerScreen extends ContainerScreen<BackpackContainer> 
     protected void drawGuiContainerForegroundLayer(MatrixStack matrixStack, int mouseX, int mouseY){
         if(container.rows >= 9)
             return;
-        this.font.func_238407_a_(matrixStack, this.title, 8.0F, 6.0F, 4210752);
-        this.font.func_238407_a_(matrixStack, this.playerInventory.getDisplayName(), 8.0F, (float)(this.ySize - 96 + 2), 4210752);
+        this.font.func_238422_b_(matrixStack, this.title, 8.0F, 6.0F, 4210752);
+        this.font.func_238422_b_(matrixStack, this.playerInventory.getDisplayName(), 8.0F, (float)(this.ySize - 96 + 2), 4210752);
     }
 }
