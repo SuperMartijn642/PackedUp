@@ -91,8 +91,8 @@ dependencies {
 //    runtimeOnly fg.deobf("mezz.jei:jei-1.15.2:6.0.0.2")
 
     // Curios
-    runtimeOnly fg.deobf("curse.maven:curios:3031837")
-    compileOnly fg.deobf("curse.maven:curios:3031839")
+    runtimeOnly fg.deobf("curse.maven:curios:3023024")
+    compileOnly fg.deobf("curse.maven:curios:3023024")
 //    runtimeOnly fg.deobf("top.theillusivec4.curios:curios:forge-1.16.2-4.0.0.0")
 //    compileOnly fg.deobf("top.theillusivec4.curios:curios:forge-1.16.2-4.0.0.0:api")
 }
