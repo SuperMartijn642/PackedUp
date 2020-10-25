@@ -81,7 +81,7 @@ public class BackpackRenameScreen extends Screen {
 
         RenderSystem.popMatrix();
 
-        this.font.func_243246_a(matrixStack, new TranslationTextComponent("gui.packedup.name"), this.nameField.x + 2, this.top + 8, 4210752);
+        this.font.func_243248_b(matrixStack, new TranslationTextComponent("gui.packedup.name"), this.nameField.x + 2, this.top + 8, 4210752);
         this.nameField.render(matrixStack, mouseX, mouseY, partialTicks);
         super.render(matrixStack, mouseX, mouseY, partialTicks);
     }
