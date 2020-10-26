@@ -113,7 +113,7 @@ public class BackpackContainer extends Container {
     public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, EntityPlayer player){
         if(clickTypeIn == ClickType.SWAP && dragType == this.bagSlot)
             return ItemStack.EMPTY;
-        if(clickTypeIn == ClickType.PICKUP && dragType == 1){
+        if(clickTypeIn == ClickType.PICKUP && dragType == 1 && slotId >= 0){
             Slot slot = this.getSlot(slotId);
             if(slot.canTakeStack(player)){
                 ItemStack stack = slot.getStack();
