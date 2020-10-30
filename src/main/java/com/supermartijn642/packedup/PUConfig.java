@@ -23,8 +23,8 @@ public class PUConfig {
 
         instance.addCustomCategoryComment(Configuration.CATEGORY_GENERAL, "");
 
-        instance.getBoolean("allowBagInBag", Configuration.CATEGORY_GENERAL, true, "Can backpacks be put inside other backpacks?");
-        instance.getInt("maxBagInBagLayer", Configuration.CATEGORY_GENERAL, -1, -1, 5, "How many layers deep can you place backpacks inside backpacks? -1 for infinite, 0 is the same as setting 'allowBagInBag' to false.");
+        allowBagInBag = instance.getBoolean("allowBagInBag", Configuration.CATEGORY_GENERAL, true, "Can backpacks be put inside other backpacks?");
+        maxBagInBagLayer = instance.getInt("maxBagInBagLayer", Configuration.CATEGORY_GENERAL, -1, -1, 5, "How many layers deep can you place backpacks inside backpacks? -1 for infinite, 0 is the same as setting 'allowBagInBag' to false.");
         for(BackpackType type : BackpackType.values()){
             rows.put(type, instance.getInt("rows" + type.name().substring(0, 1).toUpperCase() + type.name().substring(1).toLowerCase(), Configuration.CATEGORY_GENERAL, type.getDefaultRows(), 1, 13, "How many rows does the " + type.name().toLowerCase() + " backpack have?"));
         }
