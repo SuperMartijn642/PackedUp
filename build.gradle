@@ -15,14 +15,14 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'com.wynprice.cursemaven'
 
-version = '1.0.19-mc1.16.3'
+version = '1.0.19-mc1.16.4'
 group = 'com.supermartijn642.packedup' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'packedup'
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 
 minecraft {
-    mappings channel: 'snapshot', version: '20200723-1.16.1'
+    mappings channel: 'snapshot', version: '20201028-1.16.3'
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
 
     runs {
@@ -83,7 +83,7 @@ repositories {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.16.3-34.0.0'
+    minecraft 'net.minecraftforge:forge:1.16.4-35.0.1'
 
     // compile against the JEI API but do not include it at runtime
 //    compileOnly fg.deobf("mezz.jei:jei-1.15.2:6.0.0.2:api")
@@ -91,7 +91,7 @@ dependencies {
 //    runtimeOnly fg.deobf("mezz.jei:jei-1.15.2:6.0.0.2")
 
     // Curios
-    runtimeOnly fg.deobf("curse.maven:curios:3031837")
+//    runtimeOnly fg.deobf("curse.maven:curios:3031837")
     compileOnly fg.deobf("curse.maven:curios:3031839")
 //    runtimeOnly fg.deobf("top.theillusivec4.curios:curios:forge-1.16.2-4.0.0.0")
 //    compileOnly fg.deobf("top.theillusivec4.curios:curios:forge-1.16.2-4.0.0.0:api")
