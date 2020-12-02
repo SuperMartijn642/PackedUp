@@ -68,9 +68,6 @@ public class BackpackInventory implements IItemHandlerModifiable {
     @Nonnull
     @Override
     public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate){
-        if(stack.getItem() instanceof BackpackItem && !isBagAllowed(stack))
-            return stack;
-
         ItemStack current = this.stacks.get(slot);
         if(!stack.isEmpty() && this.isItemValid(slot, stack) && canStack(current, stack)){
             int amount = Math.min(stack.getCount(), 64 - current.getCount());
@@ -126,6 +123,9 @@ public class BackpackInventory implements IItemHandlerModifiable {
 
     @Override
     public boolean isItemValid(int slot, @Nonnull ItemStack stack){
+        if(stack.getItem() instanceof BackpackItem && !isBagAllowed(stack))
+            return false;
+
         if(stack.getItem() instanceof BlockItem && ((BlockItem)stack.getItem()).getBlock() instanceof ShulkerBoxBlock && stack.hasTag()){
             CompoundNBT compound = stack.getTag().getCompound("BlockEntityTag");
             if(compound.contains("Items", 9)){
