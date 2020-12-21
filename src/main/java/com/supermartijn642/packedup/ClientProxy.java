@@ -8,8 +8,11 @@ import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.client.settings.KeyModifier;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -58,5 +61,9 @@ public class ClientProxy extends CommonProxy {
     public static void onKey(InputEvent.KeyInputEvent e){
         if(OPEN_BAG_KEY != null && OPEN_BAG_KEY.isPressed() && Minecraft.getMinecraft().world != null && Minecraft.getMinecraft().currentScreen == null)
             PackedUp.channel.sendToServer(new PacketOpenBag());
+    }
+
+    public static ITextComponent getKeyBindCharacter(){
+        return OPEN_BAG_KEY == null || OPEN_BAG_KEY.getKeyModifier() == KeyModifier.NONE ? null : new TextComponentString(OPEN_BAG_KEY.getDisplayName());
     }
 }

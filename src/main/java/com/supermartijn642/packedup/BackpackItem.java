@@ -1,5 +1,6 @@
 package com.supermartijn642.packedup;
 
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -9,12 +10,17 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.Style;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.List;
 
 /**
  * Created 2/7/2020 by SuperMartijn642
@@ -46,6 +52,22 @@ public class BackpackItem extends Item implements ICapabilityProvider {
             ClientProxy.openScreen(stack.getItem().getItemStackDisplayName(stack), stack.getDisplayName());
         }
         return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
+    }
+
+    @Override
+    public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn){
+        tooltip.add(new TextComponentTranslation("packedup.backpacks.info.one", this.type.getRows() * 9).setStyle(new Style().setColor(TextFormatting.AQUA)).getFormattedText());
+        ITextComponent key = ClientProxy.getKeyBindCharacter();
+        if(key != null)
+            tooltip.add(new TextComponentTranslation("packedup.backpacks.info.two", key).setStyle(new Style().setColor(TextFormatting.AQUA)).getFormattedText());
+
+        if(flagIn.isAdvanced()){
+            NBTTagCompound compound = stack.getTagCompound();
+            if(compound != null && compound.hasKey("packedup:invIndex"))
+                tooltip.add(new TextComponentTranslation("packedup.backpacks.info.inventory_index", compound.getInteger("packedup:invIndex")).getFormattedText());
+        }
+
+        super.addInformation(stack, worldIn, tooltip, flagIn);
     }
 
     @Nullable
