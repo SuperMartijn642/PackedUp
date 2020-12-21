@@ -6,6 +6,7 @@ import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -41,6 +42,6 @@ public class ClientProxy extends CommonProxy {
     }
 
     public static ITextComponent getKeyBindCharacter(){
-        return OPEN_BAG_KEY == null || OPEN_BAG_KEY.getKey().getKeyCode() == -1 ? null : OPEN_BAG_KEY.getKey().func_237520_d_();
+        return OPEN_BAG_KEY == null || OPEN_BAG_KEY.getKey().getKeyCode() == -1 ? null : new TranslationTextComponent(OPEN_BAG_KEY.getKey().getTranslationKey());
     }
 }
