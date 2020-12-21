@@ -5,6 +5,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -37,5 +39,9 @@ public class ClientProxy extends CommonProxy {
     public static void onKey(InputEvent.KeyInputEvent e){
         if(OPEN_BAG_KEY != null && OPEN_BAG_KEY.matchesKey(e.getKey(), e.getScanCode()) && Minecraft.getInstance().world != null && Minecraft.getInstance().currentScreen == null)
             PackedUp.CHANNEL.sendToServer(new PacketOpenBag());
+    }
+
+    public static ITextComponent getKeyBindCharacter(){
+        return OPEN_BAG_KEY == null || OPEN_BAG_KEY.getKey().getKeyCode() == -1 ? null : new TranslationTextComponent(OPEN_BAG_KEY.getKey().getTranslationKey());
     }
 }
