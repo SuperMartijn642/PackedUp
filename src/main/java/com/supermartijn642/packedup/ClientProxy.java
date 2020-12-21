@@ -7,7 +7,6 @@ import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 
 /**
@@ -21,11 +20,9 @@ public class ClientProxy extends CommonProxy {
     public void init(){
         ScreenManager.registerFactory(PackedUp.container, BackpackContainerScreen::new);
 
-        if(ModList.get().isLoaded("curios")){
-            OPEN_BAG_KEY = new KeyBinding("keys.packedup.openbag", 79/*'o'*/, "keys.category.packedup");
-            ClientRegistry.registerKeyBinding(OPEN_BAG_KEY);
-            MinecraftForge.EVENT_BUS.addListener(ClientProxy::onKey);
-        }
+        OPEN_BAG_KEY = new KeyBinding("keys.packedup.openbag", 79/*'o'*/, "keys.category.packedup");
+        ClientRegistry.registerKeyBinding(OPEN_BAG_KEY);
+        MinecraftForge.EVENT_BUS.addListener(ClientProxy::onKey);
     }
 
     @Override
