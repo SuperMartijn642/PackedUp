@@ -11,7 +11,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
@@ -27,10 +26,8 @@ public class ClientProxy extends CommonProxy {
     private static KeyBinding OPEN_BAG_KEY;
 
     public static void init(){
-        if(Loader.isModLoaded("baubles")){
-            OPEN_BAG_KEY = new KeyBinding("keys.packedup.openbag", 24/*'o'*/, "keys.category.packedup");
-            ClientRegistry.registerKeyBinding(OPEN_BAG_KEY);
-        }
+        OPEN_BAG_KEY = new KeyBinding("keys.packedup.openbag", 24/*'o'*/, "keys.category.packedup");
+        ClientRegistry.registerKeyBinding(OPEN_BAG_KEY);
     }
 
     @SubscribeEvent

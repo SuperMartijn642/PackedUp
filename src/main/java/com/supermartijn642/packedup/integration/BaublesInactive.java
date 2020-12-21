@@ -1,5 +1,6 @@
 package com.supermartijn642.packedup.integration;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.capabilities.Capability;
 
@@ -14,5 +15,9 @@ public class BaublesInactive {
 
     public <T> T getBaubleCapability(Capability<T> capability, Item item){
         return null;
+    }
+
+    public boolean openBackpack(EntityPlayer player){
+        return false;
     }
 }
