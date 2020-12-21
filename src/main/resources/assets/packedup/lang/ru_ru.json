@@ -1,0 +1,13 @@
+{
+  "item.packedup.basicbackpack": "Рюкзак",
+  "item.packedup.ironbackpack": "Железный рюкзак",
+  "item.packedup.copperbackpack": "Медный рюкзак",
+  "item.packedup.silverbackpack": "Серебряный рюкзак",
+  "item.packedup.goldbackpack": "Золотой рюкзак",
+  "item.packedup.diamondbackpack": "Алмазный рюкзак",
+  "item.packedup.obsidianbackpack": "Обсидиановый рюкзак",
+  "gui.packedup.title": "Имя рюкзака",
+  "gui.packedup.name": "Имя рюкзака:",
+  "keys.category.packedup": "Packed Up",
+  "keys.packedup.openbag": "Открыть рюкзак"
+}
