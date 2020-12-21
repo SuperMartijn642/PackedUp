@@ -1,5 +1,7 @@
 package com.supermartijn642.packedup;
 
+import com.supermartijn642.packedup.compat.Compatibility;
+import com.supermartijn642.packedup.packets.PacketMaxLayers;
 import com.supermartijn642.packedup.packets.PacketOpenBag;
 import com.supermartijn642.packedup.packets.PacketRename;
 import net.minecraft.inventory.container.ContainerType;
@@ -70,6 +72,7 @@ public class PackedUp {
     }
 
     public void init(FMLCommonSetupEvent e){
+        Compatibility.init();
         proxy.init();
     }
 
