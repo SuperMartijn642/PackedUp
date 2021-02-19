@@ -27,15 +27,17 @@ public class BackpackRecipe extends ShapedRecipe {
 
     @Override
     public ItemStack getCraftingResult(CraftingInventory inv){
-        ItemStack backpack = inv.getStackInSlot(4);
-        if(!backpack.isEmpty() && backpack.getItem() instanceof BackpackItem){
-            ItemStack result = this.getRecipeOutput().copy();
-            result.setTag(backpack.getTag());
-            if(backpack.hasDisplayName())
-                result.setDisplayName(backpack.getDisplayName());
-            for(Map.Entry<Enchantment,Integer> enchant : EnchantmentHelper.getEnchantments(backpack).entrySet())
-                result.addEnchantment(enchant.getKey(), enchant.getValue());
-            return result;
+        for(int index = 0; index < inv.getSizeInventory(); index++){
+            ItemStack stack = inv.getStackInSlot(index);
+            if(!stack.isEmpty() && stack.getItem() instanceof BackpackItem){
+                ItemStack result = this.getRecipeOutput().copy();
+                result.setTag(stack.getTag());
+                if(stack.hasDisplayName())
+                    result.setDisplayName(stack.getDisplayName());
+                for(Map.Entry<Enchantment,Integer> enchant : EnchantmentHelper.getEnchantments(stack).entrySet())
+                    result.addEnchantment(enchant.getKey(), enchant.getValue());
+                return result;
+            }
         }
         return this.getRecipeOutput().copy();
     }
