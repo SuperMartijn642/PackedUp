@@ -40,15 +40,17 @@ public class BackpackRecipeFactory implements IRecipeFactory {
 
         @Override
         public ItemStack getCraftingResult(InventoryCrafting inv){
-            ItemStack backpack = inv.getStackInSlot(4);
-            if(!backpack.isEmpty() && backpack.getItem() instanceof BackpackItem){
-                ItemStack result = this.getRecipeOutput().copy();
-                result.setTagCompound(backpack.getTagCompound());
-                if(backpack.hasDisplayName())
-                    result.setStackDisplayName(backpack.getDisplayName());
-                for(Map.Entry<Enchantment,Integer> enchant : EnchantmentHelper.getEnchantments(backpack).entrySet())
-                    result.addEnchantment(enchant.getKey(), enchant.getValue());
-                return result;
+            for(int index = 0; index < inv.getSizeInventory(); index++){
+                ItemStack stack = inv.getStackInSlot(index);
+                if(!stack.isEmpty() && stack.getItem() instanceof BackpackItem){
+                    ItemStack result = this.getRecipeOutput().copy();
+                    result.setTagCompound(stack.getTagCompound());
+                    if(stack.hasDisplayName())
+                        result.setStackDisplayName(stack.getDisplayName());
+                    for(Map.Entry<Enchantment,Integer> enchant : EnchantmentHelper.getEnchantments(stack).entrySet())
+                        result.addEnchantment(enchant.getKey(), enchant.getValue());
+                    return result;
+                }
             }
             return this.getRecipeOutput().copy();
         }
