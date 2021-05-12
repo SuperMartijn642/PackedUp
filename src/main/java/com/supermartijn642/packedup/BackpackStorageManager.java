@@ -29,18 +29,18 @@ public class BackpackStorageManager {
 
     @SubscribeEvent
     public static void onWorldSave(WorldEvent.Save event){
-        if(event.getWorld().isRemote() || !(event.getWorld() instanceof World) || ((World)event.getWorld()).getDimensionKey() != World.OVERWORLD)
+        if(event.getWorld().isClientSide() || !(event.getWorld() instanceof World) || ((World)event.getWorld()).dimension() != World.OVERWORLD)
             return;
         save();
     }
 
     @SubscribeEvent
     public static void onWorldLoad(WorldEvent.Load event){
-        if(event.getWorld().isRemote() || !(event.getWorld() instanceof World) || ((World)event.getWorld()).getDimensionKey() != World.OVERWORLD)
+        if(event.getWorld().isClientSide() || !(event.getWorld() instanceof World) || ((World)event.getWorld()).dimension() != World.OVERWORLD)
             return;
         maxLayers = PUConfig.INSTANCE.allowBagInBag.get() ? PUConfig.INSTANCE.maxBagInBagLayer.get() : 0;
         ServerWorld world = (ServerWorld)event.getWorld();
-        directory = new File(world.getServer().func_240776_a_(FolderName.DOT).toFile(), "packedup/backpacks");
+        directory = new File(world.getServer().getWorldPath(FolderName.ROOT).toFile(), "packedup/backpacks");
         load();
     }
 
@@ -188,7 +188,7 @@ public class BackpackStorageManager {
 
     @SubscribeEvent
     public static void onJoin(PlayerEvent.PlayerLoggedInEvent e){
-        if(!e.getEntity().getEntityWorld().isRemote)
+        if(!e.getEntity().level.isClientSide)
             PackedUp.CHANNEL.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity)e.getEntityLiving()), new PacketMaxLayers(maxLayers));
     }
 

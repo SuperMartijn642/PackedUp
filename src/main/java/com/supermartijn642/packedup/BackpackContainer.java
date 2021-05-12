@@ -24,7 +24,7 @@ public class BackpackContainer extends Container {
         this.bagSlot = bagSlot;
         this.rows = rows;
 
-        BackpackInventory inventory = player.player.world.isRemote ?
+        BackpackInventory inventory = player.player.level.isClientSide ?
             new BackpackInventory(true, inventoryIndex, rows, bagsInThisBag, bagsThisBagIsIn, layer) :
             BackpackStorageManager.getInventory(inventoryIndex);
 
@@ -78,29 +78,29 @@ public class BackpackContainer extends Container {
     }
 
     @Override
-    public boolean canInteractWith(PlayerEntity playerIn){
+    public boolean stillValid(PlayerEntity player){
         return true;
     }
 
     @Override
-    public ItemStack transferStackInSlot(PlayerEntity playerIn, int index){
+    public ItemStack quickMoveStack(PlayerEntity player, int index){
         ItemStack returnStack = ItemStack.EMPTY;
-        Slot slot = this.inventorySlots.get(index);
-        if(slot != null && slot.getHasStack()){
-            ItemStack slotStack = slot.getStack();
+        Slot slot = this.slots.get(index);
+        if(slot != null && slot.hasItem()){
+            ItemStack slotStack = slot.getItem();
             returnStack = slotStack.copy();
             if(index < this.rows * 9){
-                if(!this.mergeItemStack(slotStack, this.rows * 9, this.inventorySlots.size(), true)){
+                if(!this.moveItemStackTo(slotStack, this.rows * 9, this.slots.size(), true)){
                     return ItemStack.EMPTY;
                 }
-            }else if(!this.mergeItemStack(slotStack, 0, this.rows * 9, false)){
+            }else if(!this.moveItemStackTo(slotStack, 0, this.rows * 9, false)){
                 return ItemStack.EMPTY;
             }
 
             if(slotStack.isEmpty()){
-                slot.putStack(ItemStack.EMPTY);
+                slot.set(ItemStack.EMPTY);
             }else{
-                slot.onSlotChanged();
+                slot.setChanged();
             }
         }
 
@@ -108,15 +108,15 @@ public class BackpackContainer extends Container {
     }
 
     @Override
-    public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, PlayerEntity player){
+    public ItemStack clicked(int slotId, int dragType, ClickType clickTypeIn, PlayerEntity player){
         if(clickTypeIn == ClickType.SWAP && dragType == this.bagSlot)
             return ItemStack.EMPTY;
         if(clickTypeIn == ClickType.PICKUP && dragType == 1 && slotId >= 0){
             Slot slot = this.getSlot(slotId);
-            if(slot.canTakeStack(player)){
-                ItemStack stack = slot.getStack();
+            if(slot.mayPickup(player)){
+                ItemStack stack = slot.getItem();
                 if(stack.getItem() instanceof BackpackItem){
-                    if(!player.world.isRemote){
+                    if(!player.level.isClientSide){
                         int bagSlot = slotId >= (this.rows + 3) * 9 ? slotId - (this.rows + 3) * 9 : slotId >= this.rows * 9 ? slotId - (this.rows - 1) * 9 : -1;
                         CommonProxy.openBackpackInventory(stack, player, bagSlot);
                     }
@@ -124,6 +124,6 @@ public class BackpackContainer extends Container {
                 }
             }
         }
-        return super.slotClick(slotId, dragType, clickTypeIn, player);
+        return super.clicked(slotId, dragType, clickTypeIn, player);
     }
 }

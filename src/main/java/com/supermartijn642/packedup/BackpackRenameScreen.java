@@ -45,17 +45,17 @@ public class BackpackRenameScreen extends Screen {
         int width = 150;
         int height = 20;
         this.children.add(this.nameField = new TextFieldWidget(this.font, (this.width - width) / 2, this.top + 20, width, height, new StringTextComponent("")));
-        this.nameField.setText(this.lastTickName);
+        this.nameField.setValue(this.lastTickName);
         this.nameField.setCanLoseFocus(true);
-        this.nameField.setFocused2(focused);
-        this.nameField.setMaxStringLength(MAX_NAME_CHARACTER_COUNT);
+        this.nameField.setFocus(focused);
+        this.nameField.setMaxLength(MAX_NAME_CHARACTER_COUNT);
     }
 
     @Override
     public void tick(){
         this.nameField.tick();
-        if(!this.lastTickName.trim().equals(this.nameField.getText().trim())){
-            this.lastTickName = this.nameField.getText();
+        if(!this.lastTickName.trim().equals(this.nameField.getValue().trim())){
+            this.lastTickName = this.nameField.getValue();
             PackedUp.CHANNEL.sendToServer(new PacketRename(this.lastTickName.trim().isEmpty() || this.lastTickName.trim().equals(this.defaultName) ? null : this.lastTickName.trim()));
         }
     }
@@ -69,19 +69,19 @@ public class BackpackRenameScreen extends Screen {
         RenderSystem.color4f(1, 1, 1, 1);
         RenderSystem.enableAlphaTest();
 
-        Minecraft.getInstance().textureManager.bindTexture(BACKGROUND);
+        Minecraft.getInstance().textureManager.bind(BACKGROUND);
         Tessellator tessellator = Tessellator.getInstance();
-        BufferBuilder builder = tessellator.getBuffer();
+        BufferBuilder builder = tessellator.getBuilder();
         builder.begin(7, DefaultVertexFormats.POSITION_TEX);
-        builder.pos(0, 0, 0).tex(0, 0).endVertex();
-        builder.pos(0, BACKGROUND_HEIGHT, 0).tex(0, 1).endVertex();
-        builder.pos(BACKGROUND_WIDTH, BACKGROUND_HEIGHT, 0).tex(1, 1).endVertex();
-        builder.pos(BACKGROUND_WIDTH, 0, 0).tex(1, 0).endVertex();
-        tessellator.draw();
+        builder.vertex(0, 0, 0).uv(0, 0).endVertex();
+        builder.vertex(0, BACKGROUND_HEIGHT, 0).uv(0, 1).endVertex();
+        builder.vertex(BACKGROUND_WIDTH, BACKGROUND_HEIGHT, 0).uv(1, 1).endVertex();
+        builder.vertex(BACKGROUND_WIDTH, 0, 0).uv(1, 0).endVertex();
+        tessellator.end();
 
         RenderSystem.popMatrix();
 
-        this.font.func_243248_b(matrixStack, new TranslationTextComponent("gui.packedup.name"), this.nameField.x + 2, this.top + 8, 4210752);
+        this.font.draw(matrixStack, new TranslationTextComponent("gui.packedup.name"), this.nameField.x + 2, this.top + 8, 4210752);
         this.nameField.render(matrixStack, mouseX, mouseY, partialTicks);
         super.render(matrixStack, mouseX, mouseY, partialTicks);
     }
@@ -95,7 +95,7 @@ public class BackpackRenameScreen extends Screen {
     public boolean mouseClicked(double mouseX, double mouseY, int mouseButton){
         if(mouseButton == 1){ // text field
             if(this.nameField.isHovered())
-                this.nameField.setText("");
+                this.nameField.setValue("");
         }
         super.mouseClicked(mouseX, mouseY, mouseButton);
         return false;
@@ -105,9 +105,9 @@ public class BackpackRenameScreen extends Screen {
     public boolean keyPressed(int p_keyPressed_1_, int p_keyPressed_2_, int p_keyPressed_3_){
         if(super.keyPressed(p_keyPressed_1_, p_keyPressed_2_, p_keyPressed_3_))
             return true;
-        InputMappings.Input mouseKey = InputMappings.getInputByCode(p_keyPressed_1_, p_keyPressed_2_);
-        if(!this.nameField.isFocused() && (p_keyPressed_1_ == 256 || Minecraft.getInstance().gameSettings.keyBindInventory.isActiveAndMatches(mouseKey))){
-            Minecraft.getInstance().player.closeScreen();
+        InputMappings.Input mouseKey = InputMappings.getKey(p_keyPressed_1_, p_keyPressed_2_);
+        if(!this.nameField.isFocused() && (p_keyPressed_1_ == 256 || Minecraft.getInstance().options.keyInventory.isActiveAndMatches(mouseKey))){
+            Minecraft.getInstance().player.closeContainer();
             return true;
         }
         return false;

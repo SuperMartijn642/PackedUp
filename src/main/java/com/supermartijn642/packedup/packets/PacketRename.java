@@ -24,11 +24,11 @@ public class PacketRename {
     public void encode(PacketBuffer buffer){
         buffer.writeBoolean(this.name != null);
         if(this.name != null)
-            buffer.writeString(this.name);
+            buffer.writeUtf(this.name);
     }
 
     public static PacketRename decode(PacketBuffer buffer){
-        return new PacketRename(buffer.readBoolean() ? buffer.readString(32767) : null);
+        return new PacketRename(buffer.readBoolean() ? buffer.readUtf(32767) : null);
     }
 
     public void handle(Supplier<NetworkEvent.Context> contextSupplier){
@@ -36,14 +36,14 @@ public class PacketRename {
 
         PlayerEntity player = contextSupplier.get().getSender();
         if(player != null){
-            ItemStack stack = player.getHeldItem(Hand.MAIN_HAND);
+            ItemStack stack = player.getItemInHand(Hand.MAIN_HAND);
 
             if(stack.isEmpty() || !(stack.getItem() instanceof BackpackItem))
-                stack = player.getHeldItem(Hand.OFF_HAND);
+                stack = player.getItemInHand(Hand.OFF_HAND);
             if(stack.isEmpty() || !(stack.getItem() instanceof BackpackItem))
                 return;
 
-            stack.setDisplayName(new StringTextComponent(this.name));
+            stack.setHoverName(new StringTextComponent(this.name));
         }
     }
 

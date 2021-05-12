@@ -19,7 +19,7 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void init(){
-        ScreenManager.registerFactory(PackedUp.container, BackpackContainerScreen::new);
+        ScreenManager.register(PackedUp.container, BackpackContainerScreen::new);
 
         OPEN_BAG_KEY = new KeyBinding("keys.packedup.openbag", 79/*'o'*/, "keys.category.packedup");
         ClientRegistry.registerKeyBinding(OPEN_BAG_KEY);
@@ -32,15 +32,15 @@ public class ClientProxy extends CommonProxy {
     }
 
     public static void openScreen(String defaultName, String name){
-        Minecraft.getInstance().displayGuiScreen(new BackpackRenameScreen(defaultName, name));
+        Minecraft.getInstance().setScreen(new BackpackRenameScreen(defaultName, name));
     }
 
     public static void onKey(InputEvent.KeyInputEvent e){
-        if(OPEN_BAG_KEY != null && OPEN_BAG_KEY.matchesKey(e.getKey(), e.getScanCode()) && Minecraft.getInstance().world != null && Minecraft.getInstance().currentScreen == null)
+        if(OPEN_BAG_KEY != null && OPEN_BAG_KEY.matches(e.getKey(), e.getScanCode()) && Minecraft.getInstance().level != null && Minecraft.getInstance().screen == null)
             PackedUp.CHANNEL.sendToServer(new PacketOpenBag());
     }
 
     public static ITextComponent getKeyBindCharacter(){
-        return OPEN_BAG_KEY == null || OPEN_BAG_KEY.getKey().getKeyCode() == -1 ? null : OPEN_BAG_KEY.getKey().func_237520_d_();
+        return OPEN_BAG_KEY == null || OPEN_BAG_KEY.getKey().getValue() == -1 ? null : OPEN_BAG_KEY.getKey().getDisplayName();
     }
 }
