@@ -8,7 +8,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.Hand;
-import net.minecraft.util.text.StringTextComponent;
 
 /**
  * Created 4/29/2020 by SuperMartijn642
@@ -47,10 +46,10 @@ public class PacketRename implements BasePacket {
             if(stack.isEmpty() || !(stack.getItem() instanceof BackpackItem))
                 return;
 
-            if(this.name == null || this.name.isEmpty() || this.name.equals(TextComponents.format(stack.getItem().getName(stack))))
+            if(this.name == null || this.name.isEmpty() || this.name.equals(TextComponents.item(stack.getItem()).format()))
                 stack.resetHoverName();
             else
-                stack.setHoverName(new StringTextComponent(this.name));
+                stack.setHoverName(TextComponents.string(this.name).get());
         }
     }
 }

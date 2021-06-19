@@ -15,7 +15,6 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
@@ -49,15 +48,15 @@ public class BackpackItem extends Item {
 
     @Override
     public void appendHoverText(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn){
-        tooltip.add(new TranslationTextComponent("packedup.backpacks.info.one", this.type.getRows() * 9).withStyle(TextFormatting.AQUA));
+        tooltip.add(TextComponents.translation("packedup.backpacks.info.one", this.type.getRows() * 9).color(TextFormatting.AQUA).get());
         ITextComponent key = ClientProxy.getKeyBindCharacter();
         if(key != null)
-            tooltip.add(new TranslationTextComponent("packedup.backpacks.info.two", key).withStyle(TextFormatting.AQUA));
+            tooltip.add(TextComponents.translation("packedup.backpacks.info.two", key).color(TextFormatting.AQUA).get());
 
         if(flagIn.isAdvanced()){
             CompoundNBT compound = stack.getOrCreateTag();
             if(compound.contains("packedup:invIndex"))
-                tooltip.add(new TranslationTextComponent("packedup.backpacks.info.inventory_index", compound.getInt("packedup:invIndex")));
+                tooltip.add(TextComponents.translation("packedup.backpacks.info.inventory_index", compound.getInt("packedup:invIndex")).get());
         }
 
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
