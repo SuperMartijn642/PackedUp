@@ -23,29 +23,26 @@ public class BackpackInventory implements IItemHandlerModifiable {
     private final ArrayList<ItemStack> stacks = new ArrayList<>();
 
     private final int inventoryIndex;
-    public int rows;
     public Set<Integer> bagsInThisBag = new HashSet<>();
     public Set<Integer> bagsDirectlyInThisBag = new HashSet<>();
     public Set<Integer> bagsThisBagIsIn = new HashSet<>();
     public Set<Integer> bagsThisBagIsDirectlyIn = new HashSet<>();
     public int layer;
 
-    public BackpackInventory(boolean remote, int inventoryIndex, int rows, Set<Integer> bagsInThisBag, Set<Integer> bagsThisBagIsIn, int layer){
+    public BackpackInventory(boolean remote, int inventoryIndex, int slots, Set<Integer> bagsInThisBag, Set<Integer> bagsThisBagIsIn, int layer){
         this.remote = remote;
         this.inventoryIndex = inventoryIndex;
-        this.rows = rows;
-        for(int a = 0; a < this.rows * 9; a++)
+        for(int a = 0; a < slots; a++)
             this.stacks.add(ItemStack.EMPTY);
         this.bagsInThisBag.addAll(bagsInThisBag);
         this.bagsThisBagIsIn.addAll(bagsThisBagIsIn);
         this.layer = layer;
     }
 
-    public BackpackInventory(boolean remote, int inventoryIndex, int rows){
+    public BackpackInventory(boolean remote, int inventoryIndex, int slots){
         this.remote = remote;
         this.inventoryIndex = inventoryIndex;
-        this.rows = rows;
-        for(int a = 0; a < this.rows * 9; a++)
+        for(int a = 0; a < slots; a++)
             this.stacks.add(ItemStack.EMPTY);
     }
 
@@ -56,7 +53,7 @@ public class BackpackInventory implements IItemHandlerModifiable {
 
     @Override
     public int getSlots(){
-        return this.rows * 9;
+        return this.stacks.size();
     }
 
     @Nonnull
@@ -140,15 +137,14 @@ public class BackpackInventory implements IItemHandlerModifiable {
     }
 
     private static boolean canStack(ItemStack stack1, ItemStack stack2){
-        return stack1.isEmpty() || stack2.isEmpty() || (stack1.getItem() == stack2.getItem() && stack1.getDamage() == stack2.getDamage() && ItemStack.areItemStackTagsEqual(stack1, stack2));
+        return stack1.isEmpty() || stack2.isEmpty() || (stack1.getItem() == stack2.getItem() && stack1.getDamageValue() == stack2.getDamageValue() && ItemStack.isSameIgnoreDurability(stack1, stack2));
     }
 
     public void save(File file){
         CompoundNBT compound = new CompoundNBT();
-        compound.putInt("rows", this.rows);
         compound.putInt("stacks", this.stacks.size());
         for(int slot = 0; slot < this.stacks.size(); slot++)
-            compound.put("stack" + slot, this.stacks.get(slot).write(new CompoundNBT()));
+            compound.put("stack" + slot, this.stacks.get(slot).save(new CompoundNBT()));
         compound.putIntArray("bagsInThisBag", Lists.newArrayList(this.bagsInThisBag));
         compound.putIntArray("bagsThisBagIsIn", Lists.newArrayList(this.bagsThisBagIsIn));
         compound.putInt("layer", this.layer);
@@ -165,11 +161,10 @@ public class BackpackInventory implements IItemHandlerModifiable {
             e.printStackTrace();
             return;
         }
-        this.rows = compound.contains("rows") ? compound.getInt("rows") : compound.getInt("slots") / 9; // Do this for compatibility with older versions
         this.stacks.clear();
-        int size = compound.contains("stacks") ? compound.getInt("stacks") : this.rows * 9; // Do this for compatibility with older versions
+        int size = compound.contains("stacks") ? compound.getInt("stacks") : compound.contains("rows") ? compound.getInt("rows") * 9 : compound.getInt("slots"); // Do this for compatibility with older versions
         for(int slot = 0; slot < size; slot++)
-            this.stacks.add(ItemStack.read(compound.getCompound("stack" + slot)));
+            this.stacks.add(ItemStack.of(compound.getCompound("stack" + slot)));
         this.bagsInThisBag.clear();
         Arrays.stream(compound.getIntArray("bagsInThisBag")).forEach(this.bagsInThisBag::add);
         this.bagsThisBagIsIn.clear();
@@ -205,11 +200,8 @@ public class BackpackInventory implements IItemHandlerModifiable {
         }
     }
 
-    public void adjustSize(int rows){
-        if(this.rows == rows)
-            return;
-        this.rows = rows;
-        while(this.stacks.size() < this.rows * 9)
+    public void adjustSize(BackpackType type){
+        while(this.stacks.size() < type.getSlots())
             this.stacks.add(ItemStack.EMPTY);
     }
 
@@ -218,7 +210,7 @@ public class BackpackInventory implements IItemHandlerModifiable {
     }
 
     private boolean isBagAllowed(ItemStack bag){
-        if(BackpackStorageManager.maxLayers != -1 && this.layer >= BackpackStorageManager.maxLayers)
+        if(BackpackStorageManager.maxLayers.get() != -1 && this.layer >= BackpackStorageManager.maxLayers.get())
             return false;
         if(!bag.getOrCreateTag().contains("packedup:invIndex"))
             return true;

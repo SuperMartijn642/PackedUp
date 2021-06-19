@@ -1,37 +1,43 @@
 package com.supermartijn642.packedup.packets;
 
+import com.supermartijn642.core.network.BasePacket;
+import com.supermartijn642.core.network.PacketContext;
 import com.supermartijn642.packedup.BackpackItem;
 import com.supermartijn642.packedup.CommonProxy;
 import com.supermartijn642.packedup.compat.Compatibility;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.network.NetworkEvent;
-
-import java.util.function.Supplier;
+import net.minecraft.network.PacketBuffer;
 
 /**
  * Created 8/13/2020 by SuperMartijn642
  */
-public class PacketOpenBag {
+public class PacketOpenBag implements BasePacket {
 
     public PacketOpenBag(){
     }
 
-    public void handle(Supplier<NetworkEvent.Context> contextSupplier){
-        contextSupplier.get().setPacketHandled(true);
+    @Override
+    public void write(PacketBuffer buffer){
+    }
 
-        PlayerEntity player = contextSupplier.get().getSender();
+    @Override
+    public void read(PacketBuffer buffer){
+    }
+
+    @Override
+    public void handle(PacketContext context){
+        PlayerEntity player = context.getSendingPlayer();
         if(player != null){
             PlayerInventory inventory = player.inventory;
             if(!Compatibility.CURIOS.openBackpack(player)){
-                for(int i = 0; i < inventory.getSizeInventory(); i++){
-                    ItemStack stack = inventory.getStackInSlot(i);
+                for(int i = 0; i < inventory.getContainerSize(); i++){
+                    ItemStack stack = inventory.getItem(i);
                     if(stack.getItem() instanceof BackpackItem)
                         CommonProxy.openBackpackInventory(stack, player, i);
                 }
             }
         }
     }
-
 }
