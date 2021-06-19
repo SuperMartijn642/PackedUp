@@ -1,40 +1,44 @@
 package com.supermartijn642.packedup.packets;
 
+import com.supermartijn642.core.TextComponents;
+import com.supermartijn642.core.network.BasePacket;
+import com.supermartijn642.core.network.PacketContext;
 import com.supermartijn642.packedup.BackpackItem;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.Hand;
 import net.minecraft.util.text.StringTextComponent;
-import net.minecraftforge.fml.network.NetworkEvent;
-
-import java.util.function.Supplier;
 
 /**
  * Created 4/29/2020 by SuperMartijn642
  */
-public class PacketRename {
+public class PacketRename implements BasePacket {
 
     private String name;
 
-    public PacketRename(String name){
-        this.name = name;
+    public PacketRename(){
     }
 
-    public void encode(PacketBuffer buffer){
+    public PacketRename(String name){
+        this.name = name == null ? null : name.trim();
+    }
+
+    @Override
+    public void write(PacketBuffer buffer){
         buffer.writeBoolean(this.name != null);
         if(this.name != null)
             buffer.writeUtf(this.name);
     }
 
-    public static PacketRename decode(PacketBuffer buffer){
-        return new PacketRename(buffer.readBoolean() ? buffer.readUtf(32767) : null);
+    @Override
+    public void read(PacketBuffer buffer){
+        this.name = buffer.readBoolean() ? buffer.readUtf(32767) : "";
     }
 
-    public void handle(Supplier<NetworkEvent.Context> contextSupplier){
-        contextSupplier.get().setPacketHandled(true);
-
-        PlayerEntity player = contextSupplier.get().getSender();
+    @Override
+    public void handle(PacketContext context){
+        PlayerEntity player = context.getSendingPlayer();
         if(player != null){
             ItemStack stack = player.getItemInHand(Hand.MAIN_HAND);
 
@@ -43,8 +47,10 @@ public class PacketRename {
             if(stack.isEmpty() || !(stack.getItem() instanceof BackpackItem))
                 return;
 
-            stack.setHoverName(new StringTextComponent(this.name));
+            if(this.name == null || this.name.isEmpty() || this.name.equals(TextComponents.format(stack.getItem().getName(stack))))
+                stack.resetHoverName();
+            else
+                stack.setHoverName(new StringTextComponent(this.name));
         }
     }
-
 }

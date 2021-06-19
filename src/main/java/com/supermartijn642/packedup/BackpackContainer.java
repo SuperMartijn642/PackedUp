@@ -1,9 +1,9 @@
 package com.supermartijn642.packedup;
 
+import com.supermartijn642.core.gui.BaseContainer;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.ClickType;
-import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
@@ -14,38 +14,36 @@ import java.util.Set;
 /**
  * Created 2/7/2020 by SuperMartijn642
  */
-public class BackpackContainer extends Container {
+public class BackpackContainer extends BaseContainer {
 
-    public final int rows;
+    public final BackpackType type;
     public final int bagSlot;
 
-    public BackpackContainer(int id, PlayerInventory player, int bagSlot, int inventoryIndex, int rows, Set<Integer> bagsInThisBag, Set<Integer> bagsThisBagIsIn, int layer){
-        super(PackedUp.container, id);
+    public BackpackContainer(int id, PlayerInventory player, int bagSlot, int inventoryIndex, BackpackType type, Set<Integer> bagsInThisBag, Set<Integer> bagsThisBagIsIn, int layer){
+        super(PackedUp.container, id, player.player);
         this.bagSlot = bagSlot;
-        this.rows = rows;
+        this.type = type;
 
         BackpackInventory inventory = player.player.level.isClientSide ?
-            new BackpackInventory(true, inventoryIndex, rows, bagsInThisBag, bagsThisBagIsIn, layer) :
+            new BackpackInventory(true, inventoryIndex, type.getSlots(), bagsInThisBag, bagsThisBagIsIn, layer) :
             BackpackStorageManager.getInventory(inventoryIndex);
 
-        this.addSlots(this.rows, inventory, player);
+        this.addSlots(inventory, player);
     }
 
-    private void addSlots(int rows, IItemHandler inventory, PlayerInventory player){
-        int startX = 8;
-        int startY = rows < 9 ? 17 : 8;
+    private void addSlots(IItemHandler inventory, PlayerInventory player){
+        int startX = Math.max(0, 9 - this.type.getColumns()) * 18 / 2 + 8;
+        int startY = 17;
 
-        int columns = 9 + Math.max(rows - 9, 0);
-        rows = Math.min(rows, 9);
-        for(int row = 0; row < rows; row++){
-            for(int column = 0; column < columns; column++){
-                int x = startX + 18 * column, y = startY + 18 * row, index = row * columns + column;
+        for(int row = 0; row < this.type.getRows(); row++){
+            for(int column = 0; column < this.type.getColumns(); column++){
+                int x = startX + 18 * column, y = startY + 18 * row, index = row * this.type.getColumns() + column;
                 this.addSlot(new SlotItemHandler(inventory, index, x, y));
             }
         }
 
-        startX = 8 + (columns - 9) * 9;
-        startY += rows * 18 + (rows == 9 ? 4 : 13);
+        startX = Math.max(0, this.type.getColumns() - 9) * 18 / 2 + 8;
+        startY += this.type.getRows() * 18 + 13;
 
         // player slots
         for(int row = 0; row < 3; row++){
@@ -68,13 +66,17 @@ public class BackpackContainer extends Container {
             int x = startX + 18 * column, y = startY;
             if(column == this.bagSlot)
                 this.addSlot(new Slot(player, column, x, y) {
-                    public boolean canTakeStack(PlayerEntity playerIn){
+                    public boolean canTakeStack(PlayerEntity player){
                         return false;
                     }
                 });
             else
                 this.addSlot(new Slot(player, column, x, y));
         }
+    }
+
+    @Override
+    protected void addSlots(PlayerEntity playerEntity){
     }
 
     @Override
@@ -89,11 +91,11 @@ public class BackpackContainer extends Container {
         if(slot != null && slot.hasItem()){
             ItemStack slotStack = slot.getItem();
             returnStack = slotStack.copy();
-            if(index < this.rows * 9){
-                if(!this.moveItemStackTo(slotStack, this.rows * 9, this.slots.size(), true)){
+            if(index < this.type.getSlots()){
+                if(!this.moveItemStackTo(slotStack, this.type.getSlots(), this.slots.size(), true)){
                     return ItemStack.EMPTY;
                 }
-            }else if(!this.moveItemStackTo(slotStack, 0, this.rows * 9, false)){
+            }else if(!this.moveItemStackTo(slotStack, 0, this.type.getSlots(), false)){
                 return ItemStack.EMPTY;
             }
 
@@ -117,7 +119,7 @@ public class BackpackContainer extends Container {
                 ItemStack stack = slot.getItem();
                 if(stack.getItem() instanceof BackpackItem){
                     if(!player.level.isClientSide){
-                        int bagSlot = slotId >= (this.rows + 3) * 9 ? slotId - (this.rows + 3) * 9 : slotId >= this.rows * 9 ? slotId - (this.rows - 1) * 9 : -1;
+                        int bagSlot = slotId >= this.type.getSlots() + 27 ? slotId - this.type.getSlots() - 27 : slotId >= this.type.getSlots() ? slotId - this.type.getSlots() - 9 : -1;
                         CommonProxy.openBackpackInventory(stack, player, bagSlot);
                     }
                     return ItemStack.EMPTY;

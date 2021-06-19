@@ -33,7 +33,7 @@ public class BackpackRecipe extends ShapedRecipe {
                 ItemStack result = this.getResultItem().copy();
                 result.setTag(stack.getTag());
                 if(stack.hasCustomHoverName())
-                    result.setHoverName(stack.getDisplayName());
+                    result.setHoverName(stack.getHoverName());
                 for(Map.Entry<Enchantment,Integer> enchant : EnchantmentHelper.getEnchantments(stack).entrySet())
                     result.enchant(enchant.getKey(), enchant.getValue());
                 return result;
