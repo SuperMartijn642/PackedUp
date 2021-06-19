@@ -48,6 +48,7 @@ public class BackpackRecipe extends ShapedRecipe {
     }
 
     public static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<BackpackRecipe> {
+
         @Override
         public BackpackRecipe read(ResourceLocation recipeId, JsonObject json){
             ShapedRecipe recipe = IRecipeSerializer.CRAFTING_SHAPED.read(recipeId, json);
