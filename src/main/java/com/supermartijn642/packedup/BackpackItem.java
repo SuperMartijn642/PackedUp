@@ -1,5 +1,6 @@
 package com.supermartijn642.packedup;
 
+import com.supermartijn642.core.TextComponents;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -12,9 +13,9 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
@@ -41,39 +42,47 @@ public class BackpackItem extends Item {
                 int bagSlot = handIn == Hand.MAIN_HAND ? playerIn.inventory.currentItem : -1;
                 CommonProxy.openBackpackInventory(stack, playerIn, bagSlot);
             }
-        }else if(worldIn.isRemote){
-            ClientProxy.openScreen(stack.getItem().getDisplayName(stack).getFormattedText(), stack.getDisplayName().getFormattedText());
-        }
+        }else if(worldIn.isRemote)
+            ClientProxy.openScreen(TextComponents.item(stack.getItem()).format(), TextComponents.itemStack(stack).format());
         return ActionResult.newResult(ActionResultType.SUCCESS, stack);
     }
 
     @Override
-    public void addInformation(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn){
-        tooltip.add(new TranslationTextComponent("packedup.backpacks.info.one", this.type.getRows() * 9).applyTextStyle(TextFormatting.AQUA));
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn){
+        tooltip.add(TextComponents.translation("packedup.backpacks.info.one", this.type.getRows() * 9).color(TextFormatting.AQUA).get());
         ITextComponent key = ClientProxy.getKeyBindCharacter();
         if(key != null)
-            tooltip.add(new TranslationTextComponent("packedup.backpacks.info.two", key).applyTextStyle(TextFormatting.AQUA));
+            tooltip.add(TextComponents.translation("packedup.backpacks.info.two", key).color(TextFormatting.AQUA).get());
 
         if(flagIn.isAdvanced()){
             CompoundNBT compound = stack.getOrCreateTag();
             if(compound.contains("packedup:invIndex"))
-                tooltip.add(new TranslationTextComponent("packedup.backpacks.info.inventory_index", compound.getInt("packedup:invIndex")));
+                tooltip.add(TextComponents.translation("packedup.backpacks.info.inventory_index", compound.getInt("packedup:invIndex")).get());
         }
 
         super.addInformation(stack, worldIn, tooltip, flagIn);
     }
 
-    public static class ContainerProvider implements INamedContainerProvider {
-        private int inventoryIndex;
-        private ITextComponent displayName;
-        private int bagSlot;
-        private BackpackInventory inventory;
+    @Override
+    public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items){
+        if(this.type.isEnabled())
+            super.fillItemGroup(group, items);
+    }
 
-        public ContainerProvider(ITextComponent displayName, int bagSlot, int inventoryIndex, BackpackInventory inventory){
+    public static class ContainerProvider implements INamedContainerProvider {
+
+        private final int inventoryIndex;
+        private final ITextComponent displayName;
+        private final int bagSlot;
+        private final BackpackInventory inventory;
+        private final BackpackType type;
+
+        public ContainerProvider(ITextComponent displayName, int bagSlot, int inventoryIndex, BackpackInventory inventory, BackpackType type){
             this.inventoryIndex = inventoryIndex;
             this.displayName = displayName;
             this.bagSlot = bagSlot;
             this.inventory = inventory;
+            this.type = type;
         }
 
         @Override
@@ -84,7 +93,7 @@ public class BackpackItem extends Item {
         @Nullable
         @Override
         public Container createMenu(int id, PlayerInventory playerInv, PlayerEntity player){
-            return new BackpackContainer(id, playerInv, this.bagSlot, this.inventoryIndex, this.inventory.rows, this.inventory.bagsInThisBag, this.inventory.bagsThisBagIsIn, this.inventory.layer);
+            return new BackpackContainer(id, playerInv, this.bagSlot, this.inventoryIndex, this.type, this.inventory.bagsInThisBag, this.inventory.bagsThisBagIsIn, this.inventory.layer);
         }
     }
 }
