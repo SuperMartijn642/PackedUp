@@ -6,7 +6,6 @@ import com.supermartijn642.core.gui.BaseScreen;
 import com.supermartijn642.core.gui.ScreenUtils;
 import com.supermartijn642.core.gui.widget.TextFieldWidget;
 import com.supermartijn642.packedup.packets.PacketRename;
-import net.minecraft.util.text.TranslationTextComponent;
 
 /**
  * Created 4/29/2020 by SuperMartijn642
@@ -19,7 +18,7 @@ public class BackpackRenameScreen extends BaseScreen {
     private final String defaultName, startName;
 
     public BackpackRenameScreen(String defaultName, String name){
-        super(new TranslationTextComponent("gui.packedup.title"));
+        super(TextComponents.translation("gui.packedup.title").get());
         this.defaultName = defaultName;
         this.startName = name;
     }

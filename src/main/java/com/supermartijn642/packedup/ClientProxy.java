@@ -2,7 +2,6 @@ package com.supermartijn642.packedup;
 
 import com.supermartijn642.core.ClientUtils;
 import com.supermartijn642.packedup.packets.PacketOpenBag;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.util.text.ITextComponent;
@@ -36,7 +35,7 @@ public class ClientProxy {
     }
 
     public static void onKey(InputEvent.KeyInputEvent e){
-        if(OPEN_BAG_KEY != null && OPEN_BAG_KEY.matches(e.getKey(), e.getScanCode()) && Minecraft.getInstance().level != null && Minecraft.getInstance().screen == null)
+        if(OPEN_BAG_KEY != null && OPEN_BAG_KEY.matches(e.getKey(), e.getScanCode()) && ClientUtils.getWorld() != null && ClientUtils.getMinecraft().screen == null)
             PackedUp.CHANNEL.sendToServer(new PacketOpenBag());
     }
 
