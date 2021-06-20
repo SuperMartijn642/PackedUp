@@ -53,7 +53,7 @@ public class BackpackItem extends Item implements ICapabilityProvider {
 
     @Override
     public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn){
-        tooltip.add(TextComponents.translation("packedup.backpacks.info.one", this.type.getRows() * 9).color(TextFormatting.AQUA).format());
+        tooltip.add(TextComponents.translation("packedup.backpacks.info.one", TextComponents.string(Integer.toString(this.type.getSlots())).color(TextFormatting.GOLD).get()).color(TextFormatting.AQUA).format());
         ITextComponent key = ClientProxy.getKeyBindCharacter();
         if(key != null)
             tooltip.add(TextComponents.translation("packedup.backpacks.info.two", key).color(TextFormatting.AQUA).format());
