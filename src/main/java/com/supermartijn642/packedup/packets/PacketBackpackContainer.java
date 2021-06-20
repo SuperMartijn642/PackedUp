@@ -1,14 +1,13 @@
 package com.supermartijn642.packedup.packets;
 
+import com.supermartijn642.core.ClientUtils;
+import com.supermartijn642.core.network.BasePacket;
+import com.supermartijn642.core.network.PacketContext;
 import com.supermartijn642.packedup.BackpackContainer;
 import com.supermartijn642.packedup.BackpackInventory;
 import com.supermartijn642.packedup.BackpackStorageManager;
-import com.supermartijn642.packedup.ClientProxy;
-import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
-import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import net.minecraft.network.PacketBuffer;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -16,7 +15,7 @@ import java.util.Set;
 /**
  * Created 6/29/2020 by SuperMartijn642
  */
-public class PacketBackpackContainer implements IMessage, IMessageHandler<PacketBackpackContainer,IMessage> {
+public class PacketBackpackContainer implements BasePacket {
 
     private int inventoryIndex;
     private Set<Integer> bagsInThisBag;
@@ -31,39 +30,36 @@ public class PacketBackpackContainer implements IMessage, IMessageHandler<Packet
     }
 
     @Override
-    public void fromBytes(ByteBuf buf){
-        int size = buf.readInt();
+    public void write(PacketBuffer buffer){
+        BackpackInventory inventory = BackpackStorageManager.getInventory(this.inventoryIndex);
+        buffer.writeInt(inventory.bagsInThisBag.size());
+        inventory.bagsInThisBag.forEach(buffer::writeInt);
+        buffer.writeInt(inventory.bagsThisBagIsIn.size());
+        inventory.bagsThisBagIsIn.forEach(buffer::writeInt);
+        buffer.writeInt(inventory.layer);
+    }
+
+    @Override
+    public void read(PacketBuffer buffer){
+        int size = buffer.readInt();
         this.bagsInThisBag = new HashSet<>(size);
         for(int i = 0; i < size; i++)
-            this.bagsInThisBag.add(buf.readInt());
-        size = buf.readInt();
+            this.bagsInThisBag.add(buffer.readInt());
+        size = buffer.readInt();
         this.bagsThisBagIsIn = new HashSet<>(size);
         for(int i = 0; i < size; i++)
-            this.bagsThisBagIsIn.add(buf.readInt());
-        this.layer = buf.readInt();
+            this.bagsThisBagIsIn.add(buffer.readInt());
+        this.layer = buffer.readInt();
     }
 
     @Override
-    public void toBytes(ByteBuf buf){
-        BackpackInventory inventory = BackpackStorageManager.getInventory(this.inventoryIndex);
-        buf.writeInt(inventory.bagsInThisBag.size());
-        inventory.bagsInThisBag.forEach(buf::writeInt);
-        buf.writeInt(inventory.bagsThisBagIsIn.size());
-        inventory.bagsThisBagIsIn.forEach(buf::writeInt);
-        buf.writeInt(inventory.layer);
-    }
-
-    @Override
-    public IMessage onMessage(PacketBackpackContainer message, MessageContext ctx){
-        EntityPlayer player = ClientProxy.getClientPlayer();
-        ClientProxy.addScheduledTask(() -> {
-            if(player.openContainer instanceof BackpackContainer){
-                BackpackContainer container = (BackpackContainer)player.openContainer;
-                container.inventory.bagsInThisBag.addAll(message.bagsInThisBag);
-                container.inventory.bagsThisBagIsIn.addAll(message.bagsThisBagIsIn);
-                container.inventory.layer = message.layer;
-            }
-        });
-        return null;
+    public void handle(PacketContext context){
+        EntityPlayer player = ClientUtils.getPlayer();
+        if(player.openContainer instanceof BackpackContainer){
+            BackpackContainer container = (BackpackContainer)player.openContainer;
+            container.inventory.bagsInThisBag.addAll(this.bagsInThisBag);
+            container.inventory.bagsThisBagIsIn.addAll(this.bagsThisBagIsIn);
+            container.inventory.layer = this.layer;
+        }
     }
 }

@@ -1,15 +1,15 @@
 package com.supermartijn642.packedup;
 
+import com.supermartijn642.core.ClientUtils;
+import com.supermartijn642.core.TextComponents;
 import com.supermartijn642.packedup.packets.PacketOpenBag;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.client.settings.KeyModifier;
@@ -24,7 +24,7 @@ import net.minecraftforge.fml.relauncher.Side;
  * Created 2/7/2020 by SuperMartijn642
  */
 @Mod.EventBusSubscriber(Side.CLIENT)
-public class ClientProxy extends CommonProxy {
+public class ClientProxy {
 
     private static KeyBinding OPEN_BAG_KEY;
 
@@ -46,24 +46,16 @@ public class ClientProxy extends CommonProxy {
     }
 
     public static void openScreen(String defaultName, String name){
-        Minecraft.getMinecraft().displayGuiScreen(new BackpackRenameScreen(defaultName, name));
-    }
-
-    public static void addScheduledTask(Runnable task){
-        Minecraft.getMinecraft().addScheduledTask(task);
-    }
-
-    public static GuiScreen getGui(){
-        return Minecraft.getMinecraft().currentScreen;
+        ClientUtils.displayScreen(new BackpackRenameScreen(defaultName, name));
     }
 
     @SubscribeEvent
     public static void onKey(InputEvent.KeyInputEvent e){
-        if(OPEN_BAG_KEY != null && OPEN_BAG_KEY.isPressed() && Minecraft.getMinecraft().world != null && Minecraft.getMinecraft().currentScreen == null)
-            PackedUp.channel.sendToServer(new PacketOpenBag());
+        if(OPEN_BAG_KEY != null && OPEN_BAG_KEY.isPressed() && ClientUtils.getWorld() != null && ClientUtils.getMinecraft().currentScreen == null)
+            PackedUp.CHANNEL.sendToServer(new PacketOpenBag());
     }
 
     public static ITextComponent getKeyBindCharacter(){
-        return OPEN_BAG_KEY == null || OPEN_BAG_KEY.getKeyModifier() == KeyModifier.NONE ? null : new TextComponentString(OPEN_BAG_KEY.getDisplayName());
+        return OPEN_BAG_KEY == null || OPEN_BAG_KEY.getKeyModifier() == KeyModifier.NONE ? null : TextComponents.string(OPEN_BAG_KEY.getDisplayName()).get();
     }
 }

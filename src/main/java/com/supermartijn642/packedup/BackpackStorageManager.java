@@ -1,32 +1,29 @@
 package com.supermartijn642.packedup;
 
-import com.supermartijn642.packedup.packets.PacketMaxLayers;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent;
-import net.minecraftforge.fml.relauncher.Side;
 
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Supplier;
 
 /**
  * Created 2/7/2020 by SuperMartijn642
  */
-@Mod.EventBusSubscriber(Side.SERVER)
+@Mod.EventBusSubscriber
 public class BackpackStorageManager {
 
     private static File directory;
     private static final HashMap<Integer,BackpackInventory> inventories = new HashMap<>();
     private static int inventoryIndex = 0;
 
-    public static int maxLayers = 3;
+    public static final Supplier<Integer> maxLayers = () -> PUConfig.allowBagInBag.get() ? PUConfig.maxBagInBagLayer.get() : 0;
 
     @SubscribeEvent
     public static void onWorldSave(WorldEvent.Save event){
@@ -39,7 +36,6 @@ public class BackpackStorageManager {
     public static void onWorldLoad(WorldEvent.Load event){
         if(event.getWorld().isRemote || event.getWorld().provider.getDimensionType() != DimensionType.OVERWORLD)
             return;
-        maxLayers = PUConfig.allowBagInBag ? PUConfig.maxBagInBagLayer : 0;
         WorldServer world = (WorldServer)event.getWorld();
         directory = new File(world.getSaveHandler().getWorldDirectory(), "packedup/backpacks");
         load();
@@ -60,7 +56,7 @@ public class BackpackStorageManager {
 
     public static int createInventoryIndex(BackpackType type){
         int index = inventoryIndex++;
-        inventories.put(index, new BackpackInventory(false, index, type.getRows()));
+        inventories.put(index, new BackpackInventory(false, index, type.getSlots()));
         return index;
     }
 
@@ -185,12 +181,6 @@ public class BackpackStorageManager {
             inv.bagsThisBagIsIn.clear();
             inv.layer = getBagsThisBagIsIn(id, inv.bagsThisBagIsIn);
         }
-    }
-
-    @SubscribeEvent
-    public static void onJoin(PlayerEvent.PlayerLoggedInEvent e){
-        if(!e.player.getEntityWorld().isRemote)
-            PackedUp.channel.sendTo(new PacketMaxLayers(maxLayers), (EntityPlayerMP)e.player);
     }
 
 }

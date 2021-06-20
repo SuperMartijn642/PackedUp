@@ -1,35 +1,34 @@
 package com.supermartijn642.packedup.packets;
 
+import com.supermartijn642.core.network.BasePacket;
+import com.supermartijn642.core.network.PacketContext;
 import com.supermartijn642.packedup.BackpackItem;
 import com.supermartijn642.packedup.CommonProxy;
 import com.supermartijn642.packedup.PackedUp;
-import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
-import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import net.minecraft.network.PacketBuffer;
 
 /**
  * Created 4/29/2020 by SuperMartijn642
  */
-public class PacketOpenBag implements IMessage, IMessageHandler<PacketOpenBag,IMessage> {
+public class PacketOpenBag implements BasePacket {
 
     public PacketOpenBag(){
     }
 
     @Override
-    public void fromBytes(ByteBuf buffer){
+    public void write(PacketBuffer buffer){
     }
 
     @Override
-    public void toBytes(ByteBuf buffer){
+    public void read(PacketBuffer buffer){
     }
 
     @Override
-    public IMessage onMessage(PacketOpenBag message, MessageContext ctx){
-        EntityPlayer player = ctx.getServerHandler().player;
+    public void handle(PacketContext context){
+        EntityPlayer player = context.getSendingPlayer();
         if(player != null){
             InventoryPlayer inventory = player.inventory;
             if(!PackedUp.baubles.openBackpack(player)){
@@ -40,7 +39,5 @@ public class PacketOpenBag implements IMessage, IMessageHandler<PacketOpenBag,IM
                 }
             }
         }
-        return null;
     }
-
 }

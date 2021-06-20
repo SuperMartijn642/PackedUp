@@ -22,18 +22,16 @@ public class BackpackInventory implements IItemHandlerModifiable {
     private final ArrayList<ItemStack> stacks = new ArrayList<>();
 
     private final int inventoryIndex;
-    public int rows;
     public Set<Integer> bagsInThisBag = new HashSet<>();
     public Set<Integer> bagsDirectlyInThisBag = new HashSet<>();
     public Set<Integer> bagsThisBagIsIn = new HashSet<>();
     public Set<Integer> bagsThisBagIsDirectlyIn = new HashSet<>();
     public int layer;
 
-    public BackpackInventory(boolean remote, int inventoryIndex, int rows){
+    public BackpackInventory(boolean remote, int inventoryIndex, int slots){
         this.remote = remote;
         this.inventoryIndex = inventoryIndex;
-        this.rows = rows;
-        for(int a = 0; a < this.rows * 9; a++)
+        for(int a = 0; a < slots; a++)
             this.stacks.add(ItemStack.EMPTY);
     }
 
@@ -44,7 +42,7 @@ public class BackpackInventory implements IItemHandlerModifiable {
 
     @Override
     public int getSlots(){
-        return this.rows * 9;
+        return this.stacks.size();
     }
 
     @Nonnull
@@ -133,7 +131,6 @@ public class BackpackInventory implements IItemHandlerModifiable {
 
     public void save(File file){
         NBTTagCompound compound = new NBTTagCompound();
-        compound.setInteger("rows", this.rows);
         compound.setInteger("stacks", this.stacks.size());
         for(int slot = 0; slot < this.stacks.size(); slot++)
             compound.setTag("stack" + slot, this.stacks.get(slot).writeToNBT(new NBTTagCompound()));
@@ -161,9 +158,8 @@ public class BackpackInventory implements IItemHandlerModifiable {
             e.printStackTrace();
             return;
         }
-        this.rows = compound.hasKey("rows") ? compound.getInteger("rows") : compound.getInteger("slots") / 9; // Do this for compatibility with older versions
         this.stacks.clear();
-        int size = compound.hasKey("stacks") ? compound.getInteger("stacks") : this.rows * 9; // Do this for compatibility with older versions
+        int size = compound.hasKey("stacks") ? compound.getInteger("stacks") : compound.hasKey("rows") ? compound.getInteger("rows") * 9 : compound.getInteger("slots"); // Do this for compatibility with older versions
         for(int slot = 0; slot < size; slot++)
             this.stacks.add(new ItemStack(compound.getCompoundTag("stack" + slot)));
         this.bagsInThisBag.clear();
@@ -201,11 +197,8 @@ public class BackpackInventory implements IItemHandlerModifiable {
         }
     }
 
-    public void adjustSize(int rows){
-        if(this.rows == rows)
-            return;
-        this.rows = rows;
-        while(this.stacks.size() < this.rows * 9)
+    public void adjustSize(BackpackType type){
+        while(this.stacks.size() < type.getSlots())
             this.stacks.add(ItemStack.EMPTY);
     }
 
@@ -214,7 +207,7 @@ public class BackpackInventory implements IItemHandlerModifiable {
     }
 
     private boolean isBagAllowed(ItemStack bag){
-        if(BackpackStorageManager.maxLayers != -1 && this.layer >= BackpackStorageManager.maxLayers)
+        if(BackpackStorageManager.maxLayers.get() != -1 && this.layer >= BackpackStorageManager.maxLayers.get())
             return false;
         if(!bag.hasTagCompound() || !bag.getTagCompound().hasKey("packedup:invIndex"))
             return true;

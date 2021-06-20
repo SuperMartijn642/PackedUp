@@ -1,5 +1,6 @@
 package com.supermartijn642.packedup;
 
+import com.supermartijn642.core.TextComponents;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,8 +12,6 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
@@ -33,11 +32,10 @@ public class BackpackItem extends Item implements ICapabilityProvider {
         super();
         this.type = type;
         this.setRegistryName(type.getRegistryName());
-        this.setUnlocalizedName(PackedUp.MODID + ":" + type.getRegistryName());
+        this.setUnlocalizedName(PackedUp.MODID + "." + type.getRegistryName());
 
         this.setMaxStackSize(1);
-        if(type.isEnabled())
-            this.setCreativeTab(CreativeTabs.SEARCH);
+        this.setCreativeTab(CreativeTabs.SEARCH);
     }
 
     @Override
@@ -48,26 +46,30 @@ public class BackpackItem extends Item implements ICapabilityProvider {
                 int bagSlot = handIn == EnumHand.MAIN_HAND ? playerIn.inventory.currentItem : -1;
                 CommonProxy.openBackpackInventory(stack, playerIn, bagSlot);
             }
-        }else if(worldIn.isRemote){
-            ClientProxy.openScreen(stack.getItem().getItemStackDisplayName(stack), stack.getDisplayName());
-        }
+        }else if(worldIn.isRemote)
+            ClientProxy.openScreen(TextComponents.item(stack.getItem()).format(), TextComponents.itemStack(stack).format());
         return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
     }
 
     @Override
     public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn){
-        tooltip.add(new TextComponentTranslation("packedup.backpacks.info.one", this.type.getRows() * 9).setStyle(new Style().setColor(TextFormatting.AQUA)).getFormattedText());
+        tooltip.add(TextComponents.translation("packedup.backpacks.info.one", this.type.getRows() * 9).color(TextFormatting.AQUA).format());
         ITextComponent key = ClientProxy.getKeyBindCharacter();
         if(key != null)
-            tooltip.add(new TextComponentTranslation("packedup.backpacks.info.two", key).setStyle(new Style().setColor(TextFormatting.AQUA)).getFormattedText());
+            tooltip.add(TextComponents.translation("packedup.backpacks.info.two", key).color(TextFormatting.AQUA).format());
 
         if(flagIn.isAdvanced()){
             NBTTagCompound compound = stack.getTagCompound();
             if(compound != null && compound.hasKey("packedup:invIndex"))
-                tooltip.add(new TextComponentTranslation("packedup.backpacks.info.inventory_index", compound.getInteger("packedup:invIndex")).getFormattedText());
+                tooltip.add(TextComponents.translation("packedup.backpacks.info.inventory_index", compound.getInteger("packedup:invIndex")).format());
         }
 
         super.addInformation(stack, worldIn, tooltip, flagIn);
+    }
+
+    @Override
+    protected boolean isInCreativeTab(CreativeTabs targetTab){
+        return this.type.isEnabled();
     }
 
     @Nullable

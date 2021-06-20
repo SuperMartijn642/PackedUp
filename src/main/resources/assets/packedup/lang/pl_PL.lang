@@ -1,10 +1,10 @@
-item.packedup:basicbackpack.name=Plecak
-item.packedup:ironbackpack.name=Żelazny plecak
-item.packedup:copperbackpack.name=Miedziany plecak
-item.packedup:silverbackpack.name=Srebrny plecak
-item.packedup:goldbackpack.name=Złoty plecak
-item.packedup:diamondbackpack.name=Diamentowy Plecak
-item.packedup:obsidianbackpack.name=Obsydianowy Plecak
+item.packedup.basicbackpack.name=Plecak
+item.packedup.ironbackpack.name=Żelazny plecak
+item.packedup.copperbackpack.name=Miedziany plecak
+item.packedup.silverbackpack.name=Srebrny plecak
+item.packedup.goldbackpack.name=Złoty plecak
+item.packedup.diamondbackpack.name=Diamentowy Plecak
+item.packedup.obsidianbackpack.name=Obsydianowy Plecak
 gui.packedup.name=Nazwa plecaka:
 keys.category.packedup=Packed Up
 keys.packedup.openbag=Otwórz plecak

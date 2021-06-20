@@ -1,56 +1,77 @@
 package com.supermartijn642.packedup;
 
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
+import com.supermartijn642.core.ClientUtils;
+import com.supermartijn642.core.TextComponents;
+import com.supermartijn642.core.gui.BaseContainerScreen;
+import com.supermartijn642.core.gui.ScreenUtils;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 
 /**
  * Created 2/7/2020 by SuperMartijn642
  */
-public class BackpackContainerScreen extends GuiContainer {
+public class BackpackContainerScreen extends BaseContainerScreen<BackpackContainer> {
 
-    private ResourceLocation texture;
-    private String title;
-    private ITextComponent playerInventory;
+    private static final ResourceLocation CORNERS = new ResourceLocation("packedup", "textures/corners.png");
 
-    private int rows;
+    private final String displayName;
 
-    public BackpackContainerScreen(BackpackContainer container, EntityPlayer player){
-        super(container);
-        this.texture = new ResourceLocation("packedup", "textures/inventory/rows" + container.rows + ".png");
-        this.xSize = 176 + Math.max(0, (container.rows - 9) * 18);
-        this.ySize = 112 + 18 * Math.min(8, container.rows);
-        this.rows = container.rows;
-
-        if(container.bagSlot < 0 || !(player.inventory.getStackInSlot(container.bagSlot).getItem() instanceof BackpackItem))
-            this.title = PackedUp.basicbackpack.getItemStackDisplayName(ItemStack.EMPTY);
-        else
-            this.title = player.inventory.getStackInSlot(container.bagSlot).getDisplayName();
-        this.playerInventory = player.inventory.getDisplayName();
+    public BackpackContainerScreen(BackpackContainer container, ITextComponent name){
+        super(container, name);
+        this.displayName = trimText(name, container.type.getColumns() * 18);
     }
 
     @Override
-    public void drawScreen(int mouseX, int mouseY, float partialTicks){
-        this.drawDefaultBackground();
-        super.drawScreen(mouseX, mouseY, partialTicks);
-        this.renderHoveredToolTip(mouseX, mouseY);
+    protected int sizeX(){
+        return this.container.type.getColumns() > 9 ? 176 + (this.container.type.getColumns() - 9) * 18 : 176;
     }
 
     @Override
-    protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY){
-        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.getTextureManager().bindTexture(this.texture);
-        this.drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, this.xSize, this.ySize);
+    protected int sizeY(){
+        return 112 + 18 * this.container.type.getRows();
     }
 
     @Override
-    protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY){
-        if(this.rows >= 9)
-            return;
-        this.fontRenderer.drawString(this.title, 8, 6, 4210752);
-        this.fontRenderer.drawString(this.playerInventory.getFormattedText(), 8, this.ySize - 96 + 2, 4210752);
+    protected void addWidgets(){
+    }
+
+    @Override
+    protected void renderBackground(int mouseX, int mouseY){
+        if(this.container.type.getColumns() == 9)
+            this.drawScreenBackground();
+        else{
+            int width = this.container.type.getColumns() * 18 + 14;
+            int offset = (this.sizeX() - width) / 2;
+            int height = this.container.type.getRows() * 18 + 23;
+            ScreenUtils.drawScreenBackground(offset, 0, width, height);
+            ScreenUtils.drawScreenBackground(Math.max(0, (width - 176) / 2f), height - 9, 176, this.sizeY() - height + 9);
+            ScreenUtils.bindTexture(CORNERS);
+            if(this.container.type.getColumns() > 9){
+                ScreenUtils.drawTexture(Math.max(0, (width - 176) / 2f), height - 3, 3, 3, 0, 0, 0.5f, 0.5f);
+                ScreenUtils.drawTexture(Math.max(0, (width - 176) / 2f) + 176 - 3, height - 3, 3, 3, 0.5f, 0, 0.5f, 0.5f);
+                ScreenUtils.fillRect(Math.max(0, (width - 176) / 2f), height - 9, 176, 6, 0xffC6C6C6);
+            }else{
+                ScreenUtils.drawTexture(offset, height - 9, 3, 3, 0, 0.5f, 0.5f, 0.5f);
+                ScreenUtils.drawTexture(offset + width - 3, height - 9, 3, 3, 0.5f, 0.5f, 0.5f, 0.5f);
+                ScreenUtils.fillRect(offset + 3, height - 9, width - 6, 3, 0xffC6C6C6);
+            }
+        }
+    }
+
+    @Override
+    protected void renderForeground(int mouseX, int mouseY){
+        int offset = (this.container.type.getColumns() - 9) * 18 / 2;
+        ScreenUtils.drawString(this.displayName, 8.0F - Math.min(0, offset), 6.0F, 4210752);
+        ScreenUtils.drawString(ClientUtils.getPlayer().inventory.getDisplayName(), 8.0F + Math.max(0, offset), this.sizeY() - 96 + 3, 4210752);
+    }
+
+    private static String trimText(ITextComponent textComponent, int width){
+        String text = TextComponents.format(textComponent);
+        FontRenderer font = ClientUtils.getFontRenderer();
+        int length = 0;
+        while(length < text.length() && font.getStringWidth(text.substring(0, length + 1) + "...") < width)
+            length++;
+        return length < text.length() ? text.substring(0, length) + "..." : text;
     }
 }

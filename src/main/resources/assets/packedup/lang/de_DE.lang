@@ -1,10 +1,10 @@
-item.packedup:basicbackpack.name=Rucksack
-item.packedup:ironbackpack.name=Eisenrucksack
-item.packedup:copperbackpack.name=Kupferrucksack
-item.packedup:silverbackpack.name=Silberrucksack
-item.packedup:goldbackpack.name=Goldrucksack
-item.packedup:diamondbackpack.name=Diamantrucksack
-item.packedup:obsidianbackpack.name=Obsidianrucksack
+item.packedup.basicbackpack.name=Rucksack
+item.packedup.ironbackpack.name=Eisenrucksack
+item.packedup.copperbackpack.name=Kupferrucksack
+item.packedup.silverbackpack.name=Silberrucksack
+item.packedup.goldbackpack.name=Goldrucksack
+item.packedup.diamondbackpack.name=Diamantrucksack
+item.packedup.obsidianbackpack.name=Obsidianrucksack
 gui.packedup.name=Name des Rucksacks:
 keys.category.packedup=Packed Up
 keys.packedup.openbag=Rucksack Öffnen
