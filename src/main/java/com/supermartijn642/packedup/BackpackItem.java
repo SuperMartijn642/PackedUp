@@ -48,7 +48,7 @@ public class BackpackItem extends Item {
 
     @Override
     public void appendHoverText(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn){
-        tooltip.add(TextComponents.translation("packedup.backpacks.info.one", this.type.getRows() * 9).color(TextFormatting.AQUA).get());
+        tooltip.add(TextComponents.translation("packedup.backpacks.info.one", TextComponents.string(Integer.toString(this.type.getSlots())).color(TextFormatting.GOLD).get()).color(TextFormatting.AQUA).get());
         ITextComponent key = ClientProxy.getKeyBindCharacter();
         if(key != null)
             tooltip.add(TextComponents.translation("packedup.backpacks.info.two", key).color(TextFormatting.AQUA).get());
