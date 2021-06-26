@@ -1,0 +1,84 @@
+{
+  "type": "packedup:backpackrecipe",
+  "conditions": [
+    {
+      "type": "packedup:enabled",
+      "backpack": "obsidian"
+    },
+    {
+      "type": "packedup:enabled",
+      "backpack": "basic"
+    },
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "forge:or",
+        "values": [
+          {
+            "type": "packedup:enabled",
+            "backpack": "diamond"
+          },
+          {
+            "type": "packedup:enabled",
+            "backpack": "gold"
+          },
+          {
+            "type": "forge:and",
+            "values": [
+              {
+                "type": "packedup:enabled",
+                "backpack": "silver"
+              },
+              {
+                "type": "forge:not",
+                "value": {
+                  "type": "forge:tag_empty",
+                  "tag": "forge:ingots/silver"
+                }
+              }
+            ]
+          },
+          {
+            "type": "packedup:enabled",
+            "backpack": "iron"
+          },
+          {
+            "type": "forge:and",
+            "values": [
+              {
+                "type": "packedup:enabled",
+                "backpack": "copper"
+              },
+              {
+                "type": "forge:not",
+                "value": {
+                  "type": "forge:tag_empty",
+                  "tag": "forge:ingots/copper"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "pattern": [
+    "ILI",
+    "ICI",
+    "III"
+  ],
+  "key": {
+    "I": {
+      "tag": "forge:obsidian"
+    },
+    "C": {
+      "item": "packedup:basicbackpack"
+    },
+    "L": {
+      "tag": "forge:leather"
+    }
+  },
+  "result": {
+    "item": "packedup:obsidianbackpack"
+  }
+}
