@@ -1,0 +1,40 @@
+{
+  "type": "packedup:backpackrecipe",
+  "conditions": [
+    {
+      "type": "packedup_enabled",
+      "backpack": "iron"
+    },
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "packedup_enabled",
+        "backpack": "basic"
+      }
+    }
+  ],
+  "pattern": [
+    "ASA",
+    "ICI",
+    "III"
+  ],
+  "key": {
+    "A": {
+      "item": "minecraft:leather"
+    },
+    "S": {
+      "item": "minecraft:string"
+    },
+    "I": {
+      "type": "forge:ore_dict",
+      "ore": "ingotIron"
+    },
+    "C": {
+      "type": "forge:ore_dict",
+      "ore": "chestWooden"
+    }
+  },
+  "result": {
+    "item": "packedup:ironbackpack"
+  }
+}

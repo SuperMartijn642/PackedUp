@@ -1,5 +1,15 @@
 {
   "type": "packedup:backpackrecipe",
+  "conditions": [
+    {
+      "type": "packedup_enabled",
+      "backpack": "gold"
+    },
+    {
+      "type": "packedup_enabled",
+      "backpack": "iron"
+    }
+  ],
   "pattern": [
     "ILI",
     "ICI",

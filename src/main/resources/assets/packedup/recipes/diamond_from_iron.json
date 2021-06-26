@@ -1,0 +1,66 @@
+{
+  "type": "packedup:backpackrecipe",
+  "conditions": [
+    {
+      "type": "packedup_enabled",
+      "backpack": "diamond"
+    },
+    {
+      "type": "packedup_enabled",
+      "backpack": "iron"
+    },
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "forge:or",
+        "values": [
+          {
+            "type": "packedup_enabled",
+            "backpack": "gold"
+          },
+          {
+            "type": "forge:and",
+            "values": [
+              {
+                "type": "packedup_enabled",
+                "backpack": "silver"
+              },
+              {
+                "type": "forge:not",
+                "value": {
+                  "type": "forge_tag_empty",
+                  "tag": "ingotSilver"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "pattern": [
+    "ILI",
+    "ICI",
+    "GGG"
+  ],
+  "key": {
+    "I": {
+      "type": "forge:ore_dict",
+      "ore": "gemDiamond"
+    },
+    "C": {
+      "item": "packedup:ironbackpack"
+    },
+    "L": {
+      "type": "forge:ore_dict",
+      "ore": "ingotIron"
+    },
+    "G": {
+      "type": "forge:ore_dict",
+      "ore": "blockGlass"
+    }
+  },
+  "result": {
+    "item": "packedup:diamondbackpack"
+  }
+}

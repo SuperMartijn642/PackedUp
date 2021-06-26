@@ -1,0 +1,77 @@
+{
+  "type": "packedup:backpackrecipe",
+  "conditions": [
+    {
+      "type": "packedup_enabled",
+      "backpack": "obsidian"
+    },
+    {
+      "type": "forge:and",
+      "values": [
+        {
+          "type": "packedup_enabled",
+          "backpack": "copper"
+        },
+        {
+          "type": "forge:not",
+          "value": {
+            "type": "forge_tag_empty",
+            "tag": "ingotCopper"
+          }
+        }
+      ]
+    },
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "forge:or",
+        "values": [
+          {
+            "type": "packedup_enabled",
+            "backpack": "diamond"
+          },
+          {
+            "type": "packedup_enabled",
+            "backpack": "gold"
+          },
+          {
+            "type": "forge:and",
+            "values": [
+              {
+                "type": "packedup_enabled",
+                "backpack": "silver"
+              },
+              {
+                "type": "forge:not",
+                "value": {
+                  "type": "forge_tag_empty",
+                  "tag": "ingotSilver"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "pattern": [
+    "ILI",
+    "ICI",
+    "III"
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:obsidian"
+    },
+    "C": {
+      "item": "packedup:copperbackpack"
+    },
+    "L": {
+      "type": "forge:ore_dict",
+      "ore": "ingotCopper"
+    }
+  },
+  "result": {
+    "item": "packedup:obsidianbackpack"
+  }
+}

@@ -1,5 +1,11 @@
 {
   "type": "forge:ore_shaped",
+  "conditions": [
+    {
+      "type": "packedup_enabled",
+      "backpack": "basic"
+    }
+  ],
   "pattern": [
     "ASA",
     "LCL",

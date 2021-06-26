@@ -1,5 +1,12 @@
 {
   "recipes": {
     "backpackrecipe": "com.supermartijn642.packedup.BackpackRecipeFactory"
+  },
+  "conditions": {
+    "packedup_enabled": "com.supermartijn642.packedup.BackpackRecipeCondition",
+    "forge:or": "com.supermartijn642.packedup.recipe_conditions.OrRecipeCondition",
+    "forge:and": "com.supermartijn642.packedup.recipe_conditions.AndRecipeCondition",
+    "forge:not": "com.supermartijn642.packedup.recipe_conditions.NotRecipeCondition",
+    "forge_tag_empty": "com.supermartijn642.packedup.recipe_conditions.EmptyTagRecipeCondition"
   }
 }

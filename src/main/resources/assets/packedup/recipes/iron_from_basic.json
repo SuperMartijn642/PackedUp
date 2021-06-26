@@ -1,5 +1,15 @@
 {
   "type": "packedup:backpackrecipe",
+  "conditions": [
+    {
+      "type": "packedup_enabled",
+      "backpack": "iron"
+    },
+    {
+      "type": "packedup_enabled",
+      "backpack": "basic"
+    }
+  ],
   "pattern": [
     "ILI",
     "ICI",
@@ -8,7 +18,7 @@
   "key": {
     "I": {
       "type": "forge:ore_dict",
-      "ore": "ingotCopper"
+      "ore": "ingotIron"
     },
     "C": {
       "item": "packedup:basicbackpack"
@@ -18,6 +28,6 @@
     }
   },
   "result": {
-    "item": "packedup:copperbackpack"
+    "item": "packedup:ironbackpack"
   }
 }

@@ -1,0 +1,61 @@
+{
+  "type": "packedup:backpackrecipe",
+  "conditions": [
+    {
+      "type": "packedup_enabled",
+      "backpack": "gold"
+    },
+    {
+      "type": "packedup_enabled",
+      "backpack": "basic"
+    },
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "forge:or",
+        "values": [
+          {
+            "type": "packedup_enabled",
+            "backpack": "iron"
+          },
+          {
+            "type": "forge:and",
+            "values": [
+              {
+                "type": "packedup_enabled",
+                "backpack": "copper"
+              },
+              {
+                "type": "forge:not",
+                "value": {
+                  "type": "forge_tag_empty",
+                  "tag": "ingotCopper"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "pattern": [
+    "ILI",
+    "ICI",
+    "III"
+  ],
+  "key": {
+    "I": {
+      "type": "forge:ore_dict",
+      "ore": "ingotGold"
+    },
+    "C": {
+      "item": "packedup:basicbackpack"
+    },
+    "L": {
+      "item": "minecraft:leather"
+    }
+  },
+  "result": {
+    "item": "packedup:goldbackpack"
+  }
+}
