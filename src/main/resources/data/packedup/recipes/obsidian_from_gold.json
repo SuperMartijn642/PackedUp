@@ -1,0 +1,39 @@
+{
+  "type": "packedup:backpackrecipe",
+  "conditions": [
+    {
+      "type": "packedup:enabled",
+      "backpack": "obsidian"
+    },
+    {
+      "type": "packedup:enabled",
+      "backpack": "gold"
+    },
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "packedup:enabled",
+        "backpack": "diamond"
+      }
+    }
+  ],
+  "pattern": [
+    "ILI",
+    "ICI",
+    "III"
+  ],
+  "key": {
+    "I": {
+      "tag": "forge:obsidian"
+    },
+    "C": {
+      "item": "packedup:goldbackpack"
+    },
+    "L": {
+      "tag": "forge:ingots/gold"
+    }
+  },
+  "result": {
+    "item": "packedup:obsidianbackpack"
+  }
+}

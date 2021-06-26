@@ -1,5 +1,15 @@
 {
   "type": "packedup:backpackrecipe",
+  "conditions": [
+    {
+      "type": "packedup:enabled",
+      "backpack": "obsidian"
+    },
+    {
+      "type": "packedup:enabled",
+      "backpack": "diamond"
+    }
+  ],
   "pattern": [
     "ILI",
     "ICI",
@@ -7,7 +17,7 @@
   ],
   "key": {
     "I": {
-      "item": "minecraft:obsidian"
+      "tag": "forge:obsidian"
     },
     "C": {
       "item": "packedup:diamondbackpack"
