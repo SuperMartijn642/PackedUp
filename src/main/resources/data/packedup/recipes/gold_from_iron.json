@@ -1,5 +1,15 @@
 {
   "type": "packedup:backpackrecipe",
+  "conditions": [
+    {
+      "type": "packedup:enabled",
+      "backpack": "gold"
+    },
+    {
+      "type": "packedup:enabled",
+      "backpack": "iron"
+    }
+  ],
   "pattern": [
     "ILI",
     "ICI",
@@ -10,10 +20,10 @@
       "tag": "forge:ingots/gold"
     },
     "C": {
-      "item": "packedup:copperbackpack"
+      "item": "packedup:ironbackpack"
     },
     "L": {
-      "tag": "forge:ingots/copper"
+      "tag": "forge:ingots/iron"
     }
   },
   "result": {

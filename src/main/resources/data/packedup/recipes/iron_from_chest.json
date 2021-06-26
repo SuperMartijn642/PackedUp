@@ -1,0 +1,38 @@
+{
+  "type": "packedup:backpackrecipe",
+  "conditions": [
+    {
+      "type": "packedup:enabled",
+      "backpack": "iron"
+    },
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "packedup:enabled",
+        "backpack": "basic"
+      }
+    }
+  ],
+  "pattern": [
+    "ASA",
+    "ICI",
+    "III"
+  ],
+  "key": {
+    "A": {
+      "tag": "forge:leather"
+    },
+    "S": {
+      "tag": "forge:string"
+    },
+    "I": {
+      "tag": "forge:ingots/iron"
+    },
+    "C": {
+      "tag": "forge:chests/wooden"
+    }
+  },
+  "result": {
+    "item": "packedup:ironbackpack"
+  }
+}

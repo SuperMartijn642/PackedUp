@@ -1,0 +1,47 @@
+{
+  "type": "packedup:backpackrecipe",
+  "conditions": [
+    {
+      "type": "packedup:enabled",
+      "backpack": "diamond"
+    },
+    {
+      "type": "forge:and",
+      "values": [
+        {
+          "type": "packedup:enabled",
+          "backpack": "silver"
+        },
+        {
+          "type": "forge:not",
+          "value": {
+            "type": "forge:tag_empty",
+            "tag": "forge:ingots/silver"
+          }
+        }
+      ]
+    }
+  ],
+  "pattern": [
+    "ILI",
+    "ICI",
+    "GGG"
+  ],
+  "key": {
+    "I": {
+      "tag": "forge:gems/diamond"
+    },
+    "C": {
+      "item": "packedup:silverbackpack"
+    },
+    "L": {
+      "tag": "forge:ingots/silver"
+    },
+    "G": {
+      "tag": "forge:glass"
+    }
+  },
+  "result": {
+    "item": "packedup:diamondbackpack"
+  }
+}

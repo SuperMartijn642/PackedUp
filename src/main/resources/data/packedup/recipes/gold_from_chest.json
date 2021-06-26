@@ -1,0 +1,63 @@
+{
+  "type": "packedup:backpackrecipe",
+  "conditions": [
+    {
+      "type": "packedup:enabled",
+      "backpack": "gold"
+    },
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "forge:or",
+        "values": [
+          {
+            "type": "packedup:enabled",
+            "backpack": "iron"
+          },
+          {
+            "type": "forge:and",
+            "values": [
+              {
+                "type": "packedup:enabled",
+                "backpack": "copper"
+              },
+              {
+                "type": "forge:not",
+                "value": {
+                  "type": "forge:tag_empty",
+                  "tag": "forge:ingots/copper"
+                }
+              }
+            ]
+          },
+          {
+            "type": "packedup:enabled",
+            "backpack": "basic"
+          }
+        ]
+      }
+    }
+  ],
+  "pattern": [
+    "ASA",
+    "ICI",
+    "III"
+  ],
+  "key": {
+    "A": {
+      "tag": "forge:leather"
+    },
+    "S": {
+      "tag": "forge:string"
+    },
+    "I": {
+      "tag": "forge:ingots/gold"
+    },
+    "C": {
+      "tag": "forge:chests/wooden"
+    }
+  },
+  "result": {
+    "item": "packedup:goldbackpack"
+  }
+}
