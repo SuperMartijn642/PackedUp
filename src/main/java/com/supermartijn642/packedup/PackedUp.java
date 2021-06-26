@@ -8,6 +8,7 @@ import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.Item;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.extensions.IForgeContainerType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -97,6 +98,7 @@ public class PackedUp {
 
         @SubscribeEvent
         public static void onRecipeRegistry(final RegistryEvent.Register<IRecipeSerializer<?>> e){
+            CraftingHelper.register(BackpackRecipeCondition.SERIALIZER);
             e.getRegistry().register(BACKPACK_RECIPE_SERIALIZER.setRegistryName(new ResourceLocation("packedup", "backpackrecipe")));
         }
     }
