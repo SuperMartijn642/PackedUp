@@ -1,5 +1,11 @@
 {
   "type": "minecraft:crafting_shaped",
+  "conditions": [
+    {
+      "type": "packedup:enabled",
+      "backpack": "basic"
+    }
+  ],
   "pattern": [
     "ASA",
     "LCL",
@@ -7,16 +13,16 @@
   ],
   "key": {
     "A": {
-      "item": "minecraft:stick"
+      "tag": "forge:rods/wooden"
     },
     "S": {
-      "item": "minecraft:string"
+      "tag": "forge:string"
     },
     "C": {
       "tag": "forge:chests/wooden"
     },
     "L": {
-      "item": "minecraft:leather"
+      "tag": "forge:leather"
     }
   },
   "result": {
