@@ -48,3 +48,17 @@ description='''Packed Up allows you to pack up all your things into new amazing 
     versionRange="[1.15,)"
     ordering="NONE"
     side="BOTH"
+# Here's another dependency
+[[dependencies.packedup]]
+    modId="supermartijn642corelib"
+    mandatory=true
+    versionRange="[1.0.8,1.1.0)"
+    ordering="NONE"
+    side="BOTH"
+# Here's another dependency
+[[dependencies.packedup]]
+    modId="supermartijn642configlib"
+    mandatory=true
+    versionRange="[1.0.8,1.1.0)"
+    ordering="NONE"
+    side="BOTH"
