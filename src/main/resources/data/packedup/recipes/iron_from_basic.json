@@ -1,5 +1,15 @@
 {
   "type": "packedup:backpackrecipe",
+  "conditions": [
+    {
+      "type": "packedup:enabled",
+      "backpack": "iron"
+    },
+    {
+      "type": "packedup:enabled",
+      "backpack": "basic"
+    }
+  ],
   "pattern": [
     "ILI",
     "ICI",
@@ -13,7 +23,7 @@
       "item": "packedup:basicbackpack"
     },
     "L": {
-      "item": "minecraft:leather"
+      "tag": "forge:leather"
     }
   },
   "result": {
