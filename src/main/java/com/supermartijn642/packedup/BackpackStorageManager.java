@@ -1,9 +1,9 @@
 package com.supermartijn642.packedup;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
-import net.minecraft.world.storage.FolderName;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.storage.LevelResource;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -28,17 +28,17 @@ public class BackpackStorageManager {
 
     @SubscribeEvent
     public static void onWorldSave(WorldEvent.Save event){
-        if(event.getWorld().isClientSide() || !(event.getWorld() instanceof World) || ((World)event.getWorld()).dimension() != World.OVERWORLD)
+        if(event.getWorld().isClientSide() || !(event.getWorld() instanceof Level) || ((Level)event.getWorld()).dimension() != Level.OVERWORLD)
             return;
         save();
     }
 
     @SubscribeEvent
     public static void onWorldLoad(WorldEvent.Load event){
-        if(event.getWorld().isClientSide() || !(event.getWorld() instanceof World) || ((World)event.getWorld()).dimension() != World.OVERWORLD)
+        if(event.getWorld().isClientSide() || !(event.getWorld() instanceof Level) || ((Level)event.getWorld()).dimension() != Level.OVERWORLD)
             return;
-        ServerWorld world = (ServerWorld)event.getWorld();
-        directory = new File(world.getServer().getWorldPath(FolderName.ROOT).toFile(), "packedup/backpacks");
+        ServerLevel world = (ServerLevel)event.getWorld();
+        directory = new File(world.getServer().getWorldPath(LevelResource.ROOT).toFile(), "packedup/backpacks");
         load();
     }
 

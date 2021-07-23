@@ -1,11 +1,11 @@
 package com.supermartijn642.packedup;
 
 import com.supermartijn642.core.gui.BaseContainer;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.ClickType;
-import net.minecraft.inventory.container.Slot;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.ClickType;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
@@ -19,7 +19,7 @@ public class BackpackContainer extends BaseContainer {
     public final BackpackType type;
     public final int bagSlot;
 
-    public BackpackContainer(int id, PlayerInventory player, int bagSlot, int inventoryIndex, BackpackType type, Set<Integer> bagsInThisBag, Set<Integer> bagsThisBagIsIn, int layer){
+    public BackpackContainer(int id, Inventory player, int bagSlot, int inventoryIndex, BackpackType type, Set<Integer> bagsInThisBag, Set<Integer> bagsThisBagIsIn, int layer){
         super(PackedUp.container, id, player.player);
         this.bagSlot = bagSlot;
         this.type = type;
@@ -31,7 +31,7 @@ public class BackpackContainer extends BaseContainer {
         this.addSlots(inventory, player);
     }
 
-    private void addSlots(IItemHandler inventory, PlayerInventory player){
+    private void addSlots(IItemHandler inventory, Inventory player){
         int startX = Math.max(0, 9 - this.type.getColumns()) * 18 / 2 + 8;
         int startY = 17;
 
@@ -51,7 +51,7 @@ public class BackpackContainer extends BaseContainer {
                 int x = startX + 18 * column, y = startY + 18 * row, index = row * 9 + column + 9;
                 if(index == this.bagSlot)
                     this.addSlot(new Slot(player, index, x, y) {
-                        public boolean canTakeStack(PlayerEntity playerIn){
+                        public boolean canTakeStack(Player playerIn){
                             return false;
                         }
                     });
@@ -66,7 +66,7 @@ public class BackpackContainer extends BaseContainer {
             int x = startX + 18 * column, y = startY;
             if(column == this.bagSlot)
                 this.addSlot(new Slot(player, column, x, y) {
-                    public boolean canTakeStack(PlayerEntity player){
+                    public boolean canTakeStack(Player player){
                         return false;
                     }
                 });
@@ -76,16 +76,16 @@ public class BackpackContainer extends BaseContainer {
     }
 
     @Override
-    protected void addSlots(PlayerEntity playerEntity){
+    protected void addSlots(Player playerEntity){
     }
 
     @Override
-    public boolean stillValid(PlayerEntity player){
+    public boolean stillValid(Player player){
         return true;
     }
 
     @Override
-    public ItemStack quickMoveStack(PlayerEntity player, int index){
+    public ItemStack quickMoveStack(Player player, int index){
         ItemStack returnStack = ItemStack.EMPTY;
         Slot slot = this.slots.get(index);
         if(slot != null && slot.hasItem()){
@@ -110,9 +110,9 @@ public class BackpackContainer extends BaseContainer {
     }
 
     @Override
-    public ItemStack clicked(int slotId, int dragType, ClickType clickTypeIn, PlayerEntity player){
+    public void clicked(int slotId, int dragType, ClickType clickTypeIn, Player player){
         if(clickTypeIn == ClickType.SWAP && dragType == this.bagSlot)
-            return ItemStack.EMPTY;
+            return;
         if(clickTypeIn == ClickType.PICKUP && dragType == 1 && slotId >= 0){
             Slot slot = this.getSlot(slotId);
             if(slot.mayPickup(player)){
@@ -122,10 +122,10 @@ public class BackpackContainer extends BaseContainer {
                         int bagSlot = slotId >= this.type.getSlots() + 27 ? slotId - this.type.getSlots() - 27 : slotId >= this.type.getSlots() ? slotId - this.type.getSlots() - 9 : -1;
                         CommonProxy.openBackpackInventory(stack, player, bagSlot);
                     }
-                    return ItemStack.EMPTY;
+                    return;
                 }
             }
         }
-        return super.clicked(slotId, dragType, clickTypeIn, player);
+        super.clicked(slotId, dragType, clickTypeIn, player);
     }
 }

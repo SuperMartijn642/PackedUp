@@ -1,13 +1,13 @@
 package com.supermartijn642.packedup;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.supermartijn642.core.ClientUtils;
 import com.supermartijn642.core.TextComponents;
 import com.supermartijn642.core.gui.BaseContainerScreen;
 import com.supermartijn642.core.gui.ScreenUtils;
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.client.gui.Font;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 
 /**
  * Created 2/7/2020 by SuperMartijn642
@@ -18,7 +18,7 @@ public class BackpackContainerScreen extends BaseContainerScreen<BackpackContain
 
     private final String displayName;
 
-    public BackpackContainerScreen(BackpackContainer container, ITextComponent name){
+    public BackpackContainerScreen(BackpackContainer container, Component name){
         super(container, name);
         this.displayName = trimText(name, container.type.getColumns() * 18);
     }
@@ -38,7 +38,7 @@ public class BackpackContainerScreen extends BaseContainerScreen<BackpackContain
     }
 
     @Override
-    protected void renderBackground(MatrixStack matrixStack, int mouseX, int mouseY){
+    protected void renderBackground(PoseStack matrixStack, int mouseX, int mouseY){
         if(this.menu.type.getColumns() == 9)
             this.drawScreenBackground(matrixStack);
         else{
@@ -61,18 +61,18 @@ public class BackpackContainerScreen extends BaseContainerScreen<BackpackContain
     }
 
     @Override
-    protected void renderForeground(MatrixStack matrixStack, int mouseX, int mouseY){
+    protected void renderForeground(PoseStack matrixStack, int mouseX, int mouseY){
         int offset = (this.menu.type.getColumns() - 9) * 18 / 2;
         ScreenUtils.drawString(matrixStack, this.displayName, 8.0F - Math.min(0, offset), 6.0F, 4210752);
-        ScreenUtils.drawString(matrixStack, this.inventory.getDisplayName(), 8.0F + Math.max(0, offset), this.sizeY() - 96 + 3, 4210752);
+        ScreenUtils.drawString(matrixStack, this.playerInventoryTitle, 8.0F + Math.max(0, offset), this.sizeY() - 96 + 3, 4210752);
     }
 
-    private static String trimText(ITextComponent textComponent, int width){
+    private static String trimText(Component textComponent, int width){
         String text = TextComponents.format(textComponent);
-        FontRenderer font = ClientUtils.getFontRenderer();
+        Font font = ClientUtils.getFontRenderer();
         int length = 0;
-        while(length < text.length() && font.width(text.substring(0,length + 1) + "...") < width)
+        while(length < text.length() && font.width(text.substring(0, length + 1) + "...") < width)
             length++;
-        return length < text.length() ? text.substring(0,length) + "..." : text;
+        return length < text.length() ? text.substring(0, length) + "..." : text;
     }
 }

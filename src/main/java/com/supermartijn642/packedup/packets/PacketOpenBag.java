@@ -5,10 +5,10 @@ import com.supermartijn642.core.network.PacketContext;
 import com.supermartijn642.packedup.BackpackItem;
 import com.supermartijn642.packedup.CommonProxy;
 import com.supermartijn642.packedup.compat.Compatibility;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketBuffer;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 
 /**
  * Created 8/13/2020 by SuperMartijn642
@@ -19,18 +19,18 @@ public class PacketOpenBag implements BasePacket {
     }
 
     @Override
-    public void write(PacketBuffer buffer){
+    public void write(FriendlyByteBuf buffer){
     }
 
     @Override
-    public void read(PacketBuffer buffer){
+    public void read(FriendlyByteBuf buffer){
     }
 
     @Override
     public void handle(PacketContext context){
-        PlayerEntity player = context.getSendingPlayer();
+        Player player = context.getSendingPlayer();
         if(player != null){
-            PlayerInventory inventory = player.inventory;
+            Inventory inventory = player.getInventory();
             if(!Compatibility.CURIOS.openBackpack(player)){
                 for(int i = 0; i < inventory.getContainerSize(); i++){
                     ItemStack stack = inventory.getItem(i);

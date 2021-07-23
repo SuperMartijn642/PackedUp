@@ -1,6 +1,6 @@
 package com.supermartijn642.packedup;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.supermartijn642.core.TextComponents;
 import com.supermartijn642.core.gui.BaseScreen;
 import com.supermartijn642.core.gui.ScreenUtils;
@@ -43,7 +43,7 @@ public class BackpackRenameScreen extends BaseScreen {
     }
 
     @Override
-    protected void render(MatrixStack matrixStack, int mouseX, int mouseY){
+    protected void render(PoseStack matrixStack, int mouseX, int mouseY){
         ScreenUtils.drawScreenBackground(matrixStack, 0, 0, this.sizeX(), this.sizeY());
         ScreenUtils.drawString(matrixStack, TextComponents.translation("gui.packedup.name").get(), this.nameField.x + 2, 8, 4210752);
     }

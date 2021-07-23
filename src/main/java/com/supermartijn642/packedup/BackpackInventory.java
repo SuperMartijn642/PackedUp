@@ -1,13 +1,13 @@
 package com.supermartijn642.packedup;
 
 import com.google.common.collect.Lists;
-import net.minecraft.block.ShulkerBoxBlock;
-import net.minecraft.inventory.ItemStackHelper;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.CompressedStreamTools;
-import net.minecraft.util.NonNullList;
+import net.minecraft.core.NonNullList;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtIo;
+import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.ShulkerBoxBlock;
 import net.minecraftforge.items.IItemHandlerModifiable;
 
 import javax.annotation.Nonnull;
@@ -124,10 +124,10 @@ public class BackpackInventory implements IItemHandlerModifiable {
             return false;
 
         if(stack.getItem() instanceof BlockItem && ((BlockItem)stack.getItem()).getBlock() instanceof ShulkerBoxBlock && stack.hasTag()){
-            CompoundNBT compound = stack.getTag().getCompound("BlockEntityTag");
+            CompoundTag compound = stack.getTag().getCompound("BlockEntityTag");
             if(compound.contains("Items", 9)){
                 NonNullList<ItemStack> items = NonNullList.withSize(27, ItemStack.EMPTY);
-                ItemStackHelper.loadAllItems(compound, items);
+                ContainerHelper.loadAllItems(compound, items);
                 for(ItemStack stack1 : items)
                     if(stack1.getItem() instanceof BackpackItem)
                         return false;
@@ -141,22 +141,22 @@ public class BackpackInventory implements IItemHandlerModifiable {
     }
 
     public void save(File file){
-        CompoundNBT compound = new CompoundNBT();
+        CompoundTag compound = new CompoundTag();
         compound.putInt("stacks", this.stacks.size());
         for(int slot = 0; slot < this.stacks.size(); slot++)
-            compound.put("stack" + slot, this.stacks.get(slot).save(new CompoundNBT()));
+            compound.put("stack" + slot, this.stacks.get(slot).save(new CompoundTag()));
         compound.putIntArray("bagsInThisBag", Lists.newArrayList(this.bagsInThisBag));
         compound.putIntArray("bagsThisBagIsIn", Lists.newArrayList(this.bagsThisBagIsIn));
         compound.putInt("layer", this.layer);
         try{
-            CompressedStreamTools.write(compound, file);
+            NbtIo.write(compound, file);
         }catch(Exception e){e.printStackTrace();}
     }
 
     public void load(File file){
-        CompoundNBT compound;
+        CompoundTag compound;
         try{
-            compound = CompressedStreamTools.read(file);
+            compound = NbtIo.read(file);
         }catch(Exception e){
             e.printStackTrace();
             return;

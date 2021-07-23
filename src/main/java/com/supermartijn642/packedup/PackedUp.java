@@ -4,10 +4,10 @@ import com.supermartijn642.core.network.PacketChannel;
 import com.supermartijn642.packedup.compat.Compatibility;
 import com.supermartijn642.packedup.packets.PacketOpenBag;
 import com.supermartijn642.packedup.packets.PacketRename;
-import net.minecraft.inventory.container.ContainerType;
-import net.minecraft.item.Item;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.extensions.IForgeContainerType;
 import net.minecraftforge.event.RegistryEvent;
@@ -32,7 +32,7 @@ public class PackedUp {
     public static final PacketChannel CHANNEL = PacketChannel.create("packedup");
 
     @ObjectHolder("packedup:container")
-    public static ContainerType<BackpackContainer> container;
+    public static MenuType<BackpackContainer> container;
 
     @ObjectHolder("packedup:basicbackpack")
     public static BackpackItem basicbackpack;
@@ -49,7 +49,7 @@ public class PackedUp {
     @ObjectHolder("packedup:obsidianbackpack")
     public static BackpackItem obsidianbackpack;
 
-    public static final IRecipeSerializer<BackpackRecipe> BACKPACK_RECIPE_SERIALIZER = new BackpackRecipe.Serializer();
+    public static final RecipeSerializer<BackpackRecipe> BACKPACK_RECIPE_SERIALIZER = new BackpackRecipe.Serializer();
 
     public PackedUp(){
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::init);
@@ -77,7 +77,7 @@ public class PackedUp {
         }
 
         @SubscribeEvent
-        public static void onContainerRegistry(final RegistryEvent.Register<ContainerType<?>> e){
+        public static void onContainerRegistry(final RegistryEvent.Register<MenuType<?>> e){
             e.getRegistry().register(IForgeContainerType.create((windowId, inv, data) -> {
                 int bagSlot = data.readInt();
                 int inventoryIndex = data.readInt();
@@ -96,7 +96,7 @@ public class PackedUp {
         }
 
         @SubscribeEvent
-        public static void onRecipeRegistry(final RegistryEvent.Register<IRecipeSerializer<?>> e){
+        public static void onRecipeRegistry(final RegistryEvent.Register<RecipeSerializer<?>> e){
             CraftingHelper.register(BackpackRecipeCondition.SERIALIZER);
             e.getRegistry().register(BACKPACK_RECIPE_SERIALIZER.setRegistryName(new ResourceLocation("packedup", "backpackrecipe")));
         }

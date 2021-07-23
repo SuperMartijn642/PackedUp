@@ -1,16 +1,16 @@
 package com.supermartijn642.packedup;
 
 import com.google.gson.JsonObject;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.inventory.CraftingInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.item.crafting.ShapedRecipe;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.core.NonNullList;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.inventory.CraftingContainer;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.ShapedRecipe;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
 import javax.annotation.Nullable;
@@ -26,7 +26,7 @@ public class BackpackRecipe extends ShapedRecipe {
     }
 
     @Override
-    public ItemStack assemble(CraftingInventory inv){
+    public ItemStack assemble(CraftingContainer inv){
         for(int index = 0; index < inv.getContainerSize(); index++){
             ItemStack stack = inv.getItem(index);
             if(!stack.isEmpty() && stack.getItem() instanceof BackpackItem){
@@ -43,28 +43,28 @@ public class BackpackRecipe extends ShapedRecipe {
     }
 
     @Override
-    public IRecipeSerializer<?> getSerializer(){
+    public RecipeSerializer<?> getSerializer(){
         return super.getSerializer();
     }
 
-    public static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<BackpackRecipe> {
+    public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<BackpackRecipe> {
 
         @Override
         public BackpackRecipe fromJson(ResourceLocation recipeId, JsonObject json){
-            ShapedRecipe recipe = IRecipeSerializer.SHAPED_RECIPE.fromJson(recipeId, json);
+            ShapedRecipe recipe = RecipeSerializer.SHAPED_RECIPE.fromJson(recipeId, json);
             return new BackpackRecipe(recipeId, recipe.getGroup(), recipe.getRecipeWidth(), recipe.getRecipeHeight(), recipe.getIngredients(), recipe.getResultItem());
         }
 
         @Nullable
         @Override
-        public BackpackRecipe fromNetwork(ResourceLocation recipeId, PacketBuffer buffer){
-            ShapedRecipe recipe = IRecipeSerializer.SHAPED_RECIPE.fromNetwork(recipeId, buffer);
+        public BackpackRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer){
+            ShapedRecipe recipe = RecipeSerializer.SHAPED_RECIPE.fromNetwork(recipeId, buffer);
             return new BackpackRecipe(recipeId, recipe.getGroup(), recipe.getRecipeWidth(), recipe.getRecipeHeight(), recipe.getIngredients(), recipe.getResultItem());
         }
 
         @Override
-        public void toNetwork(PacketBuffer buffer, BackpackRecipe recipe){
-            IRecipeSerializer.SHAPED_RECIPE.toNetwork(buffer, recipe);
+        public void toNetwork(FriendlyByteBuf buffer, BackpackRecipe recipe){
+            RecipeSerializer.SHAPED_RECIPE.toNetwork(buffer, recipe);
         }
     }
 }
