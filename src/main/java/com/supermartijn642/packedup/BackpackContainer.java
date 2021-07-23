@@ -51,7 +51,8 @@ public class BackpackContainer extends BaseContainer {
                 int x = startX + 18 * column, y = startY + 18 * row, index = row * 9 + column + 9;
                 if(index == this.bagSlot)
                     this.addSlot(new Slot(player, index, x, y) {
-                        public boolean canTakeStack(PlayerEntity playerIn){
+                        @Override
+                        public boolean mayPickup(PlayerEntity playerIn){
                             return false;
                         }
                     });
@@ -66,7 +67,8 @@ public class BackpackContainer extends BaseContainer {
             int x = startX + 18 * column, y = startY;
             if(column == this.bagSlot)
                 this.addSlot(new Slot(player, column, x, y) {
-                    public boolean canTakeStack(PlayerEntity player){
+                    @Override
+                    public boolean mayPickup(PlayerEntity player){
                         return false;
                     }
                 });
