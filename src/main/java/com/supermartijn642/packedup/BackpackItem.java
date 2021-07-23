@@ -1,6 +1,7 @@
 package com.supermartijn642.packedup;
 
 import com.supermartijn642.core.TextComponents;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -47,10 +48,10 @@ public class BackpackItem extends Item {
 
     @Override
     public void appendHoverText(ItemStack stack, Level worldIn, List<Component> tooltip, TooltipFlag flagIn){
-//        tooltip.add(TextComponents.translation("packedup.backpacks.info.one", TextComponents.string(Integer.toString(this.type.getSlots())).color(ChatFormatting.GOLD).get()).color(ChatFormatting.AQUA).get());
+        tooltip.add(TextComponents.translation("packedup.backpacks.info.one", TextComponents.string(Integer.toString(this.type.getSlots())).color(ChatFormatting.GOLD).get()).color(ChatFormatting.AQUA).get());
         Component key = ClientProxy.getKeyBindCharacter();
-//        if(key != null)
-//            tooltip.add(TextComponents.translation("packedup.backpacks.info.two", key).color(ChatFormatting.AQUA).get());
+        if(key != null)
+            tooltip.add(TextComponents.translation("packedup.backpacks.info.two", key).color(ChatFormatting.AQUA).get());
 
         if(flagIn.isAdvanced()){
             CompoundTag compound = stack.getOrCreateTag();
