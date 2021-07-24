@@ -29,8 +29,6 @@ minecraft {
 
             property 'forge.logging.markers', 'REGISTRIES'
 
-//            property 'forge.logging.console.level', 'debug'
-
             mods {
                 packedup {
                     source sourceSets.main
@@ -43,8 +41,6 @@ minecraft {
 
             property 'forge.logging.markers', 'REGISTRIES'
 
-//            property 'forge.logging.console.level', 'debug'
-
             mods {
                 packedup {
                     source sourceSets.main
@@ -56,8 +52,6 @@ minecraft {
             workingDirectory project.file('run')
 
             property 'forge.logging.markers', 'REGISTRIES'
-
-//            property 'forge.logging.console.level', 'debug'
 
             // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
             args '--mod', 'packedup', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
@@ -93,4 +87,6 @@ dependencies {
 
     // Just Enough Items
     runtimeOnly fg.deobf('curse.maven:jei-238222:3345971')
+    // Block Renderer
+    runtimeOnly fg.deobf("curse.maven:block-renderer-380456:3294692")
 }
