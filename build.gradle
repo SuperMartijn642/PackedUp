@@ -4,7 +4,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.8+', changing: true
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.9+', changing: true
     }
 }
 apply plugin: 'net.minecraftforge.gradle'
@@ -81,19 +81,17 @@ repositories {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.17.1-37.0.1'
+    minecraft 'net.minecraftforge:forge:1.17.1-37.0.7'
 
     // Core lib
-    compileOnly fg.deobf('com.supermartijn642.core:supermartijn642corelib-1.0.10a:mc1.17')//fg.deobf('curse.maven:supermartijn642s-core-lib-454372:3398450')
-    runtimeOnly fg.deobf('com.supermartijn642.core:supermartijn642corelib-1.0.10a:mc1.17')//fg.deobf('curse.maven:supermartijn642s-core-lib-454372:3398450')
+    compileOnly fg.deobf('curse.maven:supermartijn642s-core-lib-454372:3398450')
+//    runtimeOnly fg.deobf('curse.maven:supermartijn642s-core-lib-454372:3398450')
     // Config lib
     compileOnly fg.deobf('curse.maven:supermartijn642s-config-lib-438332:3397561')
-    runtimeOnly fg.deobf('curse.maven:supermartijn642s-config-lib-438332:3397561')
+//    runtimeOnly fg.deobf('curse.maven:supermartijn642s-config-lib-438332:3397561')
 
     // Curios
     compileOnly fg.deobf('curse.maven:curios-309927:3343065')
-
-    implementation('cpw.mods:securejarhandler') { version { strictly '0.9.45' } }
 
     // Just Enough Items
 //    runtimeOnly fg.deobf('curse.maven:jei-238222:3345971')
