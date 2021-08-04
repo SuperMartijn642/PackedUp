@@ -69,7 +69,7 @@ public class BackpackItem extends Item implements ICapabilityProvider {
 
     @Override
     protected boolean isInCreativeTab(CreativeTabs targetTab){
-        return this.type.isEnabled();
+        return this.type.isEnabled() && super.isInCreativeTab(targetTab);
     }
 
     @Nullable
