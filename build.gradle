@@ -11,7 +11,7 @@ apply plugin: 'net.minecraftforge.gradle'
 // Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 apply plugin: 'eclipse'
 
-version = '1.0.23a-mc1.16.5'
+version = '1.0.23a-mc1.16'
 group = 'com.supermartijn642.packedup' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'packedup'
 
@@ -78,9 +78,9 @@ dependencies {
     minecraft 'net.minecraftforge:forge:1.16.5-36.2.0'
 
     // Core lib
-    compile fg.deobf('curse.maven:supermartijn642s-core-lib-454372:3351871')
+    compile fg.deobf('curse.maven:supermartijn642s-core-lib-454372:3413422')
     // Config lib
-    compile fg.deobf('curse.maven:supermartijn642s-config-lib-438332:3357667')
+    compile fg.deobf('curse.maven:supermartijn642s-config-lib-438332:3413938')
 
     // Curios
     compile fg.deobf('curse.maven:curios-309927:3343065')
