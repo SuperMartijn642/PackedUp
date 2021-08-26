@@ -27,29 +27,29 @@ public class PacketRename implements BasePacket {
     public void write(PacketBuffer buffer){
         buffer.writeBoolean(this.name != null);
         if(this.name != null)
-            buffer.writeString(this.name);
+            buffer.writeUtf(this.name);
     }
 
     @Override
     public void read(PacketBuffer buffer){
-        this.name = buffer.readBoolean() ? buffer.readString(32767) : "";
+        this.name = buffer.readBoolean() ? buffer.readUtf(32767) : "";
     }
 
     @Override
     public void handle(PacketContext context){
         PlayerEntity player = context.getSendingPlayer();
         if(player != null){
-            ItemStack stack = player.getHeldItem(Hand.MAIN_HAND);
+            ItemStack stack = player.getItemInHand(Hand.MAIN_HAND);
 
             if(stack.isEmpty() || !(stack.getItem() instanceof BackpackItem))
-                stack = player.getHeldItem(Hand.OFF_HAND);
+                stack = player.getItemInHand(Hand.OFF_HAND);
             if(stack.isEmpty() || !(stack.getItem() instanceof BackpackItem))
                 return;
 
             if(this.name == null || this.name.isEmpty() || this.name.equals(TextComponents.item(stack.getItem()).format()))
-                stack.clearCustomName();
+                stack.resetHoverName();
             else
-                stack.setDisplayName(TextComponents.string(this.name).get());
+                stack.setHoverName(TextComponents.string(this.name).get());
         }
     }
 }

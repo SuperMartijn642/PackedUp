@@ -19,7 +19,7 @@ archivesBaseName = 'packedup'
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 
 minecraft {
-    mappings channel: 'stable', version: '58-1.14.4'
+    mappings channel: 'official', version: '1.14.4'
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
 
     runs {
@@ -73,12 +73,12 @@ repositories {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.14.4-28.2.3'
+    minecraft 'net.minecraftforge:forge:1.14.4-28.2.23'
 
     // Core lib
-    compile fg.deobf('curse.maven:supermartijn642s-core-lib-454372:3351866')
+    compile fg.deobf('curse.maven:supermartijn642s-core-lib-454372:3413419')
     // Config lib
-    compile fg.deobf('curse.maven:supermartijn642s-config-lib-438332:3357664')
+    compile fg.deobf('curse.maven:supermartijn642s-config-lib-438332:3413934')
 
     // Curios
     compile fg.deobf('curse.maven:curios-309927:2868713')

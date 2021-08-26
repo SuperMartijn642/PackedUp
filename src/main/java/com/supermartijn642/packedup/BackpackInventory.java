@@ -137,14 +137,14 @@ public class BackpackInventory implements IItemHandlerModifiable {
     }
 
     private static boolean canStack(ItemStack stack1, ItemStack stack2){
-        return stack1.isEmpty() || stack2.isEmpty() || (stack1.getItem() == stack2.getItem() && stack1.getDamage() == stack2.getDamage() && ItemStack.areItemsEqualIgnoreDurability(stack1, stack2));
+        return stack1.isEmpty() || stack2.isEmpty() || (stack1.getItem() == stack2.getItem() && stack1.getDamageValue() == stack2.getDamageValue() && ItemStack.isSameIgnoreDurability(stack1, stack2));
     }
 
     public void save(File file){
         CompoundNBT compound = new CompoundNBT();
         compound.putInt("stacks", this.stacks.size());
         for(int slot = 0; slot < this.stacks.size(); slot++)
-            compound.put("stack" + slot, this.stacks.get(slot).write(new CompoundNBT()));
+            compound.put("stack" + slot, this.stacks.get(slot).save(new CompoundNBT()));
         compound.putIntArray("bagsInThisBag", Lists.newArrayList(this.bagsInThisBag));
         compound.putIntArray("bagsThisBagIsIn", Lists.newArrayList(this.bagsThisBagIsIn));
         compound.putInt("layer", this.layer);
@@ -164,7 +164,7 @@ public class BackpackInventory implements IItemHandlerModifiable {
         this.stacks.clear();
         int size = compound.contains("stacks") ? compound.getInt("stacks") : compound.contains("rows") ? compound.getInt("rows") * 9 : compound.getInt("slots"); // Do this for compatibility with older versions
         for(int slot = 0; slot < size; slot++)
-            this.stacks.add(ItemStack.read(compound.getCompound("stack" + slot)));
+            this.stacks.add(ItemStack.of(compound.getCompound("stack" + slot)));
         this.bagsInThisBag.clear();
         Arrays.stream(compound.getIntArray("bagsInThisBag")).forEach(this.bagsInThisBag::add);
         this.bagsThisBagIsIn.clear();

@@ -32,8 +32,8 @@ public class PacketOpenBag implements BasePacket {
         if(player != null){
             PlayerInventory inventory = player.inventory;
             if(!Compatibility.CURIOS.openBackpack(player)){
-                for(int i = 0; i < inventory.getSizeInventory(); i++){
-                    ItemStack stack = inventory.getStackInSlot(i);
+                for(int i = 0; i < inventory.getContainerSize(); i++){
+                    ItemStack stack = inventory.getItem(i);
                     if(stack.getItem() instanceof BackpackItem)
                         CommonProxy.openBackpackInventory(stack, player, i);
                 }

@@ -29,26 +29,26 @@ public class BackpackItem extends Item {
     public BackpackType type;
 
     public BackpackItem(BackpackType type){
-        super(type.isEnabled() ? new Item.Properties().maxStackSize(1).group(ItemGroup.SEARCH) : new Item.Properties().maxStackSize(1));
+        super(type.isEnabled() ? new Item.Properties().stacksTo(1).tab(ItemGroup.TAB_SEARCH) : new Item.Properties().stacksTo(1));
         this.type = type;
         this.setRegistryName(type.getRegistryName());
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn){
-        ItemStack stack = playerIn.getHeldItem(handIn);
+    public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn){
+        ItemStack stack = playerIn.getItemInHand(handIn);
         if(!playerIn.isSneaking()){
-            if(!worldIn.isRemote && stack.getItem() instanceof BackpackItem){
-                int bagSlot = handIn == Hand.MAIN_HAND ? playerIn.inventory.currentItem : -1;
+            if(!worldIn.isClientSide && stack.getItem() instanceof BackpackItem){
+                int bagSlot = handIn == Hand.MAIN_HAND ? playerIn.inventory.selected : -1;
                 CommonProxy.openBackpackInventory(stack, playerIn, bagSlot);
             }
-        }else if(worldIn.isRemote)
+        }else if(worldIn.isClientSide)
             ClientProxy.openScreen(TextComponents.item(stack.getItem()).format(), TextComponents.itemStack(stack).format());
         return ActionResult.newResult(ActionResultType.SUCCESS, stack);
     }
 
     @Override
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn){
+    public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn){
         tooltip.add(TextComponents.translation("packedup.backpacks.info.one", TextComponents.string(Integer.toString(this.type.getSlots())).color(TextFormatting.GOLD).get()).color(TextFormatting.AQUA).get());
         ITextComponent key = ClientProxy.getKeyBindCharacter();
         if(key != null)
@@ -60,13 +60,13 @@ public class BackpackItem extends Item {
                 tooltip.add(TextComponents.translation("packedup.backpacks.info.inventory_index", compound.getInt("packedup:invIndex")).get());
         }
 
-        super.addInformation(stack, worldIn, tooltip, flagIn);
+        super.appendHoverText(stack, worldIn, tooltip, flagIn);
     }
 
     @Override
-    public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items){
+    public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items){
         if(this.type.isEnabled())
-            super.fillItemGroup(group, items);
+            super.fillItemCategory(group, items);
     }
 
     public static class ContainerProvider implements INamedContainerProvider {
