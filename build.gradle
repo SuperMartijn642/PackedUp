@@ -61,14 +61,14 @@ dependencies {
     minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2855'
 
     // Core lib
-    compile fg.deobf('curse.maven:supermartijn642s-core-lib-454372:3357859')
+    compile fg.deobf('curse.maven:supermartijn642s-core-lib-454372:3413418')
     // Config lib
-    compile fg.deobf('curse.maven:supermartijn642s-config-lib-438332:3357662')
+    compile fg.deobf('curse.maven:supermartijn642s-config-lib-438332:3413933')
 
     // Baubles
     compile fg.deobf('curse.maven:baubles-227083:2518667')
 }
 
-//sourceSets {
-//    main { output.resourcesDir = output.classesDir }
-//}
+sourceSets {
+    main { output.resourcesDir = output.classesDir }
+}
