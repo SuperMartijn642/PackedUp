@@ -68,6 +68,11 @@ public class BackpackItem extends Item {
             super.fillItemCategory(group, items);
     }
 
+    @Override
+    public boolean isFireResistant(){
+        return !PUConfig.canBackpacksBurn.get();
+    }
+
     public static class ContainerProvider implements INamedContainerProvider {
         private final int inventoryIndex;
         private final ITextComponent displayName;
