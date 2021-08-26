@@ -28,17 +28,17 @@ public class BackpackStorageManager {
 
     @SubscribeEvent
     public static void onWorldSave(WorldEvent.Save event){
-        if(event.getWorld().isRemote() || !(event.getWorld() instanceof World) || ((World)event.getWorld()).getDimension().getType() != DimensionType.OVERWORLD)
+        if(event.getWorld().isClientSide() || !(event.getWorld() instanceof World) || ((World)event.getWorld()).getDimension().getType() != DimensionType.OVERWORLD)
             return;
         save();
     }
 
     @SubscribeEvent
     public static void onWorldLoad(WorldEvent.Load event){
-        if(event.getWorld().isRemote() || !(event.getWorld() instanceof World) || ((World)event.getWorld()).getDimension().getType() != DimensionType.OVERWORLD)
+        if(event.getWorld().isClientSide() || !(event.getWorld() instanceof World) || ((World)event.getWorld()).getDimension().getType() != DimensionType.OVERWORLD)
             return;
         ServerWorld world = (ServerWorld)event.getWorld();
-        directory = new File(world.getSaveHandler().getWorldDirectory(), "packedup/backpacks");
+        directory = new File(world.getLevelStorage().getFolder(), "packedup/backpacks");
         load();
     }
 

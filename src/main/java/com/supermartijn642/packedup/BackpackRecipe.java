@@ -26,20 +26,20 @@ public class BackpackRecipe extends ShapedRecipe {
     }
 
     @Override
-    public ItemStack getCraftingResult(CraftingInventory inv){
-        for(int index = 0; index < inv.getSizeInventory(); index++){
-            ItemStack stack = inv.getStackInSlot(index);
+    public ItemStack assemble(CraftingInventory inv){
+        for(int index = 0; index < inv.getContainerSize(); index++){
+            ItemStack stack = inv.getItem(index);
             if(!stack.isEmpty() && stack.getItem() instanceof BackpackItem){
-                ItemStack result = this.getRecipeOutput().copy();
+                ItemStack result = this.getResultItem().copy();
                 result.setTag(stack.getTag());
-                if(stack.hasDisplayName())
-                    result.setDisplayName(stack.getDisplayName());
+                if(stack.hasCustomHoverName())
+                    result.setHoverName(stack.getHoverName());
                 for(Map.Entry<Enchantment,Integer> enchant : EnchantmentHelper.getEnchantments(stack).entrySet())
-                    result.addEnchantment(enchant.getKey(), enchant.getValue());
+                    result.enchant(enchant.getKey(), enchant.getValue());
                 return result;
             }
         }
-        return this.getRecipeOutput().copy();
+        return this.getResultItem().copy();
     }
 
     @Override
@@ -50,21 +50,21 @@ public class BackpackRecipe extends ShapedRecipe {
     public static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<BackpackRecipe> {
 
         @Override
-        public BackpackRecipe read(ResourceLocation recipeId, JsonObject json){
-            ShapedRecipe recipe = IRecipeSerializer.CRAFTING_SHAPED.read(recipeId, json);
-            return new BackpackRecipe(recipeId, recipe.getGroup(), recipe.getRecipeWidth(), recipe.getRecipeHeight(), recipe.getIngredients(), recipe.getRecipeOutput());
+        public BackpackRecipe fromJson(ResourceLocation recipeId, JsonObject json){
+            ShapedRecipe recipe = IRecipeSerializer.SHAPED_RECIPE.fromJson(recipeId, json);
+            return new BackpackRecipe(recipeId, recipe.getGroup(), recipe.getRecipeWidth(), recipe.getRecipeHeight(), recipe.getIngredients(), recipe.getResultItem());
         }
 
         @Nullable
         @Override
-        public BackpackRecipe read(ResourceLocation recipeId, PacketBuffer buffer){
-            ShapedRecipe recipe = IRecipeSerializer.CRAFTING_SHAPED.read(recipeId, buffer);
-            return new BackpackRecipe(recipeId, recipe.getGroup(), recipe.getRecipeWidth(), recipe.getRecipeHeight(), recipe.getIngredients(), recipe.getRecipeOutput());
+        public BackpackRecipe fromNetwork(ResourceLocation recipeId, PacketBuffer buffer){
+            ShapedRecipe recipe = IRecipeSerializer.SHAPED_RECIPE.fromNetwork(recipeId, buffer);
+            return new BackpackRecipe(recipeId, recipe.getGroup(), recipe.getRecipeWidth(), recipe.getRecipeHeight(), recipe.getIngredients(), recipe.getResultItem());
         }
 
         @Override
-        public void write(PacketBuffer buffer, BackpackRecipe recipe){
-            IRecipeSerializer.CRAFTING_SHAPED.write(buffer, recipe);
+        public void toNetwork(PacketBuffer buffer, BackpackRecipe recipe){
+            IRecipeSerializer.SHAPED_RECIPE.toNetwork(buffer, recipe);
         }
     }
 }

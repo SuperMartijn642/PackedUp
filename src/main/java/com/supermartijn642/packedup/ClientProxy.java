@@ -24,7 +24,7 @@ public class ClientProxy {
 
     @SubscribeEvent
     public static void init(FMLClientSetupEvent e){
-        ScreenManager.registerFactory(PackedUp.container, (ScreenManager.IScreenFactory<BackpackContainer,BackpackContainerScreen>)((container, b, name) -> new BackpackContainerScreen(container, name)));
+        ScreenManager.register(PackedUp.container, (ScreenManager.IScreenFactory<BackpackContainer,BackpackContainerScreen>)((container, b, name) -> new BackpackContainerScreen(container, name)));
 
         OPEN_BAG_KEY = new KeyBinding("keys.packedup.openbag", 79/*'o'*/, "keys.category.packedup");
         ClientRegistry.registerKeyBinding(OPEN_BAG_KEY);
@@ -36,11 +36,11 @@ public class ClientProxy {
     }
 
     public static void onKey(InputEvent.KeyInputEvent e){
-        if(OPEN_BAG_KEY != null && OPEN_BAG_KEY.matchesKey(e.getKey(), e.getScanCode()) && ClientUtils.getWorld() != null && ClientUtils.getMinecraft().currentScreen == null)
+        if(OPEN_BAG_KEY != null && OPEN_BAG_KEY.matches(e.getKey(), e.getScanCode()) && ClientUtils.getWorld() != null && ClientUtils.getMinecraft().screen == null)
             PackedUp.CHANNEL.sendToServer(new PacketOpenBag());
     }
 
     public static ITextComponent getKeyBindCharacter(){
-        return OPEN_BAG_KEY == null || OPEN_BAG_KEY.getKey().getKeyCode() == -1 ? null : TextComponents.translation(OPEN_BAG_KEY.getKey().getTranslationKey()).get();
+        return OPEN_BAG_KEY == null || OPEN_BAG_KEY.getKey().getValue() == -1 ? null : TextComponents.translation(OPEN_BAG_KEY.getKey().getName()).get();
     }
 }
