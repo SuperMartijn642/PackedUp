@@ -11,6 +11,8 @@ public class PUConfig {
 
     public static Supplier<Boolean> allowBagInBag;
     public static Supplier<Integer> maxBagInBagLayer;
+    public static Supplier<Boolean> keepBackpacksOnDeath;
+    public static Supplier<Boolean> canBackpacksBurn;
 
     public static Supplier<Boolean> basicEnable;
     public static Supplier<Integer> basicRows;
@@ -40,6 +42,8 @@ public class PUConfig {
         builder.push("General");
         allowBagInBag = builder.comment("Can backpacks be put inside other backpacks?").define("allowBagInBag", true);
         maxBagInBagLayer = builder.comment("How many layers deep can you place backpacks inside backpacks? -1 for infinite, 0 is the same as setting 'allowBagInBag' to false.").define("maxBagInBagLayer", -1, -1, 5);
+        keepBackpacksOnDeath = builder.comment("Should the backpack remain in the player's inventory if they die?").define("keepBackpacksOnDeath", false);
+        canBackpacksBurn = builder.comment("Should backpacks be destroyed by lava and fire?").define("canBackpacksBurn", true);
         builder.pop();
 
         builder.push("Backpacks");
