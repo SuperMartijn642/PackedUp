@@ -1,0 +1,46 @@
+{
+  "parent": "packedup:iron_or_copper",
+  "display": {
+    "icon": {
+      "item": "packedup:goldbackpack"
+    },
+    "title": {
+      "translate": "packedup.advancement.silver_or_gold.title"
+    },
+    "description": {
+      "translate": "packedup.advancement.silver_or_gold.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "backpack": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "packedup:silverbackpack"
+          }
+        ]
+      }
+    },
+    "backpack2": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "packedup:goldbackpack"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "backpack",
+      "backpack2"
+    ]
+  ]
+}
