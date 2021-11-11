@@ -29,7 +29,7 @@ public class BackpackItem extends Item {
     public BackpackType type;
 
     public BackpackItem(BackpackType type){
-        super(type.isEnabled() ? new Item.Properties().stacksTo(1).tab(ItemGroup.TAB_SEARCH) : new Item.Properties().stacksTo(1));
+        super(type.isEnabled() ? new Item.Properties().stacksTo(1).tab(PackedUp.ITEM_GROUP) : new Item.Properties().stacksTo(1));
         this.type = type;
         this.setRegistryName(type.getRegistryName());
     }
