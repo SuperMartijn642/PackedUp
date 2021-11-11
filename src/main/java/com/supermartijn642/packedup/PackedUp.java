@@ -6,7 +6,9 @@ import com.supermartijn642.packedup.packets.PacketOpenBag;
 import com.supermartijn642.packedup.packets.PacketRename;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.extensions.IForgeContainerType;
@@ -30,6 +32,13 @@ import java.util.Set;
 public class PackedUp {
 
     public static final PacketChannel CHANNEL = PacketChannel.create("packedup");
+
+    public static final CreativeModeTab ITEM_GROUP = new CreativeModeTab("packedup") {
+        @Override
+        public ItemStack makeIcon(){
+            return new ItemStack(basicbackpack);
+        }
+    };
 
     @ObjectHolder("packedup:container")
     public static MenuType<BackpackContainer> container;
