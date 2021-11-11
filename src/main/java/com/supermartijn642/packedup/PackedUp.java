@@ -29,7 +29,7 @@ public class PackedUp {
 
     public static final String MODID = "packedup";
     public static final String NAME = "Packed Up";
-    public static final String VERSION = "1.0.24";
+    public static final String VERSION = "1.0.25";
     public static final String DEPENDENCIES = "required-after:supermartijn642corelib@[1.0.12,);required-after:supermartijn642configlib@[1.0.9,)";
 
     @Mod.Instance
