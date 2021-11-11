@@ -6,6 +6,8 @@ import com.supermartijn642.packedup.packets.PacketOpenBag;
 import com.supermartijn642.packedup.packets.PacketRename;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.crafting.CraftingHelper;
@@ -31,6 +33,13 @@ import java.util.Set;
 public class PackedUp {
 
     public static final PacketChannel CHANNEL = PacketChannel.create("packedup");
+
+    public static final ItemGroup ITEM_GROUP = new ItemGroup("packedup") {
+        @Override
+        public ItemStack makeIcon(){
+            return new ItemStack(basicbackpack);
+        }
+    };
 
     @ObjectHolder("packedup:container")
     public static ContainerType<BackpackContainer> container;
