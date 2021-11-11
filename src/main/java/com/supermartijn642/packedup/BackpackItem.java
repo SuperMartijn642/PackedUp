@@ -35,7 +35,7 @@ public class BackpackItem extends Item implements ICapabilityProvider {
         this.setUnlocalizedName(PackedUp.MODID + "." + type.getRegistryName());
 
         this.setMaxStackSize(1);
-        this.setCreativeTab(CreativeTabs.SEARCH);
+        this.setCreativeTab(PackedUp.ITEM_GROUP);
     }
 
     @Override

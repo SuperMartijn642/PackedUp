@@ -6,7 +6,9 @@ import com.supermartijn642.packedup.integration.BaublesInactive;
 import com.supermartijn642.packedup.packets.PacketBackpackContainer;
 import com.supermartijn642.packedup.packets.PacketOpenBag;
 import com.supermartijn642.packedup.packets.PacketRename;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -36,6 +38,13 @@ public class PackedUp {
     public static final PacketChannel CHANNEL = PacketChannel.create("packedup");
 
     public static BaublesInactive baubles;
+
+    public static final CreativeTabs ITEM_GROUP = new CreativeTabs("packedup") {
+        @Override
+        public ItemStack getTabIconItem(){
+            return new ItemStack(basicbackpack);
+        }
+    };
 
     @GameRegistry.ObjectHolder("packedup:basicbackpack")
     public static BackpackItem basicbackpack;
