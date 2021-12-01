@@ -11,7 +11,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraftforge.common.crafting.CraftingHelper;
-import net.minecraftforge.common.extensions.IForgeContainerType;
+import net.minecraftforge.common.extensions.IForgeMenuType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.InterModComms;
@@ -87,7 +87,7 @@ public class PackedUp {
 
         @SubscribeEvent
         public static void onContainerRegistry(final RegistryEvent.Register<MenuType<?>> e){
-            e.getRegistry().register(IForgeContainerType.create((windowId, inv, data) -> {
+            e.getRegistry().register(IForgeMenuType.create((windowId, inv, data) -> {
                 int bagSlot = data.readInt();
                 int inventoryIndex = data.readInt();
                 BackpackType type = BackpackType.values()[data.readInt()];

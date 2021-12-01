@@ -2,16 +2,16 @@ package com.supermartijn642.packedup;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fmllegacy.network.NetworkHooks;
+import net.minecraftforge.network.NetworkHooks;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -65,8 +65,8 @@ public class CommonProxy {
 
     @SubscribeEvent
     public static void onPlayerClone(PlayerEvent.Clone e){
-        if(e.getOriginal().getPersistentData().contains("packedup:backpacks", Constants.NBT.TAG_LIST)){
-            ListTag itemData = e.getOriginal().getPersistentData().getList("packedup:backpacks", Constants.NBT.TAG_COMPOUND);
+        if(e.getOriginal().getPersistentData().contains("packedup:backpacks", Tag.TAG_LIST)){
+            ListTag itemData = e.getOriginal().getPersistentData().getList("packedup:backpacks", Tag.TAG_COMPOUND);
             itemData.stream()
                 .filter(CompoundTag.class::isInstance)
                 .map(CompoundTag.class::cast)
