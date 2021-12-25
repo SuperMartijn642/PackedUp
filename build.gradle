@@ -89,5 +89,5 @@ dependencies {
     implementation fg.deobf("curse.maven:supermartijn642s-config-lib-438332:3542143")
 
     // Curios
-    implementation fg.deobf('curse.maven:curios-309927:3412602')
+    implementation fg.deobf('curse.maven:curios-309927:3573785')
 }
