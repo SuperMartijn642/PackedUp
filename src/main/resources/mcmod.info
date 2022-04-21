@@ -1,15 +1,15 @@
 [
 {
-  "modid": "packedup",
-  "name": "Packed Up",
-  "description": "Packed Up allows you to pack up all your things into new amazing Backpacks!",
-  "version": "${version}",
-  "mcversion": "${mcversion}",
-  "url": "",
+  "modid": "${mod_id}",
+  "name": "${mod_name}",
+  "description": "${mod_description}",
+  "version": "${mod_version}",
+  "mcversion": "${minecraft_version}",
+  "url": "${mod_page}",
   "updateUrl": "",
   "authorList": ["SuperMartijn642"],
-  "credits": "Thanks to CiFru_ for creating all the textures!",
-  "logoFile": "packedup.png",
+  "credits": "",
+  "logoFile": "${mod_id}.png",
   "screenshots": [],
   "dependencies": []
 }
