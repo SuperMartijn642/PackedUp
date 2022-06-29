@@ -11,7 +11,6 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraftforge.registries.ForgeRegistryEntry;
 
 import javax.annotation.Nullable;
 import java.util.Map;
@@ -47,7 +46,7 @@ public class BackpackRecipe extends ShapedRecipe {
         return super.getSerializer();
     }
 
-    public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<BackpackRecipe> {
+    public static class Serializer implements RecipeSerializer<BackpackRecipe> {
 
         @Override
         public BackpackRecipe fromJson(ResourceLocation recipeId, JsonObject json){

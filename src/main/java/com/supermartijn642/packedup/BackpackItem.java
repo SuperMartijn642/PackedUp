@@ -30,7 +30,6 @@ public class BackpackItem extends Item {
     public BackpackItem(BackpackType type){
         super(type.isEnabled() ? new Item.Properties().stacksTo(1).tab(PackedUp.ITEM_GROUP) : new Item.Properties().stacksTo(1));
         this.type = type;
-        this.setRegistryName(type.getRegistryName());
     }
 
     @Override

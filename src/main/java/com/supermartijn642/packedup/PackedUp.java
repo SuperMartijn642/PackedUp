@@ -4,7 +4,6 @@ import com.supermartijn642.core.network.PacketChannel;
 import com.supermartijn642.packedup.compat.Compatibility;
 import com.supermartijn642.packedup.packets.PacketOpenBag;
 import com.supermartijn642.packedup.packets.PacketRename;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -12,17 +11,20 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.extensions.IForgeMenuType;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.ObjectHolder;
+import net.minecraftforge.registries.RegisterEvent;
 import top.theillusivec4.curios.api.SlotTypeMessage;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -40,22 +42,22 @@ public class PackedUp {
         }
     };
 
-    @ObjectHolder("packedup:container")
+    @ObjectHolder(value = "packedup:container", registryName = "minecraft:menu")
     public static MenuType<BackpackContainer> container;
 
-    @ObjectHolder("packedup:basicbackpack")
+    @ObjectHolder(value = "packedup:basicbackpack", registryName = "minecraft:item")
     public static BackpackItem basicbackpack;
-    @ObjectHolder("packedup:ironbackpack")
+    @ObjectHolder(value = "packedup:ironbackpack", registryName = "minecraft:item")
     public static BackpackItem ironbackpack;
-    @ObjectHolder("packedup:copperbackpack")
+    @ObjectHolder(value = "packedup:copperbackpack", registryName = "minecraft:item")
     public static BackpackItem copperbackpack;
-    @ObjectHolder("packedup:silverbackpack")
+    @ObjectHolder(value = "packedup:silverbackpack", registryName = "minecraft:item")
     public static BackpackItem silverbackpack;
-    @ObjectHolder("packedup:goldbackpack")
+    @ObjectHolder(value = "packedup:goldbackpack", registryName = "minecraft:item")
     public static BackpackItem goldbackpack;
-    @ObjectHolder("packedup:diamondbackpack")
+    @ObjectHolder(value = "packedup:diamondbackpack", registryName = "minecraft:item")
     public static BackpackItem diamondbackpack;
-    @ObjectHolder("packedup:obsidianbackpack")
+    @ObjectHolder(value = "packedup:obsidianbackpack", registryName = "minecraft:item")
     public static BackpackItem obsidianbackpack;
 
     public static final RecipeSerializer<BackpackRecipe> BACKPACK_RECIPE_SERIALIZER = new BackpackRecipe.Serializer();
@@ -80,14 +82,22 @@ public class PackedUp {
     public static class RegistryEvents {
 
         @SubscribeEvent
-        public static void onItemRegistry(final RegistryEvent.Register<Item> e){
-            for(BackpackType type : BackpackType.values())
-                e.getRegistry().register(new BackpackItem(type));
+        public static void onRegisterEvent(RegisterEvent e){
+            if(e.getRegistryKey().equals(ForgeRegistries.Keys.ITEMS))
+                onItemRegistry(Objects.requireNonNull(e.getForgeRegistry()));
+            else if(e.getRegistryKey().equals(ForgeRegistries.Keys.CONTAINER_TYPES))
+                onContainerRegistry(Objects.requireNonNull(e.getForgeRegistry()));
+            else if(e.getRegistryKey().equals(ForgeRegistries.Keys.RECIPE_SERIALIZERS))
+                onRecipeRegistry(Objects.requireNonNull(e.getForgeRegistry()));
         }
 
-        @SubscribeEvent
-        public static void onContainerRegistry(final RegistryEvent.Register<MenuType<?>> e){
-            e.getRegistry().register(IForgeMenuType.create((windowId, inv, data) -> {
+        public static void onItemRegistry(IForgeRegistry<Item> registry){
+            for(BackpackType type : BackpackType.values())
+                registry.register(type.getRegistryName(), new BackpackItem(type));
+        }
+
+        public static void onContainerRegistry(IForgeRegistry<MenuType<?>> registry){
+            registry.register("container", IForgeMenuType.create((windowId, inv, data) -> {
                 int bagSlot = data.readInt();
                 int inventoryIndex = data.readInt();
                 BackpackType type = BackpackType.values()[data.readInt()];
@@ -101,13 +111,12 @@ public class PackedUp {
                     bagsThisBagIsIn.add(data.readInt());
                 int layer = data.readInt();
                 return new BackpackContainer(windowId, inv, bagSlot, inventoryIndex, type, bagsInThisBag, bagsThisBagIsIn, layer);
-            }).setRegistryName("container"));
+            }));
         }
 
-        @SubscribeEvent
-        public static void onRecipeRegistry(final RegistryEvent.Register<RecipeSerializer<?>> e){
+        public static void onRecipeRegistry(IForgeRegistry<RecipeSerializer<?>> registry){
             CraftingHelper.register(BackpackRecipeCondition.SERIALIZER);
-            e.getRegistry().register(BACKPACK_RECIPE_SERIALIZER.setRegistryName(new ResourceLocation("packedup", "backpackrecipe")));
+            registry.register("backpackrecipe", BACKPACK_RECIPE_SERIALIZER);
         }
     }
 
