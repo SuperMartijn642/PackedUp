@@ -6,8 +6,8 @@ import net.minecraft.client.KeyMapping;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.network.chat.Component;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.ClientRegistry;
 import net.minecraftforge.client.event.InputEvent;
+import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -24,9 +24,12 @@ public class ClientProxy {
     @SubscribeEvent
     public static void init(FMLClientSetupEvent e){
         MenuScreens.register(PackedUp.container, (MenuScreens.ScreenConstructor<BackpackContainer,BackpackContainerScreen>)((container, b, name) -> new BackpackContainerScreen(container, name)));
+    }
 
+    @SubscribeEvent
+    public static void registerKeyBindings(RegisterKeyMappingsEvent e){
         OPEN_BAG_KEY = new KeyMapping("keys.packedup.openbag", 79/*'o'*/, "keys.category.packedup");
-        ClientRegistry.registerKeyBinding(OPEN_BAG_KEY);
+        e.register(OPEN_BAG_KEY);
         MinecraftForge.EVENT_BUS.addListener(ClientProxy::onKey);
     }
 
@@ -34,7 +37,7 @@ public class ClientProxy {
         ClientUtils.displayScreen(new BackpackRenameScreen(defaultName, name));
     }
 
-    public static void onKey(InputEvent.KeyInputEvent e){
+    public static void onKey(InputEvent.Key e){
         if(OPEN_BAG_KEY != null && OPEN_BAG_KEY.matches(e.getKey(), e.getScanCode()) && ClientUtils.getWorld() != null && ClientUtils.getMinecraft().screen == null)
             PackedUp.CHANNEL.sendToServer(new PacketOpenBag());
     }
