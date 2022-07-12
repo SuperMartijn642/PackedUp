@@ -32,7 +32,7 @@ public class CommonProxy {
             BackpackStorageManager.getInventory(compound.getInt("packedup:invIndex")).adjustSize(type);
         int inventoryIndex = compound.getInt("packedup:invIndex");
         BackpackInventory inventory = BackpackStorageManager.getInventory(inventoryIndex);
-        NetworkHooks.openGui((ServerPlayer)player, new BackpackItem.ContainerProvider(stack.getHoverName(), bagSlot, inventoryIndex, inventory, type), a -> {
+        NetworkHooks.openScreen((ServerPlayer)player, new BackpackItem.ContainerProvider(stack.getHoverName(), bagSlot, inventoryIndex, inventory, type), a -> {
             a.writeInt(bagSlot);
             a.writeInt(inventoryIndex);
             a.writeInt(type.ordinal());
@@ -71,7 +71,7 @@ public class CommonProxy {
                 .filter(CompoundTag.class::isInstance)
                 .map(CompoundTag.class::cast)
                 .map(ItemStack::of)
-                .forEach(stack -> e.getPlayer().getInventory().placeItemBackInInventory(stack));
+                .forEach(stack -> e.getEntity().getInventory().placeItemBackInInventory(stack));
         }
     }
 }
