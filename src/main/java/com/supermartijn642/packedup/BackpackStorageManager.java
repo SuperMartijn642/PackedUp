@@ -21,20 +21,21 @@ import java.util.function.Supplier;
 public class BackpackStorageManager {
 
     private static File directory;
+    private static long lastSaveTimestamp = 0;
     private static final HashMap<Integer,BackpackInventory> inventories = new HashMap<>();
     private static int inventoryIndex = 0;
 
-    public static final Supplier<Integer> maxLayers = () -> PUConfig.allowBagInBag.get() ? PUConfig.maxBagInBagLayer.get() : 0;
+    public static final Supplier<Integer> maxLayers = () -> PackedUpConfig.allowBagInBag.get() ? PackedUpConfig.maxBagInBagLayer.get() : 0;
 
     @SubscribeEvent
-    public static void onWorldSave(LevelEvent.Save event){
-        if(event.getLevel().isClientSide() || !(event.getLevel() instanceof Level) || ((Level)event.getLevel()).dimension() != Level.OVERWORLD)
+    public static void onLevelSave(LevelEvent.Save event){
+        if(event.getLevel().isClientSide() || !(event.getLevel() instanceof Level) || (((Level)event.getLevel()).dimension() != Level.OVERWORLD && System.currentTimeMillis() - lastSaveTimestamp < 30000))
             return;
         save();
     }
 
     @SubscribeEvent
-    public static void onWorldLoad(LevelEvent.Load event){
+    public static void onLevelLoad(LevelEvent.Load event){
         if(event.getLevel().isClientSide() || !(event.getLevel() instanceof Level) || ((Level)event.getLevel()).dimension() != Level.OVERWORLD)
             return;
         ServerLevel world = (ServerLevel)event.getLevel();
@@ -65,6 +66,7 @@ public class BackpackStorageManager {
         directory.mkdirs();
         for(int i : inventories.keySet())
             inventories.get(i).save(new File(directory, "inventory" + i + ".nbt"));
+        lastSaveTimestamp = System.currentTimeMillis();
     }
 
     public static void load(){
@@ -183,5 +185,4 @@ public class BackpackStorageManager {
             inv.layer = getBagsThisBagIsIn(id, inv.bagsThisBagIsIn);
         }
     }
-
 }

@@ -1,7 +1,7 @@
 package com.supermartijn642.packedup.compat.curios;
 
 import com.supermartijn642.packedup.BackpackItem;
-import com.supermartijn642.packedup.CommonProxy;
+import com.supermartijn642.packedup.PackedUpCommon;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import org.apache.commons.lang3.tuple.ImmutableTriple;
@@ -23,7 +23,7 @@ public class CuriosOn extends CuriosOff {
     public boolean openBackpack(Player player){ // TODO
         Optional<ImmutableTriple<String,Integer,ItemStack>> optional = CuriosApi.getCuriosHelper().findEquippedCurio(item -> item.getItem() instanceof BackpackItem, player);
         optional.ifPresent(triple ->
-            CommonProxy.openBackpackInventory(triple.getRight(), player, -1)
+            PackedUpCommon.openBackpackInventory(triple.getRight(), player, -1)
         );
         return optional.isPresent();
     }
