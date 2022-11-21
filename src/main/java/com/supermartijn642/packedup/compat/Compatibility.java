@@ -14,5 +14,4 @@ public class Compatibility {
     public static void init(){
         CURIOS = ModList.get().isLoaded("curios") ? new CuriosOn() : new CuriosOff();
     }
-
 }

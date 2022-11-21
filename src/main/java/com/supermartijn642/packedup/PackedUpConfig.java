@@ -1,13 +1,14 @@
 package com.supermartijn642.packedup;
 
-import com.supermartijn642.configlib.ModConfigBuilder;
+import com.supermartijn642.configlib.api.ConfigBuilders;
+import com.supermartijn642.configlib.api.IConfigBuilder;
 
 import java.util.function.Supplier;
 
 /**
  * Created 3/9/2020 by SuperMartijn642
  */
-public class PUConfig {
+public class PackedUpConfig {
 
     public static Supplier<Boolean> allowBagInBag;
     public static Supplier<Integer> maxBagInBagLayer;
@@ -37,7 +38,7 @@ public class PUConfig {
     public static Supplier<Integer> obsidianColumns;
 
     static{
-        ModConfigBuilder builder = new ModConfigBuilder("packedup");
+        IConfigBuilder builder = ConfigBuilders.newTomlConfig("packedup", null, false);
 
         builder.push("General");
         allowBagInBag = builder.comment("Can backpacks be put inside other backpacks?").define("allowBagInBag", true);
@@ -86,5 +87,4 @@ public class PUConfig {
 
         builder.build();
     }
-
 }

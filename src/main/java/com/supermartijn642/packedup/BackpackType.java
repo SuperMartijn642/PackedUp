@@ -1,19 +1,31 @@
 package com.supermartijn642.packedup;
 
 import java.util.Locale;
+import java.util.function.Supplier;
 
 /**
  * Created 2/7/2020 by SuperMartijn642
  */
 public enum BackpackType {
 
-    BASIC(3, 9), IRON(4, 9), COPPER(4, 9), SILVER(5, 9), GOLD(5, 9), DIAMOND(7, 9), OBSIDIAN(8, 9);
+    BASIC(() -> PackedUpConfig.basicEnable.get(), 3, 9, () -> PackedUpConfig.basicRows.get(), () -> PackedUpConfig.basicColumns.get()),
+    IRON(() -> PackedUpConfig.ironEnable.get(), 4, 9, () -> PackedUpConfig.ironRows.get(), () -> PackedUpConfig.ironColumns.get()),
+    COPPER(() -> PackedUpConfig.copperEnable.get(), 4, 9, () -> PackedUpConfig.copperRows.get(), () -> PackedUpConfig.copperColumns.get()),
+    SILVER(() -> PackedUpConfig.silverEnable.get(), 5, 9, () -> PackedUpConfig.silverRows.get(), () -> PackedUpConfig.silverColumns.get()),
+    GOLD(() -> PackedUpConfig.goldEnable.get(), 5, 9, () -> PackedUpConfig.goldRows.get(), () -> PackedUpConfig.goldColumns.get()),
+    DIAMOND(() -> PackedUpConfig.diamondEnable.get(), 7, 9, () -> PackedUpConfig.diamondRows.get(), () -> PackedUpConfig.diamondColumns.get()),
+    OBSIDIAN(() -> PackedUpConfig.obsidianEnable.get(), 8, 9, () -> PackedUpConfig.obsidianRows.get(), () -> PackedUpConfig.obsidianColumns.get());
 
+    private final Supplier<Boolean> enabled;
     private final int defaultRows, defaultColumns;
+    private final Supplier<Integer> rows, columns;
 
-    BackpackType(int defaultRows, int defaultColumns){
+    BackpackType(Supplier<Boolean> enabled, int defaultRows, int defaultColumns, Supplier<Integer> rows, Supplier<Integer> columns){
+        this.enabled = enabled;
         this.defaultRows = defaultRows;
         this.defaultColumns = defaultColumns;
+        this.rows = rows;
+        this.columns = columns;
     }
 
     public String getRegistryName(){
@@ -29,63 +41,15 @@ public enum BackpackType {
     }
 
     public boolean isEnabled(){
-        switch(this){
-            case BASIC:
-                return PUConfig.basicEnable.get();
-            case IRON:
-                return PUConfig.ironEnable.get();
-            case COPPER:
-                return PUConfig.copperEnable.get();
-            case SILVER:
-                return PUConfig.silverEnable.get();
-            case GOLD:
-                return PUConfig.goldEnable.get();
-            case DIAMOND:
-                return PUConfig.diamondEnable.get();
-            case OBSIDIAN:
-                return PUConfig.obsidianEnable.get();
-        }
-        return false;
+        return this.enabled.get();
     }
 
     public int getRows(){
-        switch(this){
-            case BASIC:
-                return PUConfig.basicRows.get();
-            case IRON:
-                return PUConfig.ironRows.get();
-            case COPPER:
-                return PUConfig.copperRows.get();
-            case SILVER:
-                return PUConfig.silverRows.get();
-            case GOLD:
-                return PUConfig.goldRows.get();
-            case DIAMOND:
-                return PUConfig.diamondRows.get();
-            case OBSIDIAN:
-                return PUConfig.obsidianRows.get();
-        }
-        return 0;
+        return this.rows.get();
     }
 
     public int getColumns(){
-        switch(this){
-            case BASIC:
-                return PUConfig.basicColumns.get();
-            case IRON:
-                return PUConfig.ironColumns.get();
-            case COPPER:
-                return PUConfig.copperColumns.get();
-            case SILVER:
-                return PUConfig.silverColumns.get();
-            case GOLD:
-                return PUConfig.goldColumns.get();
-            case DIAMOND:
-                return PUConfig.diamondColumns.get();
-            case OBSIDIAN:
-                return PUConfig.obsidianColumns.get();
-        }
-        return 0;
+        return this.columns.get();
     }
 
     public int getSlots(){
