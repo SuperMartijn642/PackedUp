@@ -21,21 +21,22 @@ import java.util.function.Supplier;
 public class BackpackStorageManager {
 
     private static File directory;
+    private static long lastSaveTimestamp = 0;
     private static final HashMap<Integer,BackpackInventory> inventories = new HashMap<>();
     private static int inventoryIndex = 0;
 
-    public static final Supplier<Integer> maxLayers = () -> PUConfig.allowBagInBag.get() ? PUConfig.maxBagInBagLayer.get() : 0;
+    public static final Supplier<Integer> maxLayers = () -> PackedUpConfig.allowBagInBag.get() ? PackedUpConfig.maxBagInBagLayer.get() : 0;
 
     @SubscribeEvent
-    public static void onWorldSave(WorldEvent.Save event){
-        if(event.getWorld().isClientSide() || !(event.getWorld() instanceof World) || ((World)event.getWorld()).getDimension().getType() != DimensionType.OVERWORLD)
+    public static void onLevelSave(WorldEvent.Save event){
+        if(event.getWorld().isClientSide() || !(event.getWorld() instanceof World) || (event.getWorld().getDimension().getType() != DimensionType.OVERWORLD && System.currentTimeMillis() - lastSaveTimestamp < 30000))
             return;
         save();
     }
 
     @SubscribeEvent
-    public static void onWorldLoad(WorldEvent.Load event){
-        if(event.getWorld().isClientSide() || !(event.getWorld() instanceof World) || ((World)event.getWorld()).getDimension().getType() != DimensionType.OVERWORLD)
+    public static void onLevelLoad(WorldEvent.Load event){
+        if(event.getWorld().isClientSide() || !(event.getWorld() instanceof World) || event.getWorld().getDimension().getType() != DimensionType.OVERWORLD)
             return;
         ServerWorld world = (ServerWorld)event.getWorld();
         directory = new File(world.getLevelStorage().getFolder(), "packedup/backpacks");
@@ -65,6 +66,7 @@ public class BackpackStorageManager {
         directory.mkdirs();
         for(int i : inventories.keySet())
             inventories.get(i).save(new File(directory, "inventory" + i + ".nbt"));
+        lastSaveTimestamp = System.currentTimeMillis();
     }
 
     public static void load(){
@@ -183,5 +185,4 @@ public class BackpackStorageManager {
             inv.layer = getBagsThisBagIsIn(id, inv.bagsThisBagIsIn);
         }
     }
-
 }

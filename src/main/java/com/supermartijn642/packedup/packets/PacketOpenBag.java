@@ -3,7 +3,7 @@ package com.supermartijn642.packedup.packets;
 import com.supermartijn642.core.network.BasePacket;
 import com.supermartijn642.core.network.PacketContext;
 import com.supermartijn642.packedup.BackpackItem;
-import com.supermartijn642.packedup.CommonProxy;
+import com.supermartijn642.packedup.PackedUpCommon;
 import com.supermartijn642.packedup.compat.Compatibility;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -35,7 +35,7 @@ public class PacketOpenBag implements BasePacket {
                 for(int i = 0; i < inventory.getContainerSize(); i++){
                     ItemStack stack = inventory.getItem(i);
                     if(stack.getItem() instanceof BackpackItem)
-                        CommonProxy.openBackpackInventory(stack, player, i);
+                        PackedUpCommon.openBackpackInventory(stack, player, i);
                 }
             }
         }
