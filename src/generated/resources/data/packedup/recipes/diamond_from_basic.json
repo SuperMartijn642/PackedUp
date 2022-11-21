@@ -1,0 +1,66 @@
+{
+  "type": "supermartijn642corelib:conditional",
+  "conditions": [
+    {
+      "backpack": "basic",
+      "type": "packedup:is_backpack_enabled"
+    },
+    {
+      "condition": {
+        "backpack": "iron",
+        "type": "packedup:is_backpack_enabled"
+      },
+      "type": "supermartijn642corelib:not"
+    },
+    {
+      "condition": {
+        "backpack": "copper",
+        "type": "packedup:is_backpack_enabled"
+      },
+      "type": "supermartijn642corelib:not"
+    },
+    {
+      "condition": {
+        "backpack": "silver",
+        "type": "packedup:is_backpack_enabled"
+      },
+      "type": "supermartijn642corelib:not"
+    },
+    {
+      "condition": {
+        "backpack": "gold",
+        "type": "packedup:is_backpack_enabled"
+      },
+      "type": "supermartijn642corelib:not"
+    },
+    {
+      "backpack": "diamond",
+      "type": "packedup:is_backpack_enabled"
+    }
+  ],
+  "recipe": {
+    "type": "packedup:upgrade_backpack",
+    "pattern": [
+      "ABA",
+      "ACA",
+      "DDD"
+    ],
+    "key": {
+      "A": {
+        "tag": "forge:gems/diamond"
+      },
+      "B": {
+        "tag": "forge:leather"
+      },
+      "C": {
+        "item": "packedup:basicbackpack"
+      },
+      "D": {
+        "tag": "forge:glass"
+      }
+    },
+    "result": {
+      "item": "packedup:diamondbackpack"
+    }
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "conditions": [
+    {
+      "backpack": "copper",
+      "type": "packedup:is_backpack_enabled"
+    },
+    {
+      "backpack": "silver",
+      "type": "packedup:is_backpack_enabled"
+    }
+  ],
+  "parent": "minecraft:recipes/root",
+  "display": {
+    "icon": {
+      "item": "packedup:silverbackpack"
+    },
+    "title": {
+      "translate": "packedup.advancement.recipes/packedup/silver_from_copper.title"
+    },
+    "description": {
+      "translate": "packedup.advancement.recipes/packedup/silver_from_copper.description"
+    },
+    "frame": "task",
+    "show_toast": false,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "criteria": {
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "packedup:silver_from_copper"
+      }
+    },
+    "recipe_condition": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "packedup:copperbackpack"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "recipe_condition"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "packedup:silver_from_copper"
+    ]
+  }
+}

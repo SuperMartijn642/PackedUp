@@ -1,0 +1,76 @@
+{
+  "type": "supermartijn642corelib:conditional",
+  "conditions": [
+    {
+      "condition": {
+        "backpack": "basic",
+        "type": "packedup:is_backpack_enabled"
+      },
+      "type": "supermartijn642corelib:not"
+    },
+    {
+      "condition": {
+        "backpack": "iron",
+        "type": "packedup:is_backpack_enabled"
+      },
+      "type": "supermartijn642corelib:not"
+    },
+    {
+      "condition": {
+        "backpack": "copper",
+        "type": "packedup:is_backpack_enabled"
+      },
+      "type": "supermartijn642corelib:not"
+    },
+    {
+      "condition": {
+        "backpack": "silver",
+        "type": "packedup:is_backpack_enabled"
+      },
+      "type": "supermartijn642corelib:not"
+    },
+    {
+      "condition": {
+        "backpack": "gold",
+        "type": "packedup:is_backpack_enabled"
+      },
+      "type": "supermartijn642corelib:not"
+    },
+    {
+      "condition": {
+        "backpack": "diamond",
+        "type": "packedup:is_backpack_enabled"
+      },
+      "type": "supermartijn642corelib:not"
+    },
+    {
+      "backpack": "obsidian",
+      "type": "packedup:is_backpack_enabled"
+    }
+  ],
+  "recipe": {
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+      "ABA",
+      "CDC",
+      "CCC"
+    ],
+    "key": {
+      "A": {
+        "tag": "forge:leather"
+      },
+      "B": {
+        "tag": "forge:string"
+      },
+      "C": {
+        "tag": "forge:obsidian"
+      },
+      "D": {
+        "tag": "forge:chests/wooden"
+      }
+    },
+    "result": {
+      "item": "packedup:obsidianbackpack"
+    }
+  }
+}

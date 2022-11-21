@@ -1,0 +1,60 @@
+{
+  "conditions": [
+    {
+      "condition": {
+        "backpack": "basic",
+        "type": "packedup:is_backpack_enabled"
+      },
+      "type": "supermartijn642corelib:not"
+    },
+    {
+      "backpack": "iron",
+      "type": "packedup:is_backpack_enabled"
+    }
+  ],
+  "parent": "minecraft:recipes/root",
+  "display": {
+    "icon": {
+      "item": "packedup:ironbackpack"
+    },
+    "title": {
+      "translate": "packedup.advancement.recipes/packedup/iron_from_chest.title"
+    },
+    "description": {
+      "translate": "packedup.advancement.recipes/packedup/iron_from_chest.description"
+    },
+    "frame": "task",
+    "show_toast": false,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "criteria": {
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "packedup:iron_from_chest"
+      }
+    },
+    "recipe_condition": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:chests/wooden"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "recipe_condition"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "packedup:iron_from_chest"
+    ]
+  }
+}

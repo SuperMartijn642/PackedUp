@@ -1,0 +1,41 @@
+{
+  "type": "supermartijn642corelib:conditional",
+  "conditions": [
+    {
+      "condition": {
+        "backpack": "basic",
+        "type": "packedup:is_backpack_enabled"
+      },
+      "type": "supermartijn642corelib:not"
+    },
+    {
+      "backpack": "iron",
+      "type": "packedup:is_backpack_enabled"
+    }
+  ],
+  "recipe": {
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+      "ABA",
+      "CDC",
+      "CCC"
+    ],
+    "key": {
+      "A": {
+        "tag": "forge:leather"
+      },
+      "B": {
+        "tag": "forge:string"
+      },
+      "C": {
+        "tag": "forge:ingots/iron"
+      },
+      "D": {
+        "tag": "forge:chests/wooden"
+      }
+    },
+    "result": {
+      "item": "packedup:ironbackpack"
+    }
+  }
+}
