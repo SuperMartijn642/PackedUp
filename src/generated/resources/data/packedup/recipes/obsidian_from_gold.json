@@ -1,0 +1,42 @@
+{
+  "type": "supermartijn642corelib:conditional",
+  "conditions": [
+    {
+      "backpack": "gold",
+      "type": "packedup:is_backpack_enabled"
+    },
+    {
+      "condition": {
+        "backpack": "diamond",
+        "type": "packedup:is_backpack_enabled"
+      },
+      "type": "supermartijn642corelib:not"
+    },
+    {
+      "backpack": "obsidian",
+      "type": "packedup:is_backpack_enabled"
+    }
+  ],
+  "recipe": {
+    "type": "packedup:upgrade_backpack",
+    "pattern": [
+      "ABA",
+      "ACA",
+      "AAA"
+    ],
+    "key": {
+      "A": {
+        "tag": "forge:obsidian"
+      },
+      "B": {
+        "tag": "forge:ingots/gold"
+      },
+      "C": {
+        "item": "packedup:goldbackpack"
+      }
+    },
+    "result": {
+      "item": "packedup:obsidianbackpack"
+    }
+  }
+}

@@ -51,6 +51,10 @@ public class BackpackInventory implements IItemHandlerModifiable {
         this.inventoryIndex = inventoryIndex;
     }
 
+    public int getInventoryIndex(){
+        return this.inventoryIndex;
+    }
+
     @Override
     public int getSlots(){
         return this.stacks.size();
@@ -120,7 +124,7 @@ public class BackpackInventory implements IItemHandlerModifiable {
 
     @Override
     public boolean isItemValid(int slot, @Nonnull ItemStack stack){
-        if(stack.getItem() instanceof BackpackItem && !isBagAllowed(stack))
+        if(stack.getItem() instanceof BackpackItem && !this.isBagAllowed(stack))
             return false;
 
         if(stack.getItem() instanceof BlockItem && ((BlockItem)stack.getItem()).getBlock() instanceof ShulkerBoxBlock && stack.hasTag()){
