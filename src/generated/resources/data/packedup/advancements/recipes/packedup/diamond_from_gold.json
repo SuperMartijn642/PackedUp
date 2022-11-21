@@ -1,0 +1,57 @@
+{
+  "conditions": [
+    {
+      "backpack": "gold",
+      "type": "packedup:is_backpack_enabled"
+    },
+    {
+      "backpack": "diamond",
+      "type": "packedup:is_backpack_enabled"
+    }
+  ],
+  "parent": "minecraft:recipes/root",
+  "display": {
+    "icon": {
+      "item": "packedup:diamondbackpack"
+    },
+    "title": {
+      "translate": "packedup.advancement.recipes/packedup/diamond_from_gold.title"
+    },
+    "description": {
+      "translate": "packedup.advancement.recipes/packedup/diamond_from_gold.description"
+    },
+    "frame": "task",
+    "show_toast": false,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "criteria": {
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "packedup:diamond_from_gold"
+      }
+    },
+    "recipe_condition": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "packedup:goldbackpack"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "recipe_condition"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "packedup:diamond_from_gold"
+    ]
+  }
+}
