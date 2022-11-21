@@ -1,0 +1,59 @@
+{
+  "conditions": [
+    {
+      "backpack": "diamond",
+      "type": "packedup:is_backpack_enabled"
+    },
+    {
+      "backpack": "obsidian",
+      "type": "packedup:is_backpack_enabled"
+    }
+  ],
+  "parent": "minecraft:recipes/root",
+  "display": {
+    "icon": {
+      "item": "packedup:obsidianbackpack"
+    },
+    "title": {
+      "translate": "packedup.advancement.recipes/packedup/obsidian_from_diamond.title"
+    },
+    "description": {
+      "translate": "packedup.advancement.recipes/packedup/obsidian_from_diamond.description"
+    },
+    "frame": "task",
+    "show_toast": false,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "criteria": {
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "packedup:obsidian_from_diamond"
+      }
+    },
+    "recipe_condition": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "packedup:diamondbackpack"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "recipe_condition"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "packedup:obsidian_from_diamond"
+    ]
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "parent": "packedup:diamond_backpack",
+  "display": {
+    "icon": {
+      "item": "packedup:obsidianbackpack"
+    },
+    "title": {
+      "translate": "packedup.advancement.obsidian_backpack.title"
+    },
+    "description": {
+      "translate": "packedup.advancement.obsidian_backpack.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "has_backpack": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "packedup:obsidianbackpack"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_backpack"
+    ]
+  ]
+}

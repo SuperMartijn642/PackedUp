@@ -1,0 +1,35 @@
+{
+  "type": "supermartijn642corelib:conditional",
+  "conditions": [
+    {
+      "backpack": "iron",
+      "type": "packedup:is_backpack_enabled"
+    },
+    {
+      "backpack": "gold",
+      "type": "packedup:is_backpack_enabled"
+    }
+  ],
+  "recipe": {
+    "type": "packedup:upgrade_backpack",
+    "pattern": [
+      "ABA",
+      "ACA",
+      "AAA"
+    ],
+    "key": {
+      "A": {
+        "tag": "forge:ingots/gold"
+      },
+      "B": {
+        "tag": "forge:ingots/iron"
+      },
+      "C": {
+        "item": "packedup:ironbackpack"
+      }
+    },
+    "result": {
+      "item": "packedup:goldbackpack"
+    }
+  }
+}
