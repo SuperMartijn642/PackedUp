@@ -1,0 +1,51 @@
+{
+  "type": "packedup:upgrade_backpack",
+  "pattern": [
+    "ABA",
+    "ACA",
+    "AAA"
+  ],
+  "key": {
+    "A": {
+      "type": "forge:ore_dict",
+      "ore": "ingotGold"
+    },
+    "B": {
+      "type": "forge:ore_dict",
+      "ore": "leather"
+    },
+    "C": [
+      {
+        "type": "minecraft:item",
+        "item": "packedup:basicbackpack"
+      }
+    ]
+  },
+  "result": {
+    "item": "packedup:goldbackpack"
+  },
+  "conditions": [
+    {
+      "type": "packedup:is_backpack_enabled",
+      "backpack": "basic"
+    },
+    {
+      "type": "supermartijn642corelib:not",
+      "condition": {
+        "backpack": "iron",
+        "type": "packedup:is_backpack_enabled"
+      }
+    },
+    {
+      "type": "supermartijn642corelib:not",
+      "condition": {
+        "backpack": "copper",
+        "type": "packedup:is_backpack_enabled"
+      }
+    },
+    {
+      "type": "packedup:is_backpack_enabled",
+      "backpack": "gold"
+    }
+  ]
+}

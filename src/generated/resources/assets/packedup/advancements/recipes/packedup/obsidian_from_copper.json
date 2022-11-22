@@ -1,0 +1,79 @@
+{
+  "conditions": [
+    {
+      "type": "packedup:is_backpack_enabled",
+      "backpack": "copper"
+    },
+    {
+      "type": "supermartijn642corelib:not",
+      "condition": {
+        "backpack": "silver",
+        "type": "packedup:is_backpack_enabled"
+      }
+    },
+    {
+      "type": "supermartijn642corelib:not",
+      "condition": {
+        "backpack": "gold",
+        "type": "packedup:is_backpack_enabled"
+      }
+    },
+    {
+      "type": "supermartijn642corelib:not",
+      "condition": {
+        "backpack": "diamond",
+        "type": "packedup:is_backpack_enabled"
+      }
+    },
+    {
+      "type": "packedup:is_backpack_enabled",
+      "backpack": "obsidian"
+    }
+  ],
+  "parent": "minecraft:recipes/root",
+  "display": {
+    "icon": {
+      "item": "packedup:obsidianbackpack"
+    },
+    "title": {
+      "translate": "packedup.advancement.recipes/packedup/obsidian_from_copper.title"
+    },
+    "description": {
+      "translate": "packedup.advancement.recipes/packedup/obsidian_from_copper.description"
+    },
+    "frame": "task",
+    "show_toast": false,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "criteria": {
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "packedup:obsidian_from_copper"
+      }
+    },
+    "recipe_condition": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "packedup:copperbackpack",
+            "data": 0
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "recipe_condition"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "packedup:obsidian_from_copper"
+    ]
+  }
+}

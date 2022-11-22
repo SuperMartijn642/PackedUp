@@ -1,0 +1,77 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "ABA",
+    "CDC",
+    "CCC"
+  ],
+  "key": {
+    "A": {
+      "type": "forge:ore_dict",
+      "ore": "leather"
+    },
+    "B": {
+      "type": "forge:ore_dict",
+      "ore": "string"
+    },
+    "C": {
+      "type": "forge:ore_dict",
+      "ore": "obsidian"
+    },
+    "D": {
+      "type": "forge:ore_dict",
+      "ore": "chestWood"
+    }
+  },
+  "result": {
+    "item": "packedup:obsidianbackpack"
+  },
+  "conditions": [
+    {
+      "type": "supermartijn642corelib:not",
+      "condition": {
+        "backpack": "basic",
+        "type": "packedup:is_backpack_enabled"
+      }
+    },
+    {
+      "type": "supermartijn642corelib:not",
+      "condition": {
+        "backpack": "iron",
+        "type": "packedup:is_backpack_enabled"
+      }
+    },
+    {
+      "type": "supermartijn642corelib:not",
+      "condition": {
+        "backpack": "copper",
+        "type": "packedup:is_backpack_enabled"
+      }
+    },
+    {
+      "type": "supermartijn642corelib:not",
+      "condition": {
+        "backpack": "silver",
+        "type": "packedup:is_backpack_enabled"
+      }
+    },
+    {
+      "type": "supermartijn642corelib:not",
+      "condition": {
+        "backpack": "gold",
+        "type": "packedup:is_backpack_enabled"
+      }
+    },
+    {
+      "type": "supermartijn642corelib:not",
+      "condition": {
+        "backpack": "diamond",
+        "type": "packedup:is_backpack_enabled"
+      }
+    },
+    {
+      "type": "packedup:is_backpack_enabled",
+      "backpack": "obsidian"
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "type": "packedup:upgrade_backpack",
+  "pattern": [
+    "ABA",
+    "ACA",
+    "AAA"
+  ],
+  "key": {
+    "A": {
+      "type": "forge:ore_dict",
+      "ore": "obsidian"
+    },
+    "B": {
+      "type": "forge:ore_dict",
+      "ore": "ingotGold"
+    },
+    "C": [
+      {
+        "type": "minecraft:item",
+        "item": "packedup:goldbackpack"
+      }
+    ]
+  },
+  "result": {
+    "item": "packedup:obsidianbackpack"
+  },
+  "conditions": [
+    {
+      "type": "packedup:is_backpack_enabled",
+      "backpack": "gold"
+    },
+    {
+      "type": "supermartijn642corelib:not",
+      "condition": {
+        "backpack": "diamond",
+        "type": "packedup:is_backpack_enabled"
+      }
+    },
+    {
+      "type": "packedup:is_backpack_enabled",
+      "backpack": "obsidian"
+    }
+  ]
+}

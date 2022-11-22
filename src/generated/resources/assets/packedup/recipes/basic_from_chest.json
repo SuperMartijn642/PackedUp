@@ -1,0 +1,35 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "ABA",
+    "CDC",
+    "CCC"
+  ],
+  "key": {
+    "A": {
+      "type": "forge:ore_dict",
+      "ore": "stickWood"
+    },
+    "B": {
+      "type": "forge:ore_dict",
+      "ore": "string"
+    },
+    "C": {
+      "type": "forge:ore_dict",
+      "ore": "leather"
+    },
+    "D": {
+      "type": "forge:ore_dict",
+      "ore": "chestWood"
+    }
+  },
+  "result": {
+    "item": "packedup:basicbackpack"
+  },
+  "conditions": [
+    {
+      "type": "packedup:is_backpack_enabled",
+      "backpack": "basic"
+    }
+  ]
+}

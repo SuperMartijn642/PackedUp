@@ -1,92 +1,114 @@
 package com.supermartijn642.packedup;
 
+import com.supermartijn642.core.CommonUtils;
+import com.supermartijn642.core.gui.BaseContainerType;
+import com.supermartijn642.core.item.CreativeItemGroup;
 import com.supermartijn642.core.network.PacketChannel;
-import com.supermartijn642.packedup.integration.BaublesActive;
-import com.supermartijn642.packedup.integration.BaublesInactive;
-import com.supermartijn642.packedup.packets.PacketBackpackContainer;
+import com.supermartijn642.core.registry.GeneratorRegistrationHandler;
+import com.supermartijn642.core.registry.RegistrationHandler;
+import com.supermartijn642.core.registry.RegistryEntryAcceptor;
+import com.supermartijn642.packedup.compat.Compatibility;
+import com.supermartijn642.packedup.generators.*;
 import com.supermartijn642.packedup.packets.PacketOpenBag;
 import com.supermartijn642.packedup.packets.PacketRename;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.common.Loader;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.relauncher.Side;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created 4/8/2020 by SuperMartijn642
  */
-@Mod(modid = PackedUp.MODID, name = PackedUp.NAME, version = PackedUp.VERSION, dependencies = PackedUp.DEPENDENCIES)
+@Mod(modid = "@mod_id@", name = "@mod_name@", version = "@mod_version@", dependencies = "required-after:forge@@forge_dependency@;required-after:supermartijn642corelib@@core_library_dependency@;required-after:supermartijn642configlib@@config_library_dependency@")
 public class PackedUp {
-
-    public static final String MODID = "packedup";
-    public static final String NAME = "Packed Up";
-    public static final String VERSION = "1.0.25";
-    public static final String DEPENDENCIES = "required-after:supermartijn642corelib@[1.0.12,);required-after:supermartijn642configlib@[1.0.9,)";
-
-    @Mod.Instance
-    public static PackedUp instance;
 
     public static final PacketChannel CHANNEL = PacketChannel.create("packedup");
 
-    public static BaublesInactive baubles;
+    @RegistryEntryAcceptor(namespace = "packedup", identifier = "container", registry = RegistryEntryAcceptor.Registry.MENU_TYPES)
+    public static BaseContainerType<BackpackContainer> container;
 
-    public static final CreativeTabs ITEM_GROUP = new CreativeTabs("packedup") {
-        @Override
-        public ItemStack getTabIconItem(){
-            return new ItemStack(basicbackpack);
-        }
-    };
-
-    @GameRegistry.ObjectHolder("packedup:basicbackpack")
+    @RegistryEntryAcceptor(namespace = "packedup", identifier = "basicbackpack", registry = RegistryEntryAcceptor.Registry.ITEMS)
     public static BackpackItem basicbackpack;
-    @GameRegistry.ObjectHolder("packedup:ironbackpack")
+    @RegistryEntryAcceptor(namespace = "packedup", identifier = "ironbackpack", registry = RegistryEntryAcceptor.Registry.ITEMS)
     public static BackpackItem ironbackpack;
-    @GameRegistry.ObjectHolder("packedup:copperbackpack")
+    @RegistryEntryAcceptor(namespace = "packedup", identifier = "copperbackpack", registry = RegistryEntryAcceptor.Registry.ITEMS)
     public static BackpackItem copperbackpack;
-    @GameRegistry.ObjectHolder("packedup:silverbackpack")
+    @RegistryEntryAcceptor(namespace = "packedup", identifier = "silverbackpack", registry = RegistryEntryAcceptor.Registry.ITEMS)
     public static BackpackItem silverbackpack;
-    @GameRegistry.ObjectHolder("packedup:goldbackpack")
+    @RegistryEntryAcceptor(namespace = "packedup", identifier = "goldbackpack", registry = RegistryEntryAcceptor.Registry.ITEMS)
     public static BackpackItem goldbackpack;
-    @GameRegistry.ObjectHolder("packedup:diamondbackpack")
+    @RegistryEntryAcceptor(namespace = "packedup", identifier = "diamondbackpack", registry = RegistryEntryAcceptor.Registry.ITEMS)
     public static BackpackItem diamondbackpack;
-    @GameRegistry.ObjectHolder("packedup:obsidianbackpack")
+    @RegistryEntryAcceptor(namespace = "packedup", identifier = "obsidianbackpack", registry = RegistryEntryAcceptor.Registry.ITEMS)
     public static BackpackItem obsidianbackpack;
+
+    public static final CreativeItemGroup ITEM_GROUP = CreativeItemGroup.create("packedup", () -> basicbackpack);
+
+    public PackedUp(){
+        CHANNEL.registerMessage(PacketRename.class, PacketRename::new, true);
+        CHANNEL.registerMessage(PacketOpenBag.class, PacketOpenBag::new, true);
+
+        register();
+        if(CommonUtils.getEnvironmentSide().isClient())
+            PackedUpClient.register();
+        registerGenerators();
+    }
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent e){
-        CHANNEL.registerMessage(PacketRename.class, PacketRename::new, true);
-        CHANNEL.registerMessage(PacketOpenBag.class, PacketOpenBag::new, true);
-        CHANNEL.registerMessage(PacketBackpackContainer.class, PacketBackpackContainer::new, true);
-
-        baubles = Loader.isModLoaded("baubles") ? new BaublesActive() : new BaublesInactive();
+        Compatibility.init();
     }
 
-    @Mod.EventHandler
-    public void init(FMLInitializationEvent e){
-        MinecraftForge.EVENT_BUS.register(BackpackStorageManager.class);
-        NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
+    private static void register(){
+        RegistrationHandler handler = RegistrationHandler.get("packedup");
 
-        if(FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT)
-            ClientProxy.init();
+        // Backpack items
+        for(BackpackType type : BackpackType.values())
+            handler.registerItem(type.getRegistryName(), () -> new BackpackItem(type));
+        // Container
+        handler.registerMenuType("container", () -> BaseContainerType.create(
+            (container, data) -> {
+                data.writeInt(container.type.ordinal());
+                data.writeInt(container.bagSlot);
+                data.writeString(ITextComponent.Serializer.componentToJson(container.bagName));
+                BackpackInventory inventory = container.inventory;
+                data.writeInt(inventory.getInventoryIndex());
+                data.writeInt(inventory.bagsInThisBag.size());
+                inventory.bagsInThisBag.forEach(data::writeInt);
+                data.writeInt(inventory.bagsThisBagIsIn.size());
+                inventory.bagsThisBagIsIn.forEach(data::writeInt);
+                data.writeInt(inventory.layer);
+            },
+            (player, data) -> {
+                BackpackType type = BackpackType.values()[data.readInt()];
+                int bagSlot = data.readInt();
+                ITextComponent bagName = ITextComponent.Serializer.jsonToComponent(data.readString(32767));
+                int inventoryIndex = data.readInt();
+                int size = data.readInt();
+                Set<Integer> bagsInThisBag = new HashSet<>(size);
+                for(int i = 0; i < size; i++)
+                    bagsInThisBag.add(data.readInt());
+                size = data.readInt();
+                Set<Integer> bagsThisBagIsIn = new HashSet<>(size);
+                for(int i = 0; i < size; i++)
+                    bagsThisBagIsIn.add(data.readInt());
+                int layer = data.readInt();
+                return new BackpackContainer(player, bagSlot, bagName, inventoryIndex, type, bagsInThisBag, bagsThisBagIsIn, layer);
+            }
+        ));
+        // Backpack enabled recipe condition
+        handler.registerResourceConditionSerializer("is_backpack_enabled", BackpackRecipeCondition.SERIALIZER);
     }
 
-    @Mod.EventBusSubscriber
-    public static class RegistryEvents {
-
-        @SubscribeEvent
-        public static void onItemRegistry(final RegistryEvent.Register<Item> e){
-            for(BackpackType type : BackpackType.values())
-                e.getRegistry().register(new BackpackItem(type));
-        }
+    private static void registerGenerators(){
+        GeneratorRegistrationHandler handler = GeneratorRegistrationHandler.get("packedup");
+        // Register all the generators
+        handler.addGenerator(PackedUpAdvancementGenerator::new);
+        handler.addGenerator(PackedUpLanguageGenerator::new);
+        handler.addGenerator(PackedUpModelGenerator::new);
+        handler.addGenerator(PackedUpRecipeGenerator::new);
+        handler.addGenerator(PackedUpTagGenerator::new);
     }
-
 }

@@ -3,8 +3,8 @@ package com.supermartijn642.packedup.packets;
 import com.supermartijn642.core.network.BasePacket;
 import com.supermartijn642.core.network.PacketContext;
 import com.supermartijn642.packedup.BackpackItem;
-import com.supermartijn642.packedup.CommonProxy;
-import com.supermartijn642.packedup.PackedUp;
+import com.supermartijn642.packedup.PackedUpCommon;
+import com.supermartijn642.packedup.compat.Compatibility;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
@@ -31,11 +31,11 @@ public class PacketOpenBag implements BasePacket {
         EntityPlayer player = context.getSendingPlayer();
         if(player != null){
             InventoryPlayer inventory = player.inventory;
-            if(!PackedUp.baubles.openBackpack(player)){
+            if(!Compatibility.BAUBLES.openBackpack(player)){
                 for(int i = 0; i < inventory.getSizeInventory(); i++){
                     ItemStack stack = inventory.getStackInSlot(i);
                     if(stack.getItem() instanceof BackpackItem)
-                        CommonProxy.openBackpackInventory(stack, player, i);
+                        PackedUpCommon.openBackpackInventory(stack, player, i);
                 }
             }
         }

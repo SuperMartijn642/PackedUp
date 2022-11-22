@@ -1,0 +1,41 @@
+{
+  "type": "packedup:upgrade_backpack",
+  "pattern": [
+    "ABA",
+    "ACA",
+    "DDD"
+  ],
+  "key": {
+    "A": {
+      "type": "forge:ore_dict",
+      "ore": "gemDiamond"
+    },
+    "B": {
+      "type": "forge:ore_dict",
+      "ore": "ingotGold"
+    },
+    "C": [
+      {
+        "type": "minecraft:item",
+        "item": "packedup:goldbackpack"
+      }
+    ],
+    "D": {
+      "type": "forge:ore_dict",
+      "ore": "blockGlass"
+    }
+  },
+  "result": {
+    "item": "packedup:diamondbackpack"
+  },
+  "conditions": [
+    {
+      "type": "packedup:is_backpack_enabled",
+      "backpack": "gold"
+    },
+    {
+      "type": "packedup:is_backpack_enabled",
+      "backpack": "diamond"
+    }
+  ]
+}

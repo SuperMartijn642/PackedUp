@@ -1,0 +1,48 @@
+{
+  "parent": "packedup:basic_backpack",
+  "display": {
+    "icon": {
+      "item": "packedup:ironbackpack"
+    },
+    "title": {
+      "translate": "packedup.advancement.iron_or_copper_backpack.title"
+    },
+    "description": {
+      "translate": "packedup.advancement.iron_or_copper_backpack.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "has_iron_backpack": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "packedup:ironbackpack",
+            "data": 0
+          }
+        ]
+      }
+    },
+    "has_copper_backpack": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "packedup:copperbackpack",
+            "data": 0
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_iron_backpack",
+      "has_copper_backpack"
+    ]
+  ]
+}

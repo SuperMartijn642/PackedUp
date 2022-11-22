@@ -28,6 +28,16 @@ public class BackpackInventory implements IItemHandlerModifiable {
     public Set<Integer> bagsThisBagIsDirectlyIn = new HashSet<>();
     public int layer;
 
+    public BackpackInventory(boolean remote, int inventoryIndex, int slots, Set<Integer> bagsInThisBag, Set<Integer> bagsThisBagIsIn, int layer){
+        this.remote = remote;
+        this.inventoryIndex = inventoryIndex;
+        for(int a = 0; a < slots; a++)
+            this.stacks.add(ItemStack.EMPTY);
+        this.bagsInThisBag.addAll(bagsInThisBag);
+        this.bagsThisBagIsIn.addAll(bagsThisBagIsIn);
+        this.layer = layer;
+    }
+
     public BackpackInventory(boolean remote, int inventoryIndex, int slots){
         this.remote = remote;
         this.inventoryIndex = inventoryIndex;
@@ -38,6 +48,10 @@ public class BackpackInventory implements IItemHandlerModifiable {
     public BackpackInventory(boolean remote, int inventoryIndex){
         this.remote = remote;
         this.inventoryIndex = inventoryIndex;
+    }
+
+    public int getInventoryIndex(){
+        return this.inventoryIndex;
     }
 
     @Override
@@ -109,7 +123,7 @@ public class BackpackInventory implements IItemHandlerModifiable {
 
     @Override
     public boolean isItemValid(int slot, @Nonnull ItemStack stack){
-        if(stack.getItem() instanceof BackpackItem && !isBagAllowed(stack))
+        if(stack.getItem() instanceof BackpackItem && !this.isBagAllowed(stack))
             return false;
 
         if(stack.getItem() instanceof ItemBlock && ((ItemBlock)stack.getItem()).getBlock() instanceof BlockShulkerBox && stack.hasTagCompound()){

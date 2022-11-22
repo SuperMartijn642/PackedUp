@@ -1,0 +1,37 @@
+{
+  "type": "packedup:upgrade_backpack",
+  "pattern": [
+    "ABA",
+    "ACA",
+    "AAA"
+  ],
+  "key": {
+    "A": {
+      "type": "forge:ore_dict",
+      "ore": "ingotGold"
+    },
+    "B": {
+      "type": "forge:ore_dict",
+      "ore": "ingotCopper"
+    },
+    "C": [
+      {
+        "type": "minecraft:item",
+        "item": "packedup:copperbackpack"
+      }
+    ]
+  },
+  "result": {
+    "item": "packedup:goldbackpack"
+  },
+  "conditions": [
+    {
+      "type": "packedup:is_backpack_enabled",
+      "backpack": "copper"
+    },
+    {
+      "type": "packedup:is_backpack_enabled",
+      "backpack": "gold"
+    }
+  ]
+}

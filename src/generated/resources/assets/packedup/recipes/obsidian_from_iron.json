@@ -1,0 +1,58 @@
+{
+  "type": "packedup:upgrade_backpack",
+  "pattern": [
+    "ABA",
+    "ACA",
+    "AAA"
+  ],
+  "key": {
+    "A": {
+      "type": "forge:ore_dict",
+      "ore": "obsidian"
+    },
+    "B": {
+      "type": "forge:ore_dict",
+      "ore": "ingotIron"
+    },
+    "C": [
+      {
+        "type": "minecraft:item",
+        "item": "packedup:ironbackpack"
+      }
+    ]
+  },
+  "result": {
+    "item": "packedup:obsidianbackpack"
+  },
+  "conditions": [
+    {
+      "type": "packedup:is_backpack_enabled",
+      "backpack": "iron"
+    },
+    {
+      "type": "supermartijn642corelib:not",
+      "condition": {
+        "backpack": "silver",
+        "type": "packedup:is_backpack_enabled"
+      }
+    },
+    {
+      "type": "supermartijn642corelib:not",
+      "condition": {
+        "backpack": "gold",
+        "type": "packedup:is_backpack_enabled"
+      }
+    },
+    {
+      "type": "supermartijn642corelib:not",
+      "condition": {
+        "backpack": "diamond",
+        "type": "packedup:is_backpack_enabled"
+      }
+    },
+    {
+      "type": "packedup:is_backpack_enabled",
+      "backpack": "obsidian"
+    }
+  ]
+}

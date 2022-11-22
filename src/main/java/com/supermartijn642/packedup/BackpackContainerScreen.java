@@ -2,8 +2,8 @@ package com.supermartijn642.packedup;
 
 import com.supermartijn642.core.ClientUtils;
 import com.supermartijn642.core.TextComponents;
-import com.supermartijn642.core.gui.BaseContainerScreen;
 import com.supermartijn642.core.gui.ScreenUtils;
+import com.supermartijn642.core.gui.widget.BaseContainerWidget;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
@@ -11,67 +11,76 @@ import net.minecraft.util.text.ITextComponent;
 /**
  * Created 2/7/2020 by SuperMartijn642
  */
-public class BackpackContainerScreen extends BaseContainerScreen<BackpackContainer> {
+public class BackpackContainerScreen extends BaseContainerWidget<BackpackContainer> {
 
     private static final ResourceLocation CORNERS = new ResourceLocation("packedup", "textures/corners.png");
 
-    private final String displayName;
+    private ITextComponent displayName;
 
-    public BackpackContainerScreen(BackpackContainer container, ITextComponent name){
-        super(container, name);
-        this.displayName = trimText(name, container.type.getColumns() * 18);
+    public BackpackContainerScreen(){
+        super(0, 0, 0, 0);
     }
 
     @Override
-    protected int sizeX(){
-        return this.container.type.getColumns() > 9 ? 176 + (this.container.type.getColumns() - 9) * 18 : 176;
+    public void initialize(){
+        super.initialize();
+        this.displayName = trimText(this.container.bagName, this.container.type.getColumns() * 18);
     }
 
     @Override
-    protected int sizeY(){
+    public ITextComponent getNarrationMessage(){
+        return this.displayName;
+    }
+
+    @Override
+    public int width(){
+        return this.container.type.getColumns() > 9 ? 176 + (this.container.type.getColumns() - 9 * 18) : 176;
+    }
+
+    @Override
+    public int height(){
         return 112 + 18 * this.container.type.getRows();
     }
 
     @Override
-    protected void addWidgets(){
-    }
-
-    @Override
-    protected void renderBackground(int mouseX, int mouseY){
+    public void renderBackground(int mouseX, int mouseY){
         if(this.container.type.getColumns() == 9)
-            this.drawScreenBackground();
+            ScreenUtils.drawScreenBackground(0, 0, this.width(), this.height());
         else{
-            int width = this.container.type.getColumns() * 18 + 14;
-            int offset = (this.sizeX() - width) / 2;
+            int backpackWidth = this.container.type.getColumns() * 18 + 14;
+            int offset = (this.width() - backpackWidth) / 2;
             int height = this.container.type.getRows() * 18 + 23;
-            ScreenUtils.drawScreenBackground(offset, 0, width, height);
-            ScreenUtils.drawScreenBackground(Math.max(0, (width - 176) / 2f), height - 9, 176, this.sizeY() - height + 9);
+            ScreenUtils.drawScreenBackground(offset, 0, backpackWidth, height);
+            ScreenUtils.drawScreenBackground(Math.max(0, (backpackWidth - 176) / 2f), height - 9, 176, this.height() - height + 9);
             ScreenUtils.bindTexture(CORNERS);
             if(this.container.type.getColumns() > 9){
-                ScreenUtils.drawTexture(Math.max(0, (width - 176) / 2f), height - 3, 3, 3, 0, 0, 0.5f, 0.5f);
-                ScreenUtils.drawTexture(Math.max(0, (width - 176) / 2f) + 176 - 3, height - 3, 3, 3, 0.5f, 0, 0.5f, 0.5f);
-                ScreenUtils.fillRect(Math.max(0, (width - 176) / 2f), height - 9, 176, 6, 0xffC6C6C6);
+                ScreenUtils.drawTexture(Math.max(0, (backpackWidth - 176) / 2f), height - 3, 3, 3, 0, 0, 0.5f, 0.5f);
+                ScreenUtils.drawTexture(Math.max(0, (backpackWidth - 176) / 2f) + 176 - 3, height - 3, 3, 3, 0.5f, 0, 0.5f, 0.5f);
+                ScreenUtils.fillRect(Math.max(0, (backpackWidth - 176) / 2f), height - 9, 176, 6, 0xffC6C6C6);
             }else{
                 ScreenUtils.drawTexture(offset, height - 9, 3, 3, 0, 0.5f, 0.5f, 0.5f);
-                ScreenUtils.drawTexture(offset + width - 3, height - 9, 3, 3, 0.5f, 0.5f, 0.5f, 0.5f);
-                ScreenUtils.fillRect(offset + 3, height - 9, width - 6, 3, 0xffC6C6C6);
+                ScreenUtils.drawTexture(offset + backpackWidth - 3, height - 9, 3, 3, 0.5f, 0.5f, 0.5f, 0.5f);
+                ScreenUtils.fillRect(offset + 3, height - 9, backpackWidth - 6, 3, 0xffC6C6C6);
             }
         }
+        super.renderBackground(mouseX, mouseY);
     }
 
     @Override
-    protected void renderForeground(int mouseX, int mouseY){
+    public void renderForeground(int mouseX, int mouseY){
         int offset = (this.container.type.getColumns() - 9) * 18 / 2;
         ScreenUtils.drawString(this.displayName, 8.0F - Math.min(0, offset), 6.0F, 4210752);
-        ScreenUtils.drawString(ClientUtils.getPlayer().inventory.getDisplayName(), 8.0F + Math.max(0, offset), this.sizeY() - 96 + 3, 4210752);
+        ScreenUtils.drawString(ClientUtils.getPlayer().inventory.getDisplayName(), 8.0F + Math.max(0, offset), this.height() - 96 + 3, 4210752);
+
+        super.renderForeground(mouseX, mouseY);
     }
 
-    private static String trimText(ITextComponent textComponent, int width){
+    private static ITextComponent trimText(ITextComponent textComponent, int width){
         String text = TextComponents.format(textComponent);
         FontRenderer font = ClientUtils.getFontRenderer();
         int length = 0;
         while(length < text.length() && font.getStringWidth(text.substring(0, length + 1) + "...") < width)
             length++;
-        return length < text.length() ? text.substring(0, length) + "..." : text;
+        return TextComponents.string(length < text.length() ? text.substring(0, length) + "..." : text).get();
     }
 }

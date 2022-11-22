@@ -1,0 +1,42 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "ABA",
+    "CDC",
+    "CCC"
+  ],
+  "key": {
+    "A": {
+      "type": "forge:ore_dict",
+      "ore": "leather"
+    },
+    "B": {
+      "type": "forge:ore_dict",
+      "ore": "string"
+    },
+    "C": {
+      "type": "forge:ore_dict",
+      "ore": "ingotIron"
+    },
+    "D": {
+      "type": "forge:ore_dict",
+      "ore": "chestWood"
+    }
+  },
+  "result": {
+    "item": "packedup:ironbackpack"
+  },
+  "conditions": [
+    {
+      "type": "supermartijn642corelib:not",
+      "condition": {
+        "backpack": "basic",
+        "type": "packedup:is_backpack_enabled"
+      }
+    },
+    {
+      "type": "packedup:is_backpack_enabled",
+      "backpack": "iron"
+    }
+  ]
+}

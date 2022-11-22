@@ -1,0 +1,58 @@
+{
+  "conditions": [
+    {
+      "type": "packedup:is_backpack_enabled",
+      "backpack": "basic"
+    },
+    {
+      "type": "packedup:is_backpack_enabled",
+      "backpack": "iron"
+    }
+  ],
+  "parent": "minecraft:recipes/root",
+  "display": {
+    "icon": {
+      "item": "packedup:ironbackpack"
+    },
+    "title": {
+      "translate": "packedup.advancement.recipes/packedup/iron_from_basic.title"
+    },
+    "description": {
+      "translate": "packedup.advancement.recipes/packedup/iron_from_basic.description"
+    },
+    "frame": "task",
+    "show_toast": false,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "criteria": {
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "packedup:iron_from_basic"
+      }
+    },
+    "recipe_condition": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "packedup:basicbackpack",
+            "data": 0
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "recipe_condition"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "packedup:iron_from_basic"
+    ]
+  }
+}

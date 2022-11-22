@@ -1,0 +1,36 @@
+{
+  "parent": "packedup:silver_or_gold_backpack",
+  "display": {
+    "icon": {
+      "item": "packedup:diamondbackpack"
+    },
+    "title": {
+      "translate": "packedup.advancement.diamond_backpack.title"
+    },
+    "description": {
+      "translate": "packedup.advancement.diamond_backpack.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "has_backpack": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "packedup:diamondbackpack",
+            "data": 0
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_backpack"
+    ]
+  ]
+}
