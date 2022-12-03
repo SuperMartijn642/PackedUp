@@ -2,8 +2,18 @@
   "type": "supermartijn642corelib:conditional",
   "conditions": [
     {
-      "backpack": "silver",
-      "type": "packedup:is_backpack_enabled"
+      "conditions": [
+        {
+          "backpack": "silver",
+          "type": "packedup:is_backpack_enabled"
+        },
+        {
+          "registry": "minecraft:item",
+          "tag": "forge:ingots/silver",
+          "type": "supermartijn642corelib:tag_populated"
+        }
+      ],
+      "type": "supermartijn642corelib:and"
     },
     {
       "condition": {
