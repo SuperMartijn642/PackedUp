@@ -1,0 +1,13 @@
+{
+  "item.packedup.basicbackpack": "Plecak",
+  "item.packedup.ironbackpack": "Żelazny plecak",
+  "item.packedup.copperbackpack": "Miedziany plecak",
+  "item.packedup.silverbackpack": "Srebrny plecak",
+  "item.packedup.goldbackpack": "Złoty plecak",
+  "item.packedup.diamondbackpack": "Diamentowy Plecak",
+  "item.packedup.obsidianbackpack": "Obsydianowy Plecak",
+  "gui.packedup.title": "Nazwij plecak",
+  "gui.packedup.name": "Nazwa plecaka:",
+  "keys.category.packedup": "Packed Up",
+  "keys.packedup.openbag": "Otwórz plecak"
+}

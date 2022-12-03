@@ -1,0 +1,13 @@
+{
+  "item.packedup.basicbackpack": "Rucksack",
+  "item.packedup.ironbackpack": "Eisenrucksack",
+  "item.packedup.copperbackpack": "Kupferrucksack",
+  "item.packedup.silverbackpack": "Silberrucksack",
+  "item.packedup.goldbackpack": "Goldrucksack",
+  "item.packedup.diamondbackpack": "Diamantrucksack",
+  "item.packedup.obsidianbackpack": "Obsidianrucksack",
+  "gui.packedup.title": "Name des Rucksacks",
+  "gui.packedup.name": "Name des Rucksacks:",
+  "keys.category.packedup": "Packed Up",
+  "keys.packedup.openbag": "Rucksack Öffnen"
+}
