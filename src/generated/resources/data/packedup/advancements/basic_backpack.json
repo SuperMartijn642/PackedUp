@@ -10,7 +10,7 @@
       "translate": "packedup.advancement.basic_backpack.description"
     },
     "frame": "task",
-    "background": "minecraft:block/black_wool",
+    "background": "minecraft:textures/block/black_wool.png",
     "show_toast": true,
     "announce_to_chat": true,
     "hidden": false
