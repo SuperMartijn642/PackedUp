@@ -1,8 +1,10 @@
 package com.supermartijn642.packedup.generators;
 
-import com.supermartijn642.core.data.condition.NotResourceCondition;
+import com.supermartijn642.core.data.condition.ResourceCondition;
+import com.supermartijn642.core.data.condition.TagPopulatedResourceCondition;
 import com.supermartijn642.core.generator.RecipeGenerator;
 import com.supermartijn642.core.generator.ResourceCache;
+import com.supermartijn642.core.registry.Registries;
 import com.supermartijn642.packedup.BackpackRecipeCondition;
 import com.supermartijn642.packedup.BackpackType;
 import com.supermartijn642.packedup.BackpackUpgradeRecipe;
@@ -25,6 +27,7 @@ public class PackedUpRecipeGenerator extends RecipeGenerator {
     @Override
     public void generate(){
         // Basic
+        ResourceCondition basicEnabled = new BackpackRecipeCondition(BackpackType.BASIC);
         this.shaped("basic_from_chest", PackedUp.basicbackpack)
             .pattern("ABA")
             .pattern("CDC")
@@ -34,9 +37,10 @@ public class PackedUpRecipeGenerator extends RecipeGenerator {
             .input('C', Tags.Items.LEATHER)
             .input('D', Tags.Items.CHESTS_WOODEN)
             .unlockedBy(Tags.Items.CHESTS_WOODEN)
-            .condition(new BackpackRecipeCondition(BackpackType.BASIC));
+            .condition(basicEnabled);
 
         // Iron
+        ResourceCondition ironEnabled = new BackpackRecipeCondition(BackpackType.IRON);
         this.shaped("iron_from_chest", PackedUp.ironbackpack)
             .pattern("ABA")
             .pattern("CDC")
@@ -46,8 +50,8 @@ public class PackedUpRecipeGenerator extends RecipeGenerator {
             .input('C', Tags.Items.INGOTS_IRON)
             .input('D', Tags.Items.CHESTS_WOODEN)
             .unlockedBy(Tags.Items.CHESTS_WOODEN)
-            .condition(new NotResourceCondition(new BackpackRecipeCondition(BackpackType.BASIC)))
-            .condition(new BackpackRecipeCondition(BackpackType.IRON));
+            .condition(basicEnabled.negate())
+            .condition(ironEnabled);
         this.shaped("iron_from_basic", PackedUp.ironbackpack)
             .customSerializer(BackpackUpgradeRecipe.SERIALIZER)
             .pattern("ABA")
@@ -57,11 +61,12 @@ public class PackedUpRecipeGenerator extends RecipeGenerator {
             .input('B', Tags.Items.LEATHER)
             .input('C', PackedUp.basicbackpack)
             .unlockedBy(PackedUp.basicbackpack)
-            .condition(new BackpackRecipeCondition(BackpackType.BASIC))
-            .condition(new BackpackRecipeCondition(BackpackType.IRON));
+            .condition(basicEnabled)
+            .condition(ironEnabled);
 
         // Copper
         ITag<Item> copperIngots = ItemTags.createOptional(new ResourceLocation("forge", "ingots/copper"));
+        ResourceCondition copperEnabled = new BackpackRecipeCondition(BackpackType.COPPER).and(new TagPopulatedResourceCondition(Registries.ITEMS, new ResourceLocation("forge", "ingots/copper")));
         this.shaped("copper_from_chest", PackedUp.copperbackpack)
             .pattern("ABA")
             .pattern("CDC")
@@ -71,8 +76,8 @@ public class PackedUpRecipeGenerator extends RecipeGenerator {
             .input('C', copperIngots)
             .input('D', Tags.Items.CHESTS_WOODEN)
             .unlockedBy(Tags.Items.CHESTS_WOODEN)
-            .condition(new NotResourceCondition(new BackpackRecipeCondition(BackpackType.BASIC)))
-            .condition(new BackpackRecipeCondition(BackpackType.COPPER));
+            .condition(basicEnabled.negate())
+            .condition(copperEnabled);
         this.shaped("copper_from_basic", PackedUp.copperbackpack)
             .customSerializer(BackpackUpgradeRecipe.SERIALIZER)
             .pattern("ABA")
@@ -82,11 +87,12 @@ public class PackedUpRecipeGenerator extends RecipeGenerator {
             .input('B', Tags.Items.LEATHER)
             .input('C', PackedUp.basicbackpack)
             .unlockedBy(PackedUp.basicbackpack)
-            .condition(new BackpackRecipeCondition(BackpackType.BASIC))
-            .condition(new BackpackRecipeCondition(BackpackType.COPPER));
+            .condition(basicEnabled)
+            .condition(copperEnabled);
 
         // Silver
         ITag<Item> silverIngots = ItemTags.createOptional(new ResourceLocation("forge", "ingots/silver"));
+        ResourceCondition silverEnabled = new BackpackRecipeCondition(BackpackType.SILVER).and(new TagPopulatedResourceCondition(Registries.ITEMS, new ResourceLocation("forge", "ingots/silver")));
         this.shaped("silver_from_chest", PackedUp.silverbackpack)
             .pattern("ABA")
             .pattern("CDC")
@@ -96,10 +102,10 @@ public class PackedUpRecipeGenerator extends RecipeGenerator {
             .input('C', silverIngots)
             .input('D', Tags.Items.CHESTS_WOODEN)
             .unlockedBy(Tags.Items.CHESTS_WOODEN)
-            .condition(new NotResourceCondition(new BackpackRecipeCondition(BackpackType.BASIC)))
-            .condition(new NotResourceCondition(new BackpackRecipeCondition(BackpackType.IRON)))
-            .condition(new NotResourceCondition(new BackpackRecipeCondition(BackpackType.COPPER)))
-            .condition(new BackpackRecipeCondition(BackpackType.SILVER));
+            .condition(basicEnabled.negate())
+            .condition(ironEnabled.negate())
+            .condition(copperEnabled.negate())
+            .condition(silverEnabled);
         this.shaped("silver_from_basic", PackedUp.silverbackpack)
             .customSerializer(BackpackUpgradeRecipe.SERIALIZER)
             .pattern("ABA")
@@ -109,10 +115,10 @@ public class PackedUpRecipeGenerator extends RecipeGenerator {
             .input('B', Tags.Items.LEATHER)
             .input('C', PackedUp.basicbackpack)
             .unlockedBy(PackedUp.basicbackpack)
-            .condition(new BackpackRecipeCondition(BackpackType.BASIC))
-            .condition(new NotResourceCondition(new BackpackRecipeCondition(BackpackType.IRON)))
-            .condition(new NotResourceCondition(new BackpackRecipeCondition(BackpackType.COPPER)))
-            .condition(new BackpackRecipeCondition(BackpackType.SILVER));
+            .condition(basicEnabled)
+            .condition(ironEnabled.negate())
+            .condition(copperEnabled.negate())
+            .condition(silverEnabled);
         this.shaped("silver_from_iron", PackedUp.silverbackpack)
             .customSerializer(BackpackUpgradeRecipe.SERIALIZER)
             .pattern("ABA")
@@ -122,8 +128,8 @@ public class PackedUpRecipeGenerator extends RecipeGenerator {
             .input('B', Tags.Items.INGOTS_IRON)
             .input('C', PackedUp.ironbackpack)
             .unlockedBy(PackedUp.ironbackpack)
-            .condition(new BackpackRecipeCondition(BackpackType.IRON))
-            .condition(new BackpackRecipeCondition(BackpackType.SILVER));
+            .condition(ironEnabled)
+            .condition(silverEnabled);
         this.shaped("silver_from_copper", PackedUp.silverbackpack)
             .customSerializer(BackpackUpgradeRecipe.SERIALIZER)
             .pattern("ABA")
@@ -133,10 +139,11 @@ public class PackedUpRecipeGenerator extends RecipeGenerator {
             .input('B', copperIngots)
             .input('C', PackedUp.copperbackpack)
             .unlockedBy(PackedUp.copperbackpack)
-            .condition(new BackpackRecipeCondition(BackpackType.COPPER))
-            .condition(new BackpackRecipeCondition(BackpackType.SILVER));
+            .condition(copperEnabled)
+            .condition(silverEnabled);
 
         // Gold
+        ResourceCondition goldEnabled = new BackpackRecipeCondition(BackpackType.GOLD);
         this.shaped("gold_from_chest", PackedUp.goldbackpack)
             .pattern("ABA")
             .pattern("CDC")
@@ -146,10 +153,10 @@ public class PackedUpRecipeGenerator extends RecipeGenerator {
             .input('C', Tags.Items.INGOTS_GOLD)
             .input('D', Tags.Items.CHESTS_WOODEN)
             .unlockedBy(Tags.Items.CHESTS_WOODEN)
-            .condition(new NotResourceCondition(new BackpackRecipeCondition(BackpackType.BASIC)))
-            .condition(new NotResourceCondition(new BackpackRecipeCondition(BackpackType.IRON)))
-            .condition(new NotResourceCondition(new BackpackRecipeCondition(BackpackType.COPPER)))
-            .condition(new BackpackRecipeCondition(BackpackType.GOLD));
+            .condition(basicEnabled.negate())
+            .condition(ironEnabled.negate())
+            .condition(copperEnabled.negate())
+            .condition(goldEnabled);
         this.shaped("gold_from_basic", PackedUp.goldbackpack)
             .customSerializer(BackpackUpgradeRecipe.SERIALIZER)
             .pattern("ABA")
@@ -159,10 +166,10 @@ public class PackedUpRecipeGenerator extends RecipeGenerator {
             .input('B', Tags.Items.LEATHER)
             .input('C', PackedUp.basicbackpack)
             .unlockedBy(PackedUp.basicbackpack)
-            .condition(new BackpackRecipeCondition(BackpackType.BASIC))
-            .condition(new NotResourceCondition(new BackpackRecipeCondition(BackpackType.IRON)))
-            .condition(new NotResourceCondition(new BackpackRecipeCondition(BackpackType.COPPER)))
-            .condition(new BackpackRecipeCondition(BackpackType.GOLD));
+            .condition(basicEnabled)
+            .condition(ironEnabled.negate())
+            .condition(copperEnabled.negate())
+            .condition(goldEnabled);
         this.shaped("gold_from_iron", PackedUp.goldbackpack)
             .customSerializer(BackpackUpgradeRecipe.SERIALIZER)
             .pattern("ABA")
@@ -172,8 +179,8 @@ public class PackedUpRecipeGenerator extends RecipeGenerator {
             .input('B', Tags.Items.INGOTS_IRON)
             .input('C', PackedUp.ironbackpack)
             .unlockedBy(PackedUp.ironbackpack)
-            .condition(new BackpackRecipeCondition(BackpackType.IRON))
-            .condition(new BackpackRecipeCondition(BackpackType.GOLD));
+            .condition(ironEnabled)
+            .condition(goldEnabled);
         this.shaped("gold_from_copper", PackedUp.goldbackpack)
             .customSerializer(BackpackUpgradeRecipe.SERIALIZER)
             .pattern("ABA")
@@ -183,10 +190,11 @@ public class PackedUpRecipeGenerator extends RecipeGenerator {
             .input('B', copperIngots)
             .input('C', PackedUp.copperbackpack)
             .unlockedBy(PackedUp.copperbackpack)
-            .condition(new BackpackRecipeCondition(BackpackType.COPPER))
-            .condition(new BackpackRecipeCondition(BackpackType.GOLD));
+            .condition(copperEnabled)
+            .condition(goldEnabled);
 
         // Diamond
+        ResourceCondition diamondEnabled = new BackpackRecipeCondition(BackpackType.DIAMOND);
         this.shaped("diamond_from_chest", PackedUp.diamondbackpack)
             .pattern("ABA")
             .pattern("CDC")
@@ -197,12 +205,12 @@ public class PackedUpRecipeGenerator extends RecipeGenerator {
             .input('D', Tags.Items.CHESTS_WOODEN)
             .input('E', Tags.Items.GLASS)
             .unlockedBy(Tags.Items.CHESTS_WOODEN)
-            .condition(new NotResourceCondition(new BackpackRecipeCondition(BackpackType.BASIC)))
-            .condition(new NotResourceCondition(new BackpackRecipeCondition(BackpackType.IRON)))
-            .condition(new NotResourceCondition(new BackpackRecipeCondition(BackpackType.COPPER)))
-            .condition(new NotResourceCondition(new BackpackRecipeCondition(BackpackType.SILVER)))
-            .condition(new NotResourceCondition(new BackpackRecipeCondition(BackpackType.GOLD)))
-            .condition(new BackpackRecipeCondition(BackpackType.DIAMOND));
+            .condition(basicEnabled.negate())
+            .condition(ironEnabled.negate())
+            .condition(copperEnabled.negate())
+            .condition(silverEnabled.negate())
+            .condition(goldEnabled.negate())
+            .condition(diamondEnabled);
         this.shaped("diamond_from_basic", PackedUp.diamondbackpack)
             .customSerializer(BackpackUpgradeRecipe.SERIALIZER)
             .pattern("ABA")
@@ -213,12 +221,12 @@ public class PackedUpRecipeGenerator extends RecipeGenerator {
             .input('C', PackedUp.basicbackpack)
             .input('D', Tags.Items.GLASS)
             .unlockedBy(PackedUp.basicbackpack)
-            .condition(new BackpackRecipeCondition(BackpackType.BASIC))
-            .condition(new NotResourceCondition(new BackpackRecipeCondition(BackpackType.IRON)))
-            .condition(new NotResourceCondition(new BackpackRecipeCondition(BackpackType.COPPER)))
-            .condition(new NotResourceCondition(new BackpackRecipeCondition(BackpackType.SILVER)))
-            .condition(new NotResourceCondition(new BackpackRecipeCondition(BackpackType.GOLD)))
-            .condition(new BackpackRecipeCondition(BackpackType.DIAMOND));
+            .condition(basicEnabled)
+            .condition(ironEnabled.negate())
+            .condition(copperEnabled.negate())
+            .condition(silverEnabled.negate())
+            .condition(goldEnabled.negate())
+            .condition(diamondEnabled);
         this.shaped("diamond_from_iron", PackedUp.diamondbackpack)
             .customSerializer(BackpackUpgradeRecipe.SERIALIZER)
             .pattern("ABA")
@@ -229,10 +237,10 @@ public class PackedUpRecipeGenerator extends RecipeGenerator {
             .input('C', PackedUp.ironbackpack)
             .input('D', Tags.Items.GLASS)
             .unlockedBy(PackedUp.ironbackpack)
-            .condition(new BackpackRecipeCondition(BackpackType.IRON))
-            .condition(new NotResourceCondition(new BackpackRecipeCondition(BackpackType.SILVER)))
-            .condition(new NotResourceCondition(new BackpackRecipeCondition(BackpackType.GOLD)))
-            .condition(new BackpackRecipeCondition(BackpackType.DIAMOND));
+            .condition(ironEnabled)
+            .condition(silverEnabled.negate())
+            .condition(goldEnabled.negate())
+            .condition(diamondEnabled);
         this.shaped("diamond_from_copper", PackedUp.diamondbackpack)
             .customSerializer(BackpackUpgradeRecipe.SERIALIZER)
             .pattern("ABA")
@@ -243,10 +251,10 @@ public class PackedUpRecipeGenerator extends RecipeGenerator {
             .input('C', PackedUp.copperbackpack)
             .input('D', Tags.Items.GLASS)
             .unlockedBy(PackedUp.copperbackpack)
-            .condition(new BackpackRecipeCondition(BackpackType.COPPER))
-            .condition(new NotResourceCondition(new BackpackRecipeCondition(BackpackType.SILVER)))
-            .condition(new NotResourceCondition(new BackpackRecipeCondition(BackpackType.GOLD)))
-            .condition(new BackpackRecipeCondition(BackpackType.DIAMOND));
+            .condition(copperEnabled)
+            .condition(silverEnabled.negate())
+            .condition(goldEnabled.negate())
+            .condition(diamondEnabled);
         this.shaped("diamond_from_silver", PackedUp.diamondbackpack)
             .customSerializer(BackpackUpgradeRecipe.SERIALIZER)
             .pattern("ABA")
@@ -257,8 +265,8 @@ public class PackedUpRecipeGenerator extends RecipeGenerator {
             .input('C', PackedUp.silverbackpack)
             .input('D', Tags.Items.GLASS)
             .unlockedBy(PackedUp.silverbackpack)
-            .condition(new BackpackRecipeCondition(BackpackType.SILVER))
-            .condition(new BackpackRecipeCondition(BackpackType.DIAMOND));
+            .condition(silverEnabled)
+            .condition(diamondEnabled);
         this.shaped("diamond_from_gold", PackedUp.diamondbackpack)
             .customSerializer(BackpackUpgradeRecipe.SERIALIZER)
             .pattern("ABA")
@@ -269,10 +277,11 @@ public class PackedUpRecipeGenerator extends RecipeGenerator {
             .input('C', PackedUp.goldbackpack)
             .input('D', Tags.Items.GLASS)
             .unlockedBy(PackedUp.goldbackpack)
-            .condition(new BackpackRecipeCondition(BackpackType.GOLD))
-            .condition(new BackpackRecipeCondition(BackpackType.DIAMOND));
+            .condition(goldEnabled)
+            .condition(diamondEnabled);
 
         // Obsidian
+        ResourceCondition obsidianEnabled = new BackpackRecipeCondition(BackpackType.OBSIDIAN);
         this.shaped("obsidian_from_chest", PackedUp.obsidianbackpack)
             .pattern("ABA")
             .pattern("CDC")
@@ -282,13 +291,13 @@ public class PackedUpRecipeGenerator extends RecipeGenerator {
             .input('C', Tags.Items.OBSIDIAN)
             .input('D', Tags.Items.CHESTS_WOODEN)
             .unlockedBy(Tags.Items.CHESTS_WOODEN)
-            .condition(new NotResourceCondition(new BackpackRecipeCondition(BackpackType.BASIC)))
-            .condition(new NotResourceCondition(new BackpackRecipeCondition(BackpackType.IRON)))
-            .condition(new NotResourceCondition(new BackpackRecipeCondition(BackpackType.COPPER)))
-            .condition(new NotResourceCondition(new BackpackRecipeCondition(BackpackType.SILVER)))
-            .condition(new NotResourceCondition(new BackpackRecipeCondition(BackpackType.GOLD)))
-            .condition(new NotResourceCondition(new BackpackRecipeCondition(BackpackType.DIAMOND)))
-            .condition(new BackpackRecipeCondition(BackpackType.OBSIDIAN));
+            .condition(basicEnabled.negate())
+            .condition(ironEnabled.negate())
+            .condition(copperEnabled.negate())
+            .condition(silverEnabled.negate())
+            .condition(goldEnabled.negate())
+            .condition(diamondEnabled.negate())
+            .condition(obsidianEnabled);
         this.shaped("obsidian_from_basic", PackedUp.obsidianbackpack)
             .customSerializer(BackpackUpgradeRecipe.SERIALIZER)
             .pattern("ABA")
@@ -298,13 +307,13 @@ public class PackedUpRecipeGenerator extends RecipeGenerator {
             .input('B', Tags.Items.LEATHER)
             .input('C', PackedUp.basicbackpack)
             .unlockedBy(PackedUp.basicbackpack)
-            .condition(new BackpackRecipeCondition(BackpackType.BASIC))
-            .condition(new NotResourceCondition(new BackpackRecipeCondition(BackpackType.IRON)))
-            .condition(new NotResourceCondition(new BackpackRecipeCondition(BackpackType.COPPER)))
-            .condition(new NotResourceCondition(new BackpackRecipeCondition(BackpackType.SILVER)))
-            .condition(new NotResourceCondition(new BackpackRecipeCondition(BackpackType.GOLD)))
-            .condition(new NotResourceCondition(new BackpackRecipeCondition(BackpackType.DIAMOND)))
-            .condition(new BackpackRecipeCondition(BackpackType.OBSIDIAN));
+            .condition(basicEnabled)
+            .condition(ironEnabled.negate())
+            .condition(copperEnabled.negate())
+            .condition(silverEnabled.negate())
+            .condition(goldEnabled.negate())
+            .condition(diamondEnabled.negate())
+            .condition(obsidianEnabled);
         this.shaped("obsidian_from_iron", PackedUp.obsidianbackpack)
             .customSerializer(BackpackUpgradeRecipe.SERIALIZER)
             .pattern("ABA")
@@ -314,11 +323,11 @@ public class PackedUpRecipeGenerator extends RecipeGenerator {
             .input('B', Tags.Items.INGOTS_IRON)
             .input('C', PackedUp.ironbackpack)
             .unlockedBy(PackedUp.ironbackpack)
-            .condition(new BackpackRecipeCondition(BackpackType.IRON))
-            .condition(new NotResourceCondition(new BackpackRecipeCondition(BackpackType.SILVER)))
-            .condition(new NotResourceCondition(new BackpackRecipeCondition(BackpackType.GOLD)))
-            .condition(new NotResourceCondition(new BackpackRecipeCondition(BackpackType.DIAMOND)))
-            .condition(new BackpackRecipeCondition(BackpackType.OBSIDIAN));
+            .condition(ironEnabled)
+            .condition(silverEnabled.negate())
+            .condition(goldEnabled.negate())
+            .condition(diamondEnabled.negate())
+            .condition(obsidianEnabled);
         this.shaped("obsidian_from_copper", PackedUp.obsidianbackpack)
             .customSerializer(BackpackUpgradeRecipe.SERIALIZER)
             .pattern("ABA")
@@ -328,11 +337,11 @@ public class PackedUpRecipeGenerator extends RecipeGenerator {
             .input('B', copperIngots)
             .input('C', PackedUp.copperbackpack)
             .unlockedBy(PackedUp.copperbackpack)
-            .condition(new BackpackRecipeCondition(BackpackType.COPPER))
-            .condition(new NotResourceCondition(new BackpackRecipeCondition(BackpackType.SILVER)))
-            .condition(new NotResourceCondition(new BackpackRecipeCondition(BackpackType.GOLD)))
-            .condition(new NotResourceCondition(new BackpackRecipeCondition(BackpackType.DIAMOND)))
-            .condition(new BackpackRecipeCondition(BackpackType.OBSIDIAN));
+            .condition(copperEnabled)
+            .condition(silverEnabled.negate())
+            .condition(goldEnabled.negate())
+            .condition(diamondEnabled.negate())
+            .condition(obsidianEnabled);
         this.shaped("obsidian_from_silver", PackedUp.obsidianbackpack)
             .customSerializer(BackpackUpgradeRecipe.SERIALIZER)
             .pattern("ABA")
@@ -342,9 +351,9 @@ public class PackedUpRecipeGenerator extends RecipeGenerator {
             .input('B', silverIngots)
             .input('C', PackedUp.silverbackpack)
             .unlockedBy(PackedUp.silverbackpack)
-            .condition(new BackpackRecipeCondition(BackpackType.SILVER))
-            .condition(new NotResourceCondition(new BackpackRecipeCondition(BackpackType.DIAMOND)))
-            .condition(new BackpackRecipeCondition(BackpackType.OBSIDIAN));
+            .condition(silverEnabled)
+            .condition(diamondEnabled.negate())
+            .condition(obsidianEnabled);
         this.shaped("obsidian_from_gold", PackedUp.obsidianbackpack)
             .customSerializer(BackpackUpgradeRecipe.SERIALIZER)
             .pattern("ABA")
@@ -354,9 +363,9 @@ public class PackedUpRecipeGenerator extends RecipeGenerator {
             .input('B', Tags.Items.INGOTS_GOLD)
             .input('C', PackedUp.goldbackpack)
             .unlockedBy(PackedUp.goldbackpack)
-            .condition(new BackpackRecipeCondition(BackpackType.GOLD))
-            .condition(new NotResourceCondition(new BackpackRecipeCondition(BackpackType.DIAMOND)))
-            .condition(new BackpackRecipeCondition(BackpackType.OBSIDIAN));
+            .condition(goldEnabled)
+            .condition(diamondEnabled.negate())
+            .condition(obsidianEnabled);
         this.shaped("obsidian_from_diamond", PackedUp.obsidianbackpack)
             .customSerializer(BackpackUpgradeRecipe.SERIALIZER)
             .pattern("ABA")
@@ -366,7 +375,7 @@ public class PackedUpRecipeGenerator extends RecipeGenerator {
             .input('B', Tags.Items.GEMS_DIAMOND)
             .input('C', PackedUp.diamondbackpack)
             .unlockedBy(PackedUp.diamondbackpack)
-            .condition(new BackpackRecipeCondition(BackpackType.DIAMOND))
-            .condition(new BackpackRecipeCondition(BackpackType.OBSIDIAN));
+            .condition(diamondEnabled)
+            .condition(obsidianEnabled);
     }
 }
