@@ -6,8 +6,18 @@
       "type": "packedup:is_backpack_enabled"
     },
     {
-      "backpack": "copper",
-      "type": "packedup:is_backpack_enabled"
+      "conditions": [
+        {
+          "backpack": "copper",
+          "type": "packedup:is_backpack_enabled"
+        },
+        {
+          "registry": "minecraft:item",
+          "tag": "forge:ingots/copper",
+          "type": "supermartijn642corelib:tag_populated"
+        }
+      ],
+      "type": "supermartijn642corelib:and"
     }
   ],
   "recipe": {
