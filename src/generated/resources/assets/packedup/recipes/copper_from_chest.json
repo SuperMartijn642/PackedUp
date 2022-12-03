@@ -35,8 +35,17 @@
       }
     },
     {
-      "type": "packedup:is_backpack_enabled",
-      "backpack": "copper"
+      "type": "supermartijn642corelib:and",
+      "conditions": [
+        {
+          "backpack": "copper",
+          "condition": "packedup:is_backpack_enabled"
+        },
+        {
+          "ore": "ingotCopper",
+          "condition": "supermartijn642corelib:ore_dict_populated"
+        }
+      ]
     }
   ]
 }

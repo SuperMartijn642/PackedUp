@@ -26,8 +26,17 @@
   },
   "conditions": [
     {
-      "type": "packedup:is_backpack_enabled",
-      "backpack": "silver"
+      "type": "supermartijn642corelib:and",
+      "conditions": [
+        {
+          "backpack": "silver",
+          "condition": "packedup:is_backpack_enabled"
+        },
+        {
+          "ore": "ingotSilver",
+          "condition": "supermartijn642corelib:ore_dict_populated"
+        }
+      ]
     },
     {
       "type": "supermartijn642corelib:not",

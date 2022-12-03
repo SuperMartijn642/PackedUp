@@ -44,15 +44,33 @@
     {
       "type": "supermartijn642corelib:not",
       "condition": {
-        "backpack": "copper",
-        "type": "packedup:is_backpack_enabled"
+        "conditions": [
+          {
+            "backpack": "copper",
+            "condition": "packedup:is_backpack_enabled"
+          },
+          {
+            "ore": "ingotCopper",
+            "condition": "supermartijn642corelib:ore_dict_populated"
+          }
+        ],
+        "type": "supermartijn642corelib:and"
       }
     },
     {
       "type": "supermartijn642corelib:not",
       "condition": {
-        "backpack": "silver",
-        "type": "packedup:is_backpack_enabled"
+        "conditions": [
+          {
+            "backpack": "silver",
+            "condition": "packedup:is_backpack_enabled"
+          },
+          {
+            "ore": "ingotSilver",
+            "condition": "supermartijn642corelib:ore_dict_populated"
+          }
+        ],
+        "type": "supermartijn642corelib:and"
       }
     },
     {

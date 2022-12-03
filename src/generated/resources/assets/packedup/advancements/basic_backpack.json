@@ -4,24 +4,25 @@
       "item": "packedup:basicbackpack"
     },
     "title": {
-      "translate": "packedup.advancement.basic.title"
+      "translate": "packedup.advancement.basic_backpack.title"
     },
     "description": {
-      "translate": "packedup.advancement.basic.description"
+      "translate": "packedup.advancement.basic_backpack.description"
     },
     "frame": "task",
+    "background": "minecraft:blocks/wool_colored_black",
     "show_toast": true,
     "announce_to_chat": true,
-    "hidden": false,
-    "background": "minecraft:textures/blocks/wool_colored_black.png"
+    "hidden": false
   },
   "criteria": {
-    "backpack": {
+    "has_backpack": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "packedup:basicbackpack"
+            "item": "packedup:basicbackpack",
+            "data": 0
           }
         ]
       }
@@ -29,7 +30,7 @@
   },
   "requirements": [
     [
-      "backpack"
+      "has_backpack"
     ]
   ]
 }
