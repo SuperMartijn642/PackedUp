@@ -32,7 +32,7 @@ forge*changelog.txt
 eclipse/
 run/
 libs/
-libs/
+lib/
 logs/
 images/
 desktop.ini
