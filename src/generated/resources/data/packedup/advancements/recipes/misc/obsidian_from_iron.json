@@ -1,18 +1,8 @@
 {
   "conditions": [
     {
-      "conditions": [
-        {
-          "backpack": "copper",
-          "type": "packedup:is_backpack_enabled"
-        },
-        {
-          "registry": "minecraft:item",
-          "tag": "forge:ingots/copper",
-          "type": "supermartijn642corelib:tag_populated"
-        }
-      ],
-      "type": "supermartijn642corelib:and"
+      "backpack": "iron",
+      "type": "packedup:is_backpack_enabled"
     },
     {
       "condition": {
@@ -56,10 +46,10 @@
       "item": "packedup:obsidianbackpack"
     },
     "title": {
-      "translate": "packedup.advancement.recipes/packedup/obsidian_from_copper.title"
+      "translate": "packedup.advancement.recipes/misc/obsidian_from_iron.title"
     },
     "description": {
-      "translate": "packedup.advancement.recipes/packedup/obsidian_from_copper.description"
+      "translate": "packedup.advancement.recipes/misc/obsidian_from_iron.description"
     },
     "frame": "task",
     "show_toast": false,
@@ -70,7 +60,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "packedup:obsidian_from_copper"
+        "recipe": "packedup:obsidian_from_iron"
       }
     },
     "recipe_condition": {
@@ -79,7 +69,7 @@
         "items": [
           {
             "items": [
-              "packedup:copperbackpack"
+              "packedup:ironbackpack"
             ]
           }
         ]
@@ -94,7 +84,7 @@
   ],
   "rewards": {
     "recipes": [
-      "packedup:obsidian_from_copper"
+      "packedup:obsidian_from_iron"
     ]
   }
 }

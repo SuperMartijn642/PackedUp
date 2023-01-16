@@ -141,7 +141,7 @@ public class BackpackInventory implements IItemHandlerModifiable {
     }
 
     private static boolean canStack(ItemStack stack1, ItemStack stack2){
-        return stack1.isEmpty() || stack2.isEmpty() || (stack1.getItem() == stack2.getItem() && stack1.getDamageValue() == stack2.getDamageValue() && ItemStack.isSameIgnoreDurability(stack1, stack2));
+        return stack1.isEmpty() || stack2.isEmpty() || (stack1.getItem() == stack2.getItem() && stack1.getDamageValue() == stack2.getDamageValue() && ItemStack.isSameItemSameTags(stack1, stack2));
     }
 
     public void save(File file){

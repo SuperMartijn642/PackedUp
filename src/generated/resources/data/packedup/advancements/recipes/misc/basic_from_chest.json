@@ -1,31 +1,20 @@
 {
   "conditions": [
     {
-      "backpack": "gold",
-      "type": "packedup:is_backpack_enabled"
-    },
-    {
-      "condition": {
-        "backpack": "diamond",
-        "type": "packedup:is_backpack_enabled"
-      },
-      "type": "supermartijn642corelib:not"
-    },
-    {
-      "backpack": "obsidian",
+      "backpack": "basic",
       "type": "packedup:is_backpack_enabled"
     }
   ],
   "parent": "minecraft:recipes/root",
   "display": {
     "icon": {
-      "item": "packedup:obsidianbackpack"
+      "item": "packedup:basicbackpack"
     },
     "title": {
-      "translate": "packedup.advancement.recipes/packedup/obsidian_from_gold.title"
+      "translate": "packedup.advancement.recipes/misc/basic_from_chest.title"
     },
     "description": {
-      "translate": "packedup.advancement.recipes/packedup/obsidian_from_gold.description"
+      "translate": "packedup.advancement.recipes/misc/basic_from_chest.description"
     },
     "frame": "task",
     "show_toast": false,
@@ -36,7 +25,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "packedup:obsidian_from_gold"
+        "recipe": "packedup:basic_from_chest"
       }
     },
     "recipe_condition": {
@@ -44,9 +33,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "packedup:goldbackpack"
-            ]
+            "tag": "forge:chests/wooden"
           }
         ]
       }
@@ -60,7 +47,7 @@
   ],
   "rewards": {
     "recipes": [
-      "packedup:obsidian_from_gold"
+      "packedup:basic_from_chest"
     ]
   }
 }

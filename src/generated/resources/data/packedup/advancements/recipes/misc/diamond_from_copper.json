@@ -15,30 +15,44 @@
       "type": "supermartijn642corelib:and"
     },
     {
-      "conditions": [
-        {
-          "backpack": "silver",
-          "type": "packedup:is_backpack_enabled"
-        },
-        {
-          "registry": "minecraft:item",
-          "tag": "forge:ingots/silver",
-          "type": "supermartijn642corelib:tag_populated"
-        }
-      ],
-      "type": "supermartijn642corelib:and"
+      "condition": {
+        "conditions": [
+          {
+            "backpack": "silver",
+            "type": "packedup:is_backpack_enabled"
+          },
+          {
+            "registry": "minecraft:item",
+            "tag": "forge:ingots/silver",
+            "type": "supermartijn642corelib:tag_populated"
+          }
+        ],
+        "type": "supermartijn642corelib:and"
+      },
+      "type": "supermartijn642corelib:not"
+    },
+    {
+      "condition": {
+        "backpack": "gold",
+        "type": "packedup:is_backpack_enabled"
+      },
+      "type": "supermartijn642corelib:not"
+    },
+    {
+      "backpack": "diamond",
+      "type": "packedup:is_backpack_enabled"
     }
   ],
   "parent": "minecraft:recipes/root",
   "display": {
     "icon": {
-      "item": "packedup:silverbackpack"
+      "item": "packedup:diamondbackpack"
     },
     "title": {
-      "translate": "packedup.advancement.recipes/packedup/silver_from_copper.title"
+      "translate": "packedup.advancement.recipes/misc/diamond_from_copper.title"
     },
     "description": {
-      "translate": "packedup.advancement.recipes/packedup/silver_from_copper.description"
+      "translate": "packedup.advancement.recipes/misc/diamond_from_copper.description"
     },
     "frame": "task",
     "show_toast": false,
@@ -49,7 +63,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "packedup:silver_from_copper"
+        "recipe": "packedup:diamond_from_copper"
       }
     },
     "recipe_condition": {
@@ -73,7 +87,7 @@
   ],
   "rewards": {
     "recipes": [
-      "packedup:silver_from_copper"
+      "packedup:diamond_from_copper"
     ]
   }
 }

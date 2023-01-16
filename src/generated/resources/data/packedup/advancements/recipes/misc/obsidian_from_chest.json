@@ -73,10 +73,10 @@
       "item": "packedup:obsidianbackpack"
     },
     "title": {
-      "translate": "packedup.advancement.recipes/packedup/obsidian_from_chest.title"
+      "translate": "packedup.advancement.recipes/misc/obsidian_from_chest.title"
     },
     "description": {
-      "translate": "packedup.advancement.recipes/packedup/obsidian_from_chest.description"
+      "translate": "packedup.advancement.recipes/misc/obsidian_from_chest.description"
     },
     "frame": "task",
     "show_toast": false,

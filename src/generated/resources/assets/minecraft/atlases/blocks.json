@@ -1,0 +1,32 @@
+{
+  "sources": [
+    {
+      "type": "minecraft:single",
+      "resource": "packedup:items/basicbackpack"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "packedup:items/goldbackpack"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "packedup:items/silverbackpack"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "packedup:items/ironbackpack"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "packedup:items/copperbackpack"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "packedup:items/diamondbackpack"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "packedup:items/obsidianbackpack"
+    }
+  ]
+}

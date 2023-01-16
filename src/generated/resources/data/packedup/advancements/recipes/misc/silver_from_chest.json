@@ -1,8 +1,35 @@
 {
   "conditions": [
     {
-      "backpack": "iron",
-      "type": "packedup:is_backpack_enabled"
+      "condition": {
+        "backpack": "basic",
+        "type": "packedup:is_backpack_enabled"
+      },
+      "type": "supermartijn642corelib:not"
+    },
+    {
+      "condition": {
+        "backpack": "iron",
+        "type": "packedup:is_backpack_enabled"
+      },
+      "type": "supermartijn642corelib:not"
+    },
+    {
+      "condition": {
+        "conditions": [
+          {
+            "backpack": "copper",
+            "type": "packedup:is_backpack_enabled"
+          },
+          {
+            "registry": "minecraft:item",
+            "tag": "forge:ingots/copper",
+            "type": "supermartijn642corelib:tag_populated"
+          }
+        ],
+        "type": "supermartijn642corelib:and"
+      },
+      "type": "supermartijn642corelib:not"
     },
     {
       "conditions": [
@@ -25,10 +52,10 @@
       "item": "packedup:silverbackpack"
     },
     "title": {
-      "translate": "packedup.advancement.recipes/packedup/silver_from_iron.title"
+      "translate": "packedup.advancement.recipes/misc/silver_from_chest.title"
     },
     "description": {
-      "translate": "packedup.advancement.recipes/packedup/silver_from_iron.description"
+      "translate": "packedup.advancement.recipes/misc/silver_from_chest.description"
     },
     "frame": "task",
     "show_toast": false,
@@ -39,7 +66,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "packedup:silver_from_iron"
+        "recipe": "packedup:silver_from_chest"
       }
     },
     "recipe_condition": {
@@ -47,9 +74,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "packedup:ironbackpack"
-            ]
+            "tag": "forge:chests/wooden"
           }
         ]
       }
@@ -63,7 +88,7 @@
   ],
   "rewards": {
     "recipes": [
-      "packedup:silver_from_iron"
+      "packedup:silver_from_chest"
     ]
   }
 }

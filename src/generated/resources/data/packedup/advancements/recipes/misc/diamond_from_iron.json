@@ -1,26 +1,19 @@
 {
   "conditions": [
     {
-      "backpack": "basic",
+      "backpack": "iron",
       "type": "packedup:is_backpack_enabled"
-    },
-    {
-      "condition": {
-        "backpack": "iron",
-        "type": "packedup:is_backpack_enabled"
-      },
-      "type": "supermartijn642corelib:not"
     },
     {
       "condition": {
         "conditions": [
           {
-            "backpack": "copper",
+            "backpack": "silver",
             "type": "packedup:is_backpack_enabled"
           },
           {
             "registry": "minecraft:item",
-            "tag": "forge:ingots/copper",
+            "tag": "forge:ingots/silver",
             "type": "supermartijn642corelib:tag_populated"
           }
         ],
@@ -29,20 +22,27 @@
       "type": "supermartijn642corelib:not"
     },
     {
-      "backpack": "gold",
+      "condition": {
+        "backpack": "gold",
+        "type": "packedup:is_backpack_enabled"
+      },
+      "type": "supermartijn642corelib:not"
+    },
+    {
+      "backpack": "diamond",
       "type": "packedup:is_backpack_enabled"
     }
   ],
   "parent": "minecraft:recipes/root",
   "display": {
     "icon": {
-      "item": "packedup:goldbackpack"
+      "item": "packedup:diamondbackpack"
     },
     "title": {
-      "translate": "packedup.advancement.recipes/packedup/gold_from_basic.title"
+      "translate": "packedup.advancement.recipes/misc/diamond_from_iron.title"
     },
     "description": {
-      "translate": "packedup.advancement.recipes/packedup/gold_from_basic.description"
+      "translate": "packedup.advancement.recipes/misc/diamond_from_iron.description"
     },
     "frame": "task",
     "show_toast": false,
@@ -53,7 +53,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "packedup:gold_from_basic"
+        "recipe": "packedup:diamond_from_iron"
       }
     },
     "recipe_condition": {
@@ -62,7 +62,7 @@
         "items": [
           {
             "items": [
-              "packedup:basicbackpack"
+              "packedup:ironbackpack"
             ]
           }
         ]
@@ -77,7 +77,7 @@
   ],
   "rewards": {
     "recipes": [
-      "packedup:gold_from_basic"
+      "packedup:diamond_from_iron"
     ]
   }
 }

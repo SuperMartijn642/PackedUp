@@ -8,20 +8,30 @@
       "type": "supermartijn642corelib:not"
     },
     {
-      "backpack": "iron",
-      "type": "packedup:is_backpack_enabled"
+      "conditions": [
+        {
+          "backpack": "copper",
+          "type": "packedup:is_backpack_enabled"
+        },
+        {
+          "registry": "minecraft:item",
+          "tag": "forge:ingots/copper",
+          "type": "supermartijn642corelib:tag_populated"
+        }
+      ],
+      "type": "supermartijn642corelib:and"
     }
   ],
   "parent": "minecraft:recipes/root",
   "display": {
     "icon": {
-      "item": "packedup:ironbackpack"
+      "item": "packedup:copperbackpack"
     },
     "title": {
-      "translate": "packedup.advancement.recipes/packedup/iron_from_chest.title"
+      "translate": "packedup.advancement.recipes/misc/copper_from_chest.title"
     },
     "description": {
-      "translate": "packedup.advancement.recipes/packedup/iron_from_chest.description"
+      "translate": "packedup.advancement.recipes/misc/copper_from_chest.description"
     },
     "frame": "task",
     "show_toast": false,
@@ -32,7 +42,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "packedup:iron_from_chest"
+        "recipe": "packedup:copper_from_chest"
       }
     },
     "recipe_condition": {
@@ -54,7 +64,7 @@
   ],
   "rewards": {
     "recipes": [
-      "packedup:iron_from_chest"
+      "packedup:copper_from_chest"
     ]
   }
 }

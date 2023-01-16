@@ -1,20 +1,24 @@
 {
   "conditions": [
     {
-      "backpack": "basic",
+      "backpack": "gold",
+      "type": "packedup:is_backpack_enabled"
+    },
+    {
+      "backpack": "diamond",
       "type": "packedup:is_backpack_enabled"
     }
   ],
   "parent": "minecraft:recipes/root",
   "display": {
     "icon": {
-      "item": "packedup:basicbackpack"
+      "item": "packedup:diamondbackpack"
     },
     "title": {
-      "translate": "packedup.advancement.recipes/packedup/basic_from_chest.title"
+      "translate": "packedup.advancement.recipes/misc/diamond_from_gold.title"
     },
     "description": {
-      "translate": "packedup.advancement.recipes/packedup/basic_from_chest.description"
+      "translate": "packedup.advancement.recipes/misc/diamond_from_gold.description"
     },
     "frame": "task",
     "show_toast": false,
@@ -25,7 +29,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "packedup:basic_from_chest"
+        "recipe": "packedup:diamond_from_gold"
       }
     },
     "recipe_condition": {
@@ -33,7 +37,9 @@
       "conditions": {
         "items": [
           {
-            "tag": "forge:chests/wooden"
+            "items": [
+              "packedup:goldbackpack"
+            ]
           }
         ]
       }
@@ -47,7 +53,7 @@
   ],
   "rewards": {
     "recipes": [
-      "packedup:basic_from_chest"
+      "packedup:diamond_from_gold"
     ]
   }
 }

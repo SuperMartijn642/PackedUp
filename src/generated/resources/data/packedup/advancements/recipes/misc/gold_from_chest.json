@@ -1,29 +1,29 @@
 {
   "conditions": [
     {
-      "conditions": [
-        {
-          "backpack": "copper",
-          "type": "packedup:is_backpack_enabled"
-        },
-        {
-          "registry": "minecraft:item",
-          "tag": "forge:ingots/copper",
-          "type": "supermartijn642corelib:tag_populated"
-        }
-      ],
-      "type": "supermartijn642corelib:and"
+      "condition": {
+        "backpack": "basic",
+        "type": "packedup:is_backpack_enabled"
+      },
+      "type": "supermartijn642corelib:not"
+    },
+    {
+      "condition": {
+        "backpack": "iron",
+        "type": "packedup:is_backpack_enabled"
+      },
+      "type": "supermartijn642corelib:not"
     },
     {
       "condition": {
         "conditions": [
           {
-            "backpack": "silver",
+            "backpack": "copper",
             "type": "packedup:is_backpack_enabled"
           },
           {
             "registry": "minecraft:item",
-            "tag": "forge:ingots/silver",
+            "tag": "forge:ingots/copper",
             "type": "supermartijn642corelib:tag_populated"
           }
         ],
@@ -32,27 +32,20 @@
       "type": "supermartijn642corelib:not"
     },
     {
-      "condition": {
-        "backpack": "gold",
-        "type": "packedup:is_backpack_enabled"
-      },
-      "type": "supermartijn642corelib:not"
-    },
-    {
-      "backpack": "diamond",
+      "backpack": "gold",
       "type": "packedup:is_backpack_enabled"
     }
   ],
   "parent": "minecraft:recipes/root",
   "display": {
     "icon": {
-      "item": "packedup:diamondbackpack"
+      "item": "packedup:goldbackpack"
     },
     "title": {
-      "translate": "packedup.advancement.recipes/packedup/diamond_from_copper.title"
+      "translate": "packedup.advancement.recipes/misc/gold_from_chest.title"
     },
     "description": {
-      "translate": "packedup.advancement.recipes/packedup/diamond_from_copper.description"
+      "translate": "packedup.advancement.recipes/misc/gold_from_chest.description"
     },
     "frame": "task",
     "show_toast": false,
@@ -63,7 +56,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "packedup:diamond_from_copper"
+        "recipe": "packedup:gold_from_chest"
       }
     },
     "recipe_condition": {
@@ -71,9 +64,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "packedup:copperbackpack"
-            ]
+            "tag": "forge:chests/wooden"
           }
         ]
       }
@@ -87,7 +78,7 @@
   ],
   "rewards": {
     "recipes": [
-      "packedup:diamond_from_copper"
+      "packedup:gold_from_chest"
     ]
   }
 }

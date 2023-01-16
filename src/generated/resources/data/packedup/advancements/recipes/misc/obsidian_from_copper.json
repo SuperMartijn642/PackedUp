@@ -1,32 +1,18 @@
 {
   "conditions": [
     {
-      "backpack": "basic",
-      "type": "packedup:is_backpack_enabled"
-    },
-    {
-      "condition": {
-        "backpack": "iron",
-        "type": "packedup:is_backpack_enabled"
-      },
-      "type": "supermartijn642corelib:not"
-    },
-    {
-      "condition": {
-        "conditions": [
-          {
-            "backpack": "copper",
-            "type": "packedup:is_backpack_enabled"
-          },
-          {
-            "registry": "minecraft:item",
-            "tag": "forge:ingots/copper",
-            "type": "supermartijn642corelib:tag_populated"
-          }
-        ],
-        "type": "supermartijn642corelib:and"
-      },
-      "type": "supermartijn642corelib:not"
+      "conditions": [
+        {
+          "backpack": "copper",
+          "type": "packedup:is_backpack_enabled"
+        },
+        {
+          "registry": "minecraft:item",
+          "tag": "forge:ingots/copper",
+          "type": "supermartijn642corelib:tag_populated"
+        }
+      ],
+      "type": "supermartijn642corelib:and"
     },
     {
       "condition": {
@@ -70,10 +56,10 @@
       "item": "packedup:obsidianbackpack"
     },
     "title": {
-      "translate": "packedup.advancement.recipes/packedup/obsidian_from_basic.title"
+      "translate": "packedup.advancement.recipes/misc/obsidian_from_copper.title"
     },
     "description": {
-      "translate": "packedup.advancement.recipes/packedup/obsidian_from_basic.description"
+      "translate": "packedup.advancement.recipes/misc/obsidian_from_copper.description"
     },
     "frame": "task",
     "show_toast": false,
@@ -84,7 +70,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "packedup:obsidian_from_basic"
+        "recipe": "packedup:obsidian_from_copper"
       }
     },
     "recipe_condition": {
@@ -93,7 +79,7 @@
         "items": [
           {
             "items": [
-              "packedup:basicbackpack"
+              "packedup:copperbackpack"
             ]
           }
         ]
@@ -108,7 +94,7 @@
   ],
   "rewards": {
     "recipes": [
-      "packedup:obsidian_from_basic"
+      "packedup:obsidian_from_copper"
     ]
   }
 }

@@ -63,10 +63,10 @@
       "item": "packedup:diamondbackpack"
     },
     "title": {
-      "translate": "packedup.advancement.recipes/packedup/diamond_from_basic.title"
+      "translate": "packedup.advancement.recipes/misc/diamond_from_basic.title"
     },
     "description": {
-      "translate": "packedup.advancement.recipes/packedup/diamond_from_basic.description"
+      "translate": "packedup.advancement.recipes/misc/diamond_from_basic.description"
     },
     "frame": "task",
     "show_toast": false,
