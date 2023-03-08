@@ -15,10 +15,10 @@
       "item": "packedup:goldbackpack"
     },
     "title": {
-      "translate": "packedup.advancement.recipes/packedup/gold_from_copper.title"
+      "translate": "packedup.advancement.recipes/misc/gold_from_copper.title"
     },
     "description": {
-      "translate": "packedup.advancement.recipes/packedup/gold_from_copper.description"
+      "translate": "packedup.advancement.recipes/misc/gold_from_copper.description"
     },
     "frame": "task",
     "show_toast": false,

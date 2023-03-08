@@ -2,23 +2,23 @@
   "fabric:load_conditions": [
     {
       "condition": "packedup:is_backpack_enabled",
-      "backpack": "gold"
+      "backpack": "basic"
     },
     {
       "condition": "packedup:is_backpack_enabled",
-      "backpack": "diamond"
+      "backpack": "copper"
     }
   ],
   "parent": "minecraft:recipes/root",
   "display": {
     "icon": {
-      "item": "packedup:diamondbackpack"
+      "item": "packedup:copperbackpack"
     },
     "title": {
-      "translate": "packedup.advancement.recipes/packedup/diamond_from_gold.title"
+      "translate": "packedup.advancement.recipes/misc/copper_from_basic.title"
     },
     "description": {
-      "translate": "packedup.advancement.recipes/packedup/diamond_from_gold.description"
+      "translate": "packedup.advancement.recipes/misc/copper_from_basic.description"
     },
     "frame": "task",
     "show_toast": false,
@@ -29,7 +29,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "packedup:diamond_from_gold"
+        "recipe": "packedup:copper_from_basic"
       }
     },
     "recipe_condition": {
@@ -38,7 +38,7 @@
         "items": [
           {
             "items": [
-              "packedup:goldbackpack"
+              "packedup:basicbackpack"
             ]
           }
         ]
@@ -53,7 +53,7 @@
   ],
   "rewards": {
     "recipes": [
-      "packedup:diamond_from_gold"
+      "packedup:copper_from_basic"
     ]
   }
 }

@@ -6,6 +6,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.ShapedRecipe;
@@ -22,8 +23,8 @@ public class BackpackUpgradeRecipe extends ShapedRecipe {
 
     public static final RecipeSerializer<BackpackUpgradeRecipe> SERIALIZER = new Serializer();
 
-    public BackpackUpgradeRecipe(ResourceLocation id, String group, int recipeWidth, int recipeHeight, NonNullList<Ingredient> recipeItems, ItemStack recipeOutput){
-        super(id, group, recipeWidth, recipeHeight, recipeItems, recipeOutput);
+    public BackpackUpgradeRecipe(ResourceLocation id, String group, CraftingBookCategory category, int recipeWidth, int recipeHeight, NonNullList<Ingredient> recipeItems, ItemStack recipeOutput){
+        super(id, group, category, recipeWidth, recipeHeight, recipeItems, recipeOutput);
     }
 
     @Override
@@ -48,14 +49,14 @@ public class BackpackUpgradeRecipe extends ShapedRecipe {
         @Override
         public BackpackUpgradeRecipe fromJson(ResourceLocation recipeId, JsonObject json){
             ShapedRecipe recipe = RecipeSerializer.SHAPED_RECIPE.fromJson(recipeId, json);
-            return new BackpackUpgradeRecipe(recipeId, recipe.getGroup(), recipe.getWidth(), recipe.getHeight(), recipe.getIngredients(), recipe.getResultItem());
+            return new BackpackUpgradeRecipe(recipeId, recipe.getGroup(), recipe.category(), recipe.getWidth(), recipe.getHeight(), recipe.getIngredients(), recipe.getResultItem());
         }
 
         @Nullable
         @Override
         public BackpackUpgradeRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer){
             ShapedRecipe recipe = RecipeSerializer.SHAPED_RECIPE.fromNetwork(recipeId, buffer);
-            return new BackpackUpgradeRecipe(recipeId, recipe.getGroup(), recipe.getWidth(), recipe.getHeight(), recipe.getIngredients(), recipe.getResultItem());
+            return new BackpackUpgradeRecipe(recipeId, recipe.getGroup(), recipe.category(), recipe.getWidth(), recipe.getHeight(), recipe.getIngredients(), recipe.getResultItem());
         }
 
         @Override

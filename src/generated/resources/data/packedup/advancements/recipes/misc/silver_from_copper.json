@@ -2,30 +2,33 @@
   "fabric:load_conditions": [
     {
       "condition": "packedup:is_backpack_enabled",
-      "backpack": "gold"
+      "backpack": "copper"
     },
     {
-      "condition": "supermartijn642corelib:not",
-      "value": {
-        "backpack": "diamond",
-        "condition": "packedup:is_backpack_enabled"
-      }
-    },
-    {
-      "condition": "packedup:is_backpack_enabled",
-      "backpack": "obsidian"
+      "condition": "supermartijn642corelib:and",
+      "conditions": [
+        {
+          "backpack": "silver",
+          "condition": "packedup:is_backpack_enabled"
+        },
+        {
+          "registry": "minecraft:item",
+          "tag": "forge:ingots/silver",
+          "condition": "supermartijn642corelib:tag_populated"
+        }
+      ]
     }
   ],
   "parent": "minecraft:recipes/root",
   "display": {
     "icon": {
-      "item": "packedup:obsidianbackpack"
+      "item": "packedup:silverbackpack"
     },
     "title": {
-      "translate": "packedup.advancement.recipes/packedup/obsidian_from_gold.title"
+      "translate": "packedup.advancement.recipes/misc/silver_from_copper.title"
     },
     "description": {
-      "translate": "packedup.advancement.recipes/packedup/obsidian_from_gold.description"
+      "translate": "packedup.advancement.recipes/misc/silver_from_copper.description"
     },
     "frame": "task",
     "show_toast": false,
@@ -36,7 +39,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "packedup:obsidian_from_gold"
+        "recipe": "packedup:silver_from_copper"
       }
     },
     "recipe_condition": {
@@ -45,7 +48,7 @@
         "items": [
           {
             "items": [
-              "packedup:goldbackpack"
+              "packedup:copperbackpack"
             ]
           }
         ]
@@ -60,7 +63,7 @@
   ],
   "rewards": {
     "recipes": [
-      "packedup:obsidian_from_gold"
+      "packedup:silver_from_copper"
     ]
   }
 }

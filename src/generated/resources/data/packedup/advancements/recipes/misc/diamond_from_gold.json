@@ -2,23 +2,23 @@
   "fabric:load_conditions": [
     {
       "condition": "packedup:is_backpack_enabled",
-      "backpack": "iron"
+      "backpack": "gold"
     },
     {
       "condition": "packedup:is_backpack_enabled",
-      "backpack": "gold"
+      "backpack": "diamond"
     }
   ],
   "parent": "minecraft:recipes/root",
   "display": {
     "icon": {
-      "item": "packedup:goldbackpack"
+      "item": "packedup:diamondbackpack"
     },
     "title": {
-      "translate": "packedup.advancement.recipes/packedup/gold_from_iron.title"
+      "translate": "packedup.advancement.recipes/misc/diamond_from_gold.title"
     },
     "description": {
-      "translate": "packedup.advancement.recipes/packedup/gold_from_iron.description"
+      "translate": "packedup.advancement.recipes/misc/diamond_from_gold.description"
     },
     "frame": "task",
     "show_toast": false,
@@ -29,7 +29,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "packedup:gold_from_iron"
+        "recipe": "packedup:diamond_from_gold"
       }
     },
     "recipe_condition": {
@@ -38,7 +38,7 @@
         "items": [
           {
             "items": [
-              "packedup:ironbackpack"
+              "packedup:goldbackpack"
             ]
           }
         ]
@@ -53,7 +53,7 @@
   ],
   "rewards": {
     "recipes": [
-      "packedup:gold_from_iron"
+      "packedup:diamond_from_gold"
     ]
   }
 }

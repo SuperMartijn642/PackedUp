@@ -1,41 +1,38 @@
 {
   "fabric:load_conditions": [
     {
-      "condition": "supermartijn642corelib:and",
-      "conditions": [
-        {
-          "backpack": "silver",
-          "condition": "packedup:is_backpack_enabled"
-        },
-        {
-          "registry": "minecraft:item",
-          "tag": "forge:ingots/silver",
-          "condition": "supermartijn642corelib:tag_populated"
-        }
-      ]
+      "condition": "packedup:is_backpack_enabled",
+      "backpack": "basic"
     },
     {
       "condition": "supermartijn642corelib:not",
       "value": {
-        "backpack": "diamond",
+        "backpack": "iron",
+        "condition": "packedup:is_backpack_enabled"
+      }
+    },
+    {
+      "condition": "supermartijn642corelib:not",
+      "value": {
+        "backpack": "copper",
         "condition": "packedup:is_backpack_enabled"
       }
     },
     {
       "condition": "packedup:is_backpack_enabled",
-      "backpack": "obsidian"
+      "backpack": "gold"
     }
   ],
   "parent": "minecraft:recipes/root",
   "display": {
     "icon": {
-      "item": "packedup:obsidianbackpack"
+      "item": "packedup:goldbackpack"
     },
     "title": {
-      "translate": "packedup.advancement.recipes/packedup/obsidian_from_silver.title"
+      "translate": "packedup.advancement.recipes/misc/gold_from_basic.title"
     },
     "description": {
-      "translate": "packedup.advancement.recipes/packedup/obsidian_from_silver.description"
+      "translate": "packedup.advancement.recipes/misc/gold_from_basic.description"
     },
     "frame": "task",
     "show_toast": false,
@@ -46,7 +43,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "packedup:obsidian_from_silver"
+        "recipe": "packedup:gold_from_basic"
       }
     },
     "recipe_condition": {
@@ -55,7 +52,7 @@
         "items": [
           {
             "items": [
-              "packedup:silverbackpack"
+              "packedup:basicbackpack"
             ]
           }
         ]
@@ -70,7 +67,7 @@
   ],
   "rewards": {
     "recipes": [
-      "packedup:obsidian_from_silver"
+      "packedup:gold_from_basic"
     ]
   }
 }

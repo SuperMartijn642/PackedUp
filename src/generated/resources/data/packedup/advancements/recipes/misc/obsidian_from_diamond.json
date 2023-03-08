@@ -2,23 +2,23 @@
   "fabric:load_conditions": [
     {
       "condition": "packedup:is_backpack_enabled",
-      "backpack": "basic"
+      "backpack": "diamond"
     },
     {
       "condition": "packedup:is_backpack_enabled",
-      "backpack": "copper"
+      "backpack": "obsidian"
     }
   ],
   "parent": "minecraft:recipes/root",
   "display": {
     "icon": {
-      "item": "packedup:copperbackpack"
+      "item": "packedup:obsidianbackpack"
     },
     "title": {
-      "translate": "packedup.advancement.recipes/packedup/copper_from_basic.title"
+      "translate": "packedup.advancement.recipes/misc/obsidian_from_diamond.title"
     },
     "description": {
-      "translate": "packedup.advancement.recipes/packedup/copper_from_basic.description"
+      "translate": "packedup.advancement.recipes/misc/obsidian_from_diamond.description"
     },
     "frame": "task",
     "show_toast": false,
@@ -29,7 +29,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "packedup:copper_from_basic"
+        "recipe": "packedup:obsidian_from_diamond"
       }
     },
     "recipe_condition": {
@@ -38,7 +38,7 @@
         "items": [
           {
             "items": [
-              "packedup:basicbackpack"
+              "packedup:diamondbackpack"
             ]
           }
         ]
@@ -53,7 +53,7 @@
   ],
   "rewards": {
     "recipes": [
-      "packedup:copper_from_basic"
+      "packedup:obsidian_from_diamond"
     ]
   }
 }
