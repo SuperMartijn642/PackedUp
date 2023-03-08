@@ -2,36 +2,26 @@
   "type": "supermartijn642corelib:conditional",
   "conditions": [
     {
-      "backpack": "basic",
-      "type": "packedup:is_backpack_enabled"
+      "type": "packedup:is_backpack_enabled",
+      "backpack": "basic"
     },
     {
-      "condition": {
+      "type": "supermartijn642corelib:not",
+      "value": {
         "backpack": "iron",
-        "type": "packedup:is_backpack_enabled"
-      },
-      "type": "supermartijn642corelib:not"
+        "condition": "packedup:is_backpack_enabled"
+      }
     },
     {
-      "condition": {
-        "conditions": [
-          {
-            "backpack": "copper",
-            "type": "packedup:is_backpack_enabled"
-          },
-          {
-            "registry": "minecraft:item",
-            "tag": "forge:ingots/copper",
-            "type": "supermartijn642corelib:tag_populated"
-          }
-        ],
-        "type": "supermartijn642corelib:and"
-      },
-      "type": "supermartijn642corelib:not"
+      "type": "supermartijn642corelib:not",
+      "value": {
+        "backpack": "copper",
+        "condition": "packedup:is_backpack_enabled"
+      }
     },
     {
-      "backpack": "gold",
-      "type": "packedup:is_backpack_enabled"
+      "type": "packedup:is_backpack_enabled",
+      "backpack": "gold"
     }
   ],
   "recipe": {
@@ -43,10 +33,10 @@
     ],
     "key": {
       "A": {
-        "tag": "forge:ingots/gold"
+        "tag": "c:gold_ingots"
       },
       "B": {
-        "tag": "forge:leather"
+        "item": "minecraft:leather"
       },
       "C": {
         "item": "packedup:basicbackpack"

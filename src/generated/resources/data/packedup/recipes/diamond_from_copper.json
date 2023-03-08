@@ -2,46 +2,36 @@
   "type": "supermartijn642corelib:conditional",
   "conditions": [
     {
-      "conditions": [
-        {
-          "backpack": "copper",
-          "type": "packedup:is_backpack_enabled"
-        },
-        {
-          "registry": "minecraft:item",
-          "tag": "forge:ingots/copper",
-          "type": "supermartijn642corelib:tag_populated"
-        }
-      ],
-      "type": "supermartijn642corelib:and"
+      "type": "packedup:is_backpack_enabled",
+      "backpack": "copper"
     },
     {
-      "condition": {
+      "type": "supermartijn642corelib:not",
+      "value": {
         "conditions": [
           {
             "backpack": "silver",
-            "type": "packedup:is_backpack_enabled"
+            "condition": "packedup:is_backpack_enabled"
           },
           {
             "registry": "minecraft:item",
             "tag": "forge:ingots/silver",
-            "type": "supermartijn642corelib:tag_populated"
+            "condition": "supermartijn642corelib:tag_populated"
           }
         ],
-        "type": "supermartijn642corelib:and"
-      },
-      "type": "supermartijn642corelib:not"
+        "condition": "supermartijn642corelib:and"
+      }
     },
     {
-      "condition": {
+      "type": "supermartijn642corelib:not",
+      "value": {
         "backpack": "gold",
-        "type": "packedup:is_backpack_enabled"
-      },
-      "type": "supermartijn642corelib:not"
+        "condition": "packedup:is_backpack_enabled"
+      }
     },
     {
-      "backpack": "diamond",
-      "type": "packedup:is_backpack_enabled"
+      "type": "packedup:is_backpack_enabled",
+      "backpack": "diamond"
     }
   ],
   "recipe": {
@@ -53,16 +43,16 @@
     ],
     "key": {
       "A": {
-        "tag": "forge:gems/diamond"
+        "tag": "c:diamonds"
       },
       "B": {
-        "tag": "forge:ingots/copper"
+        "tag": "c:copper_ingots"
       },
       "C": {
         "item": "packedup:copperbackpack"
       },
       "D": {
-        "tag": "forge:glass"
+        "tag": "c:glass_blocks"
       }
     },
     "result": {

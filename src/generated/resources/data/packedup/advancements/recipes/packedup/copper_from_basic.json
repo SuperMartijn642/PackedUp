@@ -1,22 +1,12 @@
 {
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "backpack": "basic",
-      "type": "packedup:is_backpack_enabled"
+      "condition": "packedup:is_backpack_enabled",
+      "backpack": "basic"
     },
     {
-      "conditions": [
-        {
-          "backpack": "copper",
-          "type": "packedup:is_backpack_enabled"
-        },
-        {
-          "registry": "minecraft:item",
-          "tag": "forge:ingots/copper",
-          "type": "supermartijn642corelib:tag_populated"
-        }
-      ],
-      "type": "supermartijn642corelib:and"
+      "condition": "packedup:is_backpack_enabled",
+      "backpack": "copper"
     }
   ],
   "parent": "minecraft:recipes/root",

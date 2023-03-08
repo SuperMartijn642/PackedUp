@@ -2,19 +2,19 @@
   "type": "supermartijn642corelib:conditional",
   "conditions": [
     {
-      "backpack": "gold",
-      "type": "packedup:is_backpack_enabled"
+      "type": "packedup:is_backpack_enabled",
+      "backpack": "gold"
     },
     {
-      "condition": {
+      "type": "supermartijn642corelib:not",
+      "value": {
         "backpack": "diamond",
-        "type": "packedup:is_backpack_enabled"
-      },
-      "type": "supermartijn642corelib:not"
+        "condition": "packedup:is_backpack_enabled"
+      }
     },
     {
-      "backpack": "obsidian",
-      "type": "packedup:is_backpack_enabled"
+      "type": "packedup:is_backpack_enabled",
+      "backpack": "obsidian"
     }
   ],
   "recipe": {
@@ -26,10 +26,10 @@
     ],
     "key": {
       "A": {
-        "tag": "forge:obsidian"
+        "item": "minecraft:obsidian"
       },
       "B": {
-        "tag": "forge:ingots/gold"
+        "tag": "c:gold_ingots"
       },
       "C": {
         "item": "packedup:goldbackpack"

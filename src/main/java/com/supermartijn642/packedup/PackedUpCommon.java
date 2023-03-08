@@ -2,25 +2,18 @@ package com.supermartijn642.packedup;
 
 import com.supermartijn642.core.CommonUtils;
 import com.supermartijn642.core.TextComponents;
+import com.supermartijn642.packedup.extensions.PackedUpPlayer;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.event.entity.living.LivingDropsEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Created 2/7/2020 by SuperMartijn642
  */
-@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class PackedUpCommon {
 
     public static void openBackpackInventory(ItemStack stack, Player player, int bagSlot){
@@ -37,34 +30,25 @@ public class PackedUpCommon {
         CommonUtils.openContainer(new BackpackContainer(player, bagSlot, name, inventoryIndex, type, inventory.bagsInThisBag, inventory.bagsThisBagIsIn, inventory.layer));
     }
 
-    @SubscribeEvent
-    public static void onPlayerDeath(LivingDropsEvent e){
-        if(e.getEntity() instanceof Player && PackedUpConfig.keepBackpacksOnDeath.get() && !e.isCanceled()){
-            List<ItemEntity> stacksToBeSaved = e.getDrops().stream()
-                .filter(itemEntity -> itemEntity.isAlive() && !itemEntity.getItem().isEmpty() && itemEntity.getItem().getItem() instanceof BackpackItem)
-                .collect(Collectors.toList());
-
-            if(!stacksToBeSaved.isEmpty()){
-                stacksToBeSaved.forEach(e.getDrops()::remove);
-
-                ListTag itemData = new ListTag();
-                stacksToBeSaved.stream().map(ItemEntity::getItem)
-                    .forEach(stack -> itemData.add(stack.serializeNBT()));
-
-                e.getEntity().getPersistentData().put("packedup:backpacks", itemData);
+    public static void onPlayerDeath(Player player){
+        if(PackedUpConfig.keepBackpacksOnDeath.get()){
+            List<ItemStack> stacksToBeSaved = new ArrayList<>();
+            for(int index = 0; index < player.getInventory().getContainerSize(); index++){
+                ItemStack stack = player.getInventory().getItem(index);
+                if(!stack.isEmpty() && stack.getItem() instanceof BackpackItem){
+                    stacksToBeSaved.add(stack.copy());
+                    player.getInventory().setItem(index, ItemStack.EMPTY);
+                }
             }
+            ((PackedUpPlayer)player).packedupSetBackpacks(stacksToBeSaved);
         }
     }
 
-    @SubscribeEvent
-    public static void onPlayerClone(PlayerEvent.Clone e){
-        if(e.getOriginal().getPersistentData().contains("packedup:backpacks", Tag.TAG_LIST)){
-            ListTag itemData = e.getOriginal().getPersistentData().getList("packedup:backpacks", Tag.TAG_COMPOUND);
-            itemData.stream()
-                .filter(CompoundTag.class::isInstance)
-                .map(CompoundTag.class::cast)
-                .map(ItemStack::of)
-                .forEach(stack -> e.getPlayer().getInventory().placeItemBackInInventory(stack));
+    public static void onPlayerClone(Player newPlayer, Player oldPlayer){
+        List<ItemStack> backpacks = ((PackedUpPlayer)oldPlayer).packedupGetBackpacks();
+        if(backpacks != null){
+            backpacks.forEach(newPlayer.getInventory()::placeItemBackInInventory);
+            ((PackedUpPlayer)oldPlayer).packedupSetBackpacks(null);
         }
     }
 }

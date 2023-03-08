@@ -2,70 +2,60 @@
   "type": "supermartijn642corelib:conditional",
   "conditions": [
     {
-      "condition": {
+      "type": "supermartijn642corelib:not",
+      "value": {
         "backpack": "basic",
-        "type": "packedup:is_backpack_enabled"
-      },
-      "type": "supermartijn642corelib:not"
+        "condition": "packedup:is_backpack_enabled"
+      }
     },
     {
-      "condition": {
+      "type": "supermartijn642corelib:not",
+      "value": {
         "backpack": "iron",
-        "type": "packedup:is_backpack_enabled"
-      },
-      "type": "supermartijn642corelib:not"
+        "condition": "packedup:is_backpack_enabled"
+      }
     },
     {
-      "condition": {
-        "conditions": [
-          {
-            "backpack": "copper",
-            "type": "packedup:is_backpack_enabled"
-          },
-          {
-            "registry": "minecraft:item",
-            "tag": "forge:ingots/copper",
-            "type": "supermartijn642corelib:tag_populated"
-          }
-        ],
-        "type": "supermartijn642corelib:and"
-      },
-      "type": "supermartijn642corelib:not"
+      "type": "supermartijn642corelib:not",
+      "value": {
+        "backpack": "copper",
+        "condition": "packedup:is_backpack_enabled"
+      }
     },
     {
-      "condition": {
+      "type": "supermartijn642corelib:not",
+      "value": {
         "conditions": [
           {
             "backpack": "silver",
-            "type": "packedup:is_backpack_enabled"
+            "condition": "packedup:is_backpack_enabled"
           },
           {
             "registry": "minecraft:item",
             "tag": "forge:ingots/silver",
-            "type": "supermartijn642corelib:tag_populated"
+            "condition": "supermartijn642corelib:tag_populated"
           }
         ],
-        "type": "supermartijn642corelib:and"
-      },
-      "type": "supermartijn642corelib:not"
+        "condition": "supermartijn642corelib:and"
+      }
     },
     {
-      "condition": {
+      "type": "supermartijn642corelib:not",
+      "value": {
         "backpack": "gold",
-        "type": "packedup:is_backpack_enabled"
-      },
-      "type": "supermartijn642corelib:not"
+        "condition": "packedup:is_backpack_enabled"
+      }
     },
     {
-      "condition": {
+      "type": "supermartijn642corelib:not",
+      "value": {
         "backpack": "diamond",
-        "type": "packedup:is_backpack_enabled"
-      },
-      "type": "supermartijn642corelib:not"
+        "condition": "packedup:is_backpack_enabled"
+      }
     },
     {
-      "backpack": "obsidian",
-      "type": "packedup:is_backpack_enabled"
+      "type": "packedup:is_backpack_enabled",
+      "backpack": "obsidian"
     }
   ],
   "recipe": {
@@ -77,16 +67,16 @@
     ],
     "key": {
       "A": {
-        "tag": "forge:leather"
+        "item": "minecraft:leather"
       },
       "B": {
-        "tag": "forge:string"
+        "item": "minecraft:string"
       },
       "C": {
-        "tag": "forge:obsidian"
+        "item": "minecraft:obsidian"
       },
       "D": {
-        "tag": "forge:chests/wooden"
+        "item": "minecraft:chest"
       }
     },
     "result": {

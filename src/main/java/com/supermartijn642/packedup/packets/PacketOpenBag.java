@@ -1,10 +1,11 @@
 package com.supermartijn642.packedup.packets;
 
+import com.supermartijn642.core.CommonUtils;
 import com.supermartijn642.core.network.BasePacket;
 import com.supermartijn642.core.network.PacketContext;
 import com.supermartijn642.packedup.BackpackItem;
 import com.supermartijn642.packedup.PackedUpCommon;
-import com.supermartijn642.packedup.compat.Compatibility;
+import com.supermartijn642.packedup.compat.PackedUpTrinketsIntegration;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -31,7 +32,7 @@ public class PacketOpenBag implements BasePacket {
         Player player = context.getSendingPlayer();
         if(player != null){
             Inventory inventory = player.getInventory();
-            if(!Compatibility.CURIOS.openBackpack(player)){
+            if(!CommonUtils.isModLoaded("trinkets") || !PackedUpTrinketsIntegration.openBackpack(player)){
                 for(int i = 0; i < inventory.getContainerSize(); i++){
                     ItemStack stack = inventory.getItem(i);
                     if(stack.getItem() instanceof BackpackItem)

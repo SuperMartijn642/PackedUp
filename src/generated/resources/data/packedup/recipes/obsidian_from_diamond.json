@@ -2,12 +2,12 @@
   "type": "supermartijn642corelib:conditional",
   "conditions": [
     {
-      "backpack": "diamond",
-      "type": "packedup:is_backpack_enabled"
+      "type": "packedup:is_backpack_enabled",
+      "backpack": "diamond"
     },
     {
-      "backpack": "obsidian",
-      "type": "packedup:is_backpack_enabled"
+      "type": "packedup:is_backpack_enabled",
+      "backpack": "obsidian"
     }
   ],
   "recipe": {
@@ -19,10 +19,10 @@
     ],
     "key": {
       "A": {
-        "tag": "forge:obsidian"
+        "item": "minecraft:obsidian"
       },
       "B": {
-        "tag": "forge:gems/diamond"
+        "tag": "c:diamonds"
       },
       "C": {
         "item": "packedup:diamondbackpack"

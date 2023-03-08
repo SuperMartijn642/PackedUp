@@ -2,12 +2,12 @@
   "type": "supermartijn642corelib:conditional",
   "conditions": [
     {
-      "backpack": "gold",
-      "type": "packedup:is_backpack_enabled"
+      "type": "packedup:is_backpack_enabled",
+      "backpack": "gold"
     },
     {
-      "backpack": "diamond",
-      "type": "packedup:is_backpack_enabled"
+      "type": "packedup:is_backpack_enabled",
+      "backpack": "diamond"
     }
   ],
   "recipe": {
@@ -19,16 +19,16 @@
     ],
     "key": {
       "A": {
-        "tag": "forge:gems/diamond"
+        "tag": "c:diamonds"
       },
       "B": {
-        "tag": "forge:ingots/gold"
+        "tag": "c:gold_ingots"
       },
       "C": {
         "item": "packedup:goldbackpack"
       },
       "D": {
-        "tag": "forge:glass"
+        "tag": "c:glass_blocks"
       }
     },
     "result": {

@@ -1,12 +1,12 @@
 {
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "backpack": "iron",
-      "type": "packedup:is_backpack_enabled"
+      "condition": "packedup:is_backpack_enabled",
+      "backpack": "iron"
     },
     {
-      "backpack": "gold",
-      "type": "packedup:is_backpack_enabled"
+      "condition": "packedup:is_backpack_enabled",
+      "backpack": "gold"
     }
   ],
   "parent": "minecraft:recipes/root",

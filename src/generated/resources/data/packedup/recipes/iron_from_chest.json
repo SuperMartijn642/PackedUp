@@ -2,15 +2,15 @@
   "type": "supermartijn642corelib:conditional",
   "conditions": [
     {
-      "condition": {
+      "type": "supermartijn642corelib:not",
+      "value": {
         "backpack": "basic",
-        "type": "packedup:is_backpack_enabled"
-      },
-      "type": "supermartijn642corelib:not"
+        "condition": "packedup:is_backpack_enabled"
+      }
     },
     {
-      "backpack": "iron",
-      "type": "packedup:is_backpack_enabled"
+      "type": "packedup:is_backpack_enabled",
+      "backpack": "iron"
     }
   ],
   "recipe": {
@@ -22,16 +22,16 @@
     ],
     "key": {
       "A": {
-        "tag": "forge:leather"
+        "item": "minecraft:leather"
       },
       "B": {
-        "tag": "forge:string"
+        "item": "minecraft:string"
       },
       "C": {
-        "tag": "forge:ingots/iron"
+        "tag": "c:iron_ingots"
       },
       "D": {
-        "tag": "forge:chests/wooden"
+        "item": "minecraft:chest"
       }
     },
     "result": {

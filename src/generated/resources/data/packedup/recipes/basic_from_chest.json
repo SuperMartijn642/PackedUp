@@ -2,8 +2,8 @@
   "type": "supermartijn642corelib:conditional",
   "conditions": [
     {
-      "backpack": "basic",
-      "type": "packedup:is_backpack_enabled"
+      "type": "packedup:is_backpack_enabled",
+      "backpack": "basic"
     }
   ],
   "recipe": {
@@ -15,16 +15,16 @@
     ],
     "key": {
       "A": {
-        "tag": "forge:rods/wooden"
+        "item": "minecraft:stick"
       },
       "B": {
-        "tag": "forge:string"
+        "item": "minecraft:string"
       },
       "C": {
-        "tag": "forge:leather"
+        "item": "minecraft:leather"
       },
       "D": {
-        "tag": "forge:chests/wooden"
+        "item": "minecraft:chest"
       }
     },
     "result": {

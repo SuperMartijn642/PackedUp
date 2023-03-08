@@ -1,46 +1,36 @@
 {
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "backpack": "basic",
-      "type": "packedup:is_backpack_enabled"
+      "condition": "packedup:is_backpack_enabled",
+      "backpack": "basic"
     },
     {
-      "condition": {
+      "condition": "supermartijn642corelib:not",
+      "value": {
         "backpack": "iron",
-        "type": "packedup:is_backpack_enabled"
-      },
-      "type": "supermartijn642corelib:not"
+        "condition": "packedup:is_backpack_enabled"
+      }
     },
     {
-      "condition": {
-        "conditions": [
-          {
-            "backpack": "copper",
-            "type": "packedup:is_backpack_enabled"
-          },
-          {
-            "registry": "minecraft:item",
-            "tag": "forge:ingots/copper",
-            "type": "supermartijn642corelib:tag_populated"
-          }
-        ],
-        "type": "supermartijn642corelib:and"
-      },
-      "type": "supermartijn642corelib:not"
+      "condition": "supermartijn642corelib:not",
+      "value": {
+        "backpack": "copper",
+        "condition": "packedup:is_backpack_enabled"
+      }
     },
     {
+      "condition": "supermartijn642corelib:and",
       "conditions": [
         {
           "backpack": "silver",
-          "type": "packedup:is_backpack_enabled"
+          "condition": "packedup:is_backpack_enabled"
         },
         {
           "registry": "minecraft:item",
           "tag": "forge:ingots/silver",
-          "type": "supermartijn642corelib:tag_populated"
+          "condition": "supermartijn642corelib:tag_populated"
         }
-      ],
-      "type": "supermartijn642corelib:and"
+      ]
     }
   ],
   "parent": "minecraft:recipes/root",

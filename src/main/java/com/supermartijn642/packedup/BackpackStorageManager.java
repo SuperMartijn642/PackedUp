@@ -1,12 +1,10 @@
 package com.supermartijn642.packedup;
 
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.storage.LevelResource;
-import net.minecraftforge.event.world.WorldEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 
 import java.io.File;
 import java.util.HashMap;
@@ -17,7 +15,6 @@ import java.util.function.Supplier;
 /**
  * Created 2/7/2020 by SuperMartijn642
  */
-@Mod.EventBusSubscriber
 public class BackpackStorageManager {
 
     private static File directory;
@@ -27,19 +24,20 @@ public class BackpackStorageManager {
 
     public static final Supplier<Integer> maxLayers = () -> PackedUpConfig.allowBagInBag.get() ? PackedUpConfig.maxBagInBagLayer.get() : 0;
 
-    @SubscribeEvent
-    public static void onLevelSave(WorldEvent.Save event){
-        if(event.getWorld().isClientSide() || !(event.getWorld() instanceof Level) || (((Level)event.getWorld()).dimension() != Level.OVERWORLD && System.currentTimeMillis() - lastSaveTimestamp < 30000))
+    public static void registerEventListeners(){
+        ServerWorldEvents.LOAD.register((server, level) -> onLevelLoad(level));
+    }
+
+    public static void onLevelSave(ServerLevel level){
+        if(level.dimension() != Level.OVERWORLD && System.currentTimeMillis() - lastSaveTimestamp < 30000)
             return;
         save();
     }
 
-    @SubscribeEvent
-    public static void onLevelLoad(WorldEvent.Load event){
-        if(event.getWorld().isClientSide() || !(event.getWorld() instanceof Level) || ((Level)event.getWorld()).dimension() != Level.OVERWORLD)
+    public static void onLevelLoad(ServerLevel level){
+        if(level.isClientSide() || level.dimension() != Level.OVERWORLD)
             return;
-        ServerLevel world = (ServerLevel)event.getWorld();
-        directory = new File(world.getServer().getWorldPath(LevelResource.ROOT).toFile(), "packedup/backpacks");
+        directory = new File(level.getServer().getWorldPath(LevelResource.ROOT).toFile(), "packedup/backpacks");
         load();
     }
 

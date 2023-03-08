@@ -1,39 +1,29 @@
 {
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "condition": {
+      "condition": "supermartijn642corelib:not",
+      "value": {
         "backpack": "basic",
-        "type": "packedup:is_backpack_enabled"
-      },
-      "type": "supermartijn642corelib:not"
+        "condition": "packedup:is_backpack_enabled"
+      }
     },
     {
-      "condition": {
+      "condition": "supermartijn642corelib:not",
+      "value": {
         "backpack": "iron",
-        "type": "packedup:is_backpack_enabled"
-      },
-      "type": "supermartijn642corelib:not"
+        "condition": "packedup:is_backpack_enabled"
+      }
     },
     {
-      "condition": {
-        "conditions": [
-          {
-            "backpack": "copper",
-            "type": "packedup:is_backpack_enabled"
-          },
-          {
-            "registry": "minecraft:item",
-            "tag": "forge:ingots/copper",
-            "type": "supermartijn642corelib:tag_populated"
-          }
-        ],
-        "type": "supermartijn642corelib:and"
-      },
-      "type": "supermartijn642corelib:not"
+      "condition": "supermartijn642corelib:not",
+      "value": {
+        "backpack": "copper",
+        "condition": "packedup:is_backpack_enabled"
+      }
     },
     {
-      "backpack": "gold",
-      "type": "packedup:is_backpack_enabled"
+      "condition": "packedup:is_backpack_enabled",
+      "backpack": "gold"
     }
   ],
   "parent": "minecraft:recipes/root",
@@ -64,7 +54,9 @@
       "conditions": {
         "items": [
           {
-            "tag": "forge:chests/wooden"
+            "items": [
+              "minecraft:chest"
+            ]
           }
         ]
       }

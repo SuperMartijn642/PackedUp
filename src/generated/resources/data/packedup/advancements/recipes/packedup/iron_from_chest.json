@@ -1,15 +1,15 @@
 {
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "condition": {
+      "condition": "supermartijn642corelib:not",
+      "value": {
         "backpack": "basic",
-        "type": "packedup:is_backpack_enabled"
-      },
-      "type": "supermartijn642corelib:not"
+        "condition": "packedup:is_backpack_enabled"
+      }
     },
     {
-      "backpack": "iron",
-      "type": "packedup:is_backpack_enabled"
+      "condition": "packedup:is_backpack_enabled",
+      "backpack": "iron"
     }
   ],
   "parent": "minecraft:recipes/root",
@@ -40,7 +40,9 @@
       "conditions": {
         "items": [
           {
-            "tag": "forge:chests/wooden"
+            "items": [
+              "minecraft:chest"
+            ]
           }
         ]
       }

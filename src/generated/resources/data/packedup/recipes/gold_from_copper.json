@@ -2,22 +2,12 @@
   "type": "supermartijn642corelib:conditional",
   "conditions": [
     {
-      "conditions": [
-        {
-          "backpack": "copper",
-          "type": "packedup:is_backpack_enabled"
-        },
-        {
-          "registry": "minecraft:item",
-          "tag": "forge:ingots/copper",
-          "type": "supermartijn642corelib:tag_populated"
-        }
-      ],
-      "type": "supermartijn642corelib:and"
+      "type": "packedup:is_backpack_enabled",
+      "backpack": "copper"
     },
     {
-      "backpack": "gold",
-      "type": "packedup:is_backpack_enabled"
+      "type": "packedup:is_backpack_enabled",
+      "backpack": "gold"
     }
   ],
   "recipe": {
@@ -29,10 +19,10 @@
     ],
     "key": {
       "A": {
-        "tag": "forge:ingots/gold"
+        "tag": "c:gold_ingots"
       },
       "B": {
-        "tag": "forge:ingots/copper"
+        "tag": "c:copper_ingots"
       },
       "C": {
         "item": "packedup:copperbackpack"

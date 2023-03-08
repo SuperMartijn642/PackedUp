@@ -2,12 +2,12 @@
   "type": "supermartijn642corelib:conditional",
   "conditions": [
     {
-      "backpack": "iron",
-      "type": "packedup:is_backpack_enabled"
+      "type": "packedup:is_backpack_enabled",
+      "backpack": "iron"
     },
     {
-      "backpack": "gold",
-      "type": "packedup:is_backpack_enabled"
+      "type": "packedup:is_backpack_enabled",
+      "backpack": "gold"
     }
   ],
   "recipe": {
@@ -19,10 +19,10 @@
     ],
     "key": {
       "A": {
-        "tag": "forge:ingots/gold"
+        "tag": "c:gold_ingots"
       },
       "B": {
-        "tag": "forge:ingots/iron"
+        "tag": "c:gold_ingots"
       },
       "C": {
         "item": "packedup:ironbackpack"

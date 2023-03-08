@@ -11,9 +11,8 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraftforge.registries.ForgeRegistryEntry;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import java.util.Map;
 
 /**
@@ -44,19 +43,19 @@ public class BackpackUpgradeRecipe extends ShapedRecipe {
         return this.getResultItem().copy();
     }
 
-    private static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<BackpackUpgradeRecipe> {
+    private static class Serializer implements RecipeSerializer<BackpackUpgradeRecipe> {
 
         @Override
         public BackpackUpgradeRecipe fromJson(ResourceLocation recipeId, JsonObject json){
             ShapedRecipe recipe = RecipeSerializer.SHAPED_RECIPE.fromJson(recipeId, json);
-            return new BackpackUpgradeRecipe(recipeId, recipe.getGroup(), recipe.getRecipeWidth(), recipe.getRecipeHeight(), recipe.getIngredients(), recipe.getResultItem());
+            return new BackpackUpgradeRecipe(recipeId, recipe.getGroup(), recipe.getWidth(), recipe.getHeight(), recipe.getIngredients(), recipe.getResultItem());
         }
 
         @Nullable
         @Override
         public BackpackUpgradeRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer){
             ShapedRecipe recipe = RecipeSerializer.SHAPED_RECIPE.fromNetwork(recipeId, buffer);
-            return new BackpackUpgradeRecipe(recipeId, recipe.getGroup(), recipe.getRecipeWidth(), recipe.getRecipeHeight(), recipe.getIngredients(), recipe.getResultItem());
+            return new BackpackUpgradeRecipe(recipeId, recipe.getGroup(), recipe.getWidth(), recipe.getHeight(), recipe.getIngredients(), recipe.getResultItem());
         }
 
         @Override

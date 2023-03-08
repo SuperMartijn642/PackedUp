@@ -1,8 +1,8 @@
 {
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "backpack": "basic",
-      "type": "packedup:is_backpack_enabled"
+      "condition": "packedup:is_backpack_enabled",
+      "backpack": "basic"
     }
   ],
   "parent": "minecraft:recipes/root",
@@ -33,7 +33,9 @@
       "conditions": {
         "items": [
           {
-            "tag": "forge:chests/wooden"
+            "items": [
+              "minecraft:chest"
+            ]
           }
         ]
       }
