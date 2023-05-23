@@ -15,6 +15,11 @@ public class BackpackSlot extends DummySlot {
     }
 
     @Override
+    public void initialize(ItemStack stack){
+        this.set(stack);
+    }
+
+    @Override
     public ItemStack getItem(){
         return this.inventory.getStackInSlot(this.index);
     }
