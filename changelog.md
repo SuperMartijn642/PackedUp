@@ -1,3 +1,6 @@
+### Packed Up 1.0.28b
+- Fixed backpacks always appearing empty
+
 ### Packed Up 1.0.28a
 - Fixed missing Trinkets slot
 
