@@ -1,9 +1,9 @@
 package com.supermartijn642.packedup;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.supermartijn642.core.TextComponents;
 import com.supermartijn642.core.gui.ScreenUtils;
 import com.supermartijn642.core.gui.widget.BaseWidget;
+import com.supermartijn642.core.gui.widget.WidgetRenderContext;
 import com.supermartijn642.core.gui.widget.premade.TextFieldWidget;
 import com.supermartijn642.packedup.packets.PacketRename;
 import net.minecraft.network.chat.Component;
@@ -39,10 +39,10 @@ public class BackpackRenameScreen extends BaseWidget {
     }
 
     @Override
-    public void render(PoseStack poseStack, int mouseX, int mouseY){
-        ScreenUtils.drawScreenBackground(poseStack, 0, 0, this.width(), this.height());
-        ScreenUtils.drawString(poseStack, TextComponents.translation("packedup.rename_screen.name_field").get(), this.nameField.left() + 2, 8, 4210752);
+    public void render(WidgetRenderContext context, int mouseX, int mouseY){
+        ScreenUtils.drawScreenBackground(context.poseStack(), 0, 0, this.width(), this.height());
+        ScreenUtils.drawString(context.poseStack(), TextComponents.translation("packedup.rename_screen.name_field").get(), this.nameField.left() + 2, 8, 4210752);
 
-        super.render(poseStack, mouseX, mouseY);
+        super.render(context, mouseX, mouseY);
     }
 }
