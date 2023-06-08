@@ -26,7 +26,7 @@ public class BackpackContainer extends BaseContainer {
         this.bagName = bagName;
         this.type = type;
 
-        this.inventory = player.level.isClientSide ?
+        this.inventory = player.level().isClientSide ?
             new BackpackInventory(true, inventoryIndex, type.getSlots(), bagsInThisBag, bagsThisBagIsIn, layer) :
             BackpackStorageManager.getInventory(inventoryIndex);
 
@@ -114,7 +114,7 @@ public class BackpackContainer extends BaseContainer {
                 int playerSlot = index - this.type.getSlots();
                 if(playerSlot >= 0)
                     playerSlot += playerSlot < 27 ? 9 : -27;
-                if(!player.level.isClientSide)
+                if(!player.level().isClientSide)
                     PackedUpCommon.openBackpackInventory(stack, player, playerSlot < 0 ? this.bagSlot : playerSlot);
                 return;
             }

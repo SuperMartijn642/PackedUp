@@ -1,4 +1,20 @@
-// 1.19.3	2023-01-16T23:41:50.0580575	Resource Generator 5
+// 1.20	2023-06-08T15:45:55.6963851	Core Lib Generators
+aa8f43dd8f38a67043bd549a68498b388f78506f assets/minecraft/atlases/blocks.json
+fabf09342d269ec6e53d5a7d22c73fad6410f09c assets/packedup/lang/en_us.json
+056a43a3f55ad6faaa200de8ea27c1552a752676 assets/packedup/models/item/basicbackpack.json
+9c5f5b2d30ca359a123b68d06ed526ba8dda33cb assets/packedup/models/item/copperbackpack.json
+a5466479330043c3cf8fd4dd88e3240699e33c9f assets/packedup/models/item/diamondbackpack.json
+4bdfafc82d5db1aa9300294da1728a774987d15a assets/packedup/models/item/goldbackpack.json
+6a57f5721379ece2e3624b4b1ba1b36ecdb617a1 assets/packedup/models/item/ironbackpack.json
+6ae169b92e0feedf029f13a7325938400c73452c assets/packedup/models/item/obsidianbackpack.json
+7f18eb08cd05946655007f824714b48e1f7ed755 assets/packedup/models/item/silverbackpack.json
+fc2b5f70a9cadf0f4e2b51d8b7c2a3ff070134b3 data/curios/tags/items/back.json
+8a23702b05296c8af5014d6aa6e9265ded85c7d9 data/forge/tags/items/ingots/copper.json
+8a23702b05296c8af5014d6aa6e9265ded85c7d9 data/forge/tags/items/ingots/silver.json
+ebec4627ba13df4ba6cbab5f919b7e46ffa0c209 data/packedup/advancements/basic_backpack.json
+47d46a76bd048eb30e6dce640f9a673cea199a36 data/packedup/advancements/diamond_backpack.json
+8223613023b953b6cae809fb8b0396fc1a0285f0 data/packedup/advancements/iron_or_copper_backpack.json
+ad5f3e7759cd0e05c0358fcb19d204b43edd26d5 data/packedup/advancements/obsidian_backpack.json
 b1504b4a0743a532b6994bf73f027667bf8b7982 data/packedup/advancements/recipes/misc/basic_from_chest.json
 97240075417427bdbbd8c2343838d35b5a9e34ec data/packedup/advancements/recipes/misc/copper_from_basic.json
 54fd194a896c67e3b80ba6346502cf96b775deca data/packedup/advancements/recipes/misc/copper_from_chest.json
@@ -25,6 +41,7 @@ feced14db8a89df84c6e1f9eaf1855a18ef0b04c data/packedup/advancements/recipes/misc
 e5eeeb76a137f06b61b53a05c397490fa937be7d data/packedup/advancements/recipes/misc/silver_from_chest.json
 d133a21d16c3b87a0354df2da44dc6f4aae80104 data/packedup/advancements/recipes/misc/silver_from_copper.json
 1540010bf0dc998d250b2d5e1b590ad66f930fe8 data/packedup/advancements/recipes/misc/silver_from_iron.json
+45a4b9dcdffb557fb0635366f1265707fe5bf0c4 data/packedup/advancements/silver_or_gold_backpack.json
 4ebce573bd74918f73b1b9543722e526852aa4b3 data/packedup/recipes/basic_from_chest.json
 158f1797671b3a7613c95edc94cc3897896b86af data/packedup/recipes/copper_from_basic.json
 9d8c2ea19c3664780f071548cc081f277f6dcd41 data/packedup/recipes/copper_from_chest.json
