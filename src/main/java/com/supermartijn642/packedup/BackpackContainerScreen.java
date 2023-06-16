@@ -35,7 +35,7 @@ public class BackpackContainerScreen extends BaseContainerWidget<BackpackContain
 
     @Override
     public int width(){
-        return this.container.type.getColumns() > 9 ? 176 + (this.container.type.getColumns() - 9 * 18) : 176;
+        return this.container.type.getColumns() > 9 ? 14 + this.container.type.getColumns() * 18 : 176;
     }
 
     @Override
