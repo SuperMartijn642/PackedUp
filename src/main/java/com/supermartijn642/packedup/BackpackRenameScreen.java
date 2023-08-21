@@ -1,11 +1,13 @@
 package com.supermartijn642.packedup;
 
+import com.supermartijn642.core.ClientUtils;
 import com.supermartijn642.core.TextComponents;
 import com.supermartijn642.core.gui.ScreenUtils;
 import com.supermartijn642.core.gui.widget.BaseWidget;
 import com.supermartijn642.core.gui.widget.WidgetRenderContext;
 import com.supermartijn642.core.gui.widget.premade.TextFieldWidget;
 import com.supermartijn642.packedup.packets.PacketRename;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
 
 /**
@@ -44,5 +46,15 @@ public class BackpackRenameScreen extends BaseWidget {
         ScreenUtils.drawString(context.poseStack(), TextComponents.translation("packedup.rename_screen.name_field").get(), this.nameField.left() + 2, 8, 4210752);
 
         super.render(context, mouseX, mouseY);
+    }
+
+    @Override
+    public boolean keyPressed(int keyCode, boolean hasBeenHandled){
+        if(!hasBeenHandled && keyCode == 257 /* Enter */){
+            ((LocalPlayer)ClientUtils.getPlayer()).closeContainer();
+            hasBeenHandled = true;
+        }
+        hasBeenHandled |= super.keyPressed(keyCode, hasBeenHandled);
+        return hasBeenHandled;
     }
 }

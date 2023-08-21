@@ -16,7 +16,7 @@ import net.minecraft.network.chat.Component;
  */
 public class PackedUpClient implements ClientModInitializer {
 
-    private static KeyMapping OPEN_BAG_KEY;
+    public static KeyMapping OPEN_BAG_KEY;
 
     @Override
     public void onInitializeClient(){
