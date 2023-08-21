@@ -14,6 +14,7 @@ import net.minecraft.util.text.ITextComponent;
 public class BackpackContainerScreen extends BaseContainerWidget<BackpackContainer> {
 
     private static final ResourceLocation CORNERS = new ResourceLocation("packedup", "textures/corners.png");
+    private static final int[] KEY_CODE_MAP = new int[]{-1, 256, 49, 50, 51, 52, 53, 54, 55, 56, 57, 48, 45, 61, 259, 258, 81, 87, 69, 82, 84, 89, 85, 73, 79, 80, 91, 93, 257, 341, 65, 83, 68, 70, 71, 72, 74, 75, 76, 59, 39, 96, 340, 92, 90, 88, 67, 86, 66, 78, 77, 44, 46, 47, 344, 332, 342, 32, 280, 290, 291, 292, 293, 294, 295, 296, 297, 298, 299, 282, 281, 327, 328, 329, 333, 324, 325, 326, 334, 321, 322, 323, 320, 330, -1, -1, -1, 300, 301, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 302, 303, 304, 305, 306, 307, -1, -1, -1, -1, -1, -1, -1, 308, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 336, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 335, 345, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 44, -1, 331, -1, 348, 346, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 284, -1, 268, 265, 266, -1, 263, -1, 262, -1, 269, 264, 267, 260, 261, -1, -1, -1, -1, -1, -1, -1, 343, 347, -1, -1, -1};
 
     private ITextComponent displayName;
 
@@ -73,6 +74,16 @@ public class BackpackContainerScreen extends BaseContainerWidget<BackpackContain
         ScreenUtils.drawString(ClientUtils.getPlayer().inventory.getDisplayName(), 8.0F + Math.max(0, offset), this.height() - 96 + 3, 4210752);
 
         super.renderForeground(mouseX, mouseY);
+    }
+
+    @Override
+    public boolean keyPressed(int keyCode, boolean hasBeenHandled){
+        hasBeenHandled |= super.keyPressed(keyCode, hasBeenHandled);
+        if(!hasBeenHandled && PackedUpClient.OPEN_BAG_KEY.getKeyCode() < KEY_CODE_MAP.length && KEY_CODE_MAP[PackedUpClient.OPEN_BAG_KEY.getKeyCode()] == keyCode){
+            this.container.player.closeScreen();
+            hasBeenHandled = true;
+        }
+        return hasBeenHandled;
     }
 
     private static ITextComponent trimText(ITextComponent textComponent, int width){

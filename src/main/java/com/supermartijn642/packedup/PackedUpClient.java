@@ -21,7 +21,7 @@ import net.minecraftforge.fml.relauncher.Side;
 @Mod.EventBusSubscriber(Side.CLIENT)
 public class PackedUpClient {
 
-    private static KeyBinding OPEN_BAG_KEY;
+    public static KeyBinding OPEN_BAG_KEY;
 
     public static void register(){
         ClientRegistrationHandler handler = ClientRegistrationHandler.get("packedup");
