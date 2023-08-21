@@ -6,6 +6,7 @@ import com.supermartijn642.core.TextComponents;
 import com.supermartijn642.core.gui.ScreenUtils;
 import com.supermartijn642.core.gui.widget.BaseContainerWidget;
 import net.minecraft.client.gui.Font;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
@@ -74,6 +75,16 @@ public class BackpackContainerScreen extends BaseContainerWidget<BackpackContain
         ScreenUtils.drawString(poseStack, ClientUtils.getPlayer().getInventory().getDisplayName(), 8.0F + Math.max(0, offset), this.height() - 96 + 3, 4210752);
 
         super.renderForeground(poseStack, mouseX, mouseY);
+    }
+
+    @Override
+    public boolean keyPressed(int keyCode, boolean hasBeenHandled){
+        hasBeenHandled |= super.keyPressed(keyCode, hasBeenHandled);
+        if(!hasBeenHandled && PackedUpClient.OPEN_BAG_KEY.matches(keyCode, -1)){
+            ((LocalPlayer)this.container.player).closeContainer();
+            hasBeenHandled = true;
+        }
+        return hasBeenHandled;
     }
 
     private static Component trimText(Component textComponent, int width){
