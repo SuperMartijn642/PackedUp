@@ -1,6 +1,7 @@
 package com.supermartijn642.packedup;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.supermartijn642.core.ClientUtils;
 import com.supermartijn642.core.TextComponents;
 import com.supermartijn642.core.gui.ScreenUtils;
 import com.supermartijn642.core.gui.widget.BaseWidget;
@@ -44,5 +45,15 @@ public class BackpackRenameScreen extends BaseWidget {
         ScreenUtils.drawString(poseStack, TextComponents.translation("packedup.rename_screen.name_field").get(), this.nameField.left() + 2, 8, 4210752);
 
         super.render(poseStack, mouseX, mouseY);
+    }
+
+    @Override
+    public boolean keyPressed(int keyCode, boolean hasBeenHandled){
+        if(!hasBeenHandled && keyCode == 257 /* Enter */){
+            ClientUtils.getPlayer().closeContainer();
+            hasBeenHandled = true;
+        }
+        hasBeenHandled |= super.keyPressed(keyCode, hasBeenHandled);
+        return hasBeenHandled;
     }
 }

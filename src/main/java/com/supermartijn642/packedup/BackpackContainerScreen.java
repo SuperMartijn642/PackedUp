@@ -76,6 +76,16 @@ public class BackpackContainerScreen extends BaseContainerWidget<BackpackContain
         super.renderForeground(poseStack, mouseX, mouseY);
     }
 
+    @Override
+    public boolean keyPressed(int keyCode, boolean hasBeenHandled){
+        hasBeenHandled |= super.keyPressed(keyCode, hasBeenHandled);
+        if(!hasBeenHandled && PackedUpClient.OPEN_BAG_KEY.matches(keyCode, -1)){
+            this.container.player.closeContainer();
+            hasBeenHandled = true;
+        }
+        return hasBeenHandled;
+    }
+
     private static Component trimText(Component textComponent, int width){
         String text = TextComponents.format(textComponent);
         Font font = ClientUtils.getFontRenderer();

@@ -21,7 +21,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 @Mod.EventBusSubscriber(value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class PackedUpClient {
 
-    private static KeyMapping OPEN_BAG_KEY;
+    public static KeyMapping OPEN_BAG_KEY;
 
     public static void register(){
         ClientRegistrationHandler handler = ClientRegistrationHandler.get("packedup");
