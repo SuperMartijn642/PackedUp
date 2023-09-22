@@ -2,29 +2,41 @@
   "type": "supermartijn642corelib:conditional",
   "conditions": [
     {
-      "conditions": [
-        {
-          "backpack": "silver",
-          "type": "packedup:is_backpack_enabled"
-        },
-        {
-          "registry": "minecraft:item",
-          "tag": "forge:ingots/silver",
-          "type": "supermartijn642corelib:tag_populated"
+      "type": "supermartijn642corelib:and",
+      "value": {
+        "conditions": [
+          {
+            "type": "packedup:is_backpack_enabled",
+            "value": {
+              "backpack": "silver"
+            }
+          },
+          {
+            "type": "supermartijn642corelib:tag_populated",
+            "value": {
+              "registry": "minecraft:item",
+              "tag": "forge:ingots/silver"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "supermartijn642corelib:not",
+      "value": {
+        "condition": {
+          "type": "packedup:is_backpack_enabled",
+          "value": {
+            "backpack": "diamond"
+          }
         }
-      ],
-      "type": "supermartijn642corelib:and"
+      }
     },
     {
-      "condition": {
-        "backpack": "diamond",
-        "type": "packedup:is_backpack_enabled"
-      },
-      "type": "supermartijn642corelib:not"
-    },
-    {
-      "backpack": "obsidian",
-      "type": "packedup:is_backpack_enabled"
+      "type": "packedup:is_backpack_enabled",
+      "value": {
+        "backpack": "obsidian"
+      }
     }
   ],
   "recipe": {

@@ -39,10 +39,9 @@ dependencies {
 
     // Core library
 //    implementation fg.deobf("curse.maven:supermartijn642s-core-lib-454372:${project.core_library_file}")
-    implementation fg.deobf("com.supermartijn642:supermartijn642corelib:1.1.9-forge-mc1.20")
+    implementation fg.deobf("com.supermartijn642:supermartijn642corelib:1.1.12-forge-mc1.20.2")
     // Config library
-//    implementation fg.deobf("curse.maven:supermartijn642s-config-lib-438332:${project.config_library_file}")
-    implementation fg.deobf("com.supermartijn642:supermartijn642configlib:1.1.6-forge-mc1.20")
+    implementation fg.deobf("curse.maven:supermartijn642s-config-lib-438332:${project.config_library_file}")
 
     // Curios
     compileOnly fg.deobf("curse.maven:curios-309927:${project.curios_file}")

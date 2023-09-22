@@ -1,8 +1,10 @@
 {
   "conditions": [
     {
-      "backpack": "basic",
-      "type": "packedup:is_backpack_enabled"
+      "type": "packedup:is_backpack_enabled",
+      "value": {
+        "backpack": "basic"
+      }
     }
   ],
   "parent": "minecraft:recipes/root",

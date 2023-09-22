@@ -1,22 +1,30 @@
 {
   "conditions": [
     {
-      "conditions": [
-        {
-          "backpack": "silver",
-          "type": "packedup:is_backpack_enabled"
-        },
-        {
-          "registry": "minecraft:item",
-          "tag": "forge:ingots/silver",
-          "type": "supermartijn642corelib:tag_populated"
-        }
-      ],
-      "type": "supermartijn642corelib:and"
+      "type": "supermartijn642corelib:and",
+      "value": {
+        "conditions": [
+          {
+            "type": "packedup:is_backpack_enabled",
+            "value": {
+              "backpack": "silver"
+            }
+          },
+          {
+            "type": "supermartijn642corelib:tag_populated",
+            "value": {
+              "registry": "minecraft:item",
+              "tag": "forge:ingots/silver"
+            }
+          }
+        ]
+      }
     },
     {
-      "backpack": "diamond",
-      "type": "packedup:is_backpack_enabled"
+      "type": "packedup:is_backpack_enabled",
+      "value": {
+        "backpack": "diamond"
+      }
     }
   ],
   "parent": "minecraft:recipes/root",

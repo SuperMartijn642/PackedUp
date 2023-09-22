@@ -1,15 +1,21 @@
 {
   "conditions": [
     {
-      "condition": {
-        "backpack": "basic",
-        "type": "packedup:is_backpack_enabled"
-      },
-      "type": "supermartijn642corelib:not"
+      "type": "supermartijn642corelib:not",
+      "value": {
+        "condition": {
+          "type": "packedup:is_backpack_enabled",
+          "value": {
+            "backpack": "basic"
+          }
+        }
+      }
     },
     {
-      "backpack": "iron",
-      "type": "packedup:is_backpack_enabled"
+      "type": "packedup:is_backpack_enabled",
+      "value": {
+        "backpack": "iron"
+      }
     }
   ],
   "parent": "minecraft:recipes/root",

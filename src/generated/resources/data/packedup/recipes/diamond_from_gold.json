@@ -2,12 +2,16 @@
   "type": "supermartijn642corelib:conditional",
   "conditions": [
     {
-      "backpack": "gold",
-      "type": "packedup:is_backpack_enabled"
+      "type": "packedup:is_backpack_enabled",
+      "value": {
+        "backpack": "gold"
+      }
     },
     {
-      "backpack": "diamond",
-      "type": "packedup:is_backpack_enabled"
+      "type": "packedup:is_backpack_enabled",
+      "value": {
+        "backpack": "diamond"
+      }
     }
   ],
   "recipe": {

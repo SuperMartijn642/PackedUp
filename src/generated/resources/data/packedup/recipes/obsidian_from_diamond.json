@@ -2,12 +2,16 @@
   "type": "supermartijn642corelib:conditional",
   "conditions": [
     {
-      "backpack": "diamond",
-      "type": "packedup:is_backpack_enabled"
+      "type": "packedup:is_backpack_enabled",
+      "value": {
+        "backpack": "diamond"
+      }
     },
     {
-      "backpack": "obsidian",
-      "type": "packedup:is_backpack_enabled"
+      "type": "packedup:is_backpack_enabled",
+      "value": {
+        "backpack": "obsidian"
+      }
     }
   ],
   "recipe": {
