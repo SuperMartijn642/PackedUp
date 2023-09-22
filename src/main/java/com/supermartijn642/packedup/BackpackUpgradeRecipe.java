@@ -1,10 +1,10 @@
 package com.supermartijn642.packedup;
 
-import com.google.gson.JsonObject;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.DataResult;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CraftingBookCategory;
@@ -24,8 +24,8 @@ public class BackpackUpgradeRecipe extends ShapedRecipe {
 
     public static final RecipeSerializer<BackpackUpgradeRecipe> SERIALIZER = new Serializer();
 
-    public BackpackUpgradeRecipe(ResourceLocation id, String group, CraftingBookCategory category, int recipeWidth, int recipeHeight, NonNullList<Ingredient> recipeItems, ItemStack recipeOutput){
-        super(id, group, category, recipeWidth, recipeHeight, recipeItems, recipeOutput);
+    public BackpackUpgradeRecipe(String group, CraftingBookCategory category, int recipeWidth, int recipeHeight, NonNullList<Ingredient> recipeItems, ItemStack recipeOutput, boolean showNotifications){
+        super(group, category, recipeWidth, recipeHeight, recipeItems, recipeOutput, showNotifications);
     }
 
     @Override
@@ -47,22 +47,30 @@ public class BackpackUpgradeRecipe extends ShapedRecipe {
 
     private static class Serializer implements RecipeSerializer<BackpackUpgradeRecipe> {
 
+        private static final Codec<BackpackUpgradeRecipe> CODEC = new ShapedRecipe.Serializer().codec()
+            .flatXmap(
+                shapedRecipe -> DataResult.success(fromShapedRecipe(shapedRecipe)),
+                DataResult::success
+            );
+
         @Override
-        public BackpackUpgradeRecipe fromJson(ResourceLocation recipeId, JsonObject json){
-            ShapedRecipe recipe = RecipeSerializer.SHAPED_RECIPE.fromJson(recipeId, json);
-            return new BackpackUpgradeRecipe(recipeId, recipe.getGroup(), recipe.category(), recipe.getWidth(), recipe.getHeight(), recipe.getIngredients(), recipe.getResultItem(null));
+        public Codec<BackpackUpgradeRecipe> codec(){
+            return CODEC;
         }
 
-        @Nullable
         @Override
-        public BackpackUpgradeRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer){
-            ShapedRecipe recipe = RecipeSerializer.SHAPED_RECIPE.fromNetwork(recipeId, buffer);
-            return new BackpackUpgradeRecipe(recipeId, recipe.getGroup(), recipe.category(), recipe.getWidth(), recipe.getHeight(), recipe.getIngredients(), recipe.getResultItem(null));
+        public @Nullable BackpackUpgradeRecipe fromNetwork(FriendlyByteBuf buffer){
+            //noinspection DataFlowIssue
+            return fromShapedRecipe(RecipeSerializer.SHAPED_RECIPE.fromNetwork(buffer));
         }
 
         @Override
         public void toNetwork(FriendlyByteBuf buffer, BackpackUpgradeRecipe recipe){
             RecipeSerializer.SHAPED_RECIPE.toNetwork(buffer, recipe);
+        }
+
+        private static BackpackUpgradeRecipe fromShapedRecipe(ShapedRecipe recipe){
+            return new BackpackUpgradeRecipe(recipe.getGroup(), recipe.category(), recipe.getWidth(), recipe.getHeight(), recipe.getIngredients(), recipe.getResultItem(null), recipe.showNotification());
         }
     }
 }
