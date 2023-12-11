@@ -2,18 +2,16 @@ package com.supermartijn642.packedup;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
-import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CraftingBookCategory;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.ShapedRecipe;
+import net.minecraft.world.item.crafting.ShapedRecipePattern;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
 
@@ -24,8 +22,8 @@ public class BackpackUpgradeRecipe extends ShapedRecipe {
 
     public static final RecipeSerializer<BackpackUpgradeRecipe> SERIALIZER = new Serializer();
 
-    public BackpackUpgradeRecipe(String group, CraftingBookCategory category, int recipeWidth, int recipeHeight, NonNullList<Ingredient> recipeItems, ItemStack recipeOutput, boolean showNotifications){
-        super(group, category, recipeWidth, recipeHeight, recipeItems, recipeOutput, showNotifications);
+    public BackpackUpgradeRecipe(String group, CraftingBookCategory category, ShapedRecipePattern pattern, ItemStack recipeOutput, boolean showNotifications){
+        super(group, category, pattern, recipeOutput, showNotifications);
     }
 
     @Override
@@ -59,8 +57,7 @@ public class BackpackUpgradeRecipe extends ShapedRecipe {
         }
 
         @Override
-        public @Nullable BackpackUpgradeRecipe fromNetwork(FriendlyByteBuf buffer){
-            //noinspection DataFlowIssue
+        public BackpackUpgradeRecipe fromNetwork(FriendlyByteBuf buffer){
             return fromShapedRecipe(RecipeSerializer.SHAPED_RECIPE.fromNetwork(buffer));
         }
 
@@ -70,7 +67,7 @@ public class BackpackUpgradeRecipe extends ShapedRecipe {
         }
 
         private static BackpackUpgradeRecipe fromShapedRecipe(ShapedRecipe recipe){
-            return new BackpackUpgradeRecipe(recipe.getGroup(), recipe.category(), recipe.getWidth(), recipe.getHeight(), recipe.getIngredients(), recipe.getResultItem(null), recipe.showNotification());
+            return new BackpackUpgradeRecipe(recipe.getGroup(), recipe.category(), recipe.pattern, recipe.getResultItem(null), recipe.showNotification());
         }
     }
 }
