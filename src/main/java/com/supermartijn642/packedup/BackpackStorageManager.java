@@ -1,5 +1,6 @@
 package com.supermartijn642.packedup;
 
+import com.supermartijn642.core.util.Holder;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -8,11 +9,14 @@ import net.minecraftforge.event.level.LevelEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Supplier;
+import java.util.stream.Stream;
 
 /**
  * Created 2/7/2020 by SuperMartijn642
@@ -20,7 +24,7 @@ import java.util.function.Supplier;
 @Mod.EventBusSubscriber
 public class BackpackStorageManager {
 
-    private static File directory;
+    private static Path directory;
     private static long lastSaveTimestamp = 0;
     private static final HashMap<Integer,BackpackInventory> inventories = new HashMap<>();
     private static int inventoryIndex = 0;
@@ -39,15 +43,15 @@ public class BackpackStorageManager {
         if(event.getLevel().isClientSide() || !(event.getLevel() instanceof Level) || ((Level)event.getLevel()).dimension() != Level.OVERWORLD)
             return;
         ServerLevel world = (ServerLevel)event.getLevel();
-        directory = new File(world.getServer().getWorldPath(LevelResource.ROOT).toFile(), "packedup/backpacks");
+        directory = world.getServer().getWorldPath(LevelResource.ROOT).resolve("packedup/backpacks");
         load();
     }
 
     public static BackpackInventory getInventory(int index){
         BackpackInventory inventory = inventories.get(index);
         if(inventory == null){
-            File file = new File(directory, "inventory" + index + ".nbt");
-            if(file.exists()){
+            Path file = directory.resolve("inventory" + index + ".nbt");
+            if(Files.exists(file)){
                 inventory = new BackpackInventory(false, index);
                 inventory.load(file);
                 inventories.put(index, inventory);
@@ -63,41 +67,51 @@ public class BackpackStorageManager {
     }
 
     public static void save(){
-        directory.mkdirs();
+        try{
+            Files.createDirectories(directory);
+        }catch(IOException e){
+            e.printStackTrace();
+            return;
+        }
         for(int i : inventories.keySet())
-            inventories.get(i).save(new File(directory, "inventory" + i + ".nbt"));
+            inventories.get(i).save(directory.resolve("inventory" + i + ".nbt"));
         lastSaveTimestamp = System.currentTimeMillis();
     }
 
     public static void load(){
-        File[] files = directory.listFiles();
         inventories.clear();
-        if(files == null)
-            files = new File[0];
-        int highest = -1;
-        for(File file : files){
-            String name = file.getName();
-            if(!name.startsWith("inventory") || !name.endsWith(".nbt"))
-                continue;
-            int index;
-            try{
-                index = Integer.parseInt(name.substring("inventory".length(), name.length() - ".nbt".length()));
-            }catch(NumberFormatException e){continue;}
-            if(index > highest)
-                highest = index;
+        Holder<Integer> highest = new Holder<>(-1);
+        try(Stream<Path> files = Files.list(directory)){
+            files.forEach(file -> {
+                if(Files.isRegularFile(file))
+                    return;
+                String name = file.getFileName().toString();
+                if(!name.startsWith("inventory") || !name.endsWith(".nbt"))
+                    return;
+                int index;
+                try{
+                    index = Integer.parseInt(name.substring("inventory".length(), name.length() - ".nbt".length()));
+                }catch(NumberFormatException e){
+                    return;
+                }
+                if(index > highest.get())
+                    highest.set(index);
 
-            // for validation
-            BackpackInventory inventory = new BackpackInventory(false, index);
-            inventory.load(file);
-            inventory.bagsThisBagIsIn.clear();
-            inventory.bagsThisBagIsDirectlyIn.clear();
-            inventory.bagsInThisBag.clear();
-            inventory.bagsDirectlyInThisBag.clear();
-            inventory.layer = 0;
-            inventories.put(index, inventory);
+                // for validation
+                BackpackInventory inventory = new BackpackInventory(false, index);
+                inventory.load(file);
+                inventory.bagsThisBagIsIn.clear();
+                inventory.bagsThisBagIsDirectlyIn.clear();
+                inventory.bagsInThisBag.clear();
+                inventory.bagsDirectlyInThisBag.clear();
+                inventory.layer = 0;
+                inventories.put(index, inventory);
+            });
+        }catch(IOException e){
+            e.printStackTrace();
         }
 
-        inventoryIndex = highest + 1;
+        inventoryIndex = highest.get() + 1;
 
         // validation
         for(Map.Entry<Integer,BackpackInventory> entry : inventories.entrySet()){
