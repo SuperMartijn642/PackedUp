@@ -79,34 +79,36 @@ public class BackpackStorageManager {
     public static void load(){
         inventories.clear();
         Holder<Integer> highest = new Holder<>(-1);
-        try(Stream<Path> files = Files.list(directory)){
-            files.forEach(file -> {
-                if(Files.isRegularFile(file))
-                    return;
-                String name = file.getFileName().toString();
-                if(!name.startsWith("inventory") || !name.endsWith(".nbt"))
-                    return;
-                int index;
-                try{
-                    index = Integer.parseInt(name.substring("inventory".length(), name.length() - ".nbt".length()));
-                }catch(NumberFormatException e){
-                    return;
-                }
-                if(index > highest.get())
-                    highest.set(index);
+        if(Files.exists(directory)){
+            try(Stream<Path> files = Files.list(directory)){
+                files.forEach(file -> {
+                    if(!Files.isRegularFile(file))
+                        return;
+                    String name = file.getFileName().toString();
+                    if(!name.startsWith("inventory") || !name.endsWith(".nbt"))
+                        return;
+                    int index;
+                    try{
+                        index = Integer.parseInt(name.substring("inventory".length(), name.length() - ".nbt".length()));
+                    }catch(NumberFormatException e){
+                        return;
+                    }
+                    if(index > highest.get())
+                        highest.set(index);
 
-                // for validation
-                BackpackInventory inventory = new BackpackInventory(false, index);
-                inventory.load(file);
-                inventory.bagsThisBagIsIn.clear();
-                inventory.bagsThisBagIsDirectlyIn.clear();
-                inventory.bagsInThisBag.clear();
-                inventory.bagsDirectlyInThisBag.clear();
-                inventory.layer = 0;
-                inventories.put(index, inventory);
-            });
-        }catch(IOException e){
-            e.printStackTrace();
+                    // for validation
+                    BackpackInventory inventory = new BackpackInventory(false, index);
+                    inventory.load(file);
+                    inventory.bagsThisBagIsIn.clear();
+                    inventory.bagsThisBagIsDirectlyIn.clear();
+                    inventory.bagsInThisBag.clear();
+                    inventory.bagsDirectlyInThisBag.clear();
+                    inventory.layer = 0;
+                    inventories.put(index, inventory);
+                });
+            }catch(IOException e){
+                e.printStackTrace();
+            }
         }
 
         inventoryIndex = highest.get() + 1;
