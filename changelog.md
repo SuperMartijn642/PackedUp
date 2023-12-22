@@ -1,3 +1,6 @@
+### Packed Up 1.0.30b
+- Fixed backpack data not loading properly
+
 ### Packed Up 1.0.30a
 - Fixed backpack upgrade recipes not working
 
