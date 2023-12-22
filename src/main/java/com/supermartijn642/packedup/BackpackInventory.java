@@ -8,10 +8,10 @@ import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.ShulkerBoxBlock;
-import net.minecraftforge.items.IItemHandlerModifiable;
+import net.neoforged.neoforge.items.IItemHandlerModifiable;
 
 import javax.annotation.Nonnull;
-import java.io.File;
+import java.nio.file.Path;
 import java.util.*;
 
 /**
@@ -144,7 +144,7 @@ public class BackpackInventory implements IItemHandlerModifiable {
         return stack1.isEmpty() || stack2.isEmpty() || (stack1.getItem() == stack2.getItem() && stack1.getDamageValue() == stack2.getDamageValue() && ItemStack.isSameItemSameTags(stack1, stack2));
     }
 
-    public void save(File file){
+    public void save(Path file){
         CompoundTag compound = new CompoundTag();
         compound.putInt("stacks", this.stacks.size());
         for(int slot = 0; slot < this.stacks.size(); slot++)
@@ -154,10 +154,12 @@ public class BackpackInventory implements IItemHandlerModifiable {
         compound.putInt("layer", this.layer);
         try{
             NbtIo.write(compound, file);
-        }catch(Exception e){e.printStackTrace();}
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
-    public void load(File file){
+    public void load(Path file){
         CompoundTag compound;
         try{
             compound = NbtIo.read(file);

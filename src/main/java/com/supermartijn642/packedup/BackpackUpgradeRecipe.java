@@ -1,16 +1,16 @@
 package com.supermartijn642.packedup;
 
 import com.mojang.serialization.Codec;
-import com.mojang.serialization.DataResult;
-import net.minecraft.core.NonNullList;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CraftingBookCategory;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.ShapedRecipe;
+import net.minecraft.world.item.crafting.ShapedRecipePattern;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 
@@ -24,10 +24,20 @@ public class BackpackUpgradeRecipe extends ShapedRecipe {
 
     public static final RecipeSerializer<BackpackUpgradeRecipe> SERIALIZER = new Serializer();
 
-    public BackpackUpgradeRecipe(String group, CraftingBookCategory category, int recipeWidth, int recipeHeight, NonNullList<Ingredient> recipeItems, ItemStack recipeOutput, boolean showNotifications){
-        super(group, category, recipeWidth, recipeHeight, recipeItems, recipeOutput, showNotifications);
-    }
+    private final String group;
+    private final CraftingBookCategory category;
+    private final ShapedRecipePattern pattern;
+    private final ItemStack result;
+    private final boolean showNotification;
 
+    public BackpackUpgradeRecipe(String group, CraftingBookCategory category, ShapedRecipePattern pattern, ItemStack recipeOutput, boolean showNotification){
+        super(group, category, pattern, recipeOutput, showNotification);
+        this.group = group;
+        this.category = category;
+        this.pattern = pattern;
+        this.result = recipeOutput;
+        this.showNotification = showNotification;
+    }
 
     @Override
     public ItemStack assemble(CraftingContainer inventory, RegistryAccess registryAccess){
@@ -48,11 +58,14 @@ public class BackpackUpgradeRecipe extends ShapedRecipe {
 
     private static class Serializer implements RecipeSerializer<BackpackUpgradeRecipe> {
 
-        private static final Codec<BackpackUpgradeRecipe> CODEC = new ShapedRecipe.Serializer().codec()
-            .flatXmap(
-                shapedRecipe -> DataResult.success(fromShapedRecipe(shapedRecipe)),
-                DataResult::success
-            );
+        private static final Codec<BackpackUpgradeRecipe> CODEC = RecordCodecBuilder.create(instance ->
+            instance.group(
+                ExtraCodecs.strictOptionalField(Codec.STRING, "group", "").forGetter(recipe -> recipe.group),
+                CraftingBookCategory.CODEC.fieldOf("category").orElse(CraftingBookCategory.MISC).forGetter(recipe -> recipe.category),
+                ShapedRecipePattern.MAP_CODEC.forGetter(recipe -> recipe.pattern),
+                ItemStack.ITEM_WITH_COUNT_CODEC.fieldOf("result").forGetter(recipe -> recipe.result),
+                ExtraCodecs.strictOptionalField(Codec.BOOL, "show_notification", true).forGetter(recipe -> recipe.showNotification)
+            ).apply(instance, BackpackUpgradeRecipe::new));
 
         @Override
         public Codec<BackpackUpgradeRecipe> codec(){
@@ -71,7 +84,7 @@ public class BackpackUpgradeRecipe extends ShapedRecipe {
         }
 
         private static BackpackUpgradeRecipe fromShapedRecipe(ShapedRecipe recipe){
-            return new BackpackUpgradeRecipe(recipe.getGroup(), recipe.category(), recipe.getRecipeWidth(), recipe.getRecipeHeight(), recipe.getIngredients(), recipe.getResultItem(null), recipe.showNotification());
+            return new BackpackUpgradeRecipe(recipe.getGroup(), recipe.category(), recipe.pattern, recipe.getResultItem(null), recipe.showNotification());
         }
     }
 }

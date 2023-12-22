@@ -1,5 +1,6 @@
 package com.supermartijn642.packedup;
 
+import com.supermartijn642.core.CommonUtils;
 import com.supermartijn642.core.gui.BaseContainerType;
 import com.supermartijn642.core.item.CreativeItemGroup;
 import com.supermartijn642.core.network.PacketChannel;
@@ -12,13 +13,11 @@ import com.supermartijn642.packedup.packets.PacketOpenBag;
 import com.supermartijn642.packedup.packets.PacketRename;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.fml.InterModComms;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.InterModComms;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.fml.event.lifecycle.InterModEnqueueEvent;
 import top.theillusivec4.curios.api.SlotTypeMessage;
 
 import java.util.HashSet;
@@ -52,15 +51,16 @@ public class PackedUp {
 
     public static final CreativeModeTab ITEM_GROUP = CreativeItemGroup.create("packedup", () -> basicbackpack);
 
-    public PackedUp(){
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::init);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::interModEnqueue);
+    public PackedUp(IEventBus eventBus){
+        eventBus.addListener(this::init);
+        eventBus.addListener(this::interModEnqueue);
 
         CHANNEL.registerMessage(PacketRename.class, PacketRename::new, true);
         CHANNEL.registerMessage(PacketOpenBag.class, PacketOpenBag::new, true);
 
         register();
-        DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> PackedUpClient::register);
+        if(CommonUtils.getEnvironmentSide().isClient())
+            PackedUpClient.register();
         registerGenerators();
     }
 

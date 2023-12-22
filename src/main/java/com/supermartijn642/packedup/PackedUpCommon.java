@@ -9,10 +9,10 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.event.entity.living.LivingDropsEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.event.entity.living.LivingDropsEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -49,7 +49,7 @@ public class PackedUpCommon {
 
                 ListTag itemData = new ListTag();
                 stacksToBeSaved.stream().map(ItemEntity::getItem)
-                    .forEach(stack -> itemData.add(stack.serializeNBT()));
+                    .forEach(stack -> itemData.add(stack.save(new CompoundTag())));
 
                 e.getEntity().getPersistentData().put("packedup:backpacks", itemData);
             }

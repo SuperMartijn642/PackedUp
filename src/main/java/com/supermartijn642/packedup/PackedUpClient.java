@@ -7,12 +7,12 @@ import com.supermartijn642.core.registry.ClientRegistrationHandler;
 import com.supermartijn642.packedup.packets.PacketOpenBag;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.network.chat.Component;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.InputEvent;
-import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.client.event.InputEvent;
+import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
+import net.neoforged.neoforge.common.NeoForge;
 
 /**
  * Created 2/7/2020 by SuperMartijn642
@@ -33,7 +33,7 @@ public class PackedUpClient {
         // Register key to open backpack in inventory or curious slot
         OPEN_BAG_KEY = new KeyMapping("packedup.keys.openbag", 79/*'o'*/, "packedup.keys.category");
         e.register(OPEN_BAG_KEY);
-        MinecraftForge.EVENT_BUS.addListener(PackedUpClient::onKey);
+        NeoForge.EVENT_BUS.addListener(PackedUpClient::onKey);
     }
 
     public static void openBackpackRenameScreen(String defaultName, String name){

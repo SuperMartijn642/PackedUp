@@ -12,7 +12,7 @@ import com.supermartijn642.packedup.PackedUp;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
-import net.minecraftforge.common.Tags;
+import net.neoforged.neoforge.common.Tags;
 
 /**
  * Created 14/11/2022 by SuperMartijn642
@@ -89,7 +89,7 @@ public class PackedUpRecipeGenerator extends RecipeGenerator {
             .condition(copperEnabled);
 
         // Silver
-        TagKey<Item> silverIngots = TagKey.create(Registries.ITEMS.getForgeRegistry().getRegistryKey(), new ResourceLocation("forge", "ingots/silver"));
+        TagKey<Item> silverIngots = TagKey.create(Registries.ITEMS.getVanillaRegistry().key(), new ResourceLocation("forge", "ingots/silver"));
         ResourceCondition silverEnabled = new BackpackRecipeCondition(BackpackType.SILVER).and(new TagPopulatedResourceCondition(Registries.ITEMS, new ResourceLocation("forge", "ingots/silver")));
         this.shaped("silver_from_chest", PackedUp.silverbackpack)
             .pattern("ABA")
