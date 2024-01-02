@@ -1,3 +1,6 @@
+### Packed Up 1.0.30c
+- Fixed the recipe for the golden backpack
+
 ### Packed Up 1.0.30b
 - Fixed backpack data not loading properly
 
