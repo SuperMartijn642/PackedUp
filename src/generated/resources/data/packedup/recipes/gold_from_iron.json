@@ -22,7 +22,7 @@
         "tag": "c:gold_ingots"
       },
       "B": {
-        "tag": "c:gold_ingots"
+        "tag": "c:iron_ingots"
       },
       "C": {
         "item": "packedup:ironbackpack"
