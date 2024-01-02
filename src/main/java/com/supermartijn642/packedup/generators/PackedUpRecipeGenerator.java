@@ -176,7 +176,7 @@ public class PackedUpRecipeGenerator extends RecipeGenerator {
             .pattern("ACA")
             .pattern("AAA")
             .input('A', ConventionalItemTags.GOLD_INGOTS)
-            .input('B', ConventionalItemTags.GOLD_INGOTS)
+            .input('B', ConventionalItemTags.IRON_INGOTS)
             .input('C', PackedUp.ironbackpack)
             .unlockedBy(PackedUp.ironbackpack)
             .condition(ironEnabled)
