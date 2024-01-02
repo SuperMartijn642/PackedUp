@@ -1,4 +1,4 @@
-// 1.19.4	2023-05-16T16:08:07.5662507	Packed Up/Packed Up Recipe Generator
+// 1.19.4	2024-01-02T21:09:18.4991586	Packed Up/Packed Up Recipe Generator
 48e09c08dcb6a532d1823128494d09375db2c059 data\packedup\recipes\copper_from_basic.json
 122c9682b6b19a67ae2592d6199f4b30be947979 data\packedup\recipes\obsidian_from_basic.json
 932b47e298aa6b2544948fdef8bceb6b23326162 data\packedup\recipes\obsidian_from_diamond.json
@@ -11,7 +11,7 @@ bd1ff49330b7f1c0656604b7701978a34c2518f1 data\packedup\advancements\recipes\misc
 0afd1afc12314dfde929b3a26dfb42b5462a506b data\packedup\advancements\recipes\misc\obsidian_from_gold.json
 c43d47db8b334d9ce48a1eb022876bf59b867100 data\packedup\advancements\recipes\misc\diamond_from_iron.json
 22598dd559b1402e02068c5f26f3fadcdb24c167 data\packedup\recipes\diamond_from_copper.json
-bb9542b9451e332260bdc34ebfa9109a485a20ff data\packedup\recipes\gold_from_iron.json
+c1824436bf75fde0e15453e5ae68bbd8a655594c data\packedup\recipes\gold_from_iron.json
 a989f9f4acdd6f2b75466249ad5845f845fab2f0 data\packedup\advancements\recipes\misc\silver_from_chest.json
 80295bbd49e649757137c16381b7e52c3adf294d data\packedup\recipes\gold_from_basic.json
 c96b349be92d94768c612094c84fe455a2533b4c data\packedup\recipes\gold_from_copper.json
