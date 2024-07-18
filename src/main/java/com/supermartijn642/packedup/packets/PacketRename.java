@@ -4,6 +4,7 @@ import com.supermartijn642.core.TextComponents;
 import com.supermartijn642.core.network.BasePacket;
 import com.supermartijn642.core.network.PacketContext;
 import com.supermartijn642.packedup.BackpackItem;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
@@ -47,9 +48,9 @@ public class PacketRename implements BasePacket {
                 return;
 
             if(this.name == null || this.name.isEmpty() || this.name.equals(TextComponents.item(stack.getItem()).format()))
-                stack.resetHoverName();
+                stack.remove(DataComponents.CUSTOM_NAME);
             else
-                stack.setHoverName(TextComponents.string(this.name).get());
+                stack.set(DataComponents.CUSTOM_NAME, TextComponents.string(this.name).get());
         }
     }
 }

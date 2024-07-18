@@ -1,50 +1,22 @@
 {
-  "type": "supermartijn642corelib:conditional",
-  "conditions": [
-    {
-      "type": "packedup:is_backpack_enabled",
-      "value": {
-        "backpack": "gold"
-      }
-    },
-    {
-      "type": "supermartijn642corelib:not",
-      "value": {
-        "condition": {
-          "type": "packedup:is_backpack_enabled",
-          "value": {
-            "backpack": "diamond"
-          }
-        }
-      }
-    },
-    {
-      "type": "packedup:is_backpack_enabled",
-      "value": {
-        "backpack": "obsidian"
-      }
-    }
+  "type": "packedup:upgrade_backpack",
+  "pattern": [
+    "ABA",
+    "ACA",
+    "AAA"
   ],
-  "recipe": {
-    "type": "packedup:upgrade_backpack",
-    "pattern": [
-      "ABA",
-      "ACA",
-      "AAA"
-    ],
-    "key": {
-      "A": {
-        "tag": "forge:obsidian"
-      },
-      "B": {
-        "tag": "forge:ingots/gold"
-      },
-      "C": {
-        "item": "packedup:goldbackpack"
-      }
+  "key": {
+    "A": {
+      "tag": "c:obsidians"
     },
-    "result": {
-      "item": "packedup:obsidianbackpack"
+    "B": {
+      "tag": "c:ingots/gold"
+    },
+    "C": {
+      "item": "packedup:goldbackpack"
     }
+  },
+  "result": {
+    "id": "packedup:obsidianbackpack"
   }
 }

@@ -1,78 +1,25 @@
 {
-  "type": "supermartijn642corelib:conditional",
-  "conditions": [
-    {
-      "type": "packedup:is_backpack_enabled",
-      "value": {
-        "backpack": "iron"
-      }
-    },
-    {
-      "type": "supermartijn642corelib:not",
-      "value": {
-        "condition": {
-          "type": "supermartijn642corelib:and",
-          "value": {
-            "conditions": [
-              {
-                "type": "packedup:is_backpack_enabled",
-                "value": {
-                  "backpack": "silver"
-                }
-              },
-              {
-                "type": "supermartijn642corelib:tag_populated",
-                "value": {
-                  "registry": "minecraft:item",
-                  "tag": "forge:ingots/silver"
-                }
-              }
-            ]
-          }
-        }
-      }
-    },
-    {
-      "type": "supermartijn642corelib:not",
-      "value": {
-        "condition": {
-          "type": "packedup:is_backpack_enabled",
-          "value": {
-            "backpack": "gold"
-          }
-        }
-      }
-    },
-    {
-      "type": "packedup:is_backpack_enabled",
-      "value": {
-        "backpack": "diamond"
-      }
-    }
+  "type": "packedup:upgrade_backpack",
+  "pattern": [
+    "ABA",
+    "ACA",
+    "DDD"
   ],
-  "recipe": {
-    "type": "packedup:upgrade_backpack",
-    "pattern": [
-      "ABA",
-      "ACA",
-      "DDD"
-    ],
-    "key": {
-      "A": {
-        "tag": "forge:gems/diamond"
-      },
-      "B": {
-        "tag": "forge:ingots/iron"
-      },
-      "C": {
-        "item": "packedup:ironbackpack"
-      },
-      "D": {
-        "tag": "forge:glass"
-      }
+  "key": {
+    "A": {
+      "tag": "c:gems/diamond"
     },
-    "result": {
-      "item": "packedup:diamondbackpack"
+    "B": {
+      "tag": "c:ingots/iron"
+    },
+    "C": {
+      "item": "packedup:ironbackpack"
+    },
+    "D": {
+      "tag": "c:glass_blocks/cheap"
     }
+  },
+  "result": {
+    "id": "packedup:diamondbackpack"
   }
 }

@@ -1,69 +1,49 @@
 {
   "conditions": [
     {
-      "type": "packedup:is_backpack_enabled",
-      "value": {
-        "backpack": "iron"
-      }
+      "backpack": "iron",
+      "type": "packedup:is_backpack_enabled"
     },
     {
-      "type": "supermartijn642corelib:not",
-      "value": {
-        "condition": {
-          "type": "supermartijn642corelib:and",
-          "value": {
-            "conditions": [
-              {
-                "type": "packedup:is_backpack_enabled",
-                "value": {
-                  "backpack": "silver"
-                }
-              },
-              {
-                "type": "supermartijn642corelib:tag_populated",
-                "value": {
-                  "registry": "minecraft:item",
-                  "tag": "forge:ingots/silver"
-                }
-              }
-            ]
+      "condition": {
+        "conditions": [
+          {
+            "backpack": "silver",
+            "type": "packedup:is_backpack_enabled"
+          },
+          {
+            "registry": "minecraft:item",
+            "tag": "c:ingots/silver",
+            "type": "supermartijn642corelib:tag_populated"
           }
-        }
-      }
+        ],
+        "type": "supermartijn642corelib:and"
+      },
+      "type": "supermartijn642corelib:not"
     },
     {
-      "type": "supermartijn642corelib:not",
-      "value": {
-        "condition": {
-          "type": "packedup:is_backpack_enabled",
-          "value": {
-            "backpack": "gold"
-          }
-        }
-      }
+      "condition": {
+        "backpack": "gold",
+        "type": "packedup:is_backpack_enabled"
+      },
+      "type": "supermartijn642corelib:not"
     },
     {
-      "type": "supermartijn642corelib:not",
-      "value": {
-        "condition": {
-          "type": "packedup:is_backpack_enabled",
-          "value": {
-            "backpack": "diamond"
-          }
-        }
-      }
+      "condition": {
+        "backpack": "diamond",
+        "type": "packedup:is_backpack_enabled"
+      },
+      "type": "supermartijn642corelib:not"
     },
     {
-      "type": "packedup:is_backpack_enabled",
-      "value": {
-        "backpack": "obsidian"
-      }
+      "backpack": "obsidian",
+      "type": "packedup:is_backpack_enabled"
     }
   ],
   "parent": "minecraft:recipes/root",
   "display": {
     "icon": {
-      "item": "packedup:obsidianbackpack"
+      "id": "packedup:obsidianbackpack"
     },
     "title": {
       "translate": "packedup.advancement.recipes/misc/obsidian_from_iron.title"
@@ -88,9 +68,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "packedup:ironbackpack"
-            ]
+            "items": "packedup:ironbackpack"
           }
         ]
       }

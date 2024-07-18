@@ -1,83 +1,59 @@
 {
   "conditions": [
     {
-      "type": "supermartijn642corelib:and",
-      "value": {
+      "conditions": [
+        {
+          "backpack": "copper",
+          "type": "packedup:is_backpack_enabled"
+        },
+        {
+          "registry": "minecraft:item",
+          "tag": "c:ingots/copper",
+          "type": "supermartijn642corelib:tag_populated"
+        }
+      ],
+      "type": "supermartijn642corelib:and"
+    },
+    {
+      "condition": {
         "conditions": [
           {
-            "type": "packedup:is_backpack_enabled",
-            "value": {
-              "backpack": "copper"
-            }
+            "backpack": "silver",
+            "type": "packedup:is_backpack_enabled"
           },
           {
-            "type": "supermartijn642corelib:tag_populated",
-            "value": {
-              "registry": "minecraft:item",
-              "tag": "forge:ingots/copper"
-            }
+            "registry": "minecraft:item",
+            "tag": "c:ingots/silver",
+            "type": "supermartijn642corelib:tag_populated"
           }
-        ]
-      }
+        ],
+        "type": "supermartijn642corelib:and"
+      },
+      "type": "supermartijn642corelib:not"
     },
     {
-      "type": "supermartijn642corelib:not",
-      "value": {
-        "condition": {
-          "type": "supermartijn642corelib:and",
-          "value": {
-            "conditions": [
-              {
-                "type": "packedup:is_backpack_enabled",
-                "value": {
-                  "backpack": "silver"
-                }
-              },
-              {
-                "type": "supermartijn642corelib:tag_populated",
-                "value": {
-                  "registry": "minecraft:item",
-                  "tag": "forge:ingots/silver"
-                }
-              }
-            ]
-          }
-        }
-      }
+      "condition": {
+        "backpack": "gold",
+        "type": "packedup:is_backpack_enabled"
+      },
+      "type": "supermartijn642corelib:not"
     },
     {
-      "type": "supermartijn642corelib:not",
-      "value": {
-        "condition": {
-          "type": "packedup:is_backpack_enabled",
-          "value": {
-            "backpack": "gold"
-          }
-        }
-      }
+      "condition": {
+        "backpack": "diamond",
+        "type": "packedup:is_backpack_enabled"
+      },
+      "type": "supermartijn642corelib:not"
     },
     {
-      "type": "supermartijn642corelib:not",
-      "value": {
-        "condition": {
-          "type": "packedup:is_backpack_enabled",
-          "value": {
-            "backpack": "diamond"
-          }
-        }
-      }
-    },
-    {
-      "type": "packedup:is_backpack_enabled",
-      "value": {
-        "backpack": "obsidian"
-      }
+      "backpack": "obsidian",
+      "type": "packedup:is_backpack_enabled"
     }
   ],
   "parent": "minecraft:recipes/root",
   "display": {
     "icon": {
-      "item": "packedup:obsidianbackpack"
+      "id": "packedup:obsidianbackpack"
     },
     "title": {
       "translate": "packedup.advancement.recipes/misc/obsidian_from_copper.title"
@@ -102,9 +78,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "packedup:copperbackpack"
-            ]
+            "items": "packedup:copperbackpack"
           }
         ]
       }

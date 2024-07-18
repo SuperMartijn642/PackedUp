@@ -2,7 +2,7 @@
   "parent": "packedup:diamond_backpack",
   "display": {
     "icon": {
-      "item": "packedup:obsidianbackpack"
+      "id": "packedup:obsidianbackpack"
     },
     "title": {
       "translate": "packedup.advancement.obsidian_backpack.title"
@@ -21,9 +21,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "packedup:obsidianbackpack"
-            ]
+            "items": "packedup:obsidianbackpack"
           }
         ]
       }

@@ -1,64 +1,22 @@
 {
-  "type": "supermartijn642corelib:conditional",
-  "conditions": [
-    {
-      "type": "supermartijn642corelib:and",
-      "value": {
-        "conditions": [
-          {
-            "type": "packedup:is_backpack_enabled",
-            "value": {
-              "backpack": "silver"
-            }
-          },
-          {
-            "type": "supermartijn642corelib:tag_populated",
-            "value": {
-              "registry": "minecraft:item",
-              "tag": "forge:ingots/silver"
-            }
-          }
-        ]
-      }
-    },
-    {
-      "type": "supermartijn642corelib:not",
-      "value": {
-        "condition": {
-          "type": "packedup:is_backpack_enabled",
-          "value": {
-            "backpack": "diamond"
-          }
-        }
-      }
-    },
-    {
-      "type": "packedup:is_backpack_enabled",
-      "value": {
-        "backpack": "obsidian"
-      }
-    }
+  "type": "packedup:upgrade_backpack",
+  "pattern": [
+    "ABA",
+    "ACA",
+    "AAA"
   ],
-  "recipe": {
-    "type": "packedup:upgrade_backpack",
-    "pattern": [
-      "ABA",
-      "ACA",
-      "AAA"
-    ],
-    "key": {
-      "A": {
-        "tag": "forge:obsidian"
-      },
-      "B": {
-        "tag": "forge:ingots/silver"
-      },
-      "C": {
-        "item": "packedup:silverbackpack"
-      }
+  "key": {
+    "A": {
+      "tag": "c:obsidians"
     },
-    "result": {
-      "item": "packedup:obsidianbackpack"
+    "B": {
+      "tag": "c:ingots/silver"
+    },
+    "C": {
+      "item": "packedup:silverbackpack"
     }
+  },
+  "result": {
+    "id": "packedup:obsidianbackpack"
   }
 }

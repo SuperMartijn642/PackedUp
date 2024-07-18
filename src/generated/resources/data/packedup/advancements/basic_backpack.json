@@ -1,7 +1,7 @@
 {
   "display": {
     "icon": {
-      "item": "packedup:basicbackpack"
+      "id": "packedup:basicbackpack"
     },
     "title": {
       "translate": "packedup.advancement.basic_backpack.title"
@@ -21,9 +21,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "packedup:basicbackpack"
-            ]
+            "items": "packedup:basicbackpack"
           }
         ]
       }

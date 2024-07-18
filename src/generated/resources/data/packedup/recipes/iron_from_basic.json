@@ -1,39 +1,22 @@
 {
-  "type": "supermartijn642corelib:conditional",
-  "conditions": [
-    {
-      "type": "packedup:is_backpack_enabled",
-      "value": {
-        "backpack": "basic"
-      }
-    },
-    {
-      "type": "packedup:is_backpack_enabled",
-      "value": {
-        "backpack": "iron"
-      }
-    }
+  "type": "packedup:upgrade_backpack",
+  "pattern": [
+    "ABA",
+    "ACA",
+    "AAA"
   ],
-  "recipe": {
-    "type": "packedup:upgrade_backpack",
-    "pattern": [
-      "ABA",
-      "ACA",
-      "AAA"
-    ],
-    "key": {
-      "A": {
-        "tag": "forge:ingots/iron"
-      },
-      "B": {
-        "tag": "forge:leather"
-      },
-      "C": {
-        "item": "packedup:basicbackpack"
-      }
+  "key": {
+    "A": {
+      "tag": "c:ingots/iron"
     },
-    "result": {
-      "item": "packedup:ironbackpack"
+    "B": {
+      "tag": "c:leathers"
+    },
+    "C": {
+      "item": "packedup:basicbackpack"
     }
+  },
+  "result": {
+    "id": "packedup:ironbackpack"
   }
 }

@@ -2,7 +2,7 @@
   "parent": "packedup:iron_or_copper_backpack",
   "display": {
     "icon": {
-      "item": "packedup:goldbackpack"
+      "id": "packedup:goldbackpack"
     },
     "title": {
       "translate": "packedup.advancement.silver_or_gold_backpack.title"
@@ -21,9 +21,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "packedup:silverbackpack"
-            ]
+            "items": "packedup:silverbackpack"
           }
         ]
       }
@@ -33,9 +31,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "packedup:goldbackpack"
-            ]
+            "items": "packedup:goldbackpack"
           }
         ]
       }

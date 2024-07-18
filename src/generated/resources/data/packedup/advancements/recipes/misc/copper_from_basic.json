@@ -1,36 +1,28 @@
 {
   "conditions": [
     {
-      "type": "packedup:is_backpack_enabled",
-      "value": {
-        "backpack": "basic"
-      }
+      "backpack": "basic",
+      "type": "packedup:is_backpack_enabled"
     },
     {
-      "type": "supermartijn642corelib:and",
-      "value": {
-        "conditions": [
-          {
-            "type": "packedup:is_backpack_enabled",
-            "value": {
-              "backpack": "copper"
-            }
-          },
-          {
-            "type": "supermartijn642corelib:tag_populated",
-            "value": {
-              "registry": "minecraft:item",
-              "tag": "forge:ingots/copper"
-            }
-          }
-        ]
-      }
+      "conditions": [
+        {
+          "backpack": "copper",
+          "type": "packedup:is_backpack_enabled"
+        },
+        {
+          "registry": "minecraft:item",
+          "tag": "c:ingots/copper",
+          "type": "supermartijn642corelib:tag_populated"
+        }
+      ],
+      "type": "supermartijn642corelib:and"
     }
   ],
   "parent": "minecraft:recipes/root",
   "display": {
     "icon": {
-      "item": "packedup:copperbackpack"
+      "id": "packedup:copperbackpack"
     },
     "title": {
       "translate": "packedup.advancement.recipes/misc/copper_from_basic.title"
@@ -55,9 +47,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "packedup:basicbackpack"
-            ]
+            "items": "packedup:basicbackpack"
           }
         ]
       }

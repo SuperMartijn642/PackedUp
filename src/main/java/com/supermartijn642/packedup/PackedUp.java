@@ -11,6 +11,7 @@ import com.supermartijn642.packedup.compat.Compatibility;
 import com.supermartijn642.packedup.generators.*;
 import com.supermartijn642.packedup.packets.PacketOpenBag;
 import com.supermartijn642.packedup.packets.PacketRename;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.neoforged.bus.api.IEventBus;
@@ -22,6 +23,7 @@ import top.theillusivec4.curios.api.SlotTypeMessage;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Stream;
 
 /**
  * Created 2/7/2020 by SuperMartijn642
@@ -78,12 +80,14 @@ public class PackedUp {
         // Backpack items
         for(BackpackType type : BackpackType.values())
             handler.registerItem(type.getRegistryName(), () -> new BackpackItem(type));
+        // Inventory id data component
+        handler.registerDataComponentType("inventory_id", BackpackItem.INVENTORY_ID);
         // Container
         handler.registerMenuType("container", () -> BaseContainerType.create(
             (container, data) -> {
                 data.writeInt(container.type.ordinal());
                 data.writeInt(container.bagSlot);
-                data.writeUtf(Component.Serializer.toJson(container.bagName));
+                data.writeUtf(Component.Serializer.toJson(container.bagName, HolderLookup.Provider.create(Stream.of())));
                 BackpackInventory inventory = container.inventory;
                 data.writeInt(inventory.getInventoryIndex());
                 data.writeInt(inventory.bagsInThisBag.size());
@@ -95,7 +99,7 @@ public class PackedUp {
             (player, data) -> {
                 BackpackType type = BackpackType.values()[data.readInt()];
                 int bagSlot = data.readInt();
-                Component bagName = Component.Serializer.fromJson(data.readUtf());
+                Component bagName = Component.Serializer.fromJson(data.readUtf(), HolderLookup.Provider.create(Stream.of()));
                 int inventoryIndex = data.readInt();
                 int size = data.readInt();
                 Set<Integer> bagsInThisBag = new HashSet<>(size);

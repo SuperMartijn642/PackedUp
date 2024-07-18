@@ -1,75 +1,22 @@
 {
-  "type": "supermartijn642corelib:conditional",
-  "conditions": [
-    {
-      "type": "packedup:is_backpack_enabled",
-      "value": {
-        "backpack": "basic"
-      }
-    },
-    {
-      "type": "supermartijn642corelib:not",
-      "value": {
-        "condition": {
-          "type": "packedup:is_backpack_enabled",
-          "value": {
-            "backpack": "iron"
-          }
-        }
-      }
-    },
-    {
-      "type": "supermartijn642corelib:not",
-      "value": {
-        "condition": {
-          "type": "supermartijn642corelib:and",
-          "value": {
-            "conditions": [
-              {
-                "type": "packedup:is_backpack_enabled",
-                "value": {
-                  "backpack": "copper"
-                }
-              },
-              {
-                "type": "supermartijn642corelib:tag_populated",
-                "value": {
-                  "registry": "minecraft:item",
-                  "tag": "forge:ingots/copper"
-                }
-              }
-            ]
-          }
-        }
-      }
-    },
-    {
-      "type": "packedup:is_backpack_enabled",
-      "value": {
-        "backpack": "gold"
-      }
-    }
+  "type": "packedup:upgrade_backpack",
+  "pattern": [
+    "ABA",
+    "ACA",
+    "AAA"
   ],
-  "recipe": {
-    "type": "packedup:upgrade_backpack",
-    "pattern": [
-      "ABA",
-      "ACA",
-      "AAA"
-    ],
-    "key": {
-      "A": {
-        "tag": "forge:ingots/gold"
-      },
-      "B": {
-        "tag": "forge:leather"
-      },
-      "C": {
-        "item": "packedup:basicbackpack"
-      }
+  "key": {
+    "A": {
+      "tag": "c:ingots/gold"
     },
-    "result": {
-      "item": "packedup:goldbackpack"
+    "B": {
+      "tag": "c:leathers"
+    },
+    "C": {
+      "item": "packedup:basicbackpack"
     }
+  },
+  "result": {
+    "id": "packedup:goldbackpack"
   }
 }

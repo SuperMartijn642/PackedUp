@@ -1,53 +1,22 @@
 {
-  "type": "supermartijn642corelib:conditional",
-  "conditions": [
-    {
-      "type": "packedup:is_backpack_enabled",
-      "value": {
-        "backpack": "basic"
-      }
-    },
-    {
-      "type": "supermartijn642corelib:and",
-      "value": {
-        "conditions": [
-          {
-            "type": "packedup:is_backpack_enabled",
-            "value": {
-              "backpack": "copper"
-            }
-          },
-          {
-            "type": "supermartijn642corelib:tag_populated",
-            "value": {
-              "registry": "minecraft:item",
-              "tag": "forge:ingots/copper"
-            }
-          }
-        ]
-      }
-    }
+  "type": "packedup:upgrade_backpack",
+  "pattern": [
+    "ABA",
+    "ACA",
+    "AAA"
   ],
-  "recipe": {
-    "type": "packedup:upgrade_backpack",
-    "pattern": [
-      "ABA",
-      "ACA",
-      "AAA"
-    ],
-    "key": {
-      "A": {
-        "tag": "forge:ingots/copper"
-      },
-      "B": {
-        "tag": "forge:leather"
-      },
-      "C": {
-        "item": "packedup:basicbackpack"
-      }
+  "key": {
+    "A": {
+      "tag": "c:ingots/copper"
     },
-    "result": {
-      "item": "packedup:copperbackpack"
+    "B": {
+      "tag": "c:leathers"
+    },
+    "C": {
+      "item": "packedup:basicbackpack"
     }
+  },
+  "result": {
+    "id": "packedup:copperbackpack"
   }
 }

@@ -1,22 +1,18 @@
 {
   "conditions": [
     {
-      "type": "packedup:is_backpack_enabled",
-      "value": {
-        "backpack": "basic"
-      }
+      "backpack": "basic",
+      "type": "packedup:is_backpack_enabled"
     },
     {
-      "type": "packedup:is_backpack_enabled",
-      "value": {
-        "backpack": "iron"
-      }
+      "backpack": "iron",
+      "type": "packedup:is_backpack_enabled"
     }
   ],
   "parent": "minecraft:recipes/root",
   "display": {
     "icon": {
-      "item": "packedup:ironbackpack"
+      "id": "packedup:ironbackpack"
     },
     "title": {
       "translate": "packedup.advancement.recipes/misc/iron_from_basic.title"
@@ -41,9 +37,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "packedup:basicbackpack"
-            ]
+            "items": "packedup:basicbackpack"
           }
         ]
       }
