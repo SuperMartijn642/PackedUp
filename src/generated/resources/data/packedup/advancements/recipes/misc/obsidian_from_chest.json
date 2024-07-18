@@ -31,7 +31,7 @@
           },
           {
             "registry": "minecraft:item",
-            "tag": "forge:ingots/silver",
+            "tag": "c:ingots/silver",
             "condition": "supermartijn642corelib:tag_populated"
           }
         ],

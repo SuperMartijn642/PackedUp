@@ -91,7 +91,7 @@ public class PackedUpRecipeGenerator extends RecipeGenerator {
 
         // Silver
         TagKey<Item> silverIngots = TagKey.create(Registries.ITEMS.getVanillaRegistry().key(), new ResourceLocation("c", "ingots/silver"));
-        ResourceCondition silverEnabled = new BackpackRecipeCondition(BackpackType.SILVER).and(new TagPopulatedResourceCondition(Registries.ITEMS, new ResourceLocation("forge", "ingots/silver")));
+        ResourceCondition silverEnabled = new BackpackRecipeCondition(BackpackType.SILVER).and(new TagPopulatedResourceCondition(Registries.ITEMS, new ResourceLocation("c", "ingots/silver")));
         this.shaped("silver_from_chest", PackedUp.silverbackpack)
             .pattern("ABA")
             .pattern("CDC")
