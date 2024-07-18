@@ -1,0 +1,88 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "packedup:is_backpack_enabled",
+      "backpack": "iron"
+    },
+    {
+      "condition": "supermartijn642corelib:not",
+      "value": {
+        "conditions": [
+          {
+            "backpack": "silver",
+            "condition": "packedup:is_backpack_enabled"
+          },
+          {
+            "registry": "minecraft:item",
+            "tag": "c:ingots/silver",
+            "condition": "supermartijn642corelib:tag_populated"
+          }
+        ],
+        "condition": "supermartijn642corelib:and"
+      }
+    },
+    {
+      "condition": "supermartijn642corelib:not",
+      "value": {
+        "backpack": "gold",
+        "condition": "packedup:is_backpack_enabled"
+      }
+    },
+    {
+      "condition": "supermartijn642corelib:not",
+      "value": {
+        "backpack": "diamond",
+        "condition": "packedup:is_backpack_enabled"
+      }
+    },
+    {
+      "condition": "packedup:is_backpack_enabled",
+      "backpack": "obsidian"
+    }
+  ],
+  "parent": "minecraft:recipes/root",
+  "display": {
+    "icon": {
+      "id": "packedup:obsidianbackpack"
+    },
+    "title": {
+      "translate": "packedup.advancement.recipes/misc/obsidian_from_iron.title"
+    },
+    "description": {
+      "translate": "packedup.advancement.recipes/misc/obsidian_from_iron.description"
+    },
+    "frame": "task",
+    "show_toast": false,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "criteria": {
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "packedup:obsidian_from_iron"
+      }
+    },
+    "recipe_condition": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "packedup:ironbackpack"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "recipe_condition"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "packedup:obsidian_from_iron"
+    ]
+  }
+}

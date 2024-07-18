@@ -1,0 +1,82 @@
+{
+  "type": "supermartijn642corelib:conditional",
+  "conditions": [
+    {
+      "type": "supermartijn642corelib:not",
+      "value": {
+        "backpack": "basic",
+        "condition": "packedup:is_backpack_enabled"
+      }
+    },
+    {
+      "type": "supermartijn642corelib:not",
+      "value": {
+        "backpack": "iron",
+        "condition": "packedup:is_backpack_enabled"
+      }
+    },
+    {
+      "type": "supermartijn642corelib:not",
+      "value": {
+        "backpack": "copper",
+        "condition": "packedup:is_backpack_enabled"
+      }
+    },
+    {
+      "type": "supermartijn642corelib:not",
+      "value": {
+        "conditions": [
+          {
+            "backpack": "silver",
+            "condition": "packedup:is_backpack_enabled"
+          },
+          {
+            "registry": "minecraft:item",
+            "tag": "c:ingots/silver",
+            "condition": "supermartijn642corelib:tag_populated"
+          }
+        ],
+        "condition": "supermartijn642corelib:and"
+      }
+    },
+    {
+      "type": "supermartijn642corelib:not",
+      "value": {
+        "backpack": "gold",
+        "condition": "packedup:is_backpack_enabled"
+      }
+    },
+    {
+      "type": "packedup:is_backpack_enabled",
+      "backpack": "diamond"
+    }
+  ],
+  "recipe": {
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+      "ABA",
+      "CDC",
+      "CEC"
+    ],
+    "key": {
+      "A": {
+        "item": "minecraft:leather"
+      },
+      "B": {
+        "tag": "c:strings"
+      },
+      "C": {
+        "tag": "c:gems/diamond"
+      },
+      "D": {
+        "tag": "c:chests"
+      },
+      "E": {
+        "tag": "c:glass_blocks"
+      }
+    },
+    "result": {
+      "id": "packedup:diamondbackpack"
+    }
+  }
+}

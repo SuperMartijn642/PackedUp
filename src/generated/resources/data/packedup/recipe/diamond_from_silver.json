@@ -1,0 +1,48 @@
+{
+  "type": "supermartijn642corelib:conditional",
+  "conditions": [
+    {
+      "type": "supermartijn642corelib:and",
+      "conditions": [
+        {
+          "backpack": "silver",
+          "condition": "packedup:is_backpack_enabled"
+        },
+        {
+          "registry": "minecraft:item",
+          "tag": "c:ingots/silver",
+          "condition": "supermartijn642corelib:tag_populated"
+        }
+      ]
+    },
+    {
+      "type": "packedup:is_backpack_enabled",
+      "backpack": "diamond"
+    }
+  ],
+  "recipe": {
+    "type": "packedup:upgrade_backpack",
+    "pattern": [
+      "ABA",
+      "ACA",
+      "DDD"
+    ],
+    "key": {
+      "A": {
+        "tag": "c:gems/diamond"
+      },
+      "B": {
+        "tag": "c:ingots/silver"
+      },
+      "C": {
+        "item": "packedup:silverbackpack"
+      },
+      "D": {
+        "tag": "c:glass_blocks"
+      }
+    },
+    "result": {
+      "id": "packedup:diamondbackpack"
+    }
+  }
+}

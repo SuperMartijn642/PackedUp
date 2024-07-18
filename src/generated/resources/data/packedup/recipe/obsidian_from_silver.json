@@ -1,0 +1,52 @@
+{
+  "type": "supermartijn642corelib:conditional",
+  "conditions": [
+    {
+      "type": "supermartijn642corelib:and",
+      "conditions": [
+        {
+          "backpack": "silver",
+          "condition": "packedup:is_backpack_enabled"
+        },
+        {
+          "registry": "minecraft:item",
+          "tag": "c:ingots/silver",
+          "condition": "supermartijn642corelib:tag_populated"
+        }
+      ]
+    },
+    {
+      "type": "supermartijn642corelib:not",
+      "value": {
+        "backpack": "diamond",
+        "condition": "packedup:is_backpack_enabled"
+      }
+    },
+    {
+      "type": "packedup:is_backpack_enabled",
+      "backpack": "obsidian"
+    }
+  ],
+  "recipe": {
+    "type": "packedup:upgrade_backpack",
+    "pattern": [
+      "ABA",
+      "ACA",
+      "AAA"
+    ],
+    "key": {
+      "A": {
+        "item": "minecraft:obsidian"
+      },
+      "B": {
+        "tag": "c:ingots/silver"
+      },
+      "C": {
+        "item": "packedup:silverbackpack"
+      }
+    },
+    "result": {
+      "id": "packedup:obsidianbackpack"
+    }
+  }
+}

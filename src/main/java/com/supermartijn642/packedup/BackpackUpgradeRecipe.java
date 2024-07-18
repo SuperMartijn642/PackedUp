@@ -7,12 +7,8 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.CraftingBookCategory;
-import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.ShapedRecipe;
-import net.minecraft.world.item.crafting.ShapedRecipePattern;
+import net.minecraft.world.item.crafting.*;
 
 /**
  * Created 2/8/2020 by SuperMartijn642
@@ -37,9 +33,9 @@ public class BackpackUpgradeRecipe extends ShapedRecipe {
     }
 
     @Override
-    public ItemStack assemble(CraftingContainer inventory, HolderLookup.Provider provider){
-        for(int index = 0; index < inventory.getContainerSize(); index++){
-            ItemStack stack = inventory.getItem(index);
+    public ItemStack assemble(CraftingInput input, HolderLookup.Provider provider){
+        for(int index = 0; index < input.ingredientCount(); index++){
+            ItemStack stack = input.getItem(index);
             if(!stack.isEmpty() && stack.getItem() instanceof BackpackItem && stack.has(BackpackItem.INVENTORY_ID)){
                 ItemStack result = this.getResultItem(provider).copy();
                 result.set(BackpackItem.INVENTORY_ID, stack.get(BackpackItem.INVENTORY_ID));
