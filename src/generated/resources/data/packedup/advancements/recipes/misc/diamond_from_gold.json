@@ -12,7 +12,7 @@
   "parent": "minecraft:recipes/root",
   "display": {
     "icon": {
-      "item": "packedup:diamondbackpack"
+      "id": "packedup:diamondbackpack"
     },
     "title": {
       "translate": "packedup.advancement.recipes/misc/diamond_from_gold.title"
@@ -37,9 +37,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "packedup:goldbackpack"
-            ]
+            "items": "packedup:goldbackpack"
           }
         ]
       }

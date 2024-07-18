@@ -43,7 +43,7 @@
   "parent": "minecraft:recipes/root",
   "display": {
     "icon": {
-      "item": "packedup:obsidianbackpack"
+      "id": "packedup:obsidianbackpack"
     },
     "title": {
       "translate": "packedup.advancement.recipes/misc/obsidian_from_copper.title"
@@ -68,9 +68,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "packedup:copperbackpack"
-            ]
+            "items": "packedup:copperbackpack"
           }
         ]
       }

@@ -22,7 +22,7 @@
   "parent": "minecraft:recipes/root",
   "display": {
     "icon": {
-      "item": "packedup:silverbackpack"
+      "id": "packedup:silverbackpack"
     },
     "title": {
       "translate": "packedup.advancement.recipes/misc/silver_from_copper.title"
@@ -47,9 +47,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "packedup:copperbackpack"
-            ]
+            "items": "packedup:copperbackpack"
           }
         ]
       }

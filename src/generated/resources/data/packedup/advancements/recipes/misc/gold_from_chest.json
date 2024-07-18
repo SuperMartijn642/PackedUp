@@ -29,7 +29,7 @@
   "parent": "minecraft:recipes/root",
   "display": {
     "icon": {
-      "item": "packedup:goldbackpack"
+      "id": "packedup:goldbackpack"
     },
     "title": {
       "translate": "packedup.advancement.recipes/misc/gold_from_chest.title"
@@ -54,9 +54,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "minecraft:chest"
-            ]
+            "items": "#c:chests"
           }
         ]
       }

@@ -19,7 +19,7 @@
     ],
     "key": {
       "A": {
-        "tag": "c:copper_ingots"
+        "tag": "c:ingots/copper"
       },
       "B": {
         "item": "minecraft:leather"
@@ -29,7 +29,7 @@
       }
     },
     "result": {
-      "item": "packedup:copperbackpack"
+      "id": "packedup:copperbackpack"
     }
   }
 }

@@ -33,7 +33,7 @@
     ],
     "key": {
       "A": {
-        "tag": "c:gold_ingots"
+        "tag": "c:ingots/gold"
       },
       "B": {
         "item": "minecraft:leather"
@@ -43,7 +43,7 @@
       }
     },
     "result": {
-      "item": "packedup:goldbackpack"
+      "id": "packedup:goldbackpack"
     }
   }
 }

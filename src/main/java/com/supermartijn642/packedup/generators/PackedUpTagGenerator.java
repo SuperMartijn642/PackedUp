@@ -16,7 +16,7 @@ public class PackedUpTagGenerator extends TagGenerator {
     @Override
     public void generate(){
         // Create empty silver tag
-        this.itemTag("c", "silver_ingots");
+        this.itemTag("c", "ingots/silver");
 
         // Create Trinkets tags
         this.itemTag("trinkets", "chest/back")

@@ -25,17 +25,17 @@
         "item": "minecraft:leather"
       },
       "B": {
-        "item": "minecraft:string"
+        "tag": "c:strings"
       },
       "C": {
-        "tag": "c:copper_ingots"
+        "tag": "c:ingots/copper"
       },
       "D": {
-        "item": "minecraft:chest"
+        "tag": "c:chests"
       }
     },
     "result": {
-      "item": "packedup:copperbackpack"
+      "id": "packedup:copperbackpack"
     }
   }
 }

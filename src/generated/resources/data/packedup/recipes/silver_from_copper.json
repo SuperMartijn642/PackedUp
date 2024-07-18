@@ -29,17 +29,17 @@
     ],
     "key": {
       "A": {
-        "tag": "c:silver_ingots"
+        "tag": "c:ingots/silver"
       },
       "B": {
-        "tag": "c:copper_ingots"
+        "tag": "c:ingots/copper"
       },
       "C": {
         "item": "packedup:copperbackpack"
       }
     },
     "result": {
-      "item": "packedup:silverbackpack"
+      "id": "packedup:silverbackpack"
     }
   }
 }

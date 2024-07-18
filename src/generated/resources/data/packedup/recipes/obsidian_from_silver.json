@@ -39,14 +39,14 @@
         "item": "minecraft:obsidian"
       },
       "B": {
-        "tag": "c:silver_ingots"
+        "tag": "c:ingots/silver"
       },
       "C": {
         "item": "packedup:silverbackpack"
       }
     },
     "result": {
-      "item": "packedup:obsidianbackpack"
+      "id": "packedup:obsidianbackpack"
     }
   }
 }

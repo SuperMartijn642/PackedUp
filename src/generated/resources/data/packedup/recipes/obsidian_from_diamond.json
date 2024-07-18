@@ -22,14 +22,14 @@
         "item": "minecraft:obsidian"
       },
       "B": {
-        "tag": "c:diamonds"
+        "tag": "c:gems/diamond"
       },
       "C": {
         "item": "packedup:diamondbackpack"
       }
     },
     "result": {
-      "item": "packedup:obsidianbackpack"
+      "id": "packedup:obsidianbackpack"
     }
   }
 }

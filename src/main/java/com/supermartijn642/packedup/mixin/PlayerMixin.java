@@ -2,6 +2,7 @@ package com.supermartijn642.packedup.mixin;
 
 import com.supermartijn642.packedup.PackedUpCommon;
 import com.supermartijn642.packedup.extensions.PackedUpPlayer;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
@@ -45,7 +46,9 @@ public class PlayerMixin implements PackedUpPlayer {
     private void addAdditionalSaveData(CompoundTag data, CallbackInfo ci){
         if(this.backpacks != null && !this.backpacks.isEmpty()){
             ListTag itemData = new ListTag();
-            this.backpacks.forEach(stack -> itemData.add(stack.save(new CompoundTag())));
+            //noinspection DataFlowIssue,resource
+            HolderLookup.Provider provider = ((Player)(Object)this).level().registryAccess();
+            this.backpacks.forEach(stack -> itemData.add(stack.save(provider)));
             data.put("packedup:backpacks", itemData);
         }
     }
@@ -57,10 +60,12 @@ public class PlayerMixin implements PackedUpPlayer {
     private void readAdditionalSaveData(CompoundTag data, CallbackInfo ci){
         if(data.contains("packedup:backpacks", Tag.TAG_LIST)){
             ListTag itemData = data.getList("packedup:backpacks", Tag.TAG_COMPOUND);
+            //noinspection DataFlowIssue,resource
+            HolderLookup.Provider provider = ((Player)(Object)this).level().registryAccess();
             this.backpacks = itemData.stream()
                 .filter(CompoundTag.class::isInstance)
                 .map(CompoundTag.class::cast)
-                .map(ItemStack::of)
+                .map(tag -> ItemStack.parseOptional(provider, tag))
                 .collect(Collectors.toList());
             if(this.backpacks.isEmpty())
                 this.backpacks = null;

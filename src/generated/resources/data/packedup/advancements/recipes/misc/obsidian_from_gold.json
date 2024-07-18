@@ -19,7 +19,7 @@
   "parent": "minecraft:recipes/root",
   "display": {
     "icon": {
-      "item": "packedup:obsidianbackpack"
+      "id": "packedup:obsidianbackpack"
     },
     "title": {
       "translate": "packedup.advancement.recipes/misc/obsidian_from_gold.title"
@@ -44,9 +44,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "packedup:goldbackpack"
-            ]
+            "items": "packedup:goldbackpack"
           }
         ]
       }

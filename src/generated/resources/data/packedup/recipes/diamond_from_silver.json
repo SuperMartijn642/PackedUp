@@ -29,10 +29,10 @@
     ],
     "key": {
       "A": {
-        "tag": "c:diamonds"
+        "tag": "c:gems/diamond"
       },
       "B": {
-        "tag": "c:silver_ingots"
+        "tag": "c:ingots/silver"
       },
       "C": {
         "item": "packedup:silverbackpack"
@@ -42,7 +42,7 @@
       }
     },
     "result": {
-      "item": "packedup:diamondbackpack"
+      "id": "packedup:diamondbackpack"
     }
   }
 }

@@ -4,15 +4,15 @@ import com.supermartijn642.core.TextComponents;
 import com.supermartijn642.core.item.BaseItem;
 import com.supermartijn642.core.item.ItemProperties;
 import net.minecraft.ChatFormatting;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.core.component.DataComponentType;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;
 
@@ -20,6 +20,8 @@ import java.util.function.Consumer;
  * Created 2/7/2020 by SuperMartijn642
  */
 public class BackpackItem extends BaseItem {
+
+    public static final DataComponentType<Integer> INVENTORY_ID = DataComponentType.<Integer>builder().persistent(ExtraCodecs.NON_NEGATIVE_INT).networkSynchronized(ByteBufCodecs.INT).build();
 
     public BackpackType type;
 
@@ -41,28 +43,22 @@ public class BackpackItem extends BaseItem {
     }
 
     @Override
-    protected void appendItemInformation(ItemStack stack, @Nullable BlockGetter level, Consumer<Component> info, boolean advanced){
+    protected void appendItemInformation(ItemStack stack, Consumer<Component> info, boolean advanced){
         info.accept(TextComponents.translation("packedup.backpacks.info.one", TextComponents.string(Integer.toString(this.type.getSlots())).color(ChatFormatting.GOLD).get()).color(ChatFormatting.AQUA).get());
         Component key = PackedUpClient.getKeyBindCharacter();
         if(key != null)
             info.accept(TextComponents.translation("packedup.backpacks.info.two", key).color(ChatFormatting.AQUA).get());
 
         if(advanced){
-            CompoundTag compound = stack.getOrCreateTag();
-            if(compound.contains("packedup:invIndex"))
-                info.accept(TextComponents.translation("packedup.backpacks.info.inventory_index", compound.getInt("packedup:invIndex")).get());
+            if(stack.has(INVENTORY_ID))
+                info.accept(TextComponents.translation("packedup.backpacks.info.inventory_index", stack.get(INVENTORY_ID)).get());
         }
 
-        super.appendItemInformation(stack, level, info, advanced);
+        super.appendItemInformation(stack, info, advanced);
     }
 
     @Override
     public boolean isInCreativeGroup(CreativeModeTab tab){
         return this.type.isEnabled() && super.isInCreativeGroup(tab);
-    }
-
-    @Override
-    public boolean isFireResistant(){
-        return !PackedUpConfig.canBackpacksBurn.get();
     }
 }

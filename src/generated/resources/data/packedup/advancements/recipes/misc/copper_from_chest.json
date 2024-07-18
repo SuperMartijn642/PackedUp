@@ -15,7 +15,7 @@
   "parent": "minecraft:recipes/root",
   "display": {
     "icon": {
-      "item": "packedup:copperbackpack"
+      "id": "packedup:copperbackpack"
     },
     "title": {
       "translate": "packedup.advancement.recipes/misc/copper_from_chest.title"
@@ -40,9 +40,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "minecraft:chest"
-            ]
+            "items": "#c:chests"
           }
         ]
       }

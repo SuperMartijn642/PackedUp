@@ -43,10 +43,10 @@
     ],
     "key": {
       "A": {
-        "tag": "c:diamonds"
+        "tag": "c:gems/diamond"
       },
       "B": {
-        "tag": "c:iron_ingots"
+        "tag": "c:ingots/iron"
       },
       "C": {
         "item": "packedup:ironbackpack"
@@ -56,7 +56,7 @@
       }
     },
     "result": {
-      "item": "packedup:diamondbackpack"
+      "id": "packedup:diamondbackpack"
     }
   }
 }

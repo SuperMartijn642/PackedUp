@@ -39,17 +39,17 @@
         "item": "minecraft:leather"
       },
       "B": {
-        "item": "minecraft:string"
+        "tag": "c:strings"
       },
       "C": {
-        "tag": "c:gold_ingots"
+        "tag": "c:ingots/gold"
       },
       "D": {
-        "item": "minecraft:chest"
+        "tag": "c:chests"
       }
     },
     "result": {
-      "item": "packedup:goldbackpack"
+      "id": "packedup:goldbackpack"
     }
   }
 }

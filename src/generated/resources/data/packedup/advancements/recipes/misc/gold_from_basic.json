@@ -26,7 +26,7 @@
   "parent": "minecraft:recipes/root",
   "display": {
     "icon": {
-      "item": "packedup:goldbackpack"
+      "id": "packedup:goldbackpack"
     },
     "title": {
       "translate": "packedup.advancement.recipes/misc/gold_from_basic.title"
@@ -51,9 +51,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "packedup:basicbackpack"
-            ]
+            "items": "packedup:basicbackpack"
           }
         ]
       }

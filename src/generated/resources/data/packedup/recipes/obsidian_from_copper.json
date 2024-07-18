@@ -53,14 +53,14 @@
         "item": "minecraft:obsidian"
       },
       "B": {
-        "tag": "c:copper_ingots"
+        "tag": "c:ingots/copper"
       },
       "C": {
         "item": "packedup:copperbackpack"
       }
     },
     "result": {
-      "item": "packedup:obsidianbackpack"
+      "id": "packedup:obsidianbackpack"
     }
   }
 }

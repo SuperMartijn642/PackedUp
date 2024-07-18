@@ -63,20 +63,20 @@
         "item": "minecraft:leather"
       },
       "B": {
-        "item": "minecraft:string"
+        "tag": "c:strings"
       },
       "C": {
-        "tag": "c:diamonds"
+        "tag": "c:gems/diamond"
       },
       "D": {
-        "item": "minecraft:chest"
+        "tag": "c:chests"
       },
       "E": {
         "tag": "c:glass_blocks"
       }
     },
     "result": {
-      "item": "packedup:diamondbackpack"
+      "id": "packedup:diamondbackpack"
     }
   }
 }

@@ -19,7 +19,7 @@
     ],
     "key": {
       "A": {
-        "tag": "c:iron_ingots"
+        "tag": "c:ingots/iron"
       },
       "B": {
         "item": "minecraft:leather"
@@ -29,7 +29,7 @@
       }
     },
     "result": {
-      "item": "packedup:ironbackpack"
+      "id": "packedup:ironbackpack"
     }
   }
 }

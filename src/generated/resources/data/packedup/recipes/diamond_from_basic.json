@@ -57,7 +57,7 @@
     ],
     "key": {
       "A": {
-        "tag": "c:diamonds"
+        "tag": "c:gems/diamond"
       },
       "B": {
         "item": "minecraft:leather"
@@ -70,7 +70,7 @@
       }
     },
     "result": {
-      "item": "packedup:diamondbackpack"
+      "id": "packedup:diamondbackpack"
     }
   }
 }

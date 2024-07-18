@@ -8,7 +8,7 @@
   "parent": "minecraft:recipes/root",
   "display": {
     "icon": {
-      "item": "packedup:basicbackpack"
+      "id": "packedup:basicbackpack"
     },
     "title": {
       "translate": "packedup.advancement.recipes/misc/basic_from_chest.title"
@@ -33,9 +33,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "minecraft:chest"
-            ]
+            "items": "#c:chests"
           }
         ]
       }

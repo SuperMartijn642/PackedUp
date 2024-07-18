@@ -53,7 +53,7 @@
   "parent": "minecraft:recipes/root",
   "display": {
     "icon": {
-      "item": "packedup:diamondbackpack"
+      "id": "packedup:diamondbackpack"
     },
     "title": {
       "translate": "packedup.advancement.recipes/misc/diamond_from_chest.title"
@@ -78,9 +78,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "minecraft:chest"
-            ]
+            "items": "#c:chests"
           }
         ]
       }

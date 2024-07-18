@@ -2,7 +2,7 @@
   "parent": "packedup:basic_backpack",
   "display": {
     "icon": {
-      "item": "packedup:ironbackpack"
+      "id": "packedup:ironbackpack"
     },
     "title": {
       "translate": "packedup.advancement.iron_or_copper_backpack.title"
@@ -21,9 +21,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "packedup:ironbackpack"
-            ]
+            "items": "packedup:ironbackpack"
           }
         ]
       }
@@ -33,9 +31,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "packedup:copperbackpack"
-            ]
+            "items": "packedup:copperbackpack"
           }
         ]
       }

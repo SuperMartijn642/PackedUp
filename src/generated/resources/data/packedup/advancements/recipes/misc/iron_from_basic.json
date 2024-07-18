@@ -12,7 +12,7 @@
   "parent": "minecraft:recipes/root",
   "display": {
     "icon": {
-      "item": "packedup:ironbackpack"
+      "id": "packedup:ironbackpack"
     },
     "title": {
       "translate": "packedup.advancement.recipes/misc/iron_from_basic.title"
@@ -37,9 +37,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "packedup:basicbackpack"
-            ]
+            "items": "packedup:basicbackpack"
           }
         ]
       }

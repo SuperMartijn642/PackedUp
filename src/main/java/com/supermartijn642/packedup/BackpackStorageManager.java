@@ -1,7 +1,9 @@
 package com.supermartijn642.packedup;
 
+import com.supermartijn642.core.CommonUtils;
 import com.supermartijn642.core.util.Holder;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -35,14 +37,14 @@ public class BackpackStorageManager {
     public static void onLevelSave(ServerLevel level){
         if(level.dimension() != Level.OVERWORLD && System.currentTimeMillis() - lastSaveTimestamp < 30000)
             return;
-        save();
+        save(level.registryAccess());
     }
 
     public static void onLevelLoad(ServerLevel level){
         if(level.isClientSide() || level.dimension() != Level.OVERWORLD)
             return;
         directory = level.getServer().getWorldPath(LevelResource.ROOT).resolve("packedup/backpacks");
-        load();
+        load(level.registryAccess());
     }
 
     public static BackpackInventory getInventory(int index){
@@ -51,7 +53,7 @@ public class BackpackStorageManager {
             Path file = directory.resolve("inventory" + index + ".nbt");
             if(Files.exists(file)){
                 inventory = new BackpackInventory(false, index);
-                inventory.load(file);
+                inventory.load(file, CommonUtils.getRegistryAccess());
                 inventories.put(index, inventory);
             }
         }
@@ -64,7 +66,7 @@ public class BackpackStorageManager {
         return index;
     }
 
-    public static void save(){
+    public static void save(HolderLookup.Provider provider){
         try{
             Files.createDirectories(directory);
         }catch(IOException e){
@@ -72,11 +74,11 @@ public class BackpackStorageManager {
             return;
         }
         for(int i : inventories.keySet())
-            inventories.get(i).save(directory.resolve("inventory" + i + ".nbt"));
+            inventories.get(i).save(directory.resolve("inventory" + i + ".nbt"), provider);
         lastSaveTimestamp = System.currentTimeMillis();
     }
 
-    public static void load(){
+    public static void load(HolderLookup.Provider provider){
         inventories.clear();
         Holder<Integer> highest = new Holder<>(-1);
         if(Files.exists(directory)){
@@ -98,7 +100,7 @@ public class BackpackStorageManager {
 
                     // for validation
                     BackpackInventory inventory = new BackpackInventory(false, index);
-                    inventory.load(file);
+                    inventory.load(file, provider);
                     inventory.bagsThisBagIsIn.clear();
                     inventory.bagsThisBagIsDirectlyIn.clear();
                     inventory.bagsInThisBag.clear();
@@ -117,10 +119,11 @@ public class BackpackStorageManager {
         for(Map.Entry<Integer,BackpackInventory> entry : inventories.entrySet()){
             BackpackInventory inventory = entry.getValue();
             for(ItemStack stack : inventory.getStacks()){
-                if(stack.getItem() instanceof BackpackItem && stack.getOrCreateTag().contains("packedup:invIndex")){
-                    int index = stack.getTag().getInt("packedup:invIndex");
+                if(stack.getItem() instanceof BackpackItem && stack.has(BackpackItem.INVENTORY_ID)){
+                    //noinspection DataFlowIssue
+                    int index = stack.get(BackpackItem.INVENTORY_ID);
                     if(!inventories.containsKey(index)){
-                        stack.getTag().remove("packedup:invIndex");
+                        stack.remove(BackpackItem.INVENTORY_ID);
                         continue;
                     }
                     inventory.bagsDirectlyInThisBag.add(index);
@@ -135,7 +138,7 @@ public class BackpackStorageManager {
             getBagsInThisBag(entry.getKey(), inventory.bagsInThisBag);
         }
 
-        save();
+        save(provider);
         inventories.clear();
     }
 
