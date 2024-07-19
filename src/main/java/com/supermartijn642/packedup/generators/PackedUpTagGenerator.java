@@ -16,7 +16,7 @@ public class PackedUpTagGenerator extends TagGenerator {
     @Override
     public void generate(){
         // Create empty silver tag
-        this.itemTag("forge","ingots/silver");
+        this.itemTag("c", "ingots/silver");
 
         // Curios compatibility
         this.itemTag("curios","back")

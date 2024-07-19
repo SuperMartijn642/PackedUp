@@ -1,0 +1,22 @@
+{
+  "type": "packedup:upgrade_backpack",
+  "pattern": [
+    "ABA",
+    "ACA",
+    "AAA"
+  ],
+  "key": {
+    "A": {
+      "tag": "c:ingots/silver"
+    },
+    "B": {
+      "tag": "forge:ingots/copper"
+    },
+    "C": {
+      "item": "packedup:copperbackpack"
+    }
+  },
+  "result": {
+    "id": "packedup:silverbackpack"
+  }
+}

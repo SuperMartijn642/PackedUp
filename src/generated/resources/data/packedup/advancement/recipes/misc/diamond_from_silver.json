@@ -3,42 +3,32 @@
     {
       "conditions": [
         {
-          "backpack": "copper",
+          "backpack": "silver",
           "type": "packedup:is_backpack_enabled"
         },
         {
           "registry": "minecraft:item",
-          "tag": "forge:ingots/copper",
+          "tag": "c:ingots/silver",
           "type": "supermartijn642corelib:tag_populated"
         }
       ],
       "type": "supermartijn642corelib:and"
     },
     {
-      "conditions": [
-        {
-          "backpack": "silver",
-          "type": "packedup:is_backpack_enabled"
-        },
-        {
-          "registry": "minecraft:item",
-          "tag": "forge:ingots/silver",
-          "type": "supermartijn642corelib:tag_populated"
-        }
-      ],
-      "type": "supermartijn642corelib:and"
+      "backpack": "diamond",
+      "type": "packedup:is_backpack_enabled"
     }
   ],
   "parent": "minecraft:recipes/root",
   "display": {
     "icon": {
-      "id": "packedup:silverbackpack"
+      "id": "packedup:diamondbackpack"
     },
     "title": {
-      "translate": "packedup.advancement.recipes/misc/silver_from_copper.title"
+      "translate": "packedup.advancement.recipes/misc/diamond_from_silver.title"
     },
     "description": {
-      "translate": "packedup.advancement.recipes/misc/silver_from_copper.description"
+      "translate": "packedup.advancement.recipes/misc/diamond_from_silver.description"
     },
     "frame": "task",
     "show_toast": false,
@@ -49,7 +39,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "packedup:silver_from_copper"
+        "recipe": "packedup:diamond_from_silver"
       }
     },
     "recipe_condition": {
@@ -57,7 +47,7 @@
       "conditions": {
         "items": [
           {
-            "items": "packedup:copperbackpack"
+            "items": "packedup:silverbackpack"
           }
         ]
       }
@@ -71,7 +61,7 @@
   ],
   "rewards": {
     "recipes": [
-      "packedup:silver_from_copper"
+      "packedup:diamond_from_silver"
     ]
   }
 }

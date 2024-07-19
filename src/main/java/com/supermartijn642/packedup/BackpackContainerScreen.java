@@ -14,7 +14,7 @@ import net.minecraft.resources.ResourceLocation;
  */
 public class BackpackContainerScreen extends BaseContainerWidget<BackpackContainer> {
 
-    private static final ResourceLocation CORNERS = new ResourceLocation("packedup", "textures/corners.png");
+    private static final ResourceLocation CORNERS = ResourceLocation.fromNamespaceAndPath("packedup", "textures/corners.png");
 
     private Component displayName;
 

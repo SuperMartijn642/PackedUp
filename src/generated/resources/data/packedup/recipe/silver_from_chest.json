@@ -13,7 +13,7 @@
       "tag": "forge:string"
     },
     "C": {
-      "tag": "forge:ingots/silver"
+      "tag": "c:ingots/silver"
     },
     "D": {
       "tag": "forge:chests/wooden"

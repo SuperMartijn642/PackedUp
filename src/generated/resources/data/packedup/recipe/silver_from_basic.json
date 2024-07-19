@@ -7,13 +7,13 @@
   ],
   "key": {
     "A": {
-      "tag": "forge:ingots/silver"
+      "tag": "c:ingots/silver"
     },
     "B": {
-      "tag": "forge:ingots/copper"
+      "tag": "forge:leather"
     },
     "C": {
-      "item": "packedup:copperbackpack"
+      "item": "packedup:basicbackpack"
     }
   },
   "result": {

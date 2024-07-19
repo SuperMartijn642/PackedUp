@@ -1,11 +1,8 @@
 {
   "conditions": [
     {
-      "condition": {
-        "backpack": "basic",
-        "type": "packedup:is_backpack_enabled"
-      },
-      "type": "supermartijn642corelib:not"
+      "backpack": "basic",
+      "type": "packedup:is_backpack_enabled"
     },
     {
       "condition": {
@@ -32,30 +29,44 @@
       "type": "supermartijn642corelib:not"
     },
     {
-      "conditions": [
-        {
-          "backpack": "silver",
-          "type": "packedup:is_backpack_enabled"
-        },
-        {
-          "registry": "minecraft:item",
-          "tag": "forge:ingots/silver",
-          "type": "supermartijn642corelib:tag_populated"
-        }
-      ],
-      "type": "supermartijn642corelib:and"
+      "condition": {
+        "conditions": [
+          {
+            "backpack": "silver",
+            "type": "packedup:is_backpack_enabled"
+          },
+          {
+            "registry": "minecraft:item",
+            "tag": "c:ingots/silver",
+            "type": "supermartijn642corelib:tag_populated"
+          }
+        ],
+        "type": "supermartijn642corelib:and"
+      },
+      "type": "supermartijn642corelib:not"
+    },
+    {
+      "condition": {
+        "backpack": "gold",
+        "type": "packedup:is_backpack_enabled"
+      },
+      "type": "supermartijn642corelib:not"
+    },
+    {
+      "backpack": "diamond",
+      "type": "packedup:is_backpack_enabled"
     }
   ],
   "parent": "minecraft:recipes/root",
   "display": {
     "icon": {
-      "id": "packedup:silverbackpack"
+      "id": "packedup:diamondbackpack"
     },
     "title": {
-      "translate": "packedup.advancement.recipes/misc/silver_from_chest.title"
+      "translate": "packedup.advancement.recipes/misc/diamond_from_basic.title"
     },
     "description": {
-      "translate": "packedup.advancement.recipes/misc/silver_from_chest.description"
+      "translate": "packedup.advancement.recipes/misc/diamond_from_basic.description"
     },
     "frame": "task",
     "show_toast": false,
@@ -66,7 +77,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "packedup:silver_from_chest"
+        "recipe": "packedup:diamond_from_basic"
       }
     },
     "recipe_condition": {
@@ -74,7 +85,7 @@
       "conditions": {
         "items": [
           {
-            "items": "#forge:chests/wooden"
+            "items": "packedup:basicbackpack"
           }
         ]
       }
@@ -88,7 +99,7 @@
   ],
   "rewards": {
     "recipes": [
-      "packedup:silver_from_chest"
+      "packedup:diamond_from_basic"
     ]
   }
 }

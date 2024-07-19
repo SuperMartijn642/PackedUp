@@ -1,18 +1,32 @@
 {
   "conditions": [
     {
-      "conditions": [
-        {
-          "backpack": "silver",
-          "type": "packedup:is_backpack_enabled"
-        },
-        {
-          "registry": "minecraft:item",
-          "tag": "forge:ingots/silver",
-          "type": "supermartijn642corelib:tag_populated"
-        }
-      ],
-      "type": "supermartijn642corelib:and"
+      "backpack": "iron",
+      "type": "packedup:is_backpack_enabled"
+    },
+    {
+      "condition": {
+        "conditions": [
+          {
+            "backpack": "silver",
+            "type": "packedup:is_backpack_enabled"
+          },
+          {
+            "registry": "minecraft:item",
+            "tag": "c:ingots/silver",
+            "type": "supermartijn642corelib:tag_populated"
+          }
+        ],
+        "type": "supermartijn642corelib:and"
+      },
+      "type": "supermartijn642corelib:not"
+    },
+    {
+      "condition": {
+        "backpack": "gold",
+        "type": "packedup:is_backpack_enabled"
+      },
+      "type": "supermartijn642corelib:not"
     },
     {
       "condition": {
@@ -32,10 +46,10 @@
       "id": "packedup:obsidianbackpack"
     },
     "title": {
-      "translate": "packedup.advancement.recipes/misc/obsidian_from_silver.title"
+      "translate": "packedup.advancement.recipes/misc/obsidian_from_iron.title"
     },
     "description": {
-      "translate": "packedup.advancement.recipes/misc/obsidian_from_silver.description"
+      "translate": "packedup.advancement.recipes/misc/obsidian_from_iron.description"
     },
     "frame": "task",
     "show_toast": false,
@@ -46,7 +60,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "packedup:obsidian_from_silver"
+        "recipe": "packedup:obsidian_from_iron"
       }
     },
     "recipe_condition": {
@@ -54,7 +68,7 @@
       "conditions": {
         "items": [
           {
-            "items": "packedup:silverbackpack"
+            "items": "packedup:ironbackpack"
           }
         ]
       }
@@ -68,7 +82,7 @@
   ],
   "rewards": {
     "recipes": [
-      "packedup:obsidian_from_silver"
+      "packedup:obsidian_from_iron"
     ]
   }
 }

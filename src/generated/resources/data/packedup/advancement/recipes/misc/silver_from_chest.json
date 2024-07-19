@@ -32,44 +32,30 @@
       "type": "supermartijn642corelib:not"
     },
     {
-      "condition": {
-        "conditions": [
-          {
-            "backpack": "silver",
-            "type": "packedup:is_backpack_enabled"
-          },
-          {
-            "registry": "minecraft:item",
-            "tag": "forge:ingots/silver",
-            "type": "supermartijn642corelib:tag_populated"
-          }
-        ],
-        "type": "supermartijn642corelib:and"
-      },
-      "type": "supermartijn642corelib:not"
-    },
-    {
-      "condition": {
-        "backpack": "gold",
-        "type": "packedup:is_backpack_enabled"
-      },
-      "type": "supermartijn642corelib:not"
-    },
-    {
-      "backpack": "diamond",
-      "type": "packedup:is_backpack_enabled"
+      "conditions": [
+        {
+          "backpack": "silver",
+          "type": "packedup:is_backpack_enabled"
+        },
+        {
+          "registry": "minecraft:item",
+          "tag": "c:ingots/silver",
+          "type": "supermartijn642corelib:tag_populated"
+        }
+      ],
+      "type": "supermartijn642corelib:and"
     }
   ],
   "parent": "minecraft:recipes/root",
   "display": {
     "icon": {
-      "id": "packedup:diamondbackpack"
+      "id": "packedup:silverbackpack"
     },
     "title": {
-      "translate": "packedup.advancement.recipes/misc/diamond_from_chest.title"
+      "translate": "packedup.advancement.recipes/misc/silver_from_chest.title"
     },
     "description": {
-      "translate": "packedup.advancement.recipes/misc/diamond_from_chest.description"
+      "translate": "packedup.advancement.recipes/misc/silver_from_chest.description"
     },
     "frame": "task",
     "show_toast": false,
@@ -80,7 +66,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "packedup:diamond_from_chest"
+        "recipe": "packedup:silver_from_chest"
       }
     },
     "recipe_condition": {
@@ -102,7 +88,7 @@
   ],
   "rewards": {
     "recipes": [
-      "packedup:diamond_from_chest"
+      "packedup:silver_from_chest"
     ]
   }
 }

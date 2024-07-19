@@ -7,16 +7,16 @@
   ],
   "key": {
     "A": {
-      "tag": "forge:ingots/silver"
+      "tag": "forge:obsidian"
     },
     "B": {
-      "tag": "forge:leather"
+      "tag": "c:ingots/silver"
     },
     "C": {
-      "item": "packedup:basicbackpack"
+      "item": "packedup:silverbackpack"
     }
   },
   "result": {
-    "id": "packedup:silverbackpack"
+    "id": "packedup:obsidianbackpack"
   }
 }

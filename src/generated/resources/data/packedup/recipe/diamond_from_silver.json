@@ -3,20 +3,23 @@
   "pattern": [
     "ABA",
     "ACA",
-    "AAA"
+    "DDD"
   ],
   "key": {
     "A": {
-      "tag": "forge:obsidian"
+      "tag": "forge:gems/diamond"
     },
     "B": {
-      "tag": "forge:ingots/silver"
+      "tag": "c:ingots/silver"
     },
     "C": {
       "item": "packedup:silverbackpack"
+    },
+    "D": {
+      "tag": "forge:glass"
     }
   },
   "result": {
-    "id": "packedup:obsidianbackpack"
+    "id": "packedup:diamondbackpack"
   }
 }
