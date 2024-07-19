@@ -17,6 +17,6 @@ public class PackedUpModelGenerator extends ModelGenerator {
     @Override
     public void generate(){
         for(BackpackType type : BackpackType.values())
-            this.itemGenerated("item/" + type.getRegistryName(), new ResourceLocation("packedup", "items/" + type.getRegistryName()));
+            this.itemGenerated("item/" + type.getRegistryName(), ResourceLocation.fromNamespaceAndPath("packedup", "items/" + type.getRegistryName()));
     }
 }
