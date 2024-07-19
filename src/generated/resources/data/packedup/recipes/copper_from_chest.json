@@ -1,61 +1,25 @@
 {
-  "type": "supermartijn642corelib:conditional",
-  "conditions": [
-    {
-      "type": "supermartijn642corelib:not",
-      "value": {
-        "condition": {
-          "type": "packedup:is_backpack_enabled",
-          "value": {
-            "backpack": "basic"
-          }
-        }
-      }
-    },
-    {
-      "type": "supermartijn642corelib:and",
-      "value": {
-        "conditions": [
-          {
-            "type": "packedup:is_backpack_enabled",
-            "value": {
-              "backpack": "copper"
-            }
-          },
-          {
-            "type": "supermartijn642corelib:tag_populated",
-            "value": {
-              "registry": "minecraft:item",
-              "tag": "forge:ingots/copper"
-            }
-          }
-        ]
-      }
-    }
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ABA",
+    "CDC",
+    "CCC"
   ],
-  "recipe": {
-    "type": "minecraft:crafting_shaped",
-    "pattern": [
-      "ABA",
-      "CDC",
-      "CCC"
-    ],
-    "key": {
-      "A": {
-        "tag": "forge:leather"
-      },
-      "B": {
-        "tag": "forge:string"
-      },
-      "C": {
-        "tag": "forge:ingots/copper"
-      },
-      "D": {
-        "tag": "forge:chests/wooden"
-      }
+  "key": {
+    "A": {
+      "tag": "forge:leather"
     },
-    "result": {
-      "item": "packedup:copperbackpack"
+    "B": {
+      "tag": "forge:string"
+    },
+    "C": {
+      "tag": "forge:ingots/copper"
+    },
+    "D": {
+      "tag": "forge:chests/wooden"
     }
+  },
+  "result": {
+    "id": "packedup:copperbackpack"
   }
 }

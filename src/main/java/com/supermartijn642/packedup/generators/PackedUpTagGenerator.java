@@ -15,8 +15,7 @@ public class PackedUpTagGenerator extends TagGenerator {
 
     @Override
     public void generate(){
-        // Create empty silver and copper tags
-        this.itemTag("forge","ingots/copper");
+        // Create empty silver tag
         this.itemTag("forge","ingots/silver");
 
         // Curios compatibility
@@ -24,8 +23,8 @@ public class PackedUpTagGenerator extends TagGenerator {
             .add(PackedUp.basicbackpack)
             .add(PackedUp.ironbackpack)
             .add(PackedUp.copperbackpack)
-            .add(PackedUp.silverbackpack)
             .add(PackedUp.goldbackpack)
+            .add(PackedUp.silverbackpack)
             .add(PackedUp.diamondbackpack)
             .add(PackedUp.obsidianbackpack);
     }

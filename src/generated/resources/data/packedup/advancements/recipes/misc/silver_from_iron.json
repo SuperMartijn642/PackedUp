@@ -1,36 +1,28 @@
 {
   "conditions": [
     {
-      "type": "packedup:is_backpack_enabled",
-      "value": {
-        "backpack": "iron"
-      }
+      "backpack": "iron",
+      "type": "packedup:is_backpack_enabled"
     },
     {
-      "type": "supermartijn642corelib:and",
-      "value": {
-        "conditions": [
-          {
-            "type": "packedup:is_backpack_enabled",
-            "value": {
-              "backpack": "silver"
-            }
-          },
-          {
-            "type": "supermartijn642corelib:tag_populated",
-            "value": {
-              "registry": "minecraft:item",
-              "tag": "forge:ingots/silver"
-            }
-          }
-        ]
-      }
+      "conditions": [
+        {
+          "backpack": "silver",
+          "type": "packedup:is_backpack_enabled"
+        },
+        {
+          "registry": "minecraft:item",
+          "tag": "forge:ingots/silver",
+          "type": "supermartijn642corelib:tag_populated"
+        }
+      ],
+      "type": "supermartijn642corelib:and"
     }
   ],
   "parent": "minecraft:recipes/root",
   "display": {
     "icon": {
-      "item": "packedup:silverbackpack"
+      "id": "packedup:silverbackpack"
     },
     "title": {
       "translate": "packedup.advancement.recipes/misc/silver_from_iron.title"
@@ -55,9 +47,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "packedup:ironbackpack"
-            ]
+            "items": "packedup:ironbackpack"
           }
         ]
       }

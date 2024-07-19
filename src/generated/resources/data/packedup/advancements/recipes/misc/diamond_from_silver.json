@@ -1,36 +1,28 @@
 {
   "conditions": [
     {
-      "type": "supermartijn642corelib:and",
-      "value": {
-        "conditions": [
-          {
-            "type": "packedup:is_backpack_enabled",
-            "value": {
-              "backpack": "silver"
-            }
-          },
-          {
-            "type": "supermartijn642corelib:tag_populated",
-            "value": {
-              "registry": "minecraft:item",
-              "tag": "forge:ingots/silver"
-            }
-          }
-        ]
-      }
+      "conditions": [
+        {
+          "backpack": "silver",
+          "type": "packedup:is_backpack_enabled"
+        },
+        {
+          "registry": "minecraft:item",
+          "tag": "forge:ingots/silver",
+          "type": "supermartijn642corelib:tag_populated"
+        }
+      ],
+      "type": "supermartijn642corelib:and"
     },
     {
-      "type": "packedup:is_backpack_enabled",
-      "value": {
-        "backpack": "diamond"
-      }
+      "backpack": "diamond",
+      "type": "packedup:is_backpack_enabled"
     }
   ],
   "parent": "minecraft:recipes/root",
   "display": {
     "icon": {
-      "item": "packedup:diamondbackpack"
+      "id": "packedup:diamondbackpack"
     },
     "title": {
       "translate": "packedup.advancement.recipes/misc/diamond_from_silver.title"
@@ -55,9 +47,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "packedup:silverbackpack"
-            ]
+            "items": "packedup:silverbackpack"
           }
         ]
       }

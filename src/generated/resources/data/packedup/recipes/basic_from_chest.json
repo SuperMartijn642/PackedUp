@@ -1,36 +1,25 @@
 {
-  "type": "supermartijn642corelib:conditional",
-  "conditions": [
-    {
-      "type": "packedup:is_backpack_enabled",
-      "value": {
-        "backpack": "basic"
-      }
-    }
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ABA",
+    "CDC",
+    "CCC"
   ],
-  "recipe": {
-    "type": "minecraft:crafting_shaped",
-    "pattern": [
-      "ABA",
-      "CDC",
-      "CCC"
-    ],
-    "key": {
-      "A": {
-        "tag": "forge:rods/wooden"
-      },
-      "B": {
-        "tag": "forge:string"
-      },
-      "C": {
-        "tag": "forge:leather"
-      },
-      "D": {
-        "tag": "forge:chests/wooden"
-      }
+  "key": {
+    "A": {
+      "tag": "forge:rods/wooden"
     },
-    "result": {
-      "item": "packedup:basicbackpack"
+    "B": {
+      "tag": "forge:string"
+    },
+    "C": {
+      "tag": "forge:leather"
+    },
+    "D": {
+      "tag": "forge:chests/wooden"
     }
+  },
+  "result": {
+    "id": "packedup:basicbackpack"
   }
 }

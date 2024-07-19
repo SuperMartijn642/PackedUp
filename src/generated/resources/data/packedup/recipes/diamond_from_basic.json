@@ -1,114 +1,25 @@
 {
-  "type": "supermartijn642corelib:conditional",
-  "conditions": [
-    {
-      "type": "packedup:is_backpack_enabled",
-      "value": {
-        "backpack": "basic"
-      }
-    },
-    {
-      "type": "supermartijn642corelib:not",
-      "value": {
-        "condition": {
-          "type": "packedup:is_backpack_enabled",
-          "value": {
-            "backpack": "iron"
-          }
-        }
-      }
-    },
-    {
-      "type": "supermartijn642corelib:not",
-      "value": {
-        "condition": {
-          "type": "supermartijn642corelib:and",
-          "value": {
-            "conditions": [
-              {
-                "type": "packedup:is_backpack_enabled",
-                "value": {
-                  "backpack": "copper"
-                }
-              },
-              {
-                "type": "supermartijn642corelib:tag_populated",
-                "value": {
-                  "registry": "minecraft:item",
-                  "tag": "forge:ingots/copper"
-                }
-              }
-            ]
-          }
-        }
-      }
-    },
-    {
-      "type": "supermartijn642corelib:not",
-      "value": {
-        "condition": {
-          "type": "supermartijn642corelib:and",
-          "value": {
-            "conditions": [
-              {
-                "type": "packedup:is_backpack_enabled",
-                "value": {
-                  "backpack": "silver"
-                }
-              },
-              {
-                "type": "supermartijn642corelib:tag_populated",
-                "value": {
-                  "registry": "minecraft:item",
-                  "tag": "forge:ingots/silver"
-                }
-              }
-            ]
-          }
-        }
-      }
-    },
-    {
-      "type": "supermartijn642corelib:not",
-      "value": {
-        "condition": {
-          "type": "packedup:is_backpack_enabled",
-          "value": {
-            "backpack": "gold"
-          }
-        }
-      }
-    },
-    {
-      "type": "packedup:is_backpack_enabled",
-      "value": {
-        "backpack": "diamond"
-      }
-    }
+  "type": "packedup:upgrade_backpack",
+  "pattern": [
+    "ABA",
+    "ACA",
+    "DDD"
   ],
-  "recipe": {
-    "type": "packedup:upgrade_backpack",
-    "pattern": [
-      "ABA",
-      "ACA",
-      "DDD"
-    ],
-    "key": {
-      "A": {
-        "tag": "forge:gems/diamond"
-      },
-      "B": {
-        "tag": "forge:leather"
-      },
-      "C": {
-        "item": "packedup:basicbackpack"
-      },
-      "D": {
-        "tag": "forge:glass"
-      }
+  "key": {
+    "A": {
+      "tag": "forge:gems/diamond"
     },
-    "result": {
-      "item": "packedup:diamondbackpack"
+    "B": {
+      "tag": "forge:leather"
+    },
+    "C": {
+      "item": "packedup:basicbackpack"
+    },
+    "D": {
+      "tag": "forge:glass"
     }
+  },
+  "result": {
+    "id": "packedup:diamondbackpack"
   }
 }

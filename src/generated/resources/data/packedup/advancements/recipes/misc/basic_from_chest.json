@@ -1,16 +1,14 @@
 {
   "conditions": [
     {
-      "type": "packedup:is_backpack_enabled",
-      "value": {
-        "backpack": "basic"
-      }
+      "backpack": "basic",
+      "type": "packedup:is_backpack_enabled"
     }
   ],
   "parent": "minecraft:recipes/root",
   "display": {
     "icon": {
-      "item": "packedup:basicbackpack"
+      "id": "packedup:basicbackpack"
     },
     "title": {
       "translate": "packedup.advancement.recipes/misc/basic_from_chest.title"
@@ -35,7 +33,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "forge:chests/wooden"
+            "items": "#forge:chests/wooden"
           }
         ]
       }

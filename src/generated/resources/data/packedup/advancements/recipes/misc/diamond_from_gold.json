@@ -1,22 +1,18 @@
 {
   "conditions": [
     {
-      "type": "packedup:is_backpack_enabled",
-      "value": {
-        "backpack": "gold"
-      }
+      "backpack": "gold",
+      "type": "packedup:is_backpack_enabled"
     },
     {
-      "type": "packedup:is_backpack_enabled",
-      "value": {
-        "backpack": "diamond"
-      }
+      "backpack": "diamond",
+      "type": "packedup:is_backpack_enabled"
     }
   ],
   "parent": "minecraft:recipes/root",
   "display": {
     "icon": {
-      "item": "packedup:diamondbackpack"
+      "id": "packedup:diamondbackpack"
     },
     "title": {
       "translate": "packedup.advancement.recipes/misc/diamond_from_gold.title"
@@ -41,9 +37,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "packedup:goldbackpack"
-            ]
+            "items": "packedup:goldbackpack"
           }
         ]
       }

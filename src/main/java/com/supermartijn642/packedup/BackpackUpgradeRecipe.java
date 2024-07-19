@@ -1,21 +1,18 @@
 package com.supermartijn642.packedup;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.core.RegistryAccess;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.util.ExtraCodecs;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.item.crafting.ShapedRecipePattern;
-import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
-
-import javax.annotation.Nullable;
-import java.util.Map;
 
 /**
  * Created 2/8/2020 by SuperMartijn642
@@ -40,47 +37,49 @@ public class BackpackUpgradeRecipe extends ShapedRecipe {
     }
 
     @Override
-    public ItemStack assemble(CraftingContainer inventory, RegistryAccess registryAccess){
+    public ItemStack assemble(CraftingContainer inventory, HolderLookup.Provider provider){
         for(int index = 0; index < inventory.getContainerSize(); index++){
             ItemStack stack = inventory.getItem(index);
-            if(!stack.isEmpty() && stack.getItem() instanceof BackpackItem){
-                ItemStack result = this.getResultItem(registryAccess).copy();
-                result.setTag(stack.getTag());
-                if(stack.hasCustomHoverName())
-                    result.setHoverName(stack.getHoverName());
-                for(Map.Entry<Enchantment,Integer> enchant : EnchantmentHelper.getEnchantments(stack).entrySet())
-                    result.enchant(enchant.getKey(), enchant.getValue());
+            if(!stack.isEmpty() && stack.getItem() instanceof BackpackItem && stack.has(BackpackItem.INVENTORY_ID)){
+                ItemStack result = this.getResultItem(provider).copy();
+                result.set(BackpackItem.INVENTORY_ID, stack.get(BackpackItem.INVENTORY_ID));
+                if(stack.has(DataComponents.CUSTOM_NAME))
+                    result.set(DataComponents.CUSTOM_NAME, stack.get(DataComponents.CUSTOM_NAME));
+                if(stack.has(DataComponents.ENCHANTMENTS))
+                    result.set(DataComponents.ENCHANTMENTS, stack.get(DataComponents.ENCHANTMENTS));
                 return result;
             }
         }
-        return this.getResultItem(registryAccess).copy();
+        return this.getResultItem(provider).copy();
     }
 
     private static class Serializer implements RecipeSerializer<BackpackUpgradeRecipe> {
 
-        private static final Codec<BackpackUpgradeRecipe> CODEC = RecordCodecBuilder.create(instance ->
+        private static final MapCodec<BackpackUpgradeRecipe> CODEC = RecordCodecBuilder.mapCodec(instance ->
             instance.group(
-                ExtraCodecs.strictOptionalField(Codec.STRING, "group", "").forGetter(recipe -> recipe.group),
+                Codec.STRING.optionalFieldOf("group", "").forGetter(recipe -> recipe.group),
                 CraftingBookCategory.CODEC.fieldOf("category").orElse(CraftingBookCategory.MISC).forGetter(recipe -> recipe.category),
                 ShapedRecipePattern.MAP_CODEC.forGetter(recipe -> recipe.pattern),
-                ItemStack.ITEM_WITH_COUNT_CODEC.fieldOf("result").forGetter(recipe -> recipe.result),
-                ExtraCodecs.strictOptionalField(Codec.BOOL, "show_notification", true).forGetter(recipe -> recipe.showNotification)
+                ItemStack.STRICT_CODEC.fieldOf("result").forGetter(recipe -> recipe.result),
+                Codec.BOOL.optionalFieldOf("show_notification", true).forGetter(recipe -> recipe.showNotification)
             ).apply(instance, BackpackUpgradeRecipe::new));
 
         @Override
-        public Codec<BackpackUpgradeRecipe> codec(){
+        public MapCodec<BackpackUpgradeRecipe> codec(){
             return CODEC;
         }
 
         @Override
-        public @Nullable BackpackUpgradeRecipe fromNetwork(FriendlyByteBuf buffer){
-            //noinspection DataFlowIssue
-            return fromShapedRecipe(RecipeSerializer.SHAPED_RECIPE.fromNetwork(buffer));
+        public StreamCodec<RegistryFriendlyByteBuf,BackpackUpgradeRecipe> streamCodec(){
+            return StreamCodec.of(Serializer::toNetwork, Serializer::fromNetwork);
         }
 
-        @Override
-        public void toNetwork(FriendlyByteBuf buffer, BackpackUpgradeRecipe recipe){
-            RecipeSerializer.SHAPED_RECIPE.toNetwork(buffer, recipe);
+        public static BackpackUpgradeRecipe fromNetwork(RegistryFriendlyByteBuf buffer){
+            return fromShapedRecipe(ShapedRecipe.Serializer.fromNetwork(buffer));
+        }
+
+        public static void toNetwork(RegistryFriendlyByteBuf buffer, BackpackUpgradeRecipe recipe){
+            ShapedRecipe.Serializer.toNetwork(buffer, recipe);
         }
 
         private static BackpackUpgradeRecipe fromShapedRecipe(ShapedRecipe recipe){

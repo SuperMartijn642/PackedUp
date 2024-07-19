@@ -1,27 +1,21 @@
 {
   "conditions": [
     {
-      "type": "supermartijn642corelib:not",
-      "value": {
-        "condition": {
-          "type": "packedup:is_backpack_enabled",
-          "value": {
-            "backpack": "basic"
-          }
-        }
-      }
+      "condition": {
+        "backpack": "basic",
+        "type": "packedup:is_backpack_enabled"
+      },
+      "type": "supermartijn642corelib:not"
     },
     {
-      "type": "packedup:is_backpack_enabled",
-      "value": {
-        "backpack": "iron"
-      }
+      "backpack": "iron",
+      "type": "packedup:is_backpack_enabled"
     }
   ],
   "parent": "minecraft:recipes/root",
   "display": {
     "icon": {
-      "item": "packedup:ironbackpack"
+      "id": "packedup:ironbackpack"
     },
     "title": {
       "translate": "packedup.advancement.recipes/misc/iron_from_chest.title"
@@ -46,7 +40,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "forge:chests/wooden"
+            "items": "#forge:chests/wooden"
           }
         ]
       }
