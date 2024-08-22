@@ -69,7 +69,7 @@
         "tag": "c:diamonds"
       },
       "D": {
-        "item": "minecraft:chest"
+        "tag": "c:chests"
       },
       "E": {
         "tag": "c:glass_blocks"
