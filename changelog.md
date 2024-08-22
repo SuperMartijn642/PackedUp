@@ -1,3 +1,6 @@
+### Packed Up 1.0.30a
+- Fixed backpack keybind reopening the backpack when already in a screen
+
 ### Packed Up 1.0.30
 - Backpack inventory can now be closed with the open key bind
 - Backpack rename screen can now be closed by pressing enter
