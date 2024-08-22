@@ -33,9 +33,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "minecraft:chest"
-            ]
+            "tag": "c:chests"
           }
         ]
       }
