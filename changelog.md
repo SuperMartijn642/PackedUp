@@ -1,3 +1,6 @@
+### Packed Up 1.0.30c
+- Fixed backpack keybind reopening the backpack when already in a screen
+
 ### Packed Up 1.0.30b
 - Fixed backpack data not loading properly
 
