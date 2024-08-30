@@ -1,22 +1,45 @@
 {
-  "type": "packedup:upgrade_backpack",
-  "pattern": [
-    "ABA",
-    "ACA",
-    "AAA"
-  ],
-  "key": {
-    "A": {
-      "tag": "forge:ingots/gold"
+  "type": "supermartijn642corelib:conditional",
+  "conditions": [
+    {
+      "conditions": [
+        {
+          "backpack": "copper",
+          "type": "packedup:is_backpack_enabled"
+        },
+        {
+          "registry": "minecraft:item",
+          "tag": "forge:ingots/copper",
+          "type": "supermartijn642corelib:tag_populated"
+        }
+      ],
+      "type": "supermartijn642corelib:and"
     },
-    "B": {
-      "tag": "forge:ingots/copper"
-    },
-    "C": {
-      "item": "packedup:copperbackpack"
+    {
+      "backpack": "gold",
+      "type": "packedup:is_backpack_enabled"
     }
-  },
-  "result": {
-    "id": "packedup:goldbackpack"
+  ],
+  "recipe": {
+    "type": "packedup:upgrade_backpack",
+    "pattern": [
+      "ABA",
+      "ACA",
+      "AAA"
+    ],
+    "key": {
+      "A": {
+        "tag": "forge:ingots/gold"
+      },
+      "B": {
+        "tag": "forge:ingots/copper"
+      },
+      "C": {
+        "item": "packedup:copperbackpack"
+      }
+    },
+    "result": {
+      "id": "packedup:goldbackpack"
+    }
   }
 }

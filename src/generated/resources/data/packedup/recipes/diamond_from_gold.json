@@ -1,25 +1,38 @@
 {
-  "type": "packedup:upgrade_backpack",
-  "pattern": [
-    "ABA",
-    "ACA",
-    "DDD"
-  ],
-  "key": {
-    "A": {
-      "tag": "forge:gems/diamond"
+  "type": "supermartijn642corelib:conditional",
+  "conditions": [
+    {
+      "backpack": "gold",
+      "type": "packedup:is_backpack_enabled"
     },
-    "B": {
-      "tag": "forge:ingots/gold"
-    },
-    "C": {
-      "item": "packedup:goldbackpack"
-    },
-    "D": {
-      "tag": "forge:glass"
+    {
+      "backpack": "diamond",
+      "type": "packedup:is_backpack_enabled"
     }
-  },
-  "result": {
-    "id": "packedup:diamondbackpack"
+  ],
+  "recipe": {
+    "type": "packedup:upgrade_backpack",
+    "pattern": [
+      "ABA",
+      "ACA",
+      "DDD"
+    ],
+    "key": {
+      "A": {
+        "tag": "forge:gems/diamond"
+      },
+      "B": {
+        "tag": "forge:ingots/gold"
+      },
+      "C": {
+        "item": "packedup:goldbackpack"
+      },
+      "D": {
+        "tag": "forge:glass"
+      }
+    },
+    "result": {
+      "id": "packedup:diamondbackpack"
+    }
   }
 }

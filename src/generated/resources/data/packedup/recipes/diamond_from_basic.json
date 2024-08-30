@@ -1,25 +1,86 @@
 {
-  "type": "packedup:upgrade_backpack",
-  "pattern": [
-    "ABA",
-    "ACA",
-    "DDD"
-  ],
-  "key": {
-    "A": {
-      "tag": "forge:gems/diamond"
+  "type": "supermartijn642corelib:conditional",
+  "conditions": [
+    {
+      "backpack": "basic",
+      "type": "packedup:is_backpack_enabled"
     },
-    "B": {
-      "tag": "forge:leather"
+    {
+      "condition": {
+        "backpack": "iron",
+        "type": "packedup:is_backpack_enabled"
+      },
+      "type": "supermartijn642corelib:not"
     },
-    "C": {
-      "item": "packedup:basicbackpack"
+    {
+      "condition": {
+        "conditions": [
+          {
+            "backpack": "copper",
+            "type": "packedup:is_backpack_enabled"
+          },
+          {
+            "registry": "minecraft:item",
+            "tag": "forge:ingots/copper",
+            "type": "supermartijn642corelib:tag_populated"
+          }
+        ],
+        "type": "supermartijn642corelib:and"
+      },
+      "type": "supermartijn642corelib:not"
     },
-    "D": {
-      "tag": "forge:glass"
+    {
+      "condition": {
+        "conditions": [
+          {
+            "backpack": "silver",
+            "type": "packedup:is_backpack_enabled"
+          },
+          {
+            "registry": "minecraft:item",
+            "tag": "forge:ingots/silver",
+            "type": "supermartijn642corelib:tag_populated"
+          }
+        ],
+        "type": "supermartijn642corelib:and"
+      },
+      "type": "supermartijn642corelib:not"
+    },
+    {
+      "condition": {
+        "backpack": "gold",
+        "type": "packedup:is_backpack_enabled"
+      },
+      "type": "supermartijn642corelib:not"
+    },
+    {
+      "backpack": "diamond",
+      "type": "packedup:is_backpack_enabled"
     }
-  },
-  "result": {
-    "id": "packedup:diamondbackpack"
+  ],
+  "recipe": {
+    "type": "packedup:upgrade_backpack",
+    "pattern": [
+      "ABA",
+      "ACA",
+      "DDD"
+    ],
+    "key": {
+      "A": {
+        "tag": "forge:gems/diamond"
+      },
+      "B": {
+        "tag": "forge:leather"
+      },
+      "C": {
+        "item": "packedup:basicbackpack"
+      },
+      "D": {
+        "tag": "forge:glass"
+      }
+    },
+    "result": {
+      "id": "packedup:diamondbackpack"
+    }
   }
 }

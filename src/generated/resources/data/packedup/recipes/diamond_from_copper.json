@@ -1,25 +1,72 @@
 {
-  "type": "packedup:upgrade_backpack",
-  "pattern": [
-    "ABA",
-    "ACA",
-    "DDD"
-  ],
-  "key": {
-    "A": {
-      "tag": "forge:gems/diamond"
+  "type": "supermartijn642corelib:conditional",
+  "conditions": [
+    {
+      "conditions": [
+        {
+          "backpack": "copper",
+          "type": "packedup:is_backpack_enabled"
+        },
+        {
+          "registry": "minecraft:item",
+          "tag": "forge:ingots/copper",
+          "type": "supermartijn642corelib:tag_populated"
+        }
+      ],
+      "type": "supermartijn642corelib:and"
     },
-    "B": {
-      "tag": "forge:ingots/copper"
+    {
+      "condition": {
+        "conditions": [
+          {
+            "backpack": "silver",
+            "type": "packedup:is_backpack_enabled"
+          },
+          {
+            "registry": "minecraft:item",
+            "tag": "forge:ingots/silver",
+            "type": "supermartijn642corelib:tag_populated"
+          }
+        ],
+        "type": "supermartijn642corelib:and"
+      },
+      "type": "supermartijn642corelib:not"
     },
-    "C": {
-      "item": "packedup:copperbackpack"
+    {
+      "condition": {
+        "backpack": "gold",
+        "type": "packedup:is_backpack_enabled"
+      },
+      "type": "supermartijn642corelib:not"
     },
-    "D": {
-      "tag": "forge:glass"
+    {
+      "backpack": "diamond",
+      "type": "packedup:is_backpack_enabled"
     }
-  },
-  "result": {
-    "id": "packedup:diamondbackpack"
+  ],
+  "recipe": {
+    "type": "packedup:upgrade_backpack",
+    "pattern": [
+      "ABA",
+      "ACA",
+      "DDD"
+    ],
+    "key": {
+      "A": {
+        "tag": "forge:gems/diamond"
+      },
+      "B": {
+        "tag": "forge:ingots/copper"
+      },
+      "C": {
+        "item": "packedup:copperbackpack"
+      },
+      "D": {
+        "tag": "forge:glass"
+      }
+    },
+    "result": {
+      "id": "packedup:diamondbackpack"
+    }
   }
 }
