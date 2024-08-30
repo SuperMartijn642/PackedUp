@@ -1,22 +1,35 @@
 {
-  "type": "packedup:upgrade_backpack",
-  "pattern": [
-    "ABA",
-    "ACA",
-    "AAA"
-  ],
-  "key": {
-    "A": {
-      "tag": "forge:obsidian"
+  "type": "supermartijn642corelib:conditional",
+  "conditions": [
+    {
+      "backpack": "diamond",
+      "type": "packedup:is_backpack_enabled"
     },
-    "B": {
-      "tag": "forge:gems/diamond"
-    },
-    "C": {
-      "item": "packedup:diamondbackpack"
+    {
+      "backpack": "obsidian",
+      "type": "packedup:is_backpack_enabled"
     }
-  },
-  "result": {
-    "id": "packedup:obsidianbackpack"
+  ],
+  "recipe": {
+    "type": "packedup:upgrade_backpack",
+    "pattern": [
+      "ABA",
+      "ACA",
+      "AAA"
+    ],
+    "key": {
+      "A": {
+        "tag": "forge:obsidian"
+      },
+      "B": {
+        "tag": "forge:gems/diamond"
+      },
+      "C": {
+        "item": "packedup:diamondbackpack"
+      }
+    },
+    "result": {
+      "id": "packedup:obsidianbackpack"
+    }
   }
 }
