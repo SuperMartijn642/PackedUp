@@ -1,3 +1,6 @@
+### Packed Up 1.0.30c
+- Fixed all backpack recipes always being enabled
+
 ### Packed Up 1.0.30b
 - Fixed backpack keybind reopening the backpack when already in a screen
 - Data from items inside backpacks will now be upgraded to the current version when first loaded
