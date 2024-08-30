@@ -1,22 +1,52 @@
 {
-  "type": "packedup:upgrade_backpack",
-  "pattern": [
-    "ABA",
-    "ACA",
-    "AAA"
-  ],
-  "key": {
-    "A": {
-      "tag": "c:obsidians"
+  "type": "supermartijn642corelib:conditional",
+  "conditions": [
+    {
+      "conditions": [
+        {
+          "backpack": "silver",
+          "type": "packedup:is_backpack_enabled"
+        },
+        {
+          "registry": "minecraft:item",
+          "tag": "c:ingots/silver",
+          "type": "supermartijn642corelib:tag_populated"
+        }
+      ],
+      "type": "supermartijn642corelib:and"
     },
-    "B": {
-      "tag": "c:ingots/silver"
+    {
+      "condition": {
+        "backpack": "diamond",
+        "type": "packedup:is_backpack_enabled"
+      },
+      "type": "supermartijn642corelib:not"
     },
-    "C": {
-      "item": "packedup:silverbackpack"
+    {
+      "backpack": "obsidian",
+      "type": "packedup:is_backpack_enabled"
     }
-  },
-  "result": {
-    "id": "packedup:obsidianbackpack"
+  ],
+  "recipe": {
+    "type": "packedup:upgrade_backpack",
+    "pattern": [
+      "ABA",
+      "ACA",
+      "AAA"
+    ],
+    "key": {
+      "A": {
+        "tag": "c:obsidians"
+      },
+      "B": {
+        "tag": "c:ingots/silver"
+      },
+      "C": {
+        "item": "packedup:silverbackpack"
+      }
+    },
+    "result": {
+      "id": "packedup:obsidianbackpack"
+    }
   }
 }

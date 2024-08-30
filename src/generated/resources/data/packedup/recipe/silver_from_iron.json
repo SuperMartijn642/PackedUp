@@ -1,22 +1,45 @@
 {
-  "type": "packedup:upgrade_backpack",
-  "pattern": [
-    "ABA",
-    "ACA",
-    "AAA"
-  ],
-  "key": {
-    "A": {
-      "tag": "c:ingots/silver"
+  "type": "supermartijn642corelib:conditional",
+  "conditions": [
+    {
+      "backpack": "iron",
+      "type": "packedup:is_backpack_enabled"
     },
-    "B": {
-      "tag": "c:ingots/iron"
-    },
-    "C": {
-      "item": "packedup:ironbackpack"
+    {
+      "conditions": [
+        {
+          "backpack": "silver",
+          "type": "packedup:is_backpack_enabled"
+        },
+        {
+          "registry": "minecraft:item",
+          "tag": "c:ingots/silver",
+          "type": "supermartijn642corelib:tag_populated"
+        }
+      ],
+      "type": "supermartijn642corelib:and"
     }
-  },
-  "result": {
-    "id": "packedup:silverbackpack"
+  ],
+  "recipe": {
+    "type": "packedup:upgrade_backpack",
+    "pattern": [
+      "ABA",
+      "ACA",
+      "AAA"
+    ],
+    "key": {
+      "A": {
+        "tag": "c:ingots/silver"
+      },
+      "B": {
+        "tag": "c:ingots/iron"
+      },
+      "C": {
+        "item": "packedup:ironbackpack"
+      }
+    },
+    "result": {
+      "id": "packedup:silverbackpack"
+    }
   }
 }

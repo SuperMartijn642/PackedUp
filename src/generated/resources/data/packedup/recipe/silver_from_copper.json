@@ -1,22 +1,55 @@
 {
-  "type": "packedup:upgrade_backpack",
-  "pattern": [
-    "ABA",
-    "ACA",
-    "AAA"
-  ],
-  "key": {
-    "A": {
-      "tag": "c:ingots/silver"
+  "type": "supermartijn642corelib:conditional",
+  "conditions": [
+    {
+      "conditions": [
+        {
+          "backpack": "copper",
+          "type": "packedup:is_backpack_enabled"
+        },
+        {
+          "registry": "minecraft:item",
+          "tag": "c:ingots/copper",
+          "type": "supermartijn642corelib:tag_populated"
+        }
+      ],
+      "type": "supermartijn642corelib:and"
     },
-    "B": {
-      "tag": "c:ingots/copper"
-    },
-    "C": {
-      "item": "packedup:copperbackpack"
+    {
+      "conditions": [
+        {
+          "backpack": "silver",
+          "type": "packedup:is_backpack_enabled"
+        },
+        {
+          "registry": "minecraft:item",
+          "tag": "c:ingots/silver",
+          "type": "supermartijn642corelib:tag_populated"
+        }
+      ],
+      "type": "supermartijn642corelib:and"
     }
-  },
-  "result": {
-    "id": "packedup:silverbackpack"
+  ],
+  "recipe": {
+    "type": "packedup:upgrade_backpack",
+    "pattern": [
+      "ABA",
+      "ACA",
+      "AAA"
+    ],
+    "key": {
+      "A": {
+        "tag": "c:ingots/silver"
+      },
+      "B": {
+        "tag": "c:ingots/copper"
+      },
+      "C": {
+        "item": "packedup:copperbackpack"
+      }
+    },
+    "result": {
+      "id": "packedup:silverbackpack"
+    }
   }
 }
