@@ -1,22 +1,35 @@
 {
-  "type": "packedup:upgrade_backpack",
-  "pattern": [
-    "ABA",
-    "ACA",
-    "AAA"
-  ],
-  "key": {
-    "A": {
-      "tag": "c:ingots/gold"
+  "type": "supermartijn642corelib:conditional",
+  "conditions": [
+    {
+      "backpack": "iron",
+      "type": "packedup:is_backpack_enabled"
     },
-    "B": {
-      "tag": "c:ingots/iron"
-    },
-    "C": {
-      "item": "packedup:ironbackpack"
+    {
+      "backpack": "gold",
+      "type": "packedup:is_backpack_enabled"
     }
-  },
-  "result": {
-    "id": "packedup:goldbackpack"
+  ],
+  "recipe": {
+    "type": "packedup:upgrade_backpack",
+    "pattern": [
+      "ABA",
+      "ACA",
+      "AAA"
+    ],
+    "key": {
+      "A": {
+        "tag": "c:ingots/gold"
+      },
+      "B": {
+        "tag": "c:ingots/iron"
+      },
+      "C": {
+        "item": "packedup:ironbackpack"
+      }
+    },
+    "result": {
+      "id": "packedup:goldbackpack"
+    }
   }
 }

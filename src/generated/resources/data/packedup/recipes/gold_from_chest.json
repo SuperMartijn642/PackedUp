@@ -1,25 +1,65 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "ABA",
-    "CDC",
-    "CCC"
-  ],
-  "key": {
-    "A": {
-      "tag": "c:leathers"
+  "type": "supermartijn642corelib:conditional",
+  "conditions": [
+    {
+      "condition": {
+        "backpack": "basic",
+        "type": "packedup:is_backpack_enabled"
+      },
+      "type": "supermartijn642corelib:not"
     },
-    "B": {
-      "tag": "c:strings"
+    {
+      "condition": {
+        "backpack": "iron",
+        "type": "packedup:is_backpack_enabled"
+      },
+      "type": "supermartijn642corelib:not"
     },
-    "C": {
-      "tag": "c:ingots/gold"
+    {
+      "condition": {
+        "conditions": [
+          {
+            "backpack": "copper",
+            "type": "packedup:is_backpack_enabled"
+          },
+          {
+            "registry": "minecraft:item",
+            "tag": "c:ingots/copper",
+            "type": "supermartijn642corelib:tag_populated"
+          }
+        ],
+        "type": "supermartijn642corelib:and"
+      },
+      "type": "supermartijn642corelib:not"
     },
-    "D": {
-      "tag": "c:chests/wooden"
+    {
+      "backpack": "gold",
+      "type": "packedup:is_backpack_enabled"
     }
-  },
-  "result": {
-    "id": "packedup:goldbackpack"
+  ],
+  "recipe": {
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+      "ABA",
+      "CDC",
+      "CCC"
+    ],
+    "key": {
+      "A": {
+        "tag": "c:leathers"
+      },
+      "B": {
+        "tag": "c:strings"
+      },
+      "C": {
+        "tag": "c:ingots/gold"
+      },
+      "D": {
+        "tag": "c:chests/wooden"
+      }
+    },
+    "result": {
+      "id": "packedup:goldbackpack"
+    }
   }
 }

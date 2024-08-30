@@ -1,28 +1,92 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "ABA",
-    "CDC",
-    "CEC"
-  ],
-  "key": {
-    "A": {
-      "tag": "c:leathers"
+  "type": "supermartijn642corelib:conditional",
+  "conditions": [
+    {
+      "condition": {
+        "backpack": "basic",
+        "type": "packedup:is_backpack_enabled"
+      },
+      "type": "supermartijn642corelib:not"
     },
-    "B": {
-      "tag": "c:strings"
+    {
+      "condition": {
+        "backpack": "iron",
+        "type": "packedup:is_backpack_enabled"
+      },
+      "type": "supermartijn642corelib:not"
     },
-    "C": {
-      "tag": "c:gems/diamond"
+    {
+      "condition": {
+        "conditions": [
+          {
+            "backpack": "copper",
+            "type": "packedup:is_backpack_enabled"
+          },
+          {
+            "registry": "minecraft:item",
+            "tag": "c:ingots/copper",
+            "type": "supermartijn642corelib:tag_populated"
+          }
+        ],
+        "type": "supermartijn642corelib:and"
+      },
+      "type": "supermartijn642corelib:not"
     },
-    "D": {
-      "tag": "c:chests/wooden"
+    {
+      "condition": {
+        "conditions": [
+          {
+            "backpack": "silver",
+            "type": "packedup:is_backpack_enabled"
+          },
+          {
+            "registry": "minecraft:item",
+            "tag": "c:ingots/silver",
+            "type": "supermartijn642corelib:tag_populated"
+          }
+        ],
+        "type": "supermartijn642corelib:and"
+      },
+      "type": "supermartijn642corelib:not"
     },
-    "E": {
-      "tag": "c:glass_blocks/cheap"
+    {
+      "condition": {
+        "backpack": "gold",
+        "type": "packedup:is_backpack_enabled"
+      },
+      "type": "supermartijn642corelib:not"
+    },
+    {
+      "backpack": "diamond",
+      "type": "packedup:is_backpack_enabled"
     }
-  },
-  "result": {
-    "id": "packedup:diamondbackpack"
+  ],
+  "recipe": {
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+      "ABA",
+      "CDC",
+      "CEC"
+    ],
+    "key": {
+      "A": {
+        "tag": "c:leathers"
+      },
+      "B": {
+        "tag": "c:strings"
+      },
+      "C": {
+        "tag": "c:gems/diamond"
+      },
+      "D": {
+        "tag": "c:chests/wooden"
+      },
+      "E": {
+        "tag": "c:glass_blocks/cheap"
+      }
+    },
+    "result": {
+      "id": "packedup:diamondbackpack"
+    }
   }
 }

@@ -1,25 +1,38 @@
 {
-  "type": "packedup:upgrade_backpack",
-  "pattern": [
-    "ABA",
-    "ACA",
-    "DDD"
-  ],
-  "key": {
-    "A": {
-      "tag": "c:gems/diamond"
+  "type": "supermartijn642corelib:conditional",
+  "conditions": [
+    {
+      "backpack": "gold",
+      "type": "packedup:is_backpack_enabled"
     },
-    "B": {
-      "tag": "c:ingots/gold"
-    },
-    "C": {
-      "item": "packedup:goldbackpack"
-    },
-    "D": {
-      "tag": "c:glass_blocks/cheap"
+    {
+      "backpack": "diamond",
+      "type": "packedup:is_backpack_enabled"
     }
-  },
-  "result": {
-    "id": "packedup:diamondbackpack"
+  ],
+  "recipe": {
+    "type": "packedup:upgrade_backpack",
+    "pattern": [
+      "ABA",
+      "ACA",
+      "DDD"
+    ],
+    "key": {
+      "A": {
+        "tag": "c:gems/diamond"
+      },
+      "B": {
+        "tag": "c:ingots/gold"
+      },
+      "C": {
+        "item": "packedup:goldbackpack"
+      },
+      "D": {
+        "tag": "c:glass_blocks/cheap"
+      }
+    },
+    "result": {
+      "id": "packedup:diamondbackpack"
+    }
   }
 }

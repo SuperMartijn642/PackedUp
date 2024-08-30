@@ -1,25 +1,41 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "ABA",
-    "CDC",
-    "CCC"
-  ],
-  "key": {
-    "A": {
-      "tag": "c:leathers"
+  "type": "supermartijn642corelib:conditional",
+  "conditions": [
+    {
+      "condition": {
+        "backpack": "basic",
+        "type": "packedup:is_backpack_enabled"
+      },
+      "type": "supermartijn642corelib:not"
     },
-    "B": {
-      "tag": "c:strings"
-    },
-    "C": {
-      "tag": "c:ingots/iron"
-    },
-    "D": {
-      "tag": "c:chests/wooden"
+    {
+      "backpack": "iron",
+      "type": "packedup:is_backpack_enabled"
     }
-  },
-  "result": {
-    "id": "packedup:ironbackpack"
+  ],
+  "recipe": {
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+      "ABA",
+      "CDC",
+      "CCC"
+    ],
+    "key": {
+      "A": {
+        "tag": "c:leathers"
+      },
+      "B": {
+        "tag": "c:strings"
+      },
+      "C": {
+        "tag": "c:ingots/iron"
+      },
+      "D": {
+        "tag": "c:chests/wooden"
+      }
+    },
+    "result": {
+      "id": "packedup:ironbackpack"
+    }
   }
 }
