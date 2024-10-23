@@ -66,18 +66,10 @@
       "CCC"
     ],
     "key": {
-      "A": {
-        "item": "minecraft:leather"
-      },
-      "B": {
-        "tag": "c:strings"
-      },
-      "C": {
-        "item": "minecraft:obsidian"
-      },
-      "D": {
-        "tag": "c:chests"
-      }
+      "A": "minecraft:leather",
+      "B": "#c:strings",
+      "C": "minecraft:obsidian",
+      "D": "#c:chests"
     },
     "result": {
       "id": "packedup:obsidianbackpack"

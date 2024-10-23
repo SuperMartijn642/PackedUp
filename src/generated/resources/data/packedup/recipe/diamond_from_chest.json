@@ -59,21 +59,11 @@
       "CEC"
     ],
     "key": {
-      "A": {
-        "item": "minecraft:leather"
-      },
-      "B": {
-        "tag": "c:strings"
-      },
-      "C": {
-        "tag": "c:gems/diamond"
-      },
-      "D": {
-        "tag": "c:chests"
-      },
-      "E": {
-        "tag": "c:glass_blocks"
-      }
+      "A": "minecraft:leather",
+      "B": "#c:strings",
+      "C": "#c:gems/diamond",
+      "D": "#c:chests",
+      "E": "#c:glass_blocks"
     },
     "result": {
       "id": "packedup:diamondbackpack"

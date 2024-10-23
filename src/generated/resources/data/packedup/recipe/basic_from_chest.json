@@ -14,18 +14,10 @@
       "CCC"
     ],
     "key": {
-      "A": {
-        "item": "minecraft:stick"
-      },
-      "B": {
-        "tag": "c:strings"
-      },
-      "C": {
-        "item": "minecraft:leather"
-      },
-      "D": {
-        "tag": "c:chests"
-      }
+      "A": "minecraft:stick",
+      "B": "#c:strings",
+      "C": "minecraft:leather",
+      "D": "#c:chests"
     },
     "result": {
       "id": "packedup:basicbackpack"

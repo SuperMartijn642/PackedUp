@@ -63,15 +63,9 @@
       "AAA"
     ],
     "key": {
-      "A": {
-        "item": "minecraft:obsidian"
-      },
-      "B": {
-        "item": "minecraft:leather"
-      },
-      "C": {
-        "item": "packedup:basicbackpack"
-      }
+      "A": "minecraft:obsidian",
+      "B": "minecraft:leather",
+      "C": "packedup:basicbackpack"
     },
     "result": {
       "id": "packedup:obsidianbackpack"

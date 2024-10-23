@@ -18,15 +18,9 @@
       "AAA"
     ],
     "key": {
-      "A": {
-        "item": "minecraft:obsidian"
-      },
-      "B": {
-        "tag": "c:gems/diamond"
-      },
-      "C": {
-        "item": "packedup:diamondbackpack"
-      }
+      "A": "minecraft:obsidian",
+      "B": "#c:gems/diamond",
+      "C": "packedup:diamondbackpack"
     },
     "result": {
       "id": "packedup:obsidianbackpack"

@@ -35,15 +35,9 @@
       "AAA"
     ],
     "key": {
-      "A": {
-        "item": "minecraft:obsidian"
-      },
-      "B": {
-        "tag": "c:ingots/silver"
-      },
-      "C": {
-        "item": "packedup:silverbackpack"
-      }
+      "A": "minecraft:obsidian",
+      "B": "#c:ingots/silver",
+      "C": "packedup:silverbackpack"
     },
     "result": {
       "id": "packedup:obsidianbackpack"

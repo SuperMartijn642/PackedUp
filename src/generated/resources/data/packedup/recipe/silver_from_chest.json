@@ -45,18 +45,10 @@
       "CCC"
     ],
     "key": {
-      "A": {
-        "item": "minecraft:leather"
-      },
-      "B": {
-        "tag": "c:strings"
-      },
-      "C": {
-        "tag": "c:ingots/silver"
-      },
-      "D": {
-        "tag": "c:chests"
-      }
+      "A": "minecraft:leather",
+      "B": "#c:strings",
+      "C": "#c:ingots/silver",
+      "D": "#c:chests"
     },
     "result": {
       "id": "packedup:silverbackpack"

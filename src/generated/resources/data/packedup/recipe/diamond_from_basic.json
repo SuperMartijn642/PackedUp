@@ -56,18 +56,10 @@
       "DDD"
     ],
     "key": {
-      "A": {
-        "tag": "c:gems/diamond"
-      },
-      "B": {
-        "item": "minecraft:leather"
-      },
-      "C": {
-        "item": "packedup:basicbackpack"
-      },
-      "D": {
-        "tag": "c:glass_blocks"
-      }
+      "A": "#c:gems/diamond",
+      "B": "minecraft:leather",
+      "C": "packedup:basicbackpack",
+      "D": "#c:glass_blocks"
     },
     "result": {
       "id": "packedup:diamondbackpack"

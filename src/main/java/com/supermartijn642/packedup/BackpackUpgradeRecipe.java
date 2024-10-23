@@ -37,7 +37,7 @@ public class BackpackUpgradeRecipe extends ShapedRecipe {
         for(int index = 0; index < input.ingredientCount(); index++){
             ItemStack stack = input.getItem(index);
             if(!stack.isEmpty() && stack.getItem() instanceof BackpackItem && stack.has(BackpackItem.INVENTORY_ID)){
-                ItemStack result = this.getResultItem(provider).copy();
+                ItemStack result = this.result.copy();
                 result.set(BackpackItem.INVENTORY_ID, stack.get(BackpackItem.INVENTORY_ID));
                 if(stack.has(DataComponents.CUSTOM_NAME))
                     result.set(DataComponents.CUSTOM_NAME, stack.get(DataComponents.CUSTOM_NAME));
@@ -46,7 +46,7 @@ public class BackpackUpgradeRecipe extends ShapedRecipe {
                 return result;
             }
         }
-        return this.getResultItem(provider).copy();
+        return this.result.copy();
     }
 
     private static class Serializer implements RecipeSerializer<BackpackUpgradeRecipe> {
@@ -79,7 +79,7 @@ public class BackpackUpgradeRecipe extends ShapedRecipe {
         }
 
         private static BackpackUpgradeRecipe fromShapedRecipe(ShapedRecipe recipe){
-            return new BackpackUpgradeRecipe(recipe.getGroup(), recipe.category(), recipe.pattern, recipe.getResultItem(null), recipe.showNotification());
+            return new BackpackUpgradeRecipe(recipe.group(), recipe.category(), recipe.pattern, recipe.assemble(null, null), recipe.showNotification());
         }
     }
 }

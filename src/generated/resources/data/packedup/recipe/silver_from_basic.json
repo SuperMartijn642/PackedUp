@@ -42,15 +42,9 @@
       "AAA"
     ],
     "key": {
-      "A": {
-        "tag": "c:ingots/silver"
-      },
-      "B": {
-        "item": "minecraft:leather"
-      },
-      "C": {
-        "item": "packedup:basicbackpack"
-      }
+      "A": "#c:ingots/silver",
+      "B": "minecraft:leather",
+      "C": "packedup:basicbackpack"
     },
     "result": {
       "id": "packedup:silverbackpack"
