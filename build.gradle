@@ -1,5 +1,5 @@
 plugins {
-    id "fabric-loom" version "1.6-SNAPSHOT"
+    id "fabric-loom" version "1.7-SNAPSHOT"
     id "me.modmuss50.mod-publish-plugin" version "0.5.2"
 }
 
@@ -53,7 +53,7 @@ dependencies {
     modCompileOnly "org.ladysnake.cardinal-components-api:cardinal-components-base:6.1.0"
 
     // Just Enough Items
-//    modRuntimeOnly "curse.maven:jei-238222:${just_enough_items_file}"
+    modRuntimeOnly "curse.maven:jei-238222:${just_enough_items_file}"
     // Cardinal Components (Entity)
 //    modRuntimeOnly "curse.maven:cardinal-components-e-318449:${cardinal_components_entity_file}"
     // Cardinal Components (Base)
