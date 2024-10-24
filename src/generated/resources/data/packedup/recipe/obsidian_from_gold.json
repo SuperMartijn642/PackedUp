@@ -25,15 +25,9 @@
       "AAA"
     ],
     "key": {
-      "A": {
-        "tag": "c:obsidians"
-      },
-      "B": {
-        "tag": "c:ingots/gold"
-      },
-      "C": {
-        "item": "packedup:goldbackpack"
-      }
+      "A": "#c:obsidians",
+      "B": "#c:ingots/gold",
+      "C": "packedup:goldbackpack"
     },
     "result": {
       "id": "packedup:obsidianbackpack"

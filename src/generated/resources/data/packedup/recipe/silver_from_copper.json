@@ -38,15 +38,9 @@
       "AAA"
     ],
     "key": {
-      "A": {
-        "tag": "c:ingots/silver"
-      },
-      "B": {
-        "tag": "c:ingots/copper"
-      },
-      "C": {
-        "item": "packedup:copperbackpack"
-      }
+      "A": "#c:ingots/silver",
+      "B": "#c:ingots/copper",
+      "C": "packedup:copperbackpack"
     },
     "result": {
       "id": "packedup:silverbackpack"

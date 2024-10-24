@@ -18,18 +18,10 @@
       "DDD"
     ],
     "key": {
-      "A": {
-        "tag": "c:gems/diamond"
-      },
-      "B": {
-        "tag": "c:ingots/gold"
-      },
-      "C": {
-        "item": "packedup:goldbackpack"
-      },
-      "D": {
-        "tag": "c:glass_blocks/cheap"
-      }
+      "A": "#c:gems/diamond",
+      "B": "#c:ingots/gold",
+      "C": "packedup:goldbackpack",
+      "D": "#c:glass_blocks/cheap"
     },
     "result": {
       "id": "packedup:diamondbackpack"

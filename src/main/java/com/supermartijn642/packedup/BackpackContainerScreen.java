@@ -53,14 +53,13 @@ public class BackpackContainerScreen extends BaseContainerWidget<BackpackContain
             int height = this.container.type.getRows() * 18 + 23;
             ScreenUtils.drawScreenBackground(context.poseStack(), offset, 0, backpackWidth, height);
             ScreenUtils.drawScreenBackground(context.poseStack(), Math.max(0, (backpackWidth - 176) / 2f), height - 9, 176, this.height() - height + 9);
-            ScreenUtils.bindTexture(CORNERS);
             if(this.container.type.getColumns() > 9){
-                ScreenUtils.drawTexture(context.poseStack(), Math.max(0, (backpackWidth - 176) / 2f), height - 3, 3, 3, 0, 0, 0.5f, 0.5f);
-                ScreenUtils.drawTexture(context.poseStack(), Math.max(0, (backpackWidth - 176) / 2f) + 176 - 3, height - 3, 3, 3, 0.5f, 0, 0.5f, 0.5f);
+                ScreenUtils.drawTexture(CORNERS, context.poseStack(), Math.max(0, (backpackWidth - 176) / 2f), height - 3, 3, 3, 0, 0, 0.5f, 0.5f);
+                ScreenUtils.drawTexture(CORNERS, context.poseStack(), Math.max(0, (backpackWidth - 176) / 2f) + 176 - 3, height - 3, 3, 3, 0.5f, 0, 0.5f, 0.5f);
                 ScreenUtils.fillRect(context.poseStack(), Math.max(0, (backpackWidth - 176) / 2f), height - 9, 176, 6, 0xffC6C6C6);
             }else{
-                ScreenUtils.drawTexture(context.poseStack(), offset, height - 9, 3, 3, 0, 0.5f, 0.5f, 0.5f);
-                ScreenUtils.drawTexture(context.poseStack(), offset + backpackWidth - 3, height - 9, 3, 3, 0.5f, 0.5f, 0.5f, 0.5f);
+                ScreenUtils.drawTexture(CORNERS, context.poseStack(), offset, height - 9, 3, 3, 0, 0.5f, 0.5f, 0.5f);
+                ScreenUtils.drawTexture(CORNERS, context.poseStack(), offset + backpackWidth - 3, height - 9, 3, 3, 0.5f, 0.5f, 0.5f, 0.5f);
                 ScreenUtils.fillRect(context.poseStack(), offset + 3, height - 9, backpackWidth - 6, 3, 0xffC6C6C6);
             }
         }

@@ -73,15 +73,9 @@
       "AAA"
     ],
     "key": {
-      "A": {
-        "tag": "c:obsidians"
-      },
-      "B": {
-        "tag": "c:leathers"
-      },
-      "C": {
-        "item": "packedup:basicbackpack"
-      }
+      "A": "#c:obsidians",
+      "B": "#c:leathers",
+      "C": "packedup:basicbackpack"
     },
     "result": {
       "id": "packedup:obsidianbackpack"
