@@ -15,11 +15,8 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.fml.InterModComms;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.neoforged.fml.event.lifecycle.InterModEnqueueEvent;
-import top.theillusivec4.curios.api.SlotTypeMessage;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -55,7 +52,6 @@ public class PackedUp {
 
     public PackedUp(IEventBus eventBus){
         eventBus.addListener(this::init);
-        eventBus.addListener(this::interModEnqueue);
 
         CHANNEL.registerMessage(PacketRename.class, PacketRename::new, true);
         CHANNEL.registerMessage(PacketOpenBag.class, PacketOpenBag::new, true);
@@ -68,10 +64,6 @@ public class PackedUp {
 
     public void init(FMLCommonSetupEvent e){
         Compatibility.init();
-    }
-
-    public void interModEnqueue(InterModEnqueueEvent e){
-        InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE, () -> new SlotTypeMessage.Builder("back").size(1).build());
     }
 
     private static void register(){
