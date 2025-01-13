@@ -5,6 +5,7 @@ import com.supermartijn642.core.gui.WidgetContainerScreen;
 import com.supermartijn642.core.gui.WidgetScreen;
 import com.supermartijn642.core.registry.ClientRegistrationHandler;
 import com.supermartijn642.packedup.packets.PacketOpenBag;
+import com.supermartijn642.packedup.screen.BackpackContainerScreen;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
