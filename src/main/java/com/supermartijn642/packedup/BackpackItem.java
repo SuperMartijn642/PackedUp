@@ -21,6 +21,21 @@ import java.util.function.Consumer;
  */
 public class BackpackItem extends BaseItem {
 
+    public static ItemStack getIcon(ItemStack stack){
+        if(stack.hasTag() && stack.getOrCreateTag().contains("packedup:icon"))
+            return ItemStack.of(stack.getOrCreateTag().getCompound("packedup:icon"));
+        return ItemStack.EMPTY;
+    }
+
+    public static void setIcon(ItemStack stack, ItemStack icon){
+        if(icon.isEmpty())
+            stack.removeTagKey("packedup:icon");
+        else{
+            icon.removeTagKey("packedup:icon");
+            stack.addTagElement("packedup:icon", icon.save(new CompoundTag()));
+        }
+    }
+
     public BackpackType type;
 
     public BackpackItem(BackpackType type){
@@ -36,7 +51,7 @@ public class BackpackItem extends BaseItem {
                 PackedUpCommon.openBackpackInventory(stack, player, bagSlot);
             }
         }else if(level.isClientSide)
-            PackedUpClient.openBackpackRenameScreen(TextComponents.item(stack.getItem()).format(), TextComponents.itemStack(stack).format());
+            PackedUpClient.openBackpackRenameScreen(hand);
         return ItemUseResult.success(stack);
     }
 
