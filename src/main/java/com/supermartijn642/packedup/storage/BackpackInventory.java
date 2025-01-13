@@ -1,6 +1,8 @@
-package com.supermartijn642.packedup;
+package com.supermartijn642.packedup.storage;
 
 import com.google.common.collect.Lists;
+import com.supermartijn642.packedup.BackpackItem;
+import com.supermartijn642.packedup.BackpackType;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtIo;

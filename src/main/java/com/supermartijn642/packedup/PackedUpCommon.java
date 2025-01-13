@@ -2,6 +2,9 @@ package com.supermartijn642.packedup;
 
 import com.supermartijn642.core.CommonUtils;
 import com.supermartijn642.core.TextComponents;
+import com.supermartijn642.packedup.screen.BackpackContainer;
+import com.supermartijn642.packedup.storage.BackpackInventory;
+import com.supermartijn642.packedup.storage.BackpackStorageManager;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;

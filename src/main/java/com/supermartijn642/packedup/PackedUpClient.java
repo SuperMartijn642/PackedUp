@@ -5,6 +5,7 @@ import com.supermartijn642.core.gui.WidgetContainerScreen;
 import com.supermartijn642.core.gui.WidgetScreen;
 import com.supermartijn642.core.registry.ClientRegistrationHandler;
 import com.supermartijn642.packedup.packets.PacketOpenBag;
+import com.supermartijn642.packedup.screen.BackpackContainerScreen;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.network.chat.Component;
 import net.neoforged.api.distmarker.Dist;

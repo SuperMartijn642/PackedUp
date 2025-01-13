@@ -1,6 +1,9 @@
-package com.supermartijn642.packedup;
+package com.supermartijn642.packedup.storage;
 
 import com.supermartijn642.core.util.Holder;
+import com.supermartijn642.packedup.BackpackItem;
+import com.supermartijn642.packedup.BackpackType;
+import com.supermartijn642.packedup.PackedUpConfig;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
