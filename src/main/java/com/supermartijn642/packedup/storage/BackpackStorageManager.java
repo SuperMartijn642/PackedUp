@@ -1,5 +1,8 @@
-package com.supermartijn642.packedup;
+package com.supermartijn642.packedup.storage;
 
+import com.supermartijn642.packedup.BackpackItem;
+import com.supermartijn642.packedup.BackpackType;
+import com.supermartijn642.packedup.PackedUpConfig;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
