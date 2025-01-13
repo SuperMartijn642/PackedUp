@@ -1,6 +1,12 @@
-package com.supermartijn642.packedup;
+package com.supermartijn642.packedup.screen;
 
 import com.supermartijn642.core.gui.BaseContainer;
+import com.supermartijn642.packedup.BackpackItem;
+import com.supermartijn642.packedup.BackpackType;
+import com.supermartijn642.packedup.PackedUp;
+import com.supermartijn642.packedup.PackedUpCommon;
+import com.supermartijn642.packedup.storage.BackpackInventory;
+import com.supermartijn642.packedup.storage.BackpackStorageManager;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickType;
