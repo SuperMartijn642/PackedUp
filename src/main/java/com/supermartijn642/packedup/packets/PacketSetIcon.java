@@ -1,6 +1,5 @@
 package com.supermartijn642.packedup.packets;
 
-import com.supermartijn642.core.TextComponents;
 import com.supermartijn642.core.network.BasePacket;
 import com.supermartijn642.core.network.PacketContext;
 import com.supermartijn642.packedup.BackpackItem;
@@ -10,33 +9,31 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
 /**
- * Created 4/29/2020 by SuperMartijn642
+ * Created 11/01/2025 by SuperMartijn642
  */
-public class PacketRename implements BasePacket {
+public class PacketSetIcon implements BasePacket {
 
     private InteractionHand hand;
-    private String name;
+    private ItemStack icon;
 
-    public PacketRename(InteractionHand hand, String name){
+    public PacketSetIcon(InteractionHand hand, ItemStack icon){
         this.hand = hand;
-        this.name = name == null ? null : name.trim();
+        this.icon = icon;
     }
 
-    public PacketRename(){
+    public PacketSetIcon(){
     }
 
     @Override
     public void write(FriendlyByteBuf buffer){
         buffer.writeBoolean(this.hand == InteractionHand.MAIN_HAND);
-        buffer.writeBoolean(this.name != null);
-        if(this.name != null)
-            buffer.writeUtf(this.name);
+        buffer.writeItem(this.icon);
     }
 
     @Override
     public void read(FriendlyByteBuf buffer){
         this.hand = buffer.readBoolean() ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND;
-        this.name = buffer.readBoolean() ? buffer.readUtf(32767) : "";
+        this.icon = buffer.readItem();
     }
 
     @Override
@@ -49,10 +46,7 @@ public class PacketRename implements BasePacket {
                 return;
 
             stack = stack.copy();
-            if(this.name == null || this.name.isEmpty() || this.name.equals(TextComponents.item(stack.getItem()).format()))
-                stack.resetHoverName();
-            else
-                stack.setHoverName(TextComponents.string(this.name).get());
+            BackpackItem.setIcon(stack, this.icon);
             player.setItemInHand(this.hand, stack);
         }
     }
