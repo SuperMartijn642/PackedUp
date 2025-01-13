@@ -17,7 +17,7 @@ public class PackedUpLanguageGenerator extends LanguageGenerator {
     public void generate(){
         // Item group
         this.itemGroup(PackedUp.ITEM_GROUP, "Packed Up");
-        
+
         // Backpacks
         this.item(PackedUp.basicbackpack, "Backpack");
         this.item(PackedUp.ironbackpack, "Iron Backpack");
@@ -29,11 +29,17 @@ public class PackedUpLanguageGenerator extends LanguageGenerator {
         this.translation("packedup.backpacks.info.one", "Can store %d item stacks");
         this.translation("packedup.backpacks.info.two", "Can be opened with '%s'");
         this.translation("packedup.backpacks.info.inventory_index", "Inventory id: %d");
-        
-        // Rename screen
-        this.translation("packedup.rename_screen.title", "Backpack Name");
-        this.translation("packedup.rename_screen.name_field", "Backpack Name:");
-        
+
+        // Customization screen
+        this.translation("packedup.customization_screen.title", "Backpack Customization");
+        this.translation("packedup.customization_screen.icon", "Backpack Icon");
+        this.translation("packedup.customization_screen.icon.none", "None selected");
+        this.translation("packedup.customization_screen.icon.select", "%s to select");
+        this.translation("packedup.customization_screen.icon.left_click", "Left-click");
+        this.translation("packedup.customization_screen.icon.clear", "%s to clear");
+        this.translation("packedup.customization_screen.icon.right_click", "Right-click");
+        this.translation("packedup.icon_selection_screen.icon.title", "Select icon");
+
         // Keybinding
         this.translation("packedup.keys.category", "Packed Up");
         this.translation("packedup.keys.openbag", "Open Backpack");
