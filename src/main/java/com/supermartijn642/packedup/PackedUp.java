@@ -7,19 +7,13 @@ import com.supermartijn642.core.network.PacketChannel;
 import com.supermartijn642.core.registry.GeneratorRegistrationHandler;
 import com.supermartijn642.core.registry.RegistrationHandler;
 import com.supermartijn642.core.registry.RegistryEntryAcceptor;
-import com.supermartijn642.packedup.compat.Compatibility;
 import com.supermartijn642.packedup.generators.*;
 import com.supermartijn642.packedup.packets.PacketOpenBag;
 import com.supermartijn642.packedup.packets.PacketRename;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import top.theillusivec4.curios.api.SlotTypeMessage;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -54,9 +48,6 @@ public class PackedUp {
     public static final CreativeModeTab ITEM_GROUP = CreativeItemGroup.create("packedup", () -> basicbackpack);
 
     public PackedUp(){
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::init);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::interModEnqueue);
-
         CHANNEL.registerMessage(PacketRename.class, PacketRename::new, true);
         CHANNEL.registerMessage(PacketOpenBag.class, PacketOpenBag::new, true);
 
@@ -64,14 +55,6 @@ public class PackedUp {
         if(CommonUtils.getEnvironmentSide().isClient())
             PackedUpClient.register();
         registerGenerators();
-    }
-
-    public void init(FMLCommonSetupEvent e){
-        Compatibility.init();
-    }
-
-    public void interModEnqueue(InterModEnqueueEvent e){
-        InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE, () -> new SlotTypeMessage.Builder("back").size(1).build());
     }
 
     private static void register(){
