@@ -1,4 +1,4 @@
-// this.cache.versionId	2024-07-18T19:36:42.6454082	Core Lib Generators
+// this.cache.versionId	2025-01-14T00:03:16.3119039	Core Lib Generators
 94af823806d2c53d994426d0603128f43272b3b0 data\packedup\recipes\gold_from_iron.json
 13570cd55d94f359d64817274372a5339a0fad4e data\packedup\recipes\diamond_from_silver.json
 b7bd9b3aee8721c4c447fdf4a8bf229beb072d35 data\packedup\advancements\basic_backpack.json
@@ -35,7 +35,7 @@ ea633d3a0581a344d84a8df19152564edc700a30 data\packedup\advancements\recipes\misc
 a96066af81b49f8fe5532162df901a11b409c9e2 data\packedup\recipes\silver_from_copper.json
 5701283d9559f03881e7a5c558294b6816479d02 data\packedup\recipes\gold_from_copper.json
 be354a24503b8926b95873fba744b1aba352dbd8 data\packedup\advancements\recipes\misc\silver_from_copper.json
-174df8d7c62c6b38e85b1e633f55d3c644f0dfb9 data\trinkets\tags\items\chest\back.json
+b2740afbe683f3206f77fd65d6c5f99e69e3182c data\trinkets\tags\items\chest\back.json
 4e833a8ff21745f2637b4dc4c6b3a972c474075b data\packedup\advancements\silver_or_gold_backpack.json
 1c37ddb284c2fe22174cf8b698a91ec7185a1d82 data\packedup\advancements\recipes\misc\obsidian_from_copper.json
 afe20a7126bc81640542efd7185c83011e80c355 data\packedup\recipes\copper_from_basic.json
@@ -65,5 +65,5 @@ d1a152127cf3ab2585cb9bb13390058a38a994c9 data\packedup\advancements\recipes\misc
 109df8ca134063d9a90f5a83c53c904a048e7924 data\packedup\recipes\obsidian_from_iron.json
 aa8f43dd8f38a67043bd549a68498b388f78506f assets\minecraft\atlases\blocks.json
 c0e62517cd977dd9a550b118facab6e6314f9612 data\packedup\recipes\silver_from_basic.json
-fabf09342d269ec6e53d5a7d22c73fad6410f09c assets\packedup\lang\en_us.json
+6839a4ea0887e1c7a80498e48267b5c5b894fbf6 assets\packedup\lang\en_us.json
 e28cfe841b394acdf1bdfcb7141bd10b1719c919 data\packedup\recipes\obsidian_from_diamond.json
