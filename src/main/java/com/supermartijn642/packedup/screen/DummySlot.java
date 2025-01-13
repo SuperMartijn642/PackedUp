@@ -1,4 +1,4 @@
-package com.supermartijn642.packedup;
+package com.supermartijn642.packedup.screen;
 
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Player;
