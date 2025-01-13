@@ -1,6 +1,6 @@
 package com.supermartijn642.packedup.mixin;
 
-import com.supermartijn642.packedup.BackpackStorageManager;
+import com.supermartijn642.packedup.storage.BackpackStorageManager;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.ProgressListener;
 import org.spongepowered.asm.mixin.Mixin;
