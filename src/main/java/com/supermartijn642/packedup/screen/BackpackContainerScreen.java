@@ -1,9 +1,10 @@
-package com.supermartijn642.packedup;
+package com.supermartijn642.packedup.screen;
 
 import com.supermartijn642.core.ClientUtils;
 import com.supermartijn642.core.TextComponents;
 import com.supermartijn642.core.gui.ScreenUtils;
 import com.supermartijn642.core.gui.widget.BaseContainerWidget;
+import com.supermartijn642.packedup.PackedUpClient;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
@@ -13,7 +14,7 @@ import net.minecraft.util.text.ITextComponent;
  */
 public class BackpackContainerScreen extends BaseContainerWidget<BackpackContainer> {
 
-    private static final ResourceLocation CORNERS = new ResourceLocation("packedup", "textures/corners.png");
+    private static final ResourceLocation CORNERS = new ResourceLocation("packedup", "textures/gui/corners.png");
 
     private ITextComponent displayName;
 
