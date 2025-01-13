@@ -1,6 +1,5 @@
 package com.supermartijn642.packedup.packets;
 
-import com.supermartijn642.core.TextComponents;
 import com.supermartijn642.core.network.BasePacket;
 import com.supermartijn642.core.network.PacketContext;
 import com.supermartijn642.packedup.BackpackItem;
@@ -10,33 +9,31 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.Hand;
 
 /**
- * Created 4/29/2020 by SuperMartijn642
+ * Created 11/01/2025 by SuperMartijn642
  */
-public class PacketRename implements BasePacket {
+public class PacketSetIcon implements BasePacket {
 
     private Hand hand;
-    private String name;
+    private ItemStack icon;
 
-    public PacketRename(Hand hand, String name){
+    public PacketSetIcon(Hand hand, ItemStack icon){
         this.hand = hand;
-        this.name = name == null ? null : name.trim();
+        this.icon = icon;
     }
 
-    public PacketRename(){
+    public PacketSetIcon(){
     }
 
     @Override
     public void write(PacketBuffer buffer){
         buffer.writeBoolean(this.hand == Hand.MAIN_HAND);
-        buffer.writeBoolean(this.name != null);
-        if(this.name != null)
-            buffer.writeUtf(this.name);
+        buffer.writeItem(this.icon);
     }
 
     @Override
     public void read(PacketBuffer buffer){
         this.hand = buffer.readBoolean() ? Hand.MAIN_HAND : Hand.OFF_HAND;
-        this.name = buffer.readBoolean() ? buffer.readUtf(32767) : "";
+        this.icon = buffer.readItem();
     }
 
     @Override
@@ -49,10 +46,7 @@ public class PacketRename implements BasePacket {
                 return;
 
             stack = stack.copy();
-            if(this.name == null || this.name.isEmpty() || this.name.equals(TextComponents.item(stack.getItem()).format()))
-                stack.resetHoverName();
-            else
-                stack.setHoverName(TextComponents.string(this.name).get());
+            BackpackItem.setIcon(stack, this.icon);
             player.setItemInHand(this.hand, stack);
         }
     }
