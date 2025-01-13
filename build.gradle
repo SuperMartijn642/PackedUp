@@ -73,7 +73,7 @@ processResources {
 minecraft {
     mappings channel: mappings_channel, version: mappings_version
 
-    // accessTransformer = file("src/main/resources/META-INF/accesstransformer.cfg")
+    accessTransformer = file("src/main/resources/META-INF/accesstransformer.cfg")
 
     // Make sure the core lib's mixins get applied
     String core_lib_core_mod = "com.supermartijn642.core.coremod.CoreModPlugin"
@@ -98,6 +98,8 @@ minecraft {
         }
 
         data {
+            //noinspection GroovyAssignabilityCheck
+            parent(runs.client)
             property "--generatorModid", mod_id
             property "--output", file("src/generated/resources/")
             //noinspection GroovyAssignabilityCheck
