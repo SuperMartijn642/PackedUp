@@ -6,8 +6,10 @@ import com.supermartijn642.core.gui.WidgetScreen;
 import com.supermartijn642.core.registry.ClientRegistrationHandler;
 import com.supermartijn642.packedup.packets.PacketOpenBag;
 import com.supermartijn642.packedup.screen.BackpackContainerScreen;
+import com.supermartijn642.packedup.screen.customization.BackpackCustomizationScreen;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.InteractionHand;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
@@ -27,6 +29,8 @@ public class PackedUpClient {
         ClientRegistrationHandler handler = ClientRegistrationHandler.get("packedup");
         // Register screen for the backpack inventory
         handler.registerContainerScreen(() -> PackedUp.container, container -> WidgetContainerScreen.of(new BackpackContainerScreen(), container, true));
+        // Register icon render model
+        handler.registerItemModelType("icon_renderer", BackpackIconRenderer.CODEC);
     }
 
     @SubscribeEvent
@@ -37,8 +41,8 @@ public class PackedUpClient {
         MinecraftForge.EVENT_BUS.addListener(PackedUpClient::onKey);
     }
 
-    public static void openBackpackRenameScreen(String defaultName, String name){
-        ClientUtils.displayScreen(WidgetScreen.of(new BackpackRenameScreen(defaultName, name)));
+    public static void openBackpackRenameScreen(InteractionHand hand){
+        ClientUtils.displayScreen(WidgetScreen.of(new BackpackCustomizationScreen(hand)));
     }
 
     public static void onKey(InputEvent.Key e){
