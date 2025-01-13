@@ -1,5 +1,7 @@
-package com.supermartijn642.packedup;
+package com.supermartijn642.packedup.storage;
 
+import com.supermartijn642.packedup.BackpackItem;
+import com.supermartijn642.packedup.BackpackType;
 import net.minecraft.block.BlockShulkerBox;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemBlock;
@@ -161,7 +163,9 @@ public class BackpackInventory implements IItemHandlerModifiable {
         compound.setInteger("layer", this.layer);
         try{
             CompressedStreamTools.write(compound, file);
-        }catch(Exception e){e.printStackTrace();}
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     public void load(File file){

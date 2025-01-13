@@ -11,6 +11,8 @@ import com.supermartijn642.packedup.compat.Compatibility;
 import com.supermartijn642.packedup.generators.*;
 import com.supermartijn642.packedup.packets.PacketOpenBag;
 import com.supermartijn642.packedup.packets.PacketRename;
+import com.supermartijn642.packedup.screen.BackpackContainer;
+import com.supermartijn642.packedup.storage.BackpackInventory;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
