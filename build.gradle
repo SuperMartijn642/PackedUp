@@ -115,7 +115,7 @@ gradle.taskGraph.whenReady {
         minecraft.runs.each {
             //noinspection GroovyAssignabilityCheck
             def configFile = new File(configDir, it.getUniqueFileName() + ".xml")
-            if(configFile.exists()){
+            if (configFile.exists()) {
                 def xml = new groovy.xml.XmlSlurper().parse(configFile)
                 //noinspection GrUnresolvedAccess
                 xml.configuration.@name = "Forge " + it.name.capitalize()
