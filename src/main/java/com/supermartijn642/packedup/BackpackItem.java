@@ -22,6 +22,25 @@ import java.util.function.Consumer;
 public class BackpackItem extends BaseItem {
 
     public static final DataComponentType<Integer> INVENTORY_ID = DataComponentType.<Integer>builder().persistent(ExtraCodecs.NON_NEGATIVE_INT).networkSynchronized(ByteBufCodecs.INT).build();
+    @SuppressWarnings("ClassEscapesDefinedScope")
+    public static final DataComponentType<Icon> ICON_ITEM = DataComponentType.<Icon>builder().persistent(ItemStack.OPTIONAL_CODEC.xmap(Icon::new, Icon::stack)).networkSynchronized(ItemStack.OPTIONAL_STREAM_CODEC.map(Icon::new, Icon::stack)).build();
+
+    public static ItemStack getIcon(ItemStack stack){
+        Icon icon = stack.get(ICON_ITEM);
+        return icon == null ? ItemStack.EMPTY : icon.stack;
+    }
+
+    public static void setIcon(ItemStack stack, ItemStack icon){
+        if(icon.isEmpty())
+            stack.remove(ICON_ITEM);
+        else{
+            if(icon.has(ICON_ITEM)){
+                icon = icon.copy();
+                icon.remove(ICON_ITEM);
+            }
+            stack.set(ICON_ITEM, new Icon(icon));
+        }
+    }
 
     public BackpackType type;
 
@@ -38,7 +57,7 @@ public class BackpackItem extends BaseItem {
                 PackedUpCommon.openBackpackInventory(stack, player, bagSlot);
             }
         }else if(level.isClientSide)
-            PackedUpClient.openBackpackRenameScreen(TextComponents.item(stack.getItem()).format(), TextComponents.itemStack(stack).format());
+            PackedUpClient.openBackpackRenameScreen(hand);
         return ItemUseResult.success(stack);
     }
 
@@ -60,5 +79,19 @@ public class BackpackItem extends BaseItem {
     @Override
     public boolean isInCreativeGroup(CreativeModeTab tab){
         return this.type.isEnabled() && super.isInCreativeGroup(tab);
+    }
+
+    private record Icon(ItemStack stack) {
+        @Override
+        public boolean equals(Object o){
+            if(!(o instanceof Icon icon)) return false;
+
+            return ItemStack.isSameItemSameComponents(this.stack, icon.stack);
+        }
+
+        @Override
+        public int hashCode(){
+            return ItemStack.hashItemAndComponents(this.stack);
+        }
     }
 }
