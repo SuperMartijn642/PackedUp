@@ -10,6 +10,7 @@ import com.supermartijn642.packedup.compat.Compatibility;
 import com.supermartijn642.packedup.generators.*;
 import com.supermartijn642.packedup.packets.PacketOpenBag;
 import com.supermartijn642.packedup.packets.PacketRename;
+import com.supermartijn642.packedup.packets.PacketSetIcon;
 import com.supermartijn642.packedup.screen.BackpackContainer;
 import com.supermartijn642.packedup.storage.BackpackInventory;
 import net.minecraft.network.chat.Component;
@@ -60,6 +61,7 @@ public class PackedUp {
 
         CHANNEL.registerMessage(PacketRename.class, PacketRename::new, true);
         CHANNEL.registerMessage(PacketOpenBag.class, PacketOpenBag::new, true);
+        CHANNEL.registerMessage(PacketSetIcon.class, PacketSetIcon::new, true);
 
         register();
         DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> PackedUpClient::register);
@@ -79,7 +81,7 @@ public class PackedUp {
 
         // Backpack items
         for(BackpackType type : BackpackType.values())
-            handler.registerItem(type.getRegistryName(), () -> new BackpackItem(type));
+            handler.registerItemCallback(type::registerItem);
         // Container
         handler.registerMenuType("container", () -> BaseContainerType.create(
             (container, data) -> {
