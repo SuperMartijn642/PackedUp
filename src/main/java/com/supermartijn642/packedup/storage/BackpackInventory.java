@@ -1,7 +1,9 @@
-package com.supermartijn642.packedup;
+package com.supermartijn642.packedup.storage;
 
 import com.google.common.collect.Lists;
 import com.mojang.serialization.Dynamic;
+import com.supermartijn642.packedup.BackpackItem;
+import com.supermartijn642.packedup.BackpackType;
 import net.minecraft.SharedConstants;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;

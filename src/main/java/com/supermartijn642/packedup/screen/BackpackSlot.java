@@ -1,5 +1,6 @@
-package com.supermartijn642.packedup;
+package com.supermartijn642.packedup.screen;
 
+import com.supermartijn642.packedup.storage.BackpackInventory;
 import net.minecraft.world.item.ItemStack;
 
 /**
