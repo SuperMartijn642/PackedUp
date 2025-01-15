@@ -37,7 +37,10 @@ public class BackpackItem extends BaseItem implements ICapabilityProvider {
         if(icon.isEmpty())
             stack.removeSubCompound("packedup:icon");
         else{
-            icon.removeSubCompound("packedup:icon");
+            if(icon.hasTagCompound() && icon.getTagCompound().hasKey("packedup:icon")){
+                icon = icon.copy();
+                icon.removeSubCompound("packedup:icon");
+            }
             icon.writeToNBT(stack.getOrCreateSubCompound("packedup:icon"));
         }
     }
