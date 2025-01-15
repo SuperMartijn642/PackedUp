@@ -1,12 +1,33 @@
 {
   "replace": false,
   "values": [
-    "packedup:basicbackpack",
-    "packedup:ironbackpack",
-    "packedup:silverbackpack",
-    "packedup:goldbackpack",
-    "packedup:copperbackpack",
-    "packedup:obsidianbackpack",
-    "packedup:diamondbackpack"
+    {
+      "id": "packedup:copperbackpack",
+      "required": true
+    },
+    {
+      "id": "packedup:silverbackpack",
+      "required": true
+    },
+    {
+      "id": "packedup:ironbackpack",
+      "required": true
+    },
+    {
+      "id": "packedup:basicbackpack",
+      "required": true
+    },
+    {
+      "id": "packedup:obsidianbackpack",
+      "required": true
+    },
+    {
+      "id": "packedup:diamondbackpack",
+      "required": true
+    },
+    {
+      "id": "packedup:goldbackpack",
+      "required": true
+    }
   ]
 }
