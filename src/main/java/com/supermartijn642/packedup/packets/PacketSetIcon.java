@@ -1,6 +1,5 @@
 package com.supermartijn642.packedup.packets;
 
-import com.supermartijn642.core.TextComponents;
 import com.supermartijn642.core.network.BasePacket;
 import com.supermartijn642.core.network.PacketContext;
 import com.supermartijn642.packedup.BackpackItem;
@@ -9,34 +8,38 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.EnumHand;
 
+import java.io.IOException;
+
 /**
- * Created 4/29/2020 by SuperMartijn642
+ * Created 11/01/2025 by SuperMartijn642
  */
-public class PacketRename implements BasePacket {
+public class PacketSetIcon implements BasePacket {
 
     private EnumHand hand;
-    private String name;
+    private ItemStack icon;
 
-    public PacketRename(EnumHand hand, String name){
+    public PacketSetIcon(EnumHand hand, ItemStack icon){
         this.hand = hand;
-        this.name = name == null ? null : name.trim();
+        this.icon = icon;
     }
 
-    public PacketRename(){
+    public PacketSetIcon(){
     }
 
     @Override
     public void write(PacketBuffer buffer){
         buffer.writeBoolean(this.hand == EnumHand.MAIN_HAND);
-        buffer.writeBoolean(this.name != null);
-        if(this.name != null)
-            buffer.writeString(this.name);
+        buffer.writeItemStack(this.icon);
     }
 
     @Override
     public void read(PacketBuffer buffer){
         this.hand = buffer.readBoolean() ? EnumHand.MAIN_HAND : EnumHand.OFF_HAND;
-        this.name = buffer.readBoolean() ? buffer.readString(32767) : "";
+        try{
+            this.icon = buffer.readItemStack();
+        }catch(IOException e){
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -49,10 +52,7 @@ public class PacketRename implements BasePacket {
                 return;
 
             stack = stack.copy();
-            if(this.name == null || this.name.isEmpty() || this.name.equals(TextComponents.item(stack.getItem()).format()))
-                stack.clearCustomName();
-            else
-                stack.setStackDisplayName(this.name);
+            BackpackItem.setIcon(stack, this.icon);
             player.setHeldItem(this.hand, stack);
         }
     }

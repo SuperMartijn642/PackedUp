@@ -7,7 +7,9 @@ import com.supermartijn642.core.gui.WidgetScreen;
 import com.supermartijn642.core.registry.ClientRegistrationHandler;
 import com.supermartijn642.packedup.packets.PacketOpenBag;
 import com.supermartijn642.packedup.screen.BackpackContainerScreen;
+import com.supermartijn642.packedup.screen.customization.BackpackCustomizationScreen;
 import net.minecraft.client.settings.KeyBinding;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.client.settings.KeyModifier;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -28,14 +30,19 @@ public class PackedUpClient {
         ClientRegistrationHandler handler = ClientRegistrationHandler.get("packedup");
         // Register screen for the backpack inventory
         handler.registerContainerScreen(() -> PackedUp.container, container -> WidgetContainerScreen.of(new BackpackContainerScreen(), container, true));
+        // Register item model renderers
+        for(BackpackType type : BackpackType.values()){
+            handler.registerCustomItemRenderer(type::getItem, BackpackItemRenderer::new);
+            handler.registerItemModelOverwrite(type::getItem, BackpackBakedModel::new);
+        }
 
         // Register key to open backpack in inventory or curious slot
         OPEN_BAG_KEY = new KeyBinding("packedup.keys.openbag", 24/*'o'*/, "packedup.keys.category");
         ClientRegistry.registerKeyBinding(OPEN_BAG_KEY);
     }
 
-    public static void openBackpackRenameScreen(String defaultName, String name){
-        ClientUtils.displayScreen(WidgetScreen.of(new BackpackRenameScreen(defaultName, name)));
+    public static void openBackpackRenameScreen(EnumHand hand){
+        ClientUtils.displayScreen(WidgetScreen.of(new BackpackCustomizationScreen(hand)));
     }
 
     @SubscribeEvent

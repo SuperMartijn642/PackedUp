@@ -1,5 +1,8 @@
 package com.supermartijn642.packedup;
 
+import com.supermartijn642.core.registry.RegistrationHandler;
+import net.minecraft.item.Item;
+
 import java.util.Locale;
 import java.util.function.Supplier;
 
@@ -19,6 +22,7 @@ public enum BackpackType {
     private final Supplier<Boolean> enabled;
     private final int defaultRows, defaultColumns;
     private final Supplier<Integer> rows, columns;
+    private Item item;
 
     BackpackType(Supplier<Boolean> enabled, int defaultRows, int defaultColumns, Supplier<Integer> rows, Supplier<Integer> columns){
         this.enabled = enabled;
@@ -54,5 +58,16 @@ public enum BackpackType {
 
     public int getSlots(){
         return this.getRows() * this.getColumns();
+    }
+
+    public Item getItem(){
+        if(this.item == null)
+            throw new IllegalStateException("Item has not yet been registered!");
+        return this.item;
+    }
+
+    public void registerItem(RegistrationHandler.Helper<Item> helper){
+        this.item = new BackpackItem(this);
+        helper.register(this.getRegistryName(), this.item);
     }
 }
