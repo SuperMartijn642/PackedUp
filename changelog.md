@@ -1,3 +1,8 @@
+### Packed Up 1.1.0
+- Added customizable backpack icon
+- Added Chinese translations (thanks to ChaTian!)
+- Added Turkish translations (thanks to RuyaSavascisi!)
+
 ### Packed Up 1.0.30b
 - Data from items inside backpacks will now be upgraded to the current version when first loaded
 
