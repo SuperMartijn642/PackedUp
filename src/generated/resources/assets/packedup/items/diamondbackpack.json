@@ -1,6 +1,14 @@
 {
   "model": {
-    "model": "packedup:item/diamondbackpack",
-    "type": "minecraft:model"
+    "models": [
+      {
+        "model": "packedup:item/diamondbackpack",
+        "type": "minecraft:model"
+      },
+      {
+        "type": "packedup:icon_renderer"
+      }
+    ],
+    "type": "minecraft:composite"
   }
 }

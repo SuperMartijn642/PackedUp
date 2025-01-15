@@ -1,13 +1,13 @@
-// 1.21.4	2024-12-23T19:37:16.6955454	Core Lib Generators
+// 1.21.4	2025-01-16T00:56:33.1845145	Core Lib Generators
 aa8f43dd8f38a67043bd549a68498b388f78506f assets/minecraft/atlases/blocks.json
-f3132687c35114f7ccb8adcb42c88c6e66507008 assets/packedup/items/basicbackpack.json
-73d6b706e808255d0e90633ed07fec26b1d0af28 assets/packedup/items/copperbackpack.json
-693fdabffbfdf4dbca5bfdc2ddee216096338ab9 assets/packedup/items/diamondbackpack.json
-6d1c3e551a5ce6f2f3a045aebe5bc18c2f1ef022 assets/packedup/items/goldbackpack.json
-9a41461c6eaf5c843f2fc5c9c238e67d859b5806 assets/packedup/items/ironbackpack.json
-093c45fb6587da49b2de64ebc446e8edf379b70c assets/packedup/items/obsidianbackpack.json
-d7499af194a64125c47061444ddf3b4e32122c37 assets/packedup/items/silverbackpack.json
-fabf09342d269ec6e53d5a7d22c73fad6410f09c assets/packedup/lang/en_us.json
+87b35156920cb5435af7c9ac2cb2b197ec903eb2 assets/packedup/items/basicbackpack.json
+0c68daf90947e916829b77fbc8696d639b9dbf18 assets/packedup/items/copperbackpack.json
+7cb43fe5ac1bc1743133eec73ae0af3dcb767274 assets/packedup/items/diamondbackpack.json
+9d42dbb76523ab1bc2c4f290d1a9bbebbc764ed9 assets/packedup/items/goldbackpack.json
+fe091c7e8fd3a65a2289a5a60b622268e692c754 assets/packedup/items/ironbackpack.json
+6a35f64ab031944680e39e3798603b4d03c0ecac assets/packedup/items/obsidianbackpack.json
+44db14eb7917d0df5d487215e516ec5da7a5d930 assets/packedup/items/silverbackpack.json
+6839a4ea0887e1c7a80498e48267b5c5b894fbf6 assets/packedup/lang/en_us.json
 056a43a3f55ad6faaa200de8ea27c1552a752676 assets/packedup/models/item/basicbackpack.json
 9c5f5b2d30ca359a123b68d06ed526ba8dda33cb assets/packedup/models/item/copperbackpack.json
 a5466479330043c3cf8fd4dd88e3240699e33c9f assets/packedup/models/item/diamondbackpack.json
@@ -15,7 +15,7 @@ a5466479330043c3cf8fd4dd88e3240699e33c9f assets/packedup/models/item/diamondback
 6a57f5721379ece2e3624b4b1ba1b36ecdb617a1 assets/packedup/models/item/ironbackpack.json
 6ae169b92e0feedf029f13a7325938400c73452c assets/packedup/models/item/obsidianbackpack.json
 7f18eb08cd05946655007f824714b48e1f7ed755 assets/packedup/models/item/silverbackpack.json
-4d41f949d4899bc371a1dfe11b5da66f31537cbe data/curios/tags/item/back.json
+ea7425022f431a7709bcbb2c4a4ba18ee04042b6 data/curios/tags/item/back.json
 8a23702b05296c8af5014d6aa6e9265ded85c7d9 data/c/tags/item/ingots/silver.json
 b7bd9b3aee8721c4c447fdf4a8bf229beb072d35 data/packedup/advancement/basic_backpack.json
 6bee474e4fc1a6d060f2cb2179b5477b60851576 data/packedup/advancement/diamond_backpack.json

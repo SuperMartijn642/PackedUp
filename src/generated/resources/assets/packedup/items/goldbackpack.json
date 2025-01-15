@@ -1,6 +1,14 @@
 {
   "model": {
-    "model": "packedup:item/goldbackpack",
-    "type": "minecraft:model"
+    "models": [
+      {
+        "model": "packedup:item/goldbackpack",
+        "type": "minecraft:model"
+      },
+      {
+        "type": "packedup:icon_renderer"
+      }
+    ],
+    "type": "minecraft:composite"
   }
 }
