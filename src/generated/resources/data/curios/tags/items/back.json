@@ -3,10 +3,10 @@
   "values": [
     "packedup:basicbackpack",
     "packedup:ironbackpack",
+    "packedup:diamondbackpack",
     "packedup:silverbackpack",
     "packedup:goldbackpack",
     "packedup:copperbackpack",
-    "packedup:obsidianbackpack",
-    "packedup:diamondbackpack"
+    "packedup:obsidianbackpack"
   ]
 }
