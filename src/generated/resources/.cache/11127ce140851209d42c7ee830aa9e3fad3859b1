@@ -1,6 +1,6 @@
-// 1.20.6	2024-08-30T13:49:07.2681104	Core Lib Generators
+// 1.20.6	2025-01-15T16:52:55.807129	Core Lib Generators
 aa8f43dd8f38a67043bd549a68498b388f78506f assets/minecraft/atlases/blocks.json
-fabf09342d269ec6e53d5a7d22c73fad6410f09c assets/packedup/lang/en_us.json
+6839a4ea0887e1c7a80498e48267b5c5b894fbf6 assets/packedup/lang/en_us.json
 056a43a3f55ad6faaa200de8ea27c1552a752676 assets/packedup/models/item/basicbackpack.json
 9c5f5b2d30ca359a123b68d06ed526ba8dda33cb assets/packedup/models/item/copperbackpack.json
 a5466479330043c3cf8fd4dd88e3240699e33c9f assets/packedup/models/item/diamondbackpack.json
@@ -8,7 +8,7 @@ a5466479330043c3cf8fd4dd88e3240699e33c9f assets/packedup/models/item/diamondback
 6a57f5721379ece2e3624b4b1ba1b36ecdb617a1 assets/packedup/models/item/ironbackpack.json
 6ae169b92e0feedf029f13a7325938400c73452c assets/packedup/models/item/obsidianbackpack.json
 7f18eb08cd05946655007f824714b48e1f7ed755 assets/packedup/models/item/silverbackpack.json
-22f271442039ef662786bf29580b42873bd97955 data/curios/tags/items/back.json
+2fab06ebcda3c6c43b57634a05705595b5bf7591 data/curios/tags/items/back.json
 8a23702b05296c8af5014d6aa6e9265ded85c7d9 data/forge/tags/items/ingots/silver.json
 b7bd9b3aee8721c4c447fdf4a8bf229beb072d35 data/packedup/advancements/basic_backpack.json
 6bee474e4fc1a6d060f2cb2179b5477b60851576 data/packedup/advancements/diamond_backpack.json
