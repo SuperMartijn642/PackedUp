@@ -32,7 +32,10 @@ public class BackpackItem extends BaseItem {
         if(icon.isEmpty())
             stack.removeTagKey("packedup:icon");
         else{
-            icon.removeTagKey("packedup:icon");
+            if(icon.getTagElement("packedup:icon") != null){
+                icon = icon.copy();
+                icon.removeTagKey("packedup:icon");
+            }
             stack.addTagElement("packedup:icon", icon.save(new CompoundNBT()));
         }
     }
