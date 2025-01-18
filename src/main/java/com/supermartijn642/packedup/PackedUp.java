@@ -120,7 +120,8 @@ public class PackedUp {
         GeneratorRegistrationHandler handler = GeneratorRegistrationHandler.get("packedup");
         // Register all the generators
         handler.addGenerator(PackedUpAdvancementGenerator::new);
-        handler.addGenerator(PackedUpItemInfoGenerator::new);
+        //noinspection Convert2MethodRef
+        handler.addGenerator(cache -> new PackedUpItemInfoGenerator(cache));
         handler.addGenerator(PackedUpLanguageGenerator::new);
         handler.addGenerator(PackedUpModelGenerator::new);
         handler.addGenerator(PackedUpRecipeGenerator::new);
