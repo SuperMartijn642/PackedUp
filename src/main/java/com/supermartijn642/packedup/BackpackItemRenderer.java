@@ -7,11 +7,33 @@ import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 /**
  * Created 13/01/2025 by SuperMartijn642
  */
 public class BackpackItemRenderer implements CustomItemRenderer {
+
+    /**
+     * {@link RenderItem#renderModel(IBakedModel, int, ItemStack)}
+     */
+    @SuppressWarnings("JavadocReference")
+    private static final Method RENDER_MODEL_METHOD;
+    /**
+     * {@link RenderItem#renderEffect(IBakedModel)}
+     */
+    @SuppressWarnings("JavadocReference")
+    private static final Method RENDER_EFFECT_METHOD;
+
+    static{
+        RENDER_MODEL_METHOD = ObfuscationReflectionHelper.findMethod(RenderItem.class, "func_191967_a", void.class, IBakedModel.class, int.class, ItemStack.class);
+        RENDER_EFFECT_METHOD = ObfuscationReflectionHelper.findMethod(RenderItem.class, "func_191966_a", void.class, IBakedModel.class);
+        RENDER_MODEL_METHOD.setAccessible(true);
+        RENDER_EFFECT_METHOD.setAccessible(true);
+    }
 
     private static final ThreadLocal<Boolean> RECURSION_GUARD = ThreadLocal.withInitial(() -> false);
 
@@ -37,8 +59,12 @@ public class BackpackItemRenderer implements CustomItemRenderer {
     private static void renderItemModel(ItemStack stack){
         RenderItem renderer = ClientUtils.getItemRenderer();
         IBakedModel model = renderer.getItemModelMesher().getItemModel(stack);
-        renderer.renderModel(model, -1, stack);
-        if(stack.hasEffect())
-            renderer.renderEffect(model);
+        try{
+            RENDER_MODEL_METHOD.invoke(renderer, model, -1, stack);
+            if(stack.hasEffect())
+                RENDER_EFFECT_METHOD.invoke(renderer, model);
+        }catch(InvocationTargetException | IllegalAccessException e){
+            throw new RuntimeException(e);
+        }
     }
 }

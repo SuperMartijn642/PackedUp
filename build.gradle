@@ -73,8 +73,6 @@ processResources {
 minecraft {
     mappings channel: mappings_channel, version: mappings_version
 
-    accessTransformer = file("src/main/resources/META-INF/accesstransformer.cfg")
-
     // Make sure the core lib's mixins get applied
     String core_lib_core_mod = "com.supermartijn642.core.coremod.CoreModPlugin"
 
