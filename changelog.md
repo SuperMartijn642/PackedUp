@@ -1,3 +1,6 @@
+### Packed Up 1.1.0a
+- Fixed crash when rendering backpack item
+
 ### Packed Up 1.1.0
 - Added customizable backpack icon
 - Added Chinese translations (thanks to ChaTian!)
