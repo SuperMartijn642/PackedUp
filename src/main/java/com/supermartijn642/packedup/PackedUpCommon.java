@@ -7,7 +7,6 @@ import com.supermartijn642.packedup.screen.BackpackContainer;
 import com.supermartijn642.packedup.storage.BackpackInventory;
 import com.supermartijn642.packedup.storage.BackpackStorageManager;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -67,8 +66,9 @@ public class PackedUpCommon {
         if(stack.has(DataComponents.CUSTOM_DATA)){
             CustomData data = stack.get(DataComponents.CUSTOM_DATA);
             //noinspection deprecation
-            if(data != null && data.getUnsafe().contains("packedup:invIndex", Tag.TAG_INT)){
-                stack.set(BackpackItem.INVENTORY_ID, data.copyTag().getInt("packedup:invIndex"));
+            if(data != null && data.getUnsafe().getInt("packedup:invIndex").isPresent()){
+                //noinspection OptionalGetWithoutIsPresent
+                stack.set(BackpackItem.INVENTORY_ID, data.copyTag().getInt("packedup:invIndex").get());
                 //noinspection deprecation
                 if(data.getUnsafe().size() <= 1)
                     stack.remove(DataComponents.CUSTOM_DATA);

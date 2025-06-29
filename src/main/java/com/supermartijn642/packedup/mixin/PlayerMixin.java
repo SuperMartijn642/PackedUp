@@ -5,7 +5,6 @@ import com.supermartijn642.packedup.extensions.PackedUpPlayer;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.Tag;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
@@ -15,6 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -58,14 +58,16 @@ public class PlayerMixin implements PackedUpPlayer {
         at = @At("TAIL")
     )
     private void readAdditionalSaveData(CompoundTag data, CallbackInfo ci){
-        if(data.contains("packedup:backpacks", Tag.TAG_LIST)){
-            ListTag itemData = data.getList("packedup:backpacks", Tag.TAG_COMPOUND);
+        if(data.getList("packedup:backpacks").isPresent()){
+            ListTag itemData = data.getListOrEmpty("packedup:backpacks");
             //noinspection DataFlowIssue,resource
             HolderLookup.Provider provider = ((Player)(Object)this).level().registryAccess();
             this.backpacks = itemData.stream()
                 .filter(CompoundTag.class::isInstance)
                 .map(CompoundTag.class::cast)
-                .map(tag -> ItemStack.parseOptional(provider, tag))
+                .map(tag -> ItemStack.parse(provider, tag))
+                .filter(Optional::isPresent)
+                .map(Optional::get)
                 .collect(Collectors.toList());
             if(this.backpacks.isEmpty())
                 this.backpacks = null;
