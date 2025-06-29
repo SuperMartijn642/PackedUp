@@ -1,5 +1,6 @@
 package com.supermartijn642.packedup.storage;
 
+import com.mojang.serialization.DataResult;
 import com.mojang.serialization.Dynamic;
 import com.supermartijn642.packedup.BackpackItem;
 import com.supermartijn642.packedup.BackpackType;
@@ -112,12 +113,12 @@ public class BackpackInventory {
         compound.putInt("stacks", this.stacks.size());
         for(int slot = 0; slot < this.stacks.size(); slot++)
             if(!this.stacks.get(slot).isEmpty())
-                compound.put("stack" + slot, this.stacks.get(slot).save(provider));
+                compound.put("stack" + slot, ItemStack.CODEC.encodeStart(provider.createSerializationContext(NbtOps.INSTANCE), this.stacks.get(slot)).getOrThrow());
         compound.putIntArray("bagsInThisBag", this.bagsInThisBag.stream().mapToInt(Integer::intValue).toArray());
         compound.putIntArray("bagsThisBagIsIn", this.bagsThisBagIsIn.stream().mapToInt(Integer::intValue).toArray());
         compound.putInt("layer", this.layer);
         // Add the data version the file was written in, so it can be used by DataFixerUpper when loading backpack inventories
-        compound.putInt("version", SharedConstants.getCurrentVersion().getDataVersion().getVersion());
+        compound.putInt("version", SharedConstants.getCurrentVersion().dataVersion().version());
         try{
             NbtIo.write(compound, path);
         }catch(Exception e){
@@ -138,9 +139,13 @@ public class BackpackInventory {
         this.stacks.clear();
         int size = compound.getInt("stacks").or(() -> compound.getInt("rows").map(i -> i * 9)).or(() -> compound.getInt("slots")).orElse(0); // Do this for compatibility with older versions
         for(int slot = 0; slot < size; slot++){
-            CompoundTag tag = compound.getCompoundOrEmpty("stack" + slot);
-            tag = (CompoundTag)DataFixers.getDataFixer().update(References.ITEM_STACK, new Dynamic<>(NbtOps.INSTANCE, tag), dataVersion, SharedConstants.getCurrentVersion().getDataVersion().getVersion()).getValue();
-            this.stacks.add(ItemStack.parse(provider, tag).orElse(ItemStack.EMPTY));
+            ItemStack stack = compound.getCompound("stack" + slot)
+                .map(tag -> (CompoundTag)DataFixers.getDataFixer().update(References.ITEM_STACK, new Dynamic<>(provider.createSerializationContext(NbtOps.INSTANCE), tag), dataVersion, SharedConstants.getCurrentVersion().dataVersion().version()).getValue())
+                .map(tag -> ItemStack.CODEC.decode(provider.createSerializationContext(NbtOps.INSTANCE), tag))
+                .filter(DataResult::isSuccess)
+                .map(result -> result.getOrThrow().getFirst())
+                .orElse(ItemStack.EMPTY);
+            this.stacks.add(stack);
         }
         this.bagsInThisBag.clear();
         Arrays.stream(compound.getIntArray("bagsInThisBag").orElseGet(() -> new int[0])).forEach(this.bagsInThisBag::add);

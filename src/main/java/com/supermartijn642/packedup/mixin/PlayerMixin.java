@@ -2,11 +2,10 @@ package com.supermartijn642.packedup.mixin;
 
 import com.supermartijn642.packedup.PackedUpCommon;
 import com.supermartijn642.packedup.extensions.PackedUpPlayer;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -15,7 +14,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 /**
  * Created 08/03/2023 by SuperMartijn642
@@ -43,13 +41,10 @@ public class PlayerMixin implements PackedUpPlayer {
         method = "addAdditionalSaveData",
         at = @At("TAIL")
     )
-    private void addAdditionalSaveData(CompoundTag data, CallbackInfo ci){
+    private void addAdditionalSaveData(ValueOutput output, CallbackInfo ci){
         if(this.backpacks != null && !this.backpacks.isEmpty()){
-            ListTag itemData = new ListTag();
-            //noinspection DataFlowIssue,resource
-            HolderLookup.Provider provider = ((Player)(Object)this).level().registryAccess();
-            this.backpacks.forEach(stack -> itemData.add(stack.save(provider)));
-            data.put("packedup:backpacks", itemData);
+            ValueOutput.TypedOutputList<ItemStack> itemData = output.list("packedup:backpacks", ItemStack.CODEC);
+            this.backpacks.forEach(itemData::add);
         }
     }
 
@@ -57,18 +52,10 @@ public class PlayerMixin implements PackedUpPlayer {
         method = "readAdditionalSaveData",
         at = @At("TAIL")
     )
-    private void readAdditionalSaveData(CompoundTag data, CallbackInfo ci){
-        if(data.getList("packedup:backpacks").isPresent()){
-            ListTag itemData = data.getListOrEmpty("packedup:backpacks");
-            //noinspection DataFlowIssue,resource
-            HolderLookup.Provider provider = ((Player)(Object)this).level().registryAccess();
-            this.backpacks = itemData.stream()
-                .filter(CompoundTag.class::isInstance)
-                .map(CompoundTag.class::cast)
-                .map(tag -> ItemStack.parse(provider, tag))
-                .filter(Optional::isPresent)
-                .map(Optional::get)
-                .collect(Collectors.toList());
+    private void readAdditionalSaveData(ValueInput input, CallbackInfo ci){
+        Optional<ValueInput.TypedInputList<ItemStack>> itemData = input.list("packedup:backpacks", ItemStack.CODEC);
+        if(itemData.isPresent()){
+            this.backpacks = itemData.get().stream().toList();
             if(this.backpacks.isEmpty())
                 this.backpacks = null;
         }

@@ -1,5 +1,6 @@
 // this.cache.versionId	-999999999-01-01T00:00:00	Core Lib Generators
 aa8f43dd8f38a67043bd549a68498b388f78506f assets/minecraft/atlases/blocks.json
+4bd1fd963f6c134f84191b0823529ebf7997090d assets/minecraft/atlases/gui.json
 87b35156920cb5435af7c9ac2cb2b197ec903eb2 assets/packedup/items/basicbackpack.json
 0c68daf90947e916829b77fbc8696d639b9dbf18 assets/packedup/items/copperbackpack.json
 7cb43fe5ac1bc1743133eec73ae0af3dcb767274 assets/packedup/items/diamondbackpack.json
@@ -73,4 +74,4 @@ b76d10219b1f35864d46cbf43b204b502b67f256 data/packedup/recipe/obsidian_from_silv
 e359871b3cb6c2d6801a37696cfcf4cd9fde7a13 data/packedup/recipe/silver_from_chest.json
 3528a4d9b0b343d9a4edf58d589cef1258afdd53 data/packedup/recipe/silver_from_copper.json
 b293c6315d935ced8d4ae1ec4d4f9c0efc5a99b0 data/packedup/recipe/silver_from_iron.json
-cf04fcfc2bf4804e74cbbc426b0831acd1c74079 data/trinkets/tags/item/chest/back.json
+86af6588e1b67f67c4c5f52fff63daf1feaaaa40 data/trinkets/tags/item/chest/back.json
