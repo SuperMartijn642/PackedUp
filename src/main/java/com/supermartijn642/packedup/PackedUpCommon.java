@@ -8,7 +8,6 @@ import com.supermartijn642.packedup.storage.BackpackStorageManager;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -20,12 +19,13 @@ import net.neoforged.neoforge.event.entity.living.LivingDropsEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
  * Created 2/7/2020 by SuperMartijn642
  */
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.GAME)
+@EventBusSubscriber
 public class PackedUpCommon {
 
     public static void openBackpackInventory(ItemStack stack, Player player, int bagSlot){
@@ -65,14 +65,14 @@ public class PackedUpCommon {
 
     @SubscribeEvent
     public static void onPlayerClone(PlayerEvent.Clone e){
-        if(e.getOriginal().getPersistentData().contains("packedup:backpacks", Tag.TAG_LIST)){
-            ListTag itemData = e.getOriginal().getPersistentData().getList("packedup:backpacks", Tag.TAG_COMPOUND);
-            itemData.stream()
-                .filter(CompoundTag.class::isInstance)
-                .map(CompoundTag.class::cast)
-                .map(tag -> ItemStack.parseOptional(e.getEntity().registryAccess(), tag))
-                .forEach(stack -> e.getEntity().getInventory().placeItemBackInInventory(stack));
-        }
+        ListTag itemData = e.getOriginal().getPersistentData().getListOrEmpty("packedup:backpacks");
+        itemData.stream()
+            .filter(CompoundTag.class::isInstance)
+            .map(CompoundTag.class::cast)
+            .map(tag -> ItemStack.parse(e.getEntity().registryAccess(), tag))
+            .filter(Optional::isPresent)
+            .map(Optional::get)
+            .forEach(stack -> e.getEntity().getInventory().placeItemBackInInventory(stack));
     }
 
     /**
@@ -83,8 +83,9 @@ public class PackedUpCommon {
         if(stack.has(DataComponents.CUSTOM_DATA)){
             CustomData data = stack.get(DataComponents.CUSTOM_DATA);
             //noinspection deprecation
-            if(data != null && data.getUnsafe().contains("packedup:invIndex", Tag.TAG_INT)){
-                stack.set(BackpackItem.INVENTORY_ID, data.copyTag().getInt("packedup:invIndex"));
+            if(data != null && data.getUnsafe().getInt("packedup:invIndex").isPresent()){
+                //noinspection OptionalGetWithoutIsPresent
+                stack.set(BackpackItem.INVENTORY_ID, data.copyTag().getInt("packedup:invIndex").get());
                 //noinspection deprecation
                 if(data.getUnsafe().size() <= 1)
                     stack.remove(DataComponents.CUSTOM_DATA);

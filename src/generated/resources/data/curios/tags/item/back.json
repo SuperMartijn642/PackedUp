@@ -1,12 +1,12 @@
 {
   "replace": false,
   "values": [
-    "packedup:silverbackpack",
-    "packedup:ironbackpack",
-    "packedup:obsidianbackpack",
-    "packedup:basicbackpack",
     "packedup:diamondbackpack",
-    "packedup:copperbackpack",
-    "packedup:goldbackpack"
+    "packedup:obsidianbackpack",
+    "packedup:ironbackpack",
+    "packedup:basicbackpack",
+    "packedup:goldbackpack",
+    "packedup:silverbackpack",
+    "packedup:copperbackpack"
   ]
 }

@@ -1,6 +1,5 @@
 package com.supermartijn642.packedup.storage;
 
-import com.google.common.collect.Lists;
 import com.mojang.serialization.Dynamic;
 import com.supermartijn642.packedup.BackpackItem;
 import com.supermartijn642.packedup.BackpackType;
@@ -10,7 +9,6 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtIo;
 import net.minecraft.nbt.NbtOps;
-import net.minecraft.nbt.Tag;
 import net.minecraft.util.datafix.DataFixers;
 import net.minecraft.util.datafix.fixes.References;
 import net.minecraft.world.item.BlockItem;
@@ -113,9 +111,10 @@ public class BackpackInventory {
         CompoundTag compound = new CompoundTag();
         compound.putInt("stacks", this.stacks.size());
         for(int slot = 0; slot < this.stacks.size(); slot++)
-            compound.put("stack" + slot, this.stacks.get(slot).saveOptional(provider));
-        compound.putIntArray("bagsInThisBag", Lists.newArrayList(this.bagsInThisBag));
-        compound.putIntArray("bagsThisBagIsIn", Lists.newArrayList(this.bagsThisBagIsIn));
+            if(!this.stacks.get(slot).isEmpty())
+                compound.put("stack" + slot, this.stacks.get(slot).save(provider));
+        compound.putIntArray("bagsInThisBag", this.bagsInThisBag.stream().mapToInt(Integer::intValue).toArray());
+        compound.putIntArray("bagsThisBagIsIn", this.bagsThisBagIsIn.stream().mapToInt(Integer::intValue).toArray());
         compound.putInt("layer", this.layer);
         // Add the data version the file was written in, so it can be used by DataFixerUpper when loading backpack inventories
         compound.putInt("version", SharedConstants.getCurrentVersion().getDataVersion().getVersion());
@@ -135,19 +134,19 @@ public class BackpackInventory {
             return;
         }
         // Obtain data version the inventory was written in, if not present, assume Minecraft 1.20.4
-        int dataVersion = compound.contains("version", Tag.TAG_INT) ? compound.getInt("version") : 3700;
+        int dataVersion = compound.getIntOr("version", 3700);
         this.stacks.clear();
-        int size = compound.contains("stacks") ? compound.getInt("stacks") : compound.contains("rows") ? compound.getInt("rows") * 9 : compound.getInt("slots"); // Do this for compatibility with older versions
+        int size = compound.getInt("stacks").or(() -> compound.getInt("rows").map(i -> i * 9)).or(() -> compound.getInt("slots")).orElse(0); // Do this for compatibility with older versions
         for(int slot = 0; slot < size; slot++){
-            CompoundTag tag = compound.getCompound("stack" + slot);
+            CompoundTag tag = compound.getCompoundOrEmpty("stack" + slot);
             tag = (CompoundTag)DataFixers.getDataFixer().update(References.ITEM_STACK, new Dynamic<>(NbtOps.INSTANCE, tag), dataVersion, SharedConstants.getCurrentVersion().getDataVersion().getVersion()).getValue();
-            this.stacks.add(ItemStack.parseOptional(provider, tag));
+            this.stacks.add(ItemStack.parse(provider, tag).orElse(ItemStack.EMPTY));
         }
         this.bagsInThisBag.clear();
-        Arrays.stream(compound.getIntArray("bagsInThisBag")).forEach(this.bagsInThisBag::add);
+        Arrays.stream(compound.getIntArray("bagsInThisBag").orElseGet(() -> new int[0])).forEach(this.bagsInThisBag::add);
         this.bagsThisBagIsIn.clear();
-        Arrays.stream(compound.getIntArray("bagsThisBagIsIn")).forEach(this.bagsThisBagIsIn::add);
-        this.layer = compound.getInt("layer");
+        Arrays.stream(compound.getIntArray("bagsThisBagIsIn").orElseGet(() -> new int[0])).forEach(this.bagsThisBagIsIn::add);
+        this.layer = compound.getIntOr("layer", 0);
     }
 
     public void setStackInSlot(int slot, ItemStack stack){
