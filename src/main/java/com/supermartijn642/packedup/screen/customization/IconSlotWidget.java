@@ -2,7 +2,7 @@ package com.supermartijn642.packedup.screen.customization;
 
 import com.supermartijn642.core.ClientUtils;
 import com.supermartijn642.core.TextComponents;
-import com.supermartijn642.core.gui.ScreenUtils;
+import com.supermartijn642.core.gui.GuiGraphicsHelper;
 import com.supermartijn642.core.gui.widget.BaseWidget;
 import com.supermartijn642.core.gui.widget.WidgetRenderContext;
 import com.supermartijn642.packedup.BackpackItem;
@@ -22,7 +22,7 @@ import java.util.function.Supplier;
  */
 public class IconSlotWidget extends BaseWidget {
 
-    private static final ResourceLocation ICON_SLOT_TEXTURE = ResourceLocation.fromNamespaceAndPath("packedup", "textures/gui/icon_slot.png");
+    public static final ResourceLocation ICON_SLOT_TEXTURE = ResourceLocation.fromNamespaceAndPath("packedup", "gui/icon_slot");
 
     private final InteractionHand hand;
     private final Supplier<ItemStack> backpackSupplier;
@@ -67,14 +67,14 @@ public class IconSlotWidget extends BaseWidget {
     }
 
     @Override
-    public void renderBackground(WidgetRenderContext context, int mouseX, int mouseY){
-        super.renderBackground(context, mouseX, mouseY);
-        ScreenUtils.drawTexture(ICON_SLOT_TEXTURE, context.poseStack(), this.x, this.y, this.width, this.height, this.isFocused() ? 0.5f : 0, 0, 0.5f, 1);
+    public void renderBackground(WidgetRenderContext context, GuiGraphicsHelper graphics, int mouseX, int mouseY){
+        super.renderBackground(context, graphics, mouseX, mouseY);
+        graphics.submitSprite(ICON_SLOT_TEXTURE, this.x, this.y, this.width, this.height, p -> p.uv(this.isFocused() ? 0.5f : 0, 0, 0.5f, 1));
     }
 
     @Override
-    public void render(WidgetRenderContext context, int mouseX, int mouseY){
-        super.render(context, mouseX, mouseY);
-        ScreenUtils.drawItem(context.poseStack(), this.backpackSupplier.get(), ClientUtils.getWorld(), this.x + 2, this.y + 2);
+    public void render(WidgetRenderContext context, GuiGraphicsHelper graphics, int mouseX, int mouseY){
+        super.render(context, graphics, mouseX, mouseY);
+        graphics.submitItem(this.backpackSupplier.get(), this.x + 2, this.y + 2, p -> p.level(ClientUtils.getWorld()));
     }
 }

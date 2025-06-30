@@ -1,14 +1,17 @@
 package com.supermartijn642.packedup;
 
+import com.mojang.serialization.DataResult;
 import com.supermartijn642.core.CommonUtils;
 import com.supermartijn642.core.TextComponents;
 import com.supermartijn642.packedup.screen.BackpackContainer;
 import com.supermartijn642.packedup.storage.BackpackInventory;
 import com.supermartijn642.packedup.storage.BackpackStorageManager;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.NbtOps;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.RegistryOps;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -19,8 +22,6 @@ import net.neoforged.neoforge.event.entity.living.LivingDropsEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 /**
  * Created 2/7/2020 by SuperMartijn642
@@ -49,14 +50,16 @@ public class PackedUpCommon {
         if(e.getEntity() instanceof Player && PackedUpConfig.keepBackpacksOnDeath.get() && !e.isCanceled()){
             List<ItemEntity> stacksToBeSaved = e.getDrops().stream()
                 .filter(itemEntity -> itemEntity.isAlive() && !itemEntity.getItem().isEmpty() && itemEntity.getItem().getItem() instanceof BackpackItem)
-                .collect(Collectors.toList());
+                .toList();
 
             if(!stacksToBeSaved.isEmpty()){
                 stacksToBeSaved.forEach(e.getDrops()::remove);
 
                 ListTag itemData = new ListTag();
+                RegistryOps<Tag> ops = e.getEntity().registryAccess().createSerializationContext(NbtOps.INSTANCE);
                 stacksToBeSaved.stream().map(ItemEntity::getItem)
-                    .forEach(stack -> itemData.add(stack.save(e.getEntity().registryAccess())));
+                    .map(item -> ItemStack.CODEC.encodeStart(ops, item).getOrThrow())
+                    .forEach(itemData::add);
 
                 e.getEntity().getPersistentData().put("packedup:backpacks", itemData);
             }
@@ -66,12 +69,11 @@ public class PackedUpCommon {
     @SubscribeEvent
     public static void onPlayerClone(PlayerEvent.Clone e){
         ListTag itemData = e.getOriginal().getPersistentData().getListOrEmpty("packedup:backpacks");
+        RegistryOps<Tag> ops = e.getEntity().registryAccess().createSerializationContext(NbtOps.INSTANCE);
         itemData.stream()
-            .filter(CompoundTag.class::isInstance)
-            .map(CompoundTag.class::cast)
-            .map(tag -> ItemStack.parse(e.getEntity().registryAccess(), tag))
-            .filter(Optional::isPresent)
-            .map(Optional::get)
+            .map(tag -> ItemStack.CODEC.decode(ops, tag))
+            .filter(DataResult::isSuccess)
+            .map(result -> result.getOrThrow().getFirst())
             .forEach(stack -> e.getEntity().getInventory().placeItemBackInInventory(stack));
     }
 
