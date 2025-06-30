@@ -51,7 +51,7 @@ public class BackpackIconRenderer implements ItemModel.Unbaked {
             ItemStack icon = BackpackItem.getIcon(stack);
             // Add the renderer for the icon
             if(!icon.isEmpty())
-                renderState.newLayer().setupSpecialModel(ICON_RENDERER, icon, null);
+                renderState.newLayer().setupSpecialModel(ICON_RENDERER, icon);
         };
     }
 
