@@ -13,14 +13,15 @@ import com.supermartijn642.packedup.packets.PacketRename;
 import com.supermartijn642.packedup.packets.PacketSetIcon;
 import com.supermartijn642.packedup.screen.BackpackContainer;
 import com.supermartijn642.packedup.storage.BackpackInventory;
-import net.minecraft.core.HolderLookup;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.ComponentSerialization;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Stream;
 
 /**
  * Created 2/7/2020 by SuperMartijn642
@@ -50,14 +51,14 @@ public class PackedUp {
 
     public static final CreativeModeTab ITEM_GROUP = CreativeItemGroup.create("packedup", () -> basicbackpack);
 
-    public PackedUp(){
+    public PackedUp(FMLJavaModLoadingContext context){
         CHANNEL.registerMessage(PacketRename.class, PacketRename::new, true);
         CHANNEL.registerMessage(PacketOpenBag.class, PacketOpenBag::new, true);
         CHANNEL.registerMessage(PacketSetIcon.class, PacketSetIcon::new, true);
 
         register();
         if(CommonUtils.getEnvironmentSide().isClient())
-            PackedUpClient.register();
+            PackedUpClient.register(context);
         registerGenerators();
     }
 
@@ -75,7 +76,8 @@ public class PackedUp {
             (container, data) -> {
                 data.writeInt(container.type.ordinal());
                 data.writeInt(container.bagSlot);
-                data.writeUtf(Component.Serializer.toJson(container.bagName, HolderLookup.Provider.create(Stream.of())));
+                //noinspection deprecation
+                ComponentSerialization.STREAM_CODEC.encode(new RegistryFriendlyByteBuf(data, CommonUtils.getRegistryAccess()), container.bagName);
                 BackpackInventory inventory = container.inventory;
                 data.writeInt(inventory.getInventoryIndex());
                 data.writeInt(inventory.bagsInThisBag.size());
@@ -87,7 +89,8 @@ public class PackedUp {
             (player, data) -> {
                 BackpackType type = BackpackType.values()[data.readInt()];
                 int bagSlot = data.readInt();
-                Component bagName = Component.Serializer.fromJson(data.readUtf(), HolderLookup.Provider.create(Stream.of()));
+                //noinspection deprecation
+                Component bagName = ComponentSerialization.STREAM_CODEC.decode(new RegistryFriendlyByteBuf(data, CommonUtils.getRegistryAccess()));
                 int inventoryIndex = data.readInt();
                 int size = data.readInt();
                 Set<Integer> bagsInThisBag = new HashSet<>(size);
@@ -111,6 +114,7 @@ public class PackedUp {
         GeneratorRegistrationHandler handler = GeneratorRegistrationHandler.get("packedup");
         // Register all the generators
         handler.addGenerator(PackedUpAdvancementGenerator::new);
+        handler.addGenerator(PackedUpAtlasSourceGenerator::new);
         //noinspection Convert2MethodRef
         handler.addGenerator(cache -> new PackedUpItemInfoGenerator(cache));
         handler.addGenerator(PackedUpLanguageGenerator::new);

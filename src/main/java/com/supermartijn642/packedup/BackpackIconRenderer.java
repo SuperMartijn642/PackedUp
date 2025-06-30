@@ -9,6 +9,9 @@ import net.minecraft.client.renderer.special.SpecialModelRenderer;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
+import org.joml.Vector3f;
+
+import java.util.Set;
 
 /**
  * Created 15/01/2025 by SuperMartijn642
@@ -32,6 +35,10 @@ public class BackpackIconRenderer implements ItemModel.Unbaked {
         }
 
         @Override
+        public void getExtents(Set<Vector3f> set){
+        }
+
+        @Override
         public @Nullable ItemStack extractArgument(ItemStack stack){
             return null;
         }
@@ -45,13 +52,16 @@ public class BackpackIconRenderer implements ItemModel.Unbaked {
     @Override
     public ItemModel bake(ItemModel.BakingContext context){
         return (renderState, stack, modelResolver, transformType, level, entity, someRandomId) -> {
+            renderState.appendModelIdentityElement(this);
             if(transformType != ItemDisplayContext.GUI)
                 return;
             // Get the icon
             ItemStack icon = BackpackItem.getIcon(stack);
             // Add the renderer for the icon
-            if(!icon.isEmpty())
+            if(!icon.isEmpty()){
                 renderState.newLayer().setupSpecialModel(ICON_RENDERER, icon);
+                renderState.appendModelIdentityElement(icon.getItem());
+            }
         };
     }
 

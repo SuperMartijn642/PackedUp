@@ -2,7 +2,7 @@ package com.supermartijn642.packedup.screen.customization;
 
 import com.supermartijn642.core.ClientUtils;
 import com.supermartijn642.core.TextComponents;
-import com.supermartijn642.core.gui.ScreenUtils;
+import com.supermartijn642.core.gui.GuiGraphicsHelper;
 import com.supermartijn642.core.gui.WidgetScreen;
 import com.supermartijn642.core.gui.widget.ItemBaseWidget;
 import com.supermartijn642.core.gui.widget.WidgetRenderContext;
@@ -55,15 +55,15 @@ public class BackpackCustomizationScreen extends ItemBaseWidget {
     }
 
     @Override
-    protected void renderBackground(WidgetRenderContext context, int mouseX, int mouseY, ItemStack stack){
-        ScreenUtils.drawScreenBackground(context.poseStack(), 0, 0, this.width(), this.height());
-        super.renderBackground(context, mouseX, mouseY, stack);
+    protected void renderBackground(WidgetRenderContext context, GuiGraphicsHelper graphics, int mouseX, int mouseY, ItemStack stack){
+        graphics.submitDefaultScreenBackground(0, 0, this.width(), this.height());
+        super.renderBackground(context, graphics, mouseX, mouseY, stack);
     }
 
     @Override
-    public void render(WidgetRenderContext context, int mouseX, int mouseY, ItemStack stack){
-        ScreenUtils.drawString(context.poseStack(), TITLE, 9, 7, 4210752);
-        super.render(context, mouseX, mouseY, stack);
+    public void render(WidgetRenderContext context, GuiGraphicsHelper graphics, int mouseX, int mouseY, ItemStack stack){
+        graphics.submitText(TITLE, 9, 7, p -> p.color(4210752));
+        super.render(context, graphics, mouseX, mouseY, stack);
     }
 
     @Override

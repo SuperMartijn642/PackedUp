@@ -10,22 +10,21 @@ import com.supermartijn642.packedup.screen.customization.BackpackCustomizationSc
 import net.minecraft.client.KeyMapping;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
-import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 /**
  * Created 2/7/2020 by SuperMartijn642
  */
-@Mod.EventBusSubscriber(value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class PackedUpClient {
 
     public static KeyMapping OPEN_BAG_KEY;
 
-    public static void register(){
+    public static void register(FMLJavaModLoadingContext context){
+        RegisterKeyMappingsEvent.getBus(context.getModBusGroup()).addListener(PackedUpClient::registerKeyBindings);
+        InputEvent.Key.BUS.addListener(PackedUpClient::onKey);
+
         ClientRegistrationHandler handler = ClientRegistrationHandler.get("packedup");
         // Register screen for the backpack inventory
         handler.registerContainerScreen(() -> PackedUp.container, container -> WidgetContainerScreen.of(new BackpackContainerScreen(), container, true));
@@ -33,12 +32,10 @@ public class PackedUpClient {
         handler.registerItemModelType("icon_renderer", BackpackIconRenderer.CODEC);
     }
 
-    @SubscribeEvent
     public static void registerKeyBindings(RegisterKeyMappingsEvent e){
         // Register key to open backpack in inventory or curious slot
         OPEN_BAG_KEY = new KeyMapping("packedup.keys.openbag", 79/*'o'*/, "packedup.keys.category");
         e.register(OPEN_BAG_KEY);
-        MinecraftForge.EVENT_BUS.addListener(PackedUpClient::onKey);
     }
 
     public static void openBackpackRenameScreen(InteractionHand hand){
