@@ -3,9 +3,8 @@ package com.supermartijn642.packedup.compat.curios;
 import com.supermartijn642.packedup.BackpackItem;
 import com.supermartijn642.packedup.PackedUpCommon;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import org.apache.commons.lang3.tuple.ImmutableTriple;
 import top.theillusivec4.curios.api.CuriosApi;
+import top.theillusivec4.curios.api.SlotResult;
 
 import java.util.Optional;
 
@@ -21,9 +20,9 @@ public class CuriosOn extends CuriosOff {
 
     @Override
     public boolean openBackpack(Player player){ // TODO
-        Optional<ImmutableTriple<String,Integer,ItemStack>> optional = CuriosApi.getCuriosHelper().findEquippedCurio(item -> item.getItem() instanceof BackpackItem, player);
-        optional.ifPresent(triple ->
-            PackedUpCommon.openBackpackInventory(triple.getRight(), player, -1)
+        Optional<SlotResult> optional = CuriosApi.getCuriosInventory(player).flatMap(handler -> handler.findFirstCurio(item -> item.getItem() instanceof BackpackItem));
+        optional.ifPresent(slot ->
+            PackedUpCommon.openBackpackInventory(slot.stack(), player, -1)
         );
         return optional.isPresent();
     }
