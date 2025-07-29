@@ -1,3 +1,6 @@
+### Packed Up 1.1.0b
+- Fixed integration with Curios API
+
 ### Packed Up 1.1.0a
 - Fixed crash on dedicated server
 
