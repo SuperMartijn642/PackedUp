@@ -65,12 +65,10 @@ public class PackedUpCommon {
         // Check the item nbt for a backpack id from before 1.20.6
         if(stack.has(DataComponents.CUSTOM_DATA)){
             CustomData data = stack.get(DataComponents.CUSTOM_DATA);
-            //noinspection deprecation
-            if(data != null && data.getUnsafe().getInt("packedup:invIndex").isPresent()){
+            if(data != null && data.tag.getInt("packedup:invIndex").isPresent()){
                 //noinspection OptionalGetWithoutIsPresent
                 stack.set(BackpackItem.INVENTORY_ID, data.copyTag().getInt("packedup:invIndex").get());
-                //noinspection deprecation
-                if(data.getUnsafe().size() <= 1)
+                if(data.tag.size() <= 1)
                     stack.remove(DataComponents.CUSTOM_DATA);
                 else
                     stack.set(DataComponents.CUSTOM_DATA, data.update(t -> t.remove("packedup:invIndex")));

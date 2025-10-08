@@ -41,7 +41,7 @@ public class PackedUpLanguageGenerator extends LanguageGenerator {
         this.translation("packedup.icon_selection_screen.icon.title", "Select icon");
 
         // Keybinding
-        this.translation("packedup.keys.category", "Packed Up");
+        this.translation("key.category.packedup.keys", "Packed Up");
         this.translation("packedup.keys.openbag", "Open Backpack");
 
         // Advancements

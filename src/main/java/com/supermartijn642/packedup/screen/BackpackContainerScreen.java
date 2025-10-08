@@ -7,6 +7,7 @@ import com.supermartijn642.core.gui.widget.BaseContainerWidget;
 import com.supermartijn642.core.gui.widget.WidgetRenderContext;
 import com.supermartijn642.packedup.PackedUpClient;
 import net.minecraft.client.gui.Font;
+import net.minecraft.client.input.KeyEvent;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -78,9 +79,9 @@ public class BackpackContainerScreen extends BaseContainerWidget<BackpackContain
     }
 
     @Override
-    public boolean keyPressed(int keyCode, boolean hasBeenHandled){
-        hasBeenHandled |= super.keyPressed(keyCode, hasBeenHandled);
-        if(!hasBeenHandled && PackedUpClient.OPEN_BAG_KEY.matches(keyCode, -1)){
+    public boolean keyPressed(KeyEvent event, boolean hasBeenHandled){
+        hasBeenHandled |= super.keyPressed(event, hasBeenHandled);
+        if(!hasBeenHandled && PackedUpClient.OPEN_BAG_KEY.matches(event)){
             ((LocalPlayer)this.container.player).closeContainer();
             hasBeenHandled = true;
         }

@@ -10,6 +10,7 @@ import com.supermartijn642.core.gui.widget.premade.TextFieldWidget;
 import com.supermartijn642.packedup.BackpackItem;
 import com.supermartijn642.packedup.PackedUp;
 import com.supermartijn642.packedup.packets.PacketRename;
+import net.minecraft.client.input.KeyEvent;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
@@ -67,12 +68,12 @@ public class BackpackCustomizationScreen extends ItemBaseWidget {
     }
 
     @Override
-    public boolean keyPressed(int keyCode, boolean hasBeenHandled, ItemStack stack){
-        if(!hasBeenHandled && this.nameField.isSelected() && keyCode == 257 /* Enter */){
+    public boolean keyPressed(KeyEvent event, boolean hasBeenHandled, ItemStack stack){
+        if(!hasBeenHandled && this.nameField.isSelected() && event.isConfirmation()){
             ((LocalPlayer)ClientUtils.getPlayer()).closeContainer();
             hasBeenHandled = true;
         }
-        hasBeenHandled |= super.keyPressed(keyCode, hasBeenHandled, stack);
+        hasBeenHandled |= super.keyPressed(event, hasBeenHandled, stack);
         return hasBeenHandled;
     }
 }

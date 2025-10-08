@@ -52,11 +52,11 @@ public class BackpackItem extends BaseItem {
     @Override
     public ItemUseResult interact(ItemStack stack, Player player, InteractionHand hand, Level level){
         if(!player.isCrouching()){
-            if(!level.isClientSide && stack.getItem() instanceof BackpackItem){
+            if(!level.isClientSide() && stack.getItem() instanceof BackpackItem){
                 int bagSlot = hand == InteractionHand.MAIN_HAND ? player.getInventory().getSelectedSlot() : -1;
                 PackedUpCommon.openBackpackInventory(stack, player, bagSlot);
             }
-        }else if(level.isClientSide)
+        }else if(level.isClientSide())
             PackedUpClient.openBackpackRenameScreen(hand);
         return ItemUseResult.success(stack);
     }

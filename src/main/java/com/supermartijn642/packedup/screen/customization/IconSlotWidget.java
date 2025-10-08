@@ -9,6 +9,7 @@ import com.supermartijn642.packedup.BackpackItem;
 import com.supermartijn642.packedup.PackedUp;
 import com.supermartijn642.packedup.packets.PacketSetIcon;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.input.MouseButtonInfo;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
@@ -41,16 +42,16 @@ public class IconSlotWidget extends BaseWidget {
     }
 
     @Override
-    public boolean mouseReleased(int mouseX, int mouseY, int button, boolean hasBeenHandled){
+    public boolean mouseReleased(int mouseX, int mouseY, MouseButtonInfo info, boolean hasBeenHandled){
         if(!hasBeenHandled && this.isFocused()){
-            if(button == 0) // Left click
+            if(info.button() == 0) // Left click
                 this.selectionScreen.run();
-            else if(button == 1){ // Right click
+            else if(info.button() == 1){ // Right click
                 PackedUp.CHANNEL.sendToServer(new PacketSetIcon(this.hand, ItemStack.EMPTY));
                 hasBeenHandled = true;
             }
         }
-        return super.mousePressed(mouseX, mouseY, button, hasBeenHandled);
+        return super.mouseReleased(mouseX, mouseY, info, hasBeenHandled);
     }
 
     @Override

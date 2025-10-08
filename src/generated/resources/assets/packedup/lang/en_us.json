@@ -18,7 +18,7 @@
   "packedup.customization_screen.icon.clear": "%s to clear",
   "packedup.customization_screen.icon.right_click": "Right-click",
   "packedup.icon_selection_screen.icon.title": "Select icon",
-  "packedup.keys.category": "Packed Up",
+  "key.category.packedup.keys": "Packed Up",
   "packedup.keys.openbag": "Open Backpack",
   "packedup.advancement.basic_backpack.title": "Packing Up!",
   "packedup.advancement.basic_backpack.description": "Craft a backpack",

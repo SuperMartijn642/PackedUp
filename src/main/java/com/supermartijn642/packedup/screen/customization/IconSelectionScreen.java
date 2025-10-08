@@ -10,6 +10,8 @@ import com.supermartijn642.core.util.Holder;
 import com.supermartijn642.packedup.BackpackItem;
 import com.supermartijn642.packedup.PackedUp;
 import com.supermartijn642.packedup.packets.PacketSetIcon;
+import net.minecraft.client.input.KeyEvent;
+import net.minecraft.client.input.MouseButtonInfo;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
@@ -84,8 +86,8 @@ public class IconSelectionScreen extends ItemBaseWidget {
     }
 
     @Override
-    protected boolean mouseReleased(int mouseX, int mouseY, int button, boolean hasBeenHandled, ItemStack stack){
-        if(!hasBeenHandled && button == 0){
+    protected boolean mouseReleased(int mouseX, int mouseY, MouseButtonInfo info, boolean hasBeenHandled, ItemStack stack){
+        if(!hasBeenHandled && info.button() == 0){
             Holder<ItemStack> hoveredStack = new Holder<>();
             Inventory inventory = ClientUtils.getPlayer().getInventory();
             forEachSlot((x, y, index) -> {
@@ -98,16 +100,16 @@ public class IconSelectionScreen extends ItemBaseWidget {
                 hasBeenHandled = true;
             }
         }
-        return super.mouseReleased(mouseX, mouseY, button, hasBeenHandled, stack);
+        return super.mouseReleased(mouseX, mouseY, info, hasBeenHandled, stack);
     }
 
     @Override
-    protected boolean keyPressed(int keyCode, boolean hasBeenHandled, ItemStack object){
-        if(!hasBeenHandled && (ClientUtils.getMinecraft().options.keyInventory.matches(keyCode, 0) || keyCode == 256 /* Escape */)){
+    protected boolean keyPressed(KeyEvent event, boolean hasBeenHandled, ItemStack object){
+        if(!hasBeenHandled && (ClientUtils.getMinecraft().options.keyInventory.matches(event) || event.isEscape())){
             ClientUtils.getMinecraft().setScreen(WidgetScreen.of(new BackpackCustomizationScreen(this.hand)));
             hasBeenHandled = true;
         }
-        return super.keyPressed(keyCode, hasBeenHandled, object);
+        return super.keyPressed(event, hasBeenHandled, object);
     }
 
     /**

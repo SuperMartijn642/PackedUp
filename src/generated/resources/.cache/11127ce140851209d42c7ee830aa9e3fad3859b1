@@ -8,7 +8,7 @@ aa8f43dd8f38a67043bd549a68498b388f78506f assets/minecraft/atlases/blocks.json
 fe091c7e8fd3a65a2289a5a60b622268e692c754 assets/packedup/items/ironbackpack.json
 6a35f64ab031944680e39e3798603b4d03c0ecac assets/packedup/items/obsidianbackpack.json
 44db14eb7917d0df5d487215e516ec5da7a5d930 assets/packedup/items/silverbackpack.json
-6839a4ea0887e1c7a80498e48267b5c5b894fbf6 assets/packedup/lang/en_us.json
+e1e5c182e09969abd8270b4faa51633f23e7adcd assets/packedup/lang/en_us.json
 056a43a3f55ad6faaa200de8ea27c1552a752676 assets/packedup/models/item/basicbackpack.json
 9c5f5b2d30ca359a123b68d06ed526ba8dda33cb assets/packedup/models/item/copperbackpack.json
 a5466479330043c3cf8fd4dd88e3240699e33c9f assets/packedup/models/item/diamondbackpack.json
@@ -74,4 +74,4 @@ b76d10219b1f35864d46cbf43b204b502b67f256 data/packedup/recipe/obsidian_from_silv
 e359871b3cb6c2d6801a37696cfcf4cd9fde7a13 data/packedup/recipe/silver_from_chest.json
 3528a4d9b0b343d9a4edf58d589cef1258afdd53 data/packedup/recipe/silver_from_copper.json
 b293c6315d935ced8d4ae1ec4d4f9c0efc5a99b0 data/packedup/recipe/silver_from_iron.json
-86af6588e1b67f67c4c5f52fff63daf1feaaaa40 data/trinkets/tags/item/chest/back.json
+46b160ce016ec3f8a8bb537388150e832289e808 data/trinkets/tags/item/chest/back.json
