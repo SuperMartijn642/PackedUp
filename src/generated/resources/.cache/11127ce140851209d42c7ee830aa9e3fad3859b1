@@ -1,4 +1,4 @@
-// 1.21.6	2025-06-30T15:34:17.7300649	Core Lib Generators
+// 1.21.10	2025-12-23T15:15:26.656554	Core Lib Generators
 aa8f43dd8f38a67043bd549a68498b388f78506f assets/minecraft/atlases/blocks.json
 4bd1fd963f6c134f84191b0823529ebf7997090d assets/minecraft/atlases/gui.json
 87b35156920cb5435af7c9ac2cb2b197ec903eb2 assets/packedup/items/basicbackpack.json
@@ -8,7 +8,7 @@ aa8f43dd8f38a67043bd549a68498b388f78506f assets/minecraft/atlases/blocks.json
 fe091c7e8fd3a65a2289a5a60b622268e692c754 assets/packedup/items/ironbackpack.json
 6a35f64ab031944680e39e3798603b4d03c0ecac assets/packedup/items/obsidianbackpack.json
 44db14eb7917d0df5d487215e516ec5da7a5d930 assets/packedup/items/silverbackpack.json
-6839a4ea0887e1c7a80498e48267b5c5b894fbf6 assets/packedup/lang/en_us.json
+e1e5c182e09969abd8270b4faa51633f23e7adcd assets/packedup/lang/en_us.json
 056a43a3f55ad6faaa200de8ea27c1552a752676 assets/packedup/models/item/basicbackpack.json
 9c5f5b2d30ca359a123b68d06ed526ba8dda33cb assets/packedup/models/item/copperbackpack.json
 a5466479330043c3cf8fd4dd88e3240699e33c9f assets/packedup/models/item/diamondbackpack.json
@@ -16,7 +16,7 @@ a5466479330043c3cf8fd4dd88e3240699e33c9f assets/packedup/models/item/diamondback
 6a57f5721379ece2e3624b4b1ba1b36ecdb617a1 assets/packedup/models/item/ironbackpack.json
 6ae169b92e0feedf029f13a7325938400c73452c assets/packedup/models/item/obsidianbackpack.json
 7f18eb08cd05946655007f824714b48e1f7ed755 assets/packedup/models/item/silverbackpack.json
-b5b35f2016dc38352608d3a19a8285e46eb73f84 data/curios/tags/item/back.json
+8bb6386aeb0f7bb22755c79b73a8abb8e8d4fb50 data/curios/tags/item/back.json
 8a23702b05296c8af5014d6aa6e9265ded85c7d9 data/c/tags/item/ingots/silver.json
 b7bd9b3aee8721c4c447fdf4a8bf229beb072d35 data/packedup/advancement/basic_backpack.json
 6bee474e4fc1a6d060f2cb2179b5477b60851576 data/packedup/advancement/diamond_backpack.json
