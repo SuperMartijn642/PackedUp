@@ -9,6 +9,7 @@ import com.supermartijn642.packedup.screen.BackpackContainerScreen;
 import com.supermartijn642.packedup.screen.customization.BackpackCustomizationScreen;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
@@ -22,7 +23,7 @@ public class PackedUpClient {
     public static KeyMapping OPEN_BAG_KEY;
 
     public static void register(FMLJavaModLoadingContext context){
-        RegisterKeyMappingsEvent.getBus(context.getModBusGroup()).addListener(PackedUpClient::registerKeyBindings);
+        RegisterKeyMappingsEvent.BUS.addListener(PackedUpClient::registerKeyBindings);
         InputEvent.Key.BUS.addListener(PackedUpClient::onKey);
 
         ClientRegistrationHandler handler = ClientRegistrationHandler.get("packedup");
@@ -34,7 +35,7 @@ public class PackedUpClient {
 
     public static void registerKeyBindings(RegisterKeyMappingsEvent e){
         // Register key to open backpack in inventory or curious slot
-        OPEN_BAG_KEY = new KeyMapping("packedup.keys.openbag", 79/*'o'*/, "packedup.keys.category");
+        OPEN_BAG_KEY = new KeyMapping("packedup.keys.openbag", 79/*'o'*/, new KeyMapping.Category(ResourceLocation.fromNamespaceAndPath("packedup", "keys")));
         e.register(OPEN_BAG_KEY);
     }
 
@@ -48,6 +49,6 @@ public class PackedUpClient {
     }
 
     public static Component getKeyBindCharacter(){
-        return OPEN_BAG_KEY == null || OPEN_BAG_KEY.getKey().getValue() == -1 ? null : OPEN_BAG_KEY.getKey().getDisplayName();
+        return OPEN_BAG_KEY == null || OPEN_BAG_KEY.isUnbound() ? null : OPEN_BAG_KEY.getTranslatedKeyMessage();
     }
 }
