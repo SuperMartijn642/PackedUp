@@ -9,14 +9,14 @@ import com.supermartijn642.packedup.PackedUpClient;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.input.KeyEvent;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 /**
  * Created 2/7/2020 by SuperMartijn642
  */
 public class BackpackContainerScreen extends BaseContainerWidget<BackpackContainer> {
 
-    public static final ResourceLocation CORNERS = ResourceLocation.fromNamespaceAndPath("packedup", "gui/corners");
+    public static final Identifier CORNERS = Identifier.fromNamespaceAndPath("packedup", "gui/corners");
 
     private Component displayName;
 

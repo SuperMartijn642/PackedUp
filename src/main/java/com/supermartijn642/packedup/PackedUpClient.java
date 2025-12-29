@@ -9,7 +9,7 @@ import com.supermartijn642.packedup.screen.BackpackContainerScreen;
 import com.supermartijn642.packedup.screen.customization.BackpackCustomizationScreen;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.InteractionHand;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -37,7 +37,7 @@ public class PackedUpClient {
     @SubscribeEvent
     public static void registerKeyBindings(RegisterKeyMappingsEvent e){
         // Register key to open backpack in inventory or curious slot
-        OPEN_BAG_KEY = new KeyMapping("packedup.keys.openbag", 79/*'o'*/, new KeyMapping.Category(ResourceLocation.fromNamespaceAndPath("packedup", "keys")));
+        OPEN_BAG_KEY = new KeyMapping("packedup.keys.openbag", 79/*'o'*/, new KeyMapping.Category(Identifier.fromNamespaceAndPath("packedup", "keys")));
         e.register(OPEN_BAG_KEY);
         NeoForge.EVENT_BUS.addListener(PackedUpClient::onKey);
     }

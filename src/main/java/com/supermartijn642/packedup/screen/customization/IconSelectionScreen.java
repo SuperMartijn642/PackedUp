@@ -13,7 +13,7 @@ import com.supermartijn642.packedup.packets.PacketSetIcon;
 import net.minecraft.client.input.KeyEvent;
 import net.minecraft.client.input.MouseButtonInfo;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
@@ -23,8 +23,8 @@ import net.minecraft.world.item.ItemStack;
  */
 public class IconSelectionScreen extends ItemBaseWidget {
 
-    public static final ResourceLocation SLOT_HIGHLIGHT_TEXTURE = ResourceLocation.fromNamespaceAndPath("packedup", "gui/slot_highlight");
-    public static final ResourceLocation BACKGROUND_TEXTURE = ResourceLocation.fromNamespaceAndPath("packedup", "gui/preview_frame");
+    public static final Identifier SLOT_HIGHLIGHT_TEXTURE = Identifier.fromNamespaceAndPath("packedup", "gui/slot_highlight");
+    public static final Identifier BACKGROUND_TEXTURE = Identifier.fromNamespaceAndPath("packedup", "gui/preview_frame");
     private static final Component TITLE = TextComponents.translation("packedup.icon_selection_screen.icon.title").get();
 
     private final InteractionHand hand;

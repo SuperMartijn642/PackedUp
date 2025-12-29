@@ -3,7 +3,7 @@ package com.supermartijn642.packedup.generators;
 import com.supermartijn642.core.generator.ModelGenerator;
 import com.supermartijn642.core.generator.ResourceCache;
 import com.supermartijn642.packedup.BackpackType;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 /**
  * Created 14/11/2022 by SuperMartijn642
@@ -17,6 +17,6 @@ public class PackedUpModelGenerator extends ModelGenerator {
     @Override
     public void generate(){
         for(BackpackType type : BackpackType.values())
-            this.itemGenerated(type.getItem(), ResourceLocation.fromNamespaceAndPath("packedup", "items/" + type.getRegistryName()));
+            this.itemGenerated(type.getItem(), Identifier.fromNamespaceAndPath("packedup", "items/" + type.getRegistryName()));
     }
 }
