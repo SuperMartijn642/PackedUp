@@ -10,7 +10,7 @@ import com.supermartijn642.packedup.BackpackType;
 import com.supermartijn642.packedup.BackpackUpgradeRecipe;
 import com.supermartijn642.packedup.PackedUp;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -90,8 +90,8 @@ public class PackedUpRecipeGenerator extends RecipeGenerator {
             .condition(copperEnabled);
 
         // Silver
-        TagKey<Item> silverIngots = TagKey.create(Registries.ITEMS.getVanillaRegistry().key(), ResourceLocation.fromNamespaceAndPath("c", "ingots/silver"));
-        ResourceCondition silverEnabled = new BackpackRecipeCondition(BackpackType.SILVER).and(new TagPopulatedResourceCondition(Registries.ITEMS, ResourceLocation.fromNamespaceAndPath("c", "ingots/silver")));
+        TagKey<Item> silverIngots = TagKey.create(Registries.ITEMS.getVanillaRegistry().key(), Identifier.fromNamespaceAndPath("c", "ingots/silver"));
+        ResourceCondition silverEnabled = new BackpackRecipeCondition(BackpackType.SILVER).and(new TagPopulatedResourceCondition(Registries.ITEMS, Identifier.fromNamespaceAndPath("c", "ingots/silver")));
         this.shaped("silver_from_chest", PackedUp.silverbackpack)
             .pattern("ABA")
             .pattern("CDC")

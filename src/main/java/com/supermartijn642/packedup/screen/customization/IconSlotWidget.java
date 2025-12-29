@@ -11,7 +11,7 @@ import com.supermartijn642.packedup.packets.PacketSetIcon;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.input.MouseButtonInfo;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
 
@@ -23,7 +23,7 @@ import java.util.function.Supplier;
  */
 public class IconSlotWidget extends BaseWidget {
 
-    public static final ResourceLocation ICON_SLOT_TEXTURE = ResourceLocation.fromNamespaceAndPath("packedup", "gui/icon_slot");
+    public static final Identifier ICON_SLOT_TEXTURE = Identifier.fromNamespaceAndPath("packedup", "gui/icon_slot");
 
     private final InteractionHand hand;
     private final Supplier<ItemStack> backpackSupplier;

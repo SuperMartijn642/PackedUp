@@ -12,7 +12,7 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.InteractionHand;
 
 /**
@@ -31,7 +31,7 @@ public class PackedUpClient implements ClientModInitializer {
         handler.registerItemModelType("icon_renderer", BackpackIconRenderer.CODEC);
 
         // Register key to open backpack in inventory or curious slot
-        OPEN_BAG_KEY = new KeyMapping("packedup.keys.openbag", 79/*'o'*/, new KeyMapping.Category(ResourceLocation.fromNamespaceAndPath("packedup", "keys")));
+        OPEN_BAG_KEY = new KeyMapping("packedup.keys.openbag", 79/*'o'*/, new KeyMapping.Category(Identifier.fromNamespaceAndPath("packedup", "keys")));
         KeyBindingHelper.registerKeyBinding(OPEN_BAG_KEY);
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             if(OPEN_BAG_KEY.consumeClick())
