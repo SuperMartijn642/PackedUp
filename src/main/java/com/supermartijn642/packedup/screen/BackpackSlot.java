@@ -1,6 +1,7 @@
 package com.supermartijn642.packedup.screen;
 
 import com.supermartijn642.packedup.storage.BackpackInventory;
+import com.supermartijn642.packedup.PackedUpConfig;
 import net.minecraft.world.item.ItemStack;
 
 /**
@@ -37,6 +38,6 @@ public class BackpackSlot extends DummySlot {
 
     @Override
     public int getMaxStackSize(){
-        return 64;
+        return PackedUpConfig.maxStackSize.get();
     }
 }
