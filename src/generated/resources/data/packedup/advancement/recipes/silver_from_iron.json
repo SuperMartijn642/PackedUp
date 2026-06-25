@@ -1,27 +1,34 @@
 {
   "fabric:load_conditions": [
     {
-      "condition": "supermartijn642corelib:not",
-      "value": {
-        "backpack": "basic",
-        "condition": "packedup:is_backpack_enabled"
-      }
-    },
-    {
       "condition": "packedup:is_backpack_enabled",
       "backpack": "iron"
+    },
+    {
+      "condition": "supermartijn642corelib:and",
+      "conditions": [
+        {
+          "backpack": "silver",
+          "condition": "packedup:is_backpack_enabled"
+        },
+        {
+          "registry": "minecraft:item",
+          "tag": "c:ingots/silver",
+          "condition": "supermartijn642corelib:tag_populated"
+        }
+      ]
     }
   ],
   "parent": "minecraft:recipes/root",
   "display": {
     "icon": {
-      "id": "packedup:ironbackpack"
+      "id": "packedup:silverbackpack"
     },
     "title": {
-      "translate": "packedup.advancement.recipes/misc/iron_from_chest.title"
+      "translate": "packedup.advancement.recipes/silver_from_iron.title"
     },
     "description": {
-      "translate": "packedup.advancement.recipes/misc/iron_from_chest.description"
+      "translate": "packedup.advancement.recipes/silver_from_iron.description"
     },
     "frame": "task",
     "show_toast": false,
@@ -32,7 +39,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "packedup:iron_from_chest"
+        "recipe": "packedup:silver_from_iron"
       }
     },
     "recipe_condition": {
@@ -40,7 +47,7 @@
       "conditions": {
         "items": [
           {
-            "items": "#c:chests"
+            "items": "packedup:ironbackpack"
           }
         ]
       }
@@ -54,7 +61,7 @@
   ],
   "rewards": {
     "recipes": [
-      "packedup:iron_from_chest"
+      "packedup:silver_from_iron"
     ]
   }
 }

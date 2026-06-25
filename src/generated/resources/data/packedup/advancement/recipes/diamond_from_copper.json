@@ -1,25 +1,8 @@
 {
   "fabric:load_conditions": [
     {
-      "condition": "supermartijn642corelib:not",
-      "value": {
-        "backpack": "basic",
-        "condition": "packedup:is_backpack_enabled"
-      }
-    },
-    {
-      "condition": "supermartijn642corelib:not",
-      "value": {
-        "backpack": "iron",
-        "condition": "packedup:is_backpack_enabled"
-      }
-    },
-    {
-      "condition": "supermartijn642corelib:not",
-      "value": {
-        "backpack": "copper",
-        "condition": "packedup:is_backpack_enabled"
-      }
+      "condition": "packedup:is_backpack_enabled",
+      "backpack": "copper"
     },
     {
       "condition": "supermartijn642corelib:not",
@@ -46,27 +29,20 @@
       }
     },
     {
-      "condition": "supermartijn642corelib:not",
-      "value": {
-        "backpack": "diamond",
-        "condition": "packedup:is_backpack_enabled"
-      }
-    },
-    {
       "condition": "packedup:is_backpack_enabled",
-      "backpack": "obsidian"
+      "backpack": "diamond"
     }
   ],
   "parent": "minecraft:recipes/root",
   "display": {
     "icon": {
-      "id": "packedup:obsidianbackpack"
+      "id": "packedup:diamondbackpack"
     },
     "title": {
-      "translate": "packedup.advancement.recipes/misc/obsidian_from_chest.title"
+      "translate": "packedup.advancement.recipes/diamond_from_copper.title"
     },
     "description": {
-      "translate": "packedup.advancement.recipes/misc/obsidian_from_chest.description"
+      "translate": "packedup.advancement.recipes/diamond_from_copper.description"
     },
     "frame": "task",
     "show_toast": false,
@@ -77,7 +53,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "packedup:obsidian_from_chest"
+        "recipe": "packedup:diamond_from_copper"
       }
     },
     "recipe_condition": {
@@ -85,7 +61,7 @@
       "conditions": {
         "items": [
           {
-            "items": "#c:chests"
+            "items": "packedup:copperbackpack"
           }
         ]
       }
@@ -99,7 +75,7 @@
   ],
   "rewards": {
     "recipes": [
-      "packedup:obsidian_from_chest"
+      "packedup:diamond_from_copper"
     ]
   }
 }

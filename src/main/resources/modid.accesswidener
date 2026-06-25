@@ -1,6 +1,3 @@
-accessWidener v1 named
+classTweaker v1 official
 
-accessible field net/minecraft/world/item/crafting/ShapedRecipe pattern Lnet/minecraft/world/item/crafting/ShapedRecipePattern;
-accessible method net/minecraft/world/item/crafting/ShapedRecipe$Serializer fromNetwork (Lnet/minecraft/network/RegistryFriendlyByteBuf;)Lnet/minecraft/world/item/crafting/ShapedRecipe;
-accessible method net/minecraft/world/item/crafting/ShapedRecipe$Serializer toNetwork (Lnet/minecraft/network/RegistryFriendlyByteBuf;Lnet/minecraft/world/item/crafting/ShapedRecipe;)V
 accessible field net/minecraft/world/item/component/CustomData tag Lnet/minecraft/nbt/CompoundTag;

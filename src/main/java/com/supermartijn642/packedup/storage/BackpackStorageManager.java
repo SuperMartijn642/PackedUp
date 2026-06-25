@@ -5,7 +5,7 @@ import com.supermartijn642.core.util.Holder;
 import com.supermartijn642.packedup.BackpackItem;
 import com.supermartijn642.packedup.BackpackType;
 import com.supermartijn642.packedup.PackedUpConfig;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLevelEvents;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
@@ -34,7 +34,7 @@ public class BackpackStorageManager {
     public static final Supplier<Integer> maxLayers = () -> PackedUpConfig.allowBagInBag.get() ? PackedUpConfig.maxBagInBagLayer.get() : 0;
 
     public static void registerEventListeners(){
-        ServerWorldEvents.LOAD.register((server, level) -> onLevelLoad(level));
+        ServerLevelEvents.LOAD.register((server, level) -> onLevelLoad(level));
     }
 
     public static void onLevelSave(ServerLevel level){

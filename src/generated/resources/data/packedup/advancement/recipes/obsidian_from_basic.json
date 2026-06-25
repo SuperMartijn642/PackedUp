@@ -60,10 +60,10 @@
       "id": "packedup:obsidianbackpack"
     },
     "title": {
-      "translate": "packedup.advancement.recipes/misc/obsidian_from_basic.title"
+      "translate": "packedup.advancement.recipes/obsidian_from_basic.title"
     },
     "description": {
-      "translate": "packedup.advancement.recipes/misc/obsidian_from_basic.description"
+      "translate": "packedup.advancement.recipes/obsidian_from_basic.description"
     },
     "frame": "task",
     "show_toast": false,

@@ -9,7 +9,7 @@ import com.supermartijn642.packedup.screen.BackpackContainerScreen;
 import com.supermartijn642.packedup.screen.customization.BackpackCustomizationScreen;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
+import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
@@ -32,7 +32,7 @@ public class PackedUpClient implements ClientModInitializer {
 
         // Register key to open backpack in inventory or curious slot
         OPEN_BAG_KEY = new KeyMapping("packedup.keys.openbag", 79/*'o'*/, new KeyMapping.Category(Identifier.fromNamespaceAndPath("packedup", "keys")));
-        KeyBindingHelper.registerKeyBinding(OPEN_BAG_KEY);
+        KeyMappingHelper.registerKeyMapping(OPEN_BAG_KEY);
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             if(OPEN_BAG_KEY.consumeClick())
                 onKey();

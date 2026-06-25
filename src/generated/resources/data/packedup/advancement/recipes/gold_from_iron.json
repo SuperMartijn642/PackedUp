@@ -2,23 +2,23 @@
   "fabric:load_conditions": [
     {
       "condition": "packedup:is_backpack_enabled",
-      "backpack": "diamond"
+      "backpack": "iron"
     },
     {
       "condition": "packedup:is_backpack_enabled",
-      "backpack": "obsidian"
+      "backpack": "gold"
     }
   ],
   "parent": "minecraft:recipes/root",
   "display": {
     "icon": {
-      "id": "packedup:obsidianbackpack"
+      "id": "packedup:goldbackpack"
     },
     "title": {
-      "translate": "packedup.advancement.recipes/misc/obsidian_from_diamond.title"
+      "translate": "packedup.advancement.recipes/gold_from_iron.title"
     },
     "description": {
-      "translate": "packedup.advancement.recipes/misc/obsidian_from_diamond.description"
+      "translate": "packedup.advancement.recipes/gold_from_iron.description"
     },
     "frame": "task",
     "show_toast": false,
@@ -29,7 +29,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "packedup:obsidian_from_diamond"
+        "recipe": "packedup:gold_from_iron"
       }
     },
     "recipe_condition": {
@@ -37,7 +37,7 @@
       "conditions": {
         "items": [
           {
-            "items": "packedup:diamondbackpack"
+            "items": "packedup:ironbackpack"
           }
         ]
       }
@@ -51,7 +51,7 @@
   ],
   "rewards": {
     "recipes": [
-      "packedup:obsidian_from_diamond"
+      "packedup:gold_from_iron"
     ]
   }
 }

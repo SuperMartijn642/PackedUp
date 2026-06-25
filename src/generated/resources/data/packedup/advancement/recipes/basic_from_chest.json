@@ -2,33 +2,19 @@
   "fabric:load_conditions": [
     {
       "condition": "packedup:is_backpack_enabled",
-      "backpack": "copper"
-    },
-    {
-      "condition": "supermartijn642corelib:and",
-      "conditions": [
-        {
-          "backpack": "silver",
-          "condition": "packedup:is_backpack_enabled"
-        },
-        {
-          "registry": "minecraft:item",
-          "tag": "c:ingots/silver",
-          "condition": "supermartijn642corelib:tag_populated"
-        }
-      ]
+      "backpack": "basic"
     }
   ],
   "parent": "minecraft:recipes/root",
   "display": {
     "icon": {
-      "id": "packedup:silverbackpack"
+      "id": "packedup:basicbackpack"
     },
     "title": {
-      "translate": "packedup.advancement.recipes/misc/silver_from_copper.title"
+      "translate": "packedup.advancement.recipes/basic_from_chest.title"
     },
     "description": {
-      "translate": "packedup.advancement.recipes/misc/silver_from_copper.description"
+      "translate": "packedup.advancement.recipes/basic_from_chest.description"
     },
     "frame": "task",
     "show_toast": false,
@@ -39,7 +25,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "packedup:silver_from_copper"
+        "recipe": "packedup:basic_from_chest"
       }
     },
     "recipe_condition": {
@@ -47,7 +33,7 @@
       "conditions": {
         "items": [
           {
-            "items": "packedup:copperbackpack"
+            "items": "#c:chests"
           }
         ]
       }
@@ -61,7 +47,7 @@
   ],
   "rewards": {
     "recipes": [
-      "packedup:silver_from_copper"
+      "packedup:basic_from_chest"
     ]
   }
 }

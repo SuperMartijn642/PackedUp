@@ -1,8 +1,25 @@
 {
   "fabric:load_conditions": [
     {
-      "condition": "packedup:is_backpack_enabled",
-      "backpack": "copper"
+      "condition": "supermartijn642corelib:not",
+      "value": {
+        "backpack": "basic",
+        "condition": "packedup:is_backpack_enabled"
+      }
+    },
+    {
+      "condition": "supermartijn642corelib:not",
+      "value": {
+        "backpack": "iron",
+        "condition": "packedup:is_backpack_enabled"
+      }
+    },
+    {
+      "condition": "supermartijn642corelib:not",
+      "value": {
+        "backpack": "copper",
+        "condition": "packedup:is_backpack_enabled"
+      }
     },
     {
       "condition": "supermartijn642corelib:not",
@@ -46,10 +63,10 @@
       "id": "packedup:obsidianbackpack"
     },
     "title": {
-      "translate": "packedup.advancement.recipes/misc/obsidian_from_copper.title"
+      "translate": "packedup.advancement.recipes/obsidian_from_chest.title"
     },
     "description": {
-      "translate": "packedup.advancement.recipes/misc/obsidian_from_copper.description"
+      "translate": "packedup.advancement.recipes/obsidian_from_chest.description"
     },
     "frame": "task",
     "show_toast": false,
@@ -60,7 +77,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "packedup:obsidian_from_copper"
+        "recipe": "packedup:obsidian_from_chest"
       }
     },
     "recipe_condition": {
@@ -68,7 +85,7 @@
       "conditions": {
         "items": [
           {
-            "items": "packedup:copperbackpack"
+            "items": "#c:chests"
           }
         ]
       }
@@ -82,7 +99,7 @@
   ],
   "rewards": {
     "recipes": [
-      "packedup:obsidian_from_copper"
+      "packedup:obsidian_from_chest"
     ]
   }
 }

@@ -32,10 +32,10 @@
       "id": "packedup:obsidianbackpack"
     },
     "title": {
-      "translate": "packedup.advancement.recipes/misc/obsidian_from_silver.title"
+      "translate": "packedup.advancement.recipes/obsidian_from_silver.title"
     },
     "description": {
-      "translate": "packedup.advancement.recipes/misc/obsidian_from_silver.description"
+      "translate": "packedup.advancement.recipes/obsidian_from_silver.description"
     },
     "frame": "task",
     "show_toast": false,

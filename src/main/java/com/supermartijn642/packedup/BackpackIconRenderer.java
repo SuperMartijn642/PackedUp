@@ -5,11 +5,13 @@ import com.mojang.serialization.MapCodec;
 import com.supermartijn642.core.ClientUtils;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.item.ItemModel;
+import net.minecraft.client.renderer.item.ItemStackRenderState;
 import net.minecraft.client.renderer.item.TrackingItemStackRenderState;
 import net.minecraft.client.renderer.special.SpecialModelRenderer;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
+import org.joml.Matrix4fc;
 import org.joml.Vector3fc;
 
 import java.util.function.Consumer;
@@ -24,7 +26,7 @@ public class BackpackIconRenderer implements ItemModel.Unbaked {
         private static final ThreadLocal<Boolean> RECURSION_GUARD = ThreadLocal.withInitial(() -> false);
 
         @Override
-        public void submit(ItemStack icon, ItemDisplayContext displayContext, PoseStack poseStack, SubmitNodeCollector output, int combinedLight, int combinedOverlay, boolean hasFoil, int k){
+        public void submit(ItemStack icon, PoseStack poseStack, SubmitNodeCollector output, int combinedLight, int combinedOverlay, boolean hasFoil, int k){
             // Render the icon
             if(RECURSION_GUARD.get() == Boolean.TRUE)
                 return;
@@ -55,7 +57,7 @@ public class BackpackIconRenderer implements ItemModel.Unbaked {
     }
 
     @Override
-    public ItemModel bake(ItemModel.BakingContext context){
+    public ItemModel bake(ItemModel.BakingContext context, Matrix4fc transformation){
         return (renderState, stack, modelResolver, transformType, level, entity, someRandomId) -> {
             renderState.appendModelIdentityElement(this);
             if(transformType != ItemDisplayContext.GUI)
@@ -64,7 +66,9 @@ public class BackpackIconRenderer implements ItemModel.Unbaked {
             ItemStack icon = BackpackItem.getIcon(stack);
             // Add the renderer for the icon
             if(!icon.isEmpty()){
-                renderState.newLayer().setupSpecialModel(ICON_RENDERER, icon);
+                ItemStackRenderState.LayerRenderState layer = renderState.newLayer();
+                layer.setLocalTransform(transformation);
+                layer.setupSpecialModel(ICON_RENDERER, icon);
                 renderState.appendModelIdentityElement(icon.getItem());
             }
         };

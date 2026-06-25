@@ -25,10 +25,10 @@
       "id": "packedup:diamondbackpack"
     },
     "title": {
-      "translate": "packedup.advancement.recipes/misc/diamond_from_silver.title"
+      "translate": "packedup.advancement.recipes/diamond_from_silver.title"
     },
     "description": {
-      "translate": "packedup.advancement.recipes/misc/diamond_from_silver.description"
+      "translate": "packedup.advancement.recipes/diamond_from_silver.description"
     },
     "frame": "task",
     "show_toast": false,

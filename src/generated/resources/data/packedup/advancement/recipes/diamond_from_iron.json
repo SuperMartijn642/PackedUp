@@ -2,30 +2,47 @@
   "fabric:load_conditions": [
     {
       "condition": "packedup:is_backpack_enabled",
-      "backpack": "gold"
+      "backpack": "iron"
     },
     {
       "condition": "supermartijn642corelib:not",
       "value": {
-        "backpack": "diamond",
+        "conditions": [
+          {
+            "backpack": "silver",
+            "condition": "packedup:is_backpack_enabled"
+          },
+          {
+            "registry": "minecraft:item",
+            "tag": "c:ingots/silver",
+            "condition": "supermartijn642corelib:tag_populated"
+          }
+        ],
+        "condition": "supermartijn642corelib:and"
+      }
+    },
+    {
+      "condition": "supermartijn642corelib:not",
+      "value": {
+        "backpack": "gold",
         "condition": "packedup:is_backpack_enabled"
       }
     },
     {
       "condition": "packedup:is_backpack_enabled",
-      "backpack": "obsidian"
+      "backpack": "diamond"
     }
   ],
   "parent": "minecraft:recipes/root",
   "display": {
     "icon": {
-      "id": "packedup:obsidianbackpack"
+      "id": "packedup:diamondbackpack"
     },
     "title": {
-      "translate": "packedup.advancement.recipes/misc/obsidian_from_gold.title"
+      "translate": "packedup.advancement.recipes/diamond_from_iron.title"
     },
     "description": {
-      "translate": "packedup.advancement.recipes/misc/obsidian_from_gold.description"
+      "translate": "packedup.advancement.recipes/diamond_from_iron.description"
     },
     "frame": "task",
     "show_toast": false,
@@ -36,7 +53,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "packedup:obsidian_from_gold"
+        "recipe": "packedup:diamond_from_iron"
       }
     },
     "recipe_condition": {
@@ -44,7 +61,7 @@
       "conditions": {
         "items": [
           {
-            "items": "packedup:goldbackpack"
+            "items": "packedup:ironbackpack"
           }
         ]
       }
@@ -58,7 +75,7 @@
   ],
   "rewards": {
     "recipes": [
-      "packedup:obsidian_from_gold"
+      "packedup:diamond_from_iron"
     ]
   }
 }
