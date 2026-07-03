@@ -5,6 +5,7 @@ import com.mojang.serialization.Dynamic;
 import com.supermartijn642.packedup.BackpackItem;
 import com.supermartijn642.packedup.BackpackType;
 import net.minecraft.SharedConstants;
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
@@ -13,7 +14,9 @@ import net.minecraft.nbt.NbtOps;
 import net.minecraft.util.datafix.DataFixers;
 import net.minecraft.util.datafix.fixes.References;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.level.block.ShulkerBoxBlock;
 
@@ -97,9 +100,13 @@ public class BackpackInventory {
         if(stack.getItem() instanceof BlockItem && ((BlockItem)stack.getItem()).getBlock() instanceof ShulkerBoxBlock && stack.has(DataComponents.CONTAINER)){
             ItemContainerContents container = stack.get(DataComponents.CONTAINER);
             // Check whether the container contains a backpack
-            //noinspection RedundantIfStatement
-            if(container != null && container.stream().anyMatch(stack1 -> stack1.getItem() instanceof BackpackItem))
-                return false;
+            if(container != null){
+                for(ItemStackTemplate template : container.nonEmptyItems()){
+                    Holder<Item> item = template.item();
+                    if(item.isBound() && item.value() instanceof BackpackItem)
+                        return false;
+                }
+            }
         }
         return true;
     }

@@ -1,8 +1,18 @@
 {
   "conditions": [
     {
-      "backpack": "iron",
-      "type": "packedup:is_backpack_enabled"
+      "conditions": [
+        {
+          "backpack": "copper",
+          "type": "packedup:is_backpack_enabled"
+        },
+        {
+          "registry": "minecraft:item",
+          "tag": "c:ingots/copper",
+          "type": "supermartijn642corelib:tag_populated"
+        }
+      ],
+      "type": "supermartijn642corelib:and"
     },
     {
       "condition": {
@@ -39,10 +49,10 @@
       "id": "packedup:diamondbackpack"
     },
     "title": {
-      "translate": "packedup.advancement.recipes/misc/diamond_from_iron.title"
+      "translate": "packedup.advancement.recipes/diamond_from_copper.title"
     },
     "description": {
-      "translate": "packedup.advancement.recipes/misc/diamond_from_iron.description"
+      "translate": "packedup.advancement.recipes/diamond_from_copper.description"
     },
     "frame": "task",
     "show_toast": false,
@@ -53,7 +63,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "packedup:diamond_from_iron"
+        "recipe": "packedup:diamond_from_copper"
       }
     },
     "recipe_condition": {
@@ -61,7 +71,7 @@
       "conditions": {
         "items": [
           {
-            "items": "packedup:ironbackpack"
+            "items": "packedup:copperbackpack"
           }
         ]
       }
@@ -75,7 +85,7 @@
   ],
   "rewards": {
     "recipes": [
-      "packedup:diamond_from_iron"
+      "packedup:diamond_from_copper"
     ]
   }
 }

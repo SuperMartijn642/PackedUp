@@ -1,11 +1,8 @@
 {
   "conditions": [
     {
-      "condition": {
-        "backpack": "basic",
-        "type": "packedup:is_backpack_enabled"
-      },
-      "type": "supermartijn642corelib:not"
+      "backpack": "basic",
+      "type": "packedup:is_backpack_enabled"
     },
     {
       "condition": {
@@ -52,10 +49,10 @@
       "id": "packedup:silverbackpack"
     },
     "title": {
-      "translate": "packedup.advancement.recipes/misc/silver_from_chest.title"
+      "translate": "packedup.advancement.recipes/silver_from_basic.title"
     },
     "description": {
-      "translate": "packedup.advancement.recipes/misc/silver_from_chest.description"
+      "translate": "packedup.advancement.recipes/silver_from_basic.description"
     },
     "frame": "task",
     "show_toast": false,
@@ -66,7 +63,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "packedup:silver_from_chest"
+        "recipe": "packedup:silver_from_basic"
       }
     },
     "recipe_condition": {
@@ -74,7 +71,7 @@
       "conditions": {
         "items": [
           {
-            "items": "#c:chests/wooden"
+            "items": "packedup:basicbackpack"
           }
         ]
       }
@@ -88,7 +85,7 @@
   ],
   "rewards": {
     "recipes": [
-      "packedup:silver_from_chest"
+      "packedup:silver_from_basic"
     ]
   }
 }

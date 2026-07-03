@@ -1,24 +1,34 @@
 {
   "conditions": [
     {
-      "backpack": "diamond",
-      "type": "packedup:is_backpack_enabled"
+      "conditions": [
+        {
+          "backpack": "copper",
+          "type": "packedup:is_backpack_enabled"
+        },
+        {
+          "registry": "minecraft:item",
+          "tag": "c:ingots/copper",
+          "type": "supermartijn642corelib:tag_populated"
+        }
+      ],
+      "type": "supermartijn642corelib:and"
     },
     {
-      "backpack": "obsidian",
+      "backpack": "gold",
       "type": "packedup:is_backpack_enabled"
     }
   ],
   "parent": "minecraft:recipes/root",
   "display": {
     "icon": {
-      "id": "packedup:obsidianbackpack"
+      "id": "packedup:goldbackpack"
     },
     "title": {
-      "translate": "packedup.advancement.recipes/misc/obsidian_from_diamond.title"
+      "translate": "packedup.advancement.recipes/gold_from_copper.title"
     },
     "description": {
-      "translate": "packedup.advancement.recipes/misc/obsidian_from_diamond.description"
+      "translate": "packedup.advancement.recipes/gold_from_copper.description"
     },
     "frame": "task",
     "show_toast": false,
@@ -29,7 +39,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "packedup:obsidian_from_diamond"
+        "recipe": "packedup:gold_from_copper"
       }
     },
     "recipe_condition": {
@@ -37,7 +47,7 @@
       "conditions": {
         "items": [
           {
-            "items": "packedup:diamondbackpack"
+            "items": "packedup:copperbackpack"
           }
         ]
       }
@@ -51,7 +61,7 @@
   ],
   "rewards": {
     "recipes": [
-      "packedup:obsidian_from_diamond"
+      "packedup:gold_from_copper"
     ]
   }
 }
