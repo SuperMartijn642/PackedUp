@@ -1,27 +1,20 @@
 {
   "conditions": [
     {
-      "condition": {
-        "backpack": "basic",
-        "type": "packedup:is_backpack_enabled"
-      },
-      "type": "supermartijn642corelib:not"
-    },
-    {
-      "backpack": "iron",
+      "backpack": "basic",
       "type": "packedup:is_backpack_enabled"
     }
   ],
   "parent": "minecraft:recipes/root",
   "display": {
     "icon": {
-      "id": "packedup:ironbackpack"
+      "id": "packedup:basicbackpack"
     },
     "title": {
-      "translate": "packedup.advancement.recipes/misc/iron_from_chest.title"
+      "translate": "packedup.advancement.recipes/basic_from_chest.title"
     },
     "description": {
-      "translate": "packedup.advancement.recipes/misc/iron_from_chest.description"
+      "translate": "packedup.advancement.recipes/basic_from_chest.description"
     },
     "frame": "task",
     "show_toast": false,
@@ -32,7 +25,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "packedup:iron_from_chest"
+        "recipe": "packedup:basic_from_chest"
       }
     },
     "recipe_condition": {
@@ -54,7 +47,7 @@
   ],
   "rewards": {
     "recipes": [
-      "packedup:iron_from_chest"
+      "packedup:basic_from_chest"
     ]
   }
 }

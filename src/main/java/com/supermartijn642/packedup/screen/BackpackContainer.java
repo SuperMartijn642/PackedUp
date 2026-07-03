@@ -9,7 +9,7 @@ import com.supermartijn642.packedup.storage.BackpackInventory;
 import com.supermartijn642.packedup.storage.BackpackStorageManager;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.ClickType;
+import net.minecraft.world.inventory.ContainerInput;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 
@@ -110,13 +110,13 @@ public class BackpackContainer extends BaseContainer {
     }
 
     @Override
-    public void clicked(int index, int dragType, ClickType clickType, Player player){
-        if(clickType == ClickType.SWAP && dragType == this.bagSlot)
+    public void clicked(int slot, int buttonNum, ContainerInput input, Player player){
+        if(input == ContainerInput.SWAP && buttonNum == this.bagSlot)
             return;
-        if(clickType == ClickType.PICKUP && dragType == 1 && index >= 0){
-            ItemStack stack = this.getSlot(index).getItem();
+        if(input == ContainerInput.PICKUP && buttonNum == 1 && slot >= 0){
+            ItemStack stack = this.getSlot(slot).getItem();
             if(stack.getItem() instanceof BackpackItem){
-                int playerSlot = index - this.type.getSlots();
+                int playerSlot = slot - this.type.getSlots();
                 if(playerSlot >= 0)
                     playerSlot += playerSlot < 27 ? 9 : -27;
                 if(!player.level().isClientSide())
@@ -124,6 +124,6 @@ public class BackpackContainer extends BaseContainer {
                 return;
             }
         }
-        super.clicked(index, dragType, clickType, player);
+        super.clicked(slot, buttonNum, input, player);
     }
 }
