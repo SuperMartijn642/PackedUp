@@ -96,7 +96,7 @@ public class IconSelectionScreen extends ItemBaseWidget {
             });
             if(hoveredStack.get() != null){
                 PackedUp.CHANNEL.sendToServer(new PacketSetIcon(this.hand, hoveredStack.get()));
-                ClientUtils.getMinecraft().setScreen(WidgetScreen.of(new BackpackCustomizationScreen(this.hand)));
+                ClientUtils.displayScreen(WidgetScreen.of(new BackpackCustomizationScreen(this.hand)));
                 hasBeenHandled = true;
             }
         }
@@ -106,7 +106,7 @@ public class IconSelectionScreen extends ItemBaseWidget {
     @Override
     protected boolean keyPressed(KeyEvent event, boolean hasBeenHandled, ItemStack object){
         if(!hasBeenHandled && (ClientUtils.getMinecraft().options.keyInventory.matches(event) || event.isEscape())){
-            ClientUtils.getMinecraft().setScreen(WidgetScreen.of(new BackpackCustomizationScreen(this.hand)));
+            ClientUtils.displayScreen(WidgetScreen.of(new BackpackCustomizationScreen(this.hand)));
             hasBeenHandled = true;
         }
         return super.keyPressed(event, hasBeenHandled, object);
