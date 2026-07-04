@@ -51,7 +51,7 @@ public class BackpackCustomizationScreen extends ItemBaseWidget {
         this.nameField.setFocused(true);
         this.addWidget(new IconSlotWidget(8, 20, this.hand,
             () -> this.object,
-            () -> ClientUtils.getMinecraft().setScreen(WidgetScreen.of(new IconSelectionScreen(this.hand)))
+            () -> ClientUtils.displayScreen(WidgetScreen.of(new IconSelectionScreen(this.hand)))
         ));
     }
 

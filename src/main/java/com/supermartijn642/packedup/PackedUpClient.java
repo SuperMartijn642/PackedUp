@@ -47,7 +47,7 @@ public class PackedUpClient {
     }
 
     public static void onKey(InputEvent.Key e){
-        if(OPEN_BAG_KEY != null && OPEN_BAG_KEY.consumeClick() && ClientUtils.getWorld() != null && ClientUtils.getMinecraft().screen == null)
+        if(OPEN_BAG_KEY != null && OPEN_BAG_KEY.consumeClick() && ClientUtils.getWorld() != null && ClientUtils.getMinecraft().gui.screen() == null)
             PackedUp.CHANNEL.sendToServer(new PacketOpenBag());
     }
 
