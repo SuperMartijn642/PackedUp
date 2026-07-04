@@ -19,7 +19,7 @@
     ],
     "key": {
       "A": "#c:ingots/iron",
-      "B": "minecraft:leather",
+      "B": "#c:leathers",
       "C": "packedup:basicbackpack"
     },
     "result": {

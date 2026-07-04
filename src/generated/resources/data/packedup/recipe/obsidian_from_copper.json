@@ -49,7 +49,7 @@
       "AAA"
     ],
     "key": {
-      "A": "minecraft:obsidian",
+      "A": "#c:obsidians",
       "B": "#c:ingots/copper",
       "C": "packedup:copperbackpack"
     },

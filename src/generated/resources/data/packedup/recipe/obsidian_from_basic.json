@@ -63,8 +63,8 @@
       "AAA"
     ],
     "key": {
-      "A": "minecraft:obsidian",
-      "B": "minecraft:leather",
+      "A": "#c:obsidians",
+      "B": "#c:leathers",
       "C": "packedup:basicbackpack"
     },
     "result": {

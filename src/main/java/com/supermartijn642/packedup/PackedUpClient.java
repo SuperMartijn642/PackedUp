@@ -44,7 +44,7 @@ public class PackedUpClient implements ClientModInitializer {
     }
 
     public static void onKey(){
-        if(ClientUtils.getWorld() != null && ClientUtils.getMinecraft().screen == null)
+        if(ClientUtils.getWorld() != null && ClientUtils.getMinecraft().gui.screen() == null)
             PackedUp.CHANNEL.sendToServer(new PacketOpenBag());
     }
 

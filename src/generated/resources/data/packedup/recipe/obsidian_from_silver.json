@@ -35,7 +35,7 @@
       "AAA"
     ],
     "key": {
-      "A": "minecraft:obsidian",
+      "A": "#c:obsidians",
       "B": "#c:ingots/silver",
       "C": "packedup:silverbackpack"
     },

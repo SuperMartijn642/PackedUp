@@ -57,7 +57,7 @@
     ],
     "key": {
       "A": "#c:gems/diamond",
-      "B": "minecraft:leather",
+      "B": "#c:leathers",
       "C": "packedup:basicbackpack",
       "D": "#c:glass_blocks"
     },

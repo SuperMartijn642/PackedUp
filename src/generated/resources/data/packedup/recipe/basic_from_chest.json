@@ -14,9 +14,9 @@
       "CCC"
     ],
     "key": {
-      "A": "minecraft:stick",
+      "A": "#c:rods/wooden",
       "B": "#c:strings",
-      "C": "minecraft:leather",
+      "C": "#c:leathers",
       "D": "#c:chests"
     },
     "result": {

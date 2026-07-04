@@ -66,9 +66,9 @@
       "CCC"
     ],
     "key": {
-      "A": "minecraft:leather",
+      "A": "#c:leathers",
       "B": "#c:strings",
-      "C": "minecraft:obsidian",
+      "C": "#c:obsidians",
       "D": "#c:chests"
     },
     "result": {

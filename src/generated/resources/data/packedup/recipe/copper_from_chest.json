@@ -21,7 +21,7 @@
       "CCC"
     ],
     "key": {
-      "A": "minecraft:leather",
+      "A": "#c:leathers",
       "B": "#c:strings",
       "C": "#c:ingots/copper",
       "D": "#c:chests"
