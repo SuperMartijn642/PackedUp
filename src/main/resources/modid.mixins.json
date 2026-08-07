@@ -9,7 +9,9 @@
     "ServerLevelMixin",
     "ServerPlayerMixin"
   ],
-  "client": [],
+  "client": [
+    "MinecraftMixin"
+  ],
   "server": [],
   "injectors": {
     "defaultRequire": 1
