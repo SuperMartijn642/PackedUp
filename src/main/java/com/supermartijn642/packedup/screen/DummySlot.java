@@ -1,7 +1,6 @@
 package com.supermartijn642.packedup.screen;
 
 import net.minecraft.world.Container;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 
@@ -10,52 +9,8 @@ import net.minecraft.world.item.ItemStack;
  */
 public class DummySlot extends Slot {
 
-    private static final Container EMPTY_CONTAINER = new Container() {
-        @Override
-        public int getContainerSize(){
-            return 0;
-        }
-
-        @Override
-        public boolean isEmpty(){
-            return true;
-        }
-
-        @Override
-        public ItemStack getItem(int i){
-            return ItemStack.EMPTY;
-        }
-
-        @Override
-        public ItemStack removeItem(int i, int j){
-            return ItemStack.EMPTY;
-        }
-
-        @Override
-        public ItemStack removeItemNoUpdate(int i){
-            return ItemStack.EMPTY;
-        }
-
-        @Override
-        public void setItem(int i, ItemStack itemStack){
-        }
-
-        @Override
-        public void setChanged(){
-        }
-
-        @Override
-        public boolean stillValid(Player player){
-            return false;
-        }
-
-        @Override
-        public void clearContent(){
-        }
-    };
-
-    public DummySlot(int index, int x, int y){
-        super(EMPTY_CONTAINER, index, x, y);
+    public DummySlot(Container container, int index, int x, int y){
+        super(container, index, x, y);
     }
 
     @Override
