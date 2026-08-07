@@ -47,6 +47,10 @@ dependencies {
 
     // Trinkets
     compileOnly "curse.maven:trinkets-updated-1509777:${trinkets_file}"
+    // TrashSlot
+    compileOnly "curse.maven:trashslot-235577:${trashslot_file}"
+    // Balm
+    compileOnly "curse.maven:balm-531761:${balm_file}"
 
     // Just Enough Items
 //    runtimeOnly "curse.maven:jei-238222:${just_enough_items_file}"
