@@ -7,6 +7,7 @@ import com.supermartijn642.core.network.PacketChannel;
 import com.supermartijn642.core.registry.GeneratorRegistrationHandler;
 import com.supermartijn642.core.registry.RegistrationHandler;
 import com.supermartijn642.core.registry.RegistryEntryAcceptor;
+import com.supermartijn642.packedup.compat.Compatibility;
 import com.supermartijn642.packedup.generators.*;
 import com.supermartijn642.packedup.packets.PacketOpenBag;
 import com.supermartijn642.packedup.packets.PacketRename;
@@ -60,6 +61,8 @@ public class PackedUp implements ModInitializer {
 
         register();
         registerGenerators();
+
+        Compatibility.init();
     }
 
     private static void register(){
