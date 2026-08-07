@@ -9,7 +9,9 @@
     "ServerLevelMixin",
     "ServerPlayerMixin"
   ],
-  "client": [],
+  "client": [
+    "GuiMixin"
+  ],
   "server": [],
   "injectors": {
     "defaultRequire": 1
