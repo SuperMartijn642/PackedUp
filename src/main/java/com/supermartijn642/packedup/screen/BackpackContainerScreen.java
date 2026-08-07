@@ -9,6 +9,7 @@ import com.supermartijn642.packedup.PackedUpClient;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.input.KeyEvent;
 import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 
@@ -20,6 +21,7 @@ public class BackpackContainerScreen extends BaseContainerWidget<BackpackContain
     public static final Identifier CORNERS = Identifier.fromNamespaceAndPath("packedup", "gui/corners");
 
     private Component displayName;
+    private Rect2i playerBounds, backpackBounds;
 
     public BackpackContainerScreen(){
         super(0, 0, 0, 0);
@@ -29,6 +31,11 @@ public class BackpackContainerScreen extends BaseContainerWidget<BackpackContain
     public void initialize(){
         super.initialize();
         this.displayName = trimText(this.container.bagName, this.container.type.getColumns() * 18);
+        int backpackWidth = this.container.type.getColumns() * 18 + 14;
+        int offset = (this.width() - backpackWidth) / 2;
+        int height = this.container.type.getRows() * 18 + 23;
+        this.backpackBounds = new Rect2i(offset, 0, backpackWidth, height);
+        this.playerBounds = new Rect2i((int)Math.max(0, (backpackWidth - 176) / 2f), height - 9, 176, this.height() - height + 9);
     }
 
     @Override
@@ -46,14 +53,22 @@ public class BackpackContainerScreen extends BaseContainerWidget<BackpackContain
         return 112 + 18 * this.container.type.getRows();
     }
 
+    public Rect2i getPlayerInventoryBounds(){
+        return this.playerBounds;
+    }
+
+    public Rect2i getBackpackInventoryBounds(){
+        return this.backpackBounds;
+    }
+
     @Override
     public void renderBackground(WidgetRenderContext context, GuiGraphicsHelper graphics, int mouseX, int mouseY){
         if(this.container.type.getColumns() == 9)
             graphics.submitDefaultScreenBackground(0, 0, this.width(), this.height());
         else{
-            int backpackWidth = this.container.type.getColumns() * 18 + 14;
-            int offset = (this.width() - backpackWidth) / 2;
-            int height = this.container.type.getRows() * 18 + 23;
+            int backpackWidth = this.backpackBounds.getWidth();
+            int offset = this.backpackBounds.getX();
+            int height = this.backpackBounds.getHeight();
             graphics.submitDefaultScreenBackground(offset, 0, backpackWidth, height);
             graphics.submitDefaultScreenBackground(Math.max(0, (backpackWidth - 176) / 2f), height - 9, 176, this.height() - height + 9);
             if(this.container.type.getColumns() > 9){
