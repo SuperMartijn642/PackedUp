@@ -29,7 +29,7 @@ public class DummySlot extends Slot {
     @Override
     public int getMaxStackSize(){
         ItemStack stack = this.getItem();
-        return stack.isEmpty() ? 64 : stack.getMaxStackSize();
+        return stack.isEmpty() ? super.getMaxStackSize() : stack.getMaxStackSize();
     }
 
     @Override
