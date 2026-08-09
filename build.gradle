@@ -27,12 +27,24 @@ repositories {
         }
         filter { includeGroup "maven.modrinth" }
     }
-    maven { url = "https://repo.spongepowered.org/maven" }
+    exclusiveContent {
+        forRepository {
+            maven { url = "https://repo.spongepowered.org/maven" }
+        }
+        filter { includeGroup "org.spongepowered" }
+    }
 }
 
 dependencies {
     // Forge
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+    // SpongePowered Mixin
+    annotationProcessor "org.spongepowered:mixin:0.8.5:processor"
+    implementation("org.spongepowered:mixin:0.8.3-SNAPSHOT") {
+        exclude module: "guava"
+        exclude module: "commons-io"
+        exclude module: "gson"
+    }
 
     // Core library
     implementation fg.deobf("curse.maven:supermartijn642s-core-lib-454372:${core_library_file}")
@@ -74,6 +86,11 @@ processResources {
 minecraft {
     mappings channel: mappings_channel, version: mappings_version
 
+    // accessTransformer = file("src/main/resources/META-INF/accesstransformer.cfg")
+
+    String resolved_core_plugin = "${mod_package}.${coremod_package}.${coremod_class}"
+    String resolved_core_config = "${mod_id}.mixins.json"
+
     // Make sure the core lib's mixins get applied
     String core_lib_core_mod = "com.supermartijn642.core.coremod.CoreModPlugin"
 
@@ -82,7 +99,9 @@ minecraft {
             workingDirectory file("run")
 
             property "forge.logging.markers", "REGISTRIES"
-            property "fml.coreMods.load", core_lib_core_mod
+            property "fml.coreMods.load", resolved_core_plugin + "," + core_lib_core_mod
+
+            args "--mixin", resolved_core_config
 
             mods {
                 //noinspection GroovyAssignabilityCheck
@@ -127,6 +146,12 @@ compileJava {
     source = processSources.outputs
 }
 
+mixin {
+    // MixinGradle Settings
+    add sourceSets.main, "${mod_id}.mixins.refmap.json"
+    config "${mod_id}.mixins.json"
+}
+
 // Rename the IntelliJ run configs
 gradle.taskGraph.whenReady {
     tasks.genIntellijRuns.doLast {
@@ -141,6 +166,25 @@ gradle.taskGraph.whenReady {
                 configFile.withWriter { groovy.xml.XmlUtil.serialize(xml, it) }
             }
         }
+    }
+}
+
+jar {
+    from {
+        configurations.compileClasspath
+                .filter { "mixin-0.8.3-SNAPSHOT.jar" == it.name }
+                .collect { it.isDirectory() ? it : zipTree(it) }
+    } {
+        exclude "LICENSE.txt", "META-INF/MANIFSET.MF", "META-INF/maven/**", "META-INF/*.RSA", "META-INF/*.SF"
+    }
+
+    manifest {
+        attributes "FMLCorePlugin": "com.supermartijn642.scarecrowsterritory.core.CoreMod"
+        attributes "FMLCorePluginContainsFMLMod": "true"
+        attributes "ForceLoadAsMod": "true"
+        attributes "TweakClass": "org.spongepowered.asm.launch.MixinTweaker"
+        attributes "TweakOrder": "0"
+        attributes "MixinConfigs": "scarecrowsterritory.mixins.json"
     }
 }
 
