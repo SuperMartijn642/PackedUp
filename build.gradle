@@ -27,12 +27,20 @@ repositories {
         }
         filter { includeGroup "maven.modrinth" }
     }
-    maven { url = "https://repo.spongepowered.org/maven" }
+    exclusiveContent {
+        forRepository {
+            maven { url = "https://repo.spongepowered.org/maven" }
+        }
+        filter { includeGroup "org.spongepowered" }
+    }
+    maven { url "https://maven.shedaniel.me" }
 }
 
 dependencies {
     // Forge
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+    // SpongePowered Mixin
+    annotationProcessor "org.spongepowered:mixin:0.8.4:processor"
 
     // Core library
     implementation fg.deobf("curse.maven:supermartijn642s-core-lib-454372:${core_library_file}")
@@ -152,6 +160,12 @@ tasks.register('prepareDataResources', Sync) {
 tasks.configureEach {
     if (it.name == "prepareRunData")
         it.dependsOn "prepareDataResources"
+}
+
+// MixinGradle Settings
+mixin {
+    add sourceSets.main, "${mod_id}.mixins.refmap.json"
+    config "${mod_id}.mixins.json"
 }
 
 // Force the jar to be reobfuscated
