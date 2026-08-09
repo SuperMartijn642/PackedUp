@@ -10,16 +10,14 @@ import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.ShulkerBoxBlock;
-import net.neoforged.neoforge.items.IItemHandlerModifiable;
 
-import javax.annotation.Nonnull;
 import java.nio.file.Path;
 import java.util.*;
 
 /**
  * Created 2/8/2020 by SuperMartijn642
  */
-public class BackpackInventory implements IItemHandlerModifiable {
+public class BackpackInventory {
 
     private final boolean remote;
     private final ArrayList<ItemStack> stacks = new ArrayList<>();
@@ -57,75 +55,34 @@ public class BackpackInventory implements IItemHandlerModifiable {
         return this.inventoryIndex;
     }
 
-    @Override
-    public int getSlots(){
-        return this.stacks.size();
-    }
-
-    @Nonnull
-    @Override
     public ItemStack getStackInSlot(int slot){
         return this.stacks.get(slot);
     }
 
-    @Nonnull
-    @Override
-    public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate){
-        ItemStack current = this.stacks.get(slot);
-        if(!stack.isEmpty() && this.isItemValid(slot, stack) && canStack(current, stack)){
-            int amount = Math.min(stack.getCount(), 64 - current.getCount());
-            if(!simulate){
-                ItemStack newStack = stack.copy();
-                newStack.setCount(current.getCount() + amount);
-                this.stacks.set(slot, newStack);
-
-                if(!this.remote && stack.getItem() instanceof BackpackItem && stack.getOrCreateTag().contains("packedup:invIndex")){
-                    int index = stack.getOrCreateTag().getInt("packedup:invIndex");
-                    if(!this.bagsDirectlyInThisBag.contains(index))
-                        BackpackStorageManager.onInsert(index, this.inventoryIndex);
-                }
-            }
-            ItemStack result = stack.copy();
-            result.shrink(amount);
-            return result;
-        }
-        return stack;
-    }
-
-    @Nonnull
-    @Override
-    public ItemStack extractItem(int slot, int amount, boolean simulate){
+    public ItemStack extractItem(int slot, int amount){
         ItemStack stack = this.stacks.get(slot);
         int count = Math.min(amount, stack.getCount());
         ItemStack result = stack.copy();
-        if(!simulate){
-            stack.shrink(count);
+        stack.shrink(count);
 
-            if(!this.remote && result.getItem() instanceof BackpackItem && result.getOrCreateTag().contains("packedup:invIndex")){
-                int index = result.getOrCreateTag().getInt("packedup:invIndex");
-                boolean contains = false;
-                for(ItemStack stack1 : this.stacks){
-                    if(stack1.getItem() instanceof BackpackItem && stack1.getOrCreateTag().contains("packedup:invIndex")
-                        && stack1.getOrCreateTag().getInt("packedup:invIndex") == index){
-                        contains = true;
-                        break;
-                    }
+        if(!this.remote && result.getItem() instanceof BackpackItem && result.getOrCreateTag().contains("packedup:invIndex")){
+            int index = result.getOrCreateTag().getInt("packedup:invIndex");
+            boolean contains = false;
+            for(ItemStack stack1 : this.stacks){
+                if(stack1.getItem() instanceof BackpackItem && stack1.getOrCreateTag().contains("packedup:invIndex")
+                    && stack1.getOrCreateTag().getInt("packedup:invIndex") == index){
+                    contains = true;
+                    break;
                 }
-                if(!contains)
-                    BackpackStorageManager.onExtract(index, this.inventoryIndex);
             }
+            if(!contains)
+                BackpackStorageManager.onExtract(index, this.inventoryIndex);
         }
         result.setCount(count);
         return result;
     }
 
-    @Override
-    public int getSlotLimit(int slot){
-        return 64;
-    }
-
-    @Override
-    public boolean isItemValid(int slot, @Nonnull ItemStack stack){
+    public boolean isItemValid(ItemStack stack){
         if(stack.getItem() instanceof BackpackItem && !this.isBagAllowed(stack))
             return false;
 
@@ -146,7 +103,7 @@ public class BackpackInventory implements IItemHandlerModifiable {
         return stack1.isEmpty() || stack2.isEmpty() || (stack1.getItem() == stack2.getItem() && stack1.getDamageValue() == stack2.getDamageValue() && ItemStack.isSameItemSameTags(stack1, stack2));
     }
 
-    public void save(Path file){
+    public void save(Path path){
         CompoundTag compound = new CompoundTag();
         compound.putInt("stacks", this.stacks.size());
         for(int slot = 0; slot < this.stacks.size(); slot++)
@@ -155,16 +112,16 @@ public class BackpackInventory implements IItemHandlerModifiable {
         compound.putIntArray("bagsThisBagIsIn", Lists.newArrayList(this.bagsThisBagIsIn));
         compound.putInt("layer", this.layer);
         try{
-            NbtIo.write(compound, file);
+            NbtIo.write(compound, path);
         }catch(Exception e){
             e.printStackTrace();
         }
     }
 
-    public void load(Path file){
+    public void load(Path path){
         CompoundTag compound;
         try{
-            compound = NbtIo.read(file);
+            compound = NbtIo.read(path);
         }catch(Exception e){
             e.printStackTrace();
             return;
@@ -180,8 +137,7 @@ public class BackpackInventory implements IItemHandlerModifiable {
         this.layer = compound.getInt("layer");
     }
 
-    @Override
-    public void setStackInSlot(int slot, @Nonnull ItemStack stack){
+    public void setStackInSlot(int slot, ItemStack stack){
         ItemStack oldStack = this.stacks.get(slot);
         this.stacks.set(slot, ItemStack.EMPTY);
 
