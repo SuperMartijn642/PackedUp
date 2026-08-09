@@ -12,7 +12,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.items.SlotItemHandler;
 
 import java.util.Set;
 
@@ -47,7 +46,7 @@ public class BackpackContainer extends BaseContainer {
         for(int row = 0; row < this.type.getRows(); row++){
             for(int column = 0; column < this.type.getColumns(); column++){
                 int x = startX + 18 * column, y = startY + 18 * row, index = row * this.type.getColumns() + column;
-                this.addSlot(new SlotItemHandler(this.inventory, index, x, y));
+                this.addSlot(new BackpackSlot(this.inventory, index, x, y));
             }
         }
 
