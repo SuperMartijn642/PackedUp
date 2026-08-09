@@ -59,6 +59,7 @@ processResources {
 
     // Replace the mod version
     Map<String, ?> copyProperties = project.properties.clone() as Map<String, ?>
+    copyProperties.removeAll { !(it.value instanceof String) }
     //noinspection UnnecessaryQualifiedReference
     var matcher = java.util.regex.Pattern.compile("[^.0-9]").matcher(copyProperties.mod_version as String)
     if (matcher.find())
@@ -128,8 +129,16 @@ tasks.register('prepareDataResources', Sync) {
     into layout.buildDirectory.dir("/data_resources")
     inputs.property "version", version
 
+    // Replace the mod version
+    Map<String, ?> copyProperties = project.properties.clone() as Map<String, ?>
+    copyProperties.removeAll { !(it.value instanceof String) }
+    //noinspection UnnecessaryQualifiedReference
+    var matcher = java.util.regex.Pattern.compile("[^.0-9]").matcher(copyProperties.mod_version as String)
+    if (matcher.find())
+        copyProperties.mod_version = copyProperties.mod_version.substring(0, matcher.start()) + "+" + copyProperties.mod_version.substring(matcher.start())
+
     filesMatching(["META-INF/mods.toml", "modid.mixins.json", "pack.mcmeta"]) {
-        expand properties
+        expand copyProperties
     }
 
     exclude "**/*.pdn"
