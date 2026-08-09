@@ -33,6 +33,13 @@ repositories {
 dependencies {
     // Forge
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+    // SpongePowered Mixin
+    annotationProcessor "org.spongepowered:mixin:0.8.7:processor"
+    // Mixin Extras
+    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.5.3"))
+    implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.5.3")) {
+        jarJar.ranged(it, "[0.5.3,)")
+    }
 
     // Core library
     implementation "curse.maven:supermartijn642s-core-lib-454372:${core_library_file}"
@@ -75,6 +82,10 @@ processResources {
     rename "^modid.mixins.json\$", "${mod_id}.mixins.json"
     rename "^icon.png\$", "${mod_id}.png"
 }
+
+jarJar.enable()
+tasks.jarJar.archiveClassifier = ""
+tasks.assemble.dependsOn tasks.jarJar
 
 minecraft {
     mappings channel: "official", version: minecraft_version
@@ -155,8 +166,16 @@ tasks.configureEach {
         it.dependsOn "prepareDataResources"
 }
 
+// MixinGradle Settings
+mixin {
+    add sourceSets.main, "${mod_id}.mixins.refmap.json"
+    config "${mod_id}.mixins.json"
+}
+
+jar.manifest.attributes "MixinConfigs": "${mod_id}.mixins.json"
+
 publishMods {
-    file = jar.archiveFile
+    file = tasks.jarJar.archiveFile
     displayName = "${mod_name} ${mod_version} for Forge ${minecraft_suffix.substring(2)}"
     version = project.version
     //noinspection UnnecessaryQualifiedReference
