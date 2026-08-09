@@ -63,6 +63,7 @@ processResources {
 
     // Replace the mod version
     Map<String, ?> copyProperties = project.properties.clone() as Map<String, ?>
+    copyProperties.removeAll { !(it.value instanceof String) }
     //noinspection UnnecessaryQualifiedReference
     var matcher = java.util.regex.Pattern.compile("[^.0-9]").matcher(copyProperties.mod_version as String)
     if (matcher.find())
@@ -134,6 +135,7 @@ tasks.register('prepareDataResources', Sync) {
 
     // Replace the mod version
     Map<String, ?> copyProperties = project.properties.clone() as Map<String, ?>
+    copyProperties.removeAll { !(it.value instanceof String) }
     //noinspection UnnecessaryQualifiedReference
     var matcher = java.util.regex.Pattern.compile("[^.0-9]").matcher(copyProperties.mod_version as String)
     if (matcher.find())
