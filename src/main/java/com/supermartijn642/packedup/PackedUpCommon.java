@@ -8,6 +8,7 @@ import com.supermartijn642.packedup.storage.BackpackInventory;
 import com.supermartijn642.packedup.storage.BackpackStorageManager;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.util.Prediction;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.CustomData;
@@ -53,7 +54,7 @@ public class PackedUpCommon {
     public static void onPlayerClone(Player newPlayer, Player oldPlayer){
         List<ItemStack> backpacks = ((PackedUpPlayer)oldPlayer).packedupGetBackpacks();
         if(backpacks != null){
-            backpacks.forEach(newPlayer.getInventory()::placeItemBackInInventory);
+            backpacks.forEach(s -> newPlayer.getInventory().placeItemBackInInventory(s, Prediction.SERVER_ONLY));
             ((PackedUpPlayer)oldPlayer).packedupSetBackpacks(null);
         }
     }

@@ -1,3 +1,5 @@
+## Update to Minecraft 26.3
+
 ### Packed Up 1.1.1
 - Added integration with TrashSlot for positioning trash slot
 - Added dummy `Container` for backpack slots for other mods to interact with

@@ -77,7 +77,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "packedup:obsidian_from_chest"
+        "recipes": "packedup:obsidian_from_chest"
       }
     },
     "recipe_condition": {

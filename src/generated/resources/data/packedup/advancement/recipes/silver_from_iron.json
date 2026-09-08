@@ -39,7 +39,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "packedup:silver_from_iron"
+        "recipes": "packedup:silver_from_iron"
       }
     },
     "recipe_condition": {

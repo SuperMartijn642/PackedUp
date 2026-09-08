@@ -29,7 +29,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "packedup:gold_from_copper"
+        "recipes": "packedup:gold_from_copper"
       }
     },
     "recipe_condition": {

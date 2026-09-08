@@ -46,7 +46,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "packedup:gold_from_chest"
+        "recipes": "packedup:gold_from_chest"
       }
     },
     "recipe_condition": {

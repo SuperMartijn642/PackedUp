@@ -43,7 +43,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "packedup:gold_from_basic"
+        "recipes": "packedup:gold_from_basic"
       }
     },
     "recipe_condition": {

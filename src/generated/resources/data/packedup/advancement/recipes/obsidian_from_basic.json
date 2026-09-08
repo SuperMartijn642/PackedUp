@@ -74,7 +74,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "packedup:obsidian_from_basic"
+        "recipes": "packedup:obsidian_from_basic"
       }
     },
     "recipe_condition": {
