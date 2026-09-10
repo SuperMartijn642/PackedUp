@@ -1,3 +1,6 @@
+### Packed Up 1.1.1a
+- Added icon and banner images for new NeoForge 26.2.0.50-beta mod list
+
 ### Packed Up 1.1.1
 - Added integration with TrashSlot for positioning trash slot
 - Added dummy `Container` for backpack slots for other mods to interact with
