@@ -63,7 +63,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "packedup:diamond_from_copper"
+        "recipes": "packedup:diamond_from_copper"
       }
     },
     "recipe_condition": {

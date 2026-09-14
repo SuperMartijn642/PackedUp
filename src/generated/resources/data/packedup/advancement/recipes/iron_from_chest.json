@@ -32,7 +32,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "packedup:iron_from_chest"
+        "recipes": "packedup:iron_from_chest"
       }
     },
     "recipe_condition": {

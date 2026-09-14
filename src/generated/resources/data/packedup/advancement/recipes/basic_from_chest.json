@@ -25,7 +25,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "packedup:basic_from_chest"
+        "recipes": "packedup:basic_from_chest"
       }
     },
     "recipe_condition": {

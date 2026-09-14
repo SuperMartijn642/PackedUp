@@ -42,7 +42,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "packedup:copper_from_chest"
+        "recipes": "packedup:copper_from_chest"
       }
     },
     "recipe_condition": {

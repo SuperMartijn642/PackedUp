@@ -60,7 +60,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "packedup:obsidian_from_iron"
+        "recipes": "packedup:obsidian_from_iron"
       }
     },
     "recipe_condition": {

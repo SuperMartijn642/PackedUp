@@ -77,7 +77,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "packedup:diamond_from_basic"
+        "recipes": "packedup:diamond_from_basic"
       }
     },
     "recipe_condition": {

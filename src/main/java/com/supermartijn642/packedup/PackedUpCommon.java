@@ -12,6 +12,7 @@ import net.minecraft.nbt.NbtOps;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.RegistryOps;
+import net.minecraft.util.Prediction;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -74,7 +75,7 @@ public class PackedUpCommon {
             .map(tag -> ItemStack.CODEC.decode(ops, tag))
             .filter(DataResult::isSuccess)
             .map(result -> result.getOrThrow().getFirst())
-            .forEach(stack -> e.getEntity().getInventory().placeItemBackInInventory(stack));
+            .forEach(stack -> e.getEntity().getInventory().placeItemBackInInventory(stack, Prediction.SERVER_ONLY));
     }
 
     /**

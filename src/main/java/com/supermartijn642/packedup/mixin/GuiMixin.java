@@ -6,7 +6,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.screens.Screen;
 import org.jspecify.annotations.Nullable;
-import org.lwjgl.glfw.GLFW;
+import org.lwjgl.sdl.SDLMouse;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -59,7 +59,7 @@ public class GuiMixin {
         if(!(this.screen instanceof WidgetContainerScreen<?,?> s && s.getWidget() instanceof BackpackContainerScreen))
             return;
         if(this.hadBackpackOpen)
-            GLFW.glfwSetCursorPos(this.minecraft.getWindow().handle(), this.lastMouseX, this.lastMouseY);
+            SDLMouse.SDL_WarpMouseInWindow(this.minecraft.getWindow().handle(), (float)this.lastMouseX, (float)this.lastMouseY);
         this.hadBackpackOpen = true;
     }
 }
