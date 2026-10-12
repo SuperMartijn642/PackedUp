@@ -179,12 +179,12 @@ jar {
     }
 
     manifest {
-        attributes "FMLCorePlugin": "com.supermartijn642.scarecrowsterritory.core.CoreMod"
+        attributes "FMLCorePlugin": "${mod_package}.${coremod_package}.${coremod_class}"
         attributes "FMLCorePluginContainsFMLMod": "true"
         attributes "ForceLoadAsMod": "true"
         attributes "TweakClass": "org.spongepowered.asm.launch.MixinTweaker"
         attributes "TweakOrder": "0"
-        attributes "MixinConfigs": "scarecrowsterritory.mixins.json"
+        attributes "MixinConfigs": "${mod_id}.mixins.json"
     }
 }
 
