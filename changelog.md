@@ -1,3 +1,6 @@
+### Packed Up 1.1.1a
+- Fixed missing texture for advancement backgrounds
+
 ### Packed Up 1.1.1
 - Added dummy `Container` for backpack slots for other mods to interact with
 - Fixed mouse position getting reset to the center of the screen when opening nested backpacks
