@@ -1,3 +1,6 @@
+### Packed Up 1.1.1a
+- Fixed missing texture for advancement backgrounds
+
 ## Update to Minecraft 26.3
 
 ### Packed Up 1.1.1a
