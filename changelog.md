@@ -1,3 +1,6 @@
+### Packed Up 1.1.1b
+- Fixed missing texture for advancement backgrounds
+
 ### Packed Up 1.1.1a
 - Added icon and banner images for new NeoForge 26.2.0.50-beta mod list
 
