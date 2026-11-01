@@ -1,3 +1,6 @@
+### Packed Up 1.1.2
+- Fixed missing comma in Polish language file, breaking Polish translations
+
 ### Packed Up 1.1.1a
 - Fixed missing texture for advancement backgrounds
 
