@@ -1,3 +1,6 @@
+### Packed Up 1.1.2
+- Fixed missing comma in Polish language file, breaking Polish translations
+
 ### Packed Up 1.1.1a
 - Fixed crash due to incorrect manifest entries
 
