@@ -8,7 +8,7 @@ import com.supermartijn642.core.CommonUtils;
 public class Compatibility {
 
     public static void init(){
-        if(CommonUtils.isModLoaded("trashslot"))
+        if(CommonUtils.getEnvironmentSide().isClient() && CommonUtils.isModLoaded("trashslot"))
             TrashSlotCompatibility.register();
     }
 }
