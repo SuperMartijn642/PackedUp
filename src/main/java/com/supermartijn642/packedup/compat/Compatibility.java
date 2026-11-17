@@ -13,7 +13,7 @@ public class Compatibility {
 
     public static void init(){
         CURIOS = CommonUtils.isModLoaded("curios") ? new CuriosOn() : new CuriosOff();
-        if(CommonUtils.isModLoaded("trashslot"))
+        if(CommonUtils.getEnvironmentSide().isClient() && CommonUtils.isModLoaded("trashslot"))
             TrashSlotCompatibility.register();
     }
 }
