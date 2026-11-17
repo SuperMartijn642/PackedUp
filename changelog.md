@@ -1,3 +1,6 @@
+### Packed Up 1.1.2a
+- Fixed crash on dedicated server with TrashSlot
+
 ### Packed Up 1.1.2
 - Fixed missing comma in Polish language file, breaking Polish translations
 
